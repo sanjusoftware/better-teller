@@ -18,7 +18,7 @@
     SidebarItem,
     SidebarWrapper,
     SidebarDropdownWrapper,
-    SidebarDropdownItem, Footer, FooterCopyright, FooterLinkGroup, FooterLink
+    SidebarDropdownItem
   } from "flowbite-svelte";
   $: activeUrl = page.url.pathname;
   let spanClass = "flex-1 ms-3 whitespace-nowrap font-medium";
