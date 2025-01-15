@@ -12,6 +12,10 @@
     LifeSaverSolid,
     UserSettingsSolid,
     AdjustmentsVerticalSolid,
+    ShareNodesSolid,
+    PrinterSolid,
+    DownloadSolid,
+    FileCopySolid,
   } from "flowbite-svelte-icons";
   import {
     NavBrand,
@@ -21,7 +25,10 @@
     SidebarWrapper,
     SidebarDropdownWrapper,
     SidebarDropdownItem,
+    SpeedDial,
+    SpeedDialButton,
   } from "flowbite-svelte";
+  
   $: activeUrl = page.url.pathname;
   let spanClass = "flex-1 ms-3 whitespace-nowrap font-medium";
   let activeClass =
@@ -415,7 +422,7 @@
         </div>
       </form>
       <SidebarGroup>
-        <SidebarItem label="Dashboard" class="font-medium">
+        <SidebarItem label="Dashboard" href="/" class="font-medium">
           <svelte:fragment slot="icon">
             <ChartPieSolid
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -428,11 +435,11 @@
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             />
           </svelte:fragment>
-          <SidebarDropdownItem label="Loans" />
-          <SidebarDropdownItem label="Cards" />
-          <SidebarDropdownItem label="Mortgages" />
+          <SidebarDropdownItem label="Loans" href="/loans" />
+          <SidebarDropdownItem label="Cards" href="/cards" />
+          <SidebarDropdownItem label="Mortgages" href="/mortgages" />
         </SidebarDropdownWrapper>
-        <SidebarItem label="Inbox" {spanClass}>
+        <SidebarItem label="Tasks" href="/tasks" {spanClass}>
           <svelte:fragment slot="icon">
             <MailBoxOutline
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -568,4 +575,20 @@
   </Sidebar>
   <!-- Content -->
   <slot />
+
+  <!-- Quick Actions -->
+  <SpeedDial defaultClass="absolute end-6 bottom-6" tooltip="none">
+    <SpeedDialButton name="Share">
+      <ShareNodesSolid class="w-6 h-6" />
+    </SpeedDialButton>
+    <SpeedDialButton name="Print">
+      <PrinterSolid class="w-6 h-6" />
+    </SpeedDialButton>
+    <SpeedDialButton name="Save">
+      <DownloadSolid class="w-6 h-6" />
+    </SpeedDialButton>
+    <SpeedDialButton name="Copy">
+      <FileCopySolid class="w-6 h-6" />
+    </SpeedDialButton>
+  </SpeedDial>
 </div>
