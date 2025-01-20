@@ -168,13 +168,13 @@
                 </Dropdown>
             </div>
             <div class="flex items-center space-x-4">
-				<Input placeholder="From" class="w-full">
-					<CalendarMonthOutline slot="left" size="md" />
-				</Input>
-				<Input placeholder="To" class="w-full">
-					<CalendarMonthOutline slot="left" size="md" />
-				</Input>
-			</div>
+                <Input placeholder="From" class="w-full">
+                    <CalendarMonthOutline slot="left" size="md" />
+                </Input>
+                <Input placeholder="To" class="w-full">
+                    <CalendarMonthOutline slot="left" size="md" />
+                </Input>
+            </div>
         </div>
     </div>
     <Table
