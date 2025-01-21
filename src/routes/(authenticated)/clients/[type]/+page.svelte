@@ -34,17 +34,17 @@
 	import Delete from './Delete.svelte';
 	import MetaTag from '../../../utils/MetaTag.svelte';
 
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
+
 	let openUser: boolean = false; // modal control
 	let openDelete: boolean = false; // modal control
 
 	let current_user: any = {};
-	const path: string = '/clients/edit';
+	const path: string = `/clients/${data.clienttype.toLowerCase()}`;
 	const description: string = 'Clients Dashboard';
-	const title: string = 'Manage Clients';
+	const title: string = `Better Teller - Manage Clients`;
 	const subtitle: string = 'Manage Clients';
-
-	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
 </script>
 
 <MetaTag {path} {description} {title} {subtitle} />
@@ -52,9 +52,8 @@
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
 	<div class="p-4">
 		<Breadcrumb class="mb-5">
-			<BreadcrumbItem home>Home</BreadcrumbItem>
-			<BreadcrumbItem href="/clients/users">Users</BreadcrumbItem>
-			<BreadcrumbItem>List</BreadcrumbItem>
+			<BreadcrumbItem home>Clients</BreadcrumbItem>
+			<BreadcrumbItem href={path}>{data.clienttype}</BreadcrumbItem>
 		</Breadcrumb>
 		<Heading tag="h1" class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
 			All {data.clienttype} Clients
@@ -95,7 +94,7 @@
 					class="gap-2 whitespace-nowrap px-3"
 					on:click={() => ((current_user = {}), (openUser = true))}
 				>
-					<PlusOutline size="sm" />Add user
+					<PlusOutline size="sm" />Add New
 				</Button>
 				<Button size="sm" color="alternative" class="gap-2 px-3">
 					<DownloadSolid size="md" class="-ml-1" />Export
