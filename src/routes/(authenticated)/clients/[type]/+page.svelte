@@ -18,7 +18,7 @@
 	} from 'flowbite-svelte';
 	import {
 		DownloadSolid,
-		EditOutline,
+		EyeSolid,
 		PlusOutline,
 		TrashBinSolid
 	} from 'flowbite-svelte-icons';
@@ -34,22 +34,23 @@
 	let openDelete =$state(false); // modal control
 	let current_user = $state({});
 	
-	const path: string = `/clients/${data.clienttype.toLowerCase()}`;
+	const clientsPath: string = `/clients/${data.clienttype.toLowerCase()}`;
 	const description: string = 'Clients Dashboard';
 	const title: string = `Better Teller - Manage Clients`;
 	const subtitle: string = 'Manage Clients';
 </script>
 
-<MetaTag {path} {description} {title} {subtitle} />
+<MetaTag path={clientsPath} {description} {title} {subtitle} />
 
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
 	<div class="p-4">
 		<Breadcrumb class="mb-5">
-			<BreadcrumbItem home>Clients</BreadcrumbItem>
-			<BreadcrumbItem href={path}>{data.clienttype}</BreadcrumbItem>
+			<BreadcrumbItem home href="/">Home</BreadcrumbItem>
+			<BreadcrumbItem>Clients</BreadcrumbItem>
+			<BreadcrumbItem href={clientsPath}>{data.clienttype}</BreadcrumbItem>
 		</Breadcrumb>
 		<Heading tag="h1" class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-			All {data.clienttype} Clients
+			{data.clienttype} Clients
 		</Heading>
 
 		<Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
@@ -83,7 +84,11 @@
 					<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
 						<Avatar border />
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-							<div class="text-base font-semibold text-gray-900 dark:text-white">{client.name}</div>
+							<div class="text-base font-semibold text-gray-900 dark:text-white">
+								<a href={`/clients/${data.clienttype.toLowerCase()}/profile/${client.id}`}>
+									{client.name}
+								</a>
+							</div>
 							<div class="text-sm font-normal text-gray-500 dark:text-gray-400">{client.email}</div>
 						</div>
 					</TableBodyCell>
@@ -103,9 +108,9 @@
 						<Button
 							size="sm"
 							class="gap-2 px-3"
-							on:click={() => ((current_user = client), (openUser = true))}
+							href={`/clients/${data.clienttype.toLowerCase()}/profile/${client.id}`}
 						>
-							<EditOutline size="sm" /> Edit user
+							<EyeSolid size="sm" /> View
 						</Button>
 						<Button
 							color="red"
@@ -113,7 +118,7 @@
 							class="gap-2 px-3"
 							on:click={() => ((current_user = client), (openDelete = true))}
 						>
-							<TrashBinSolid size="sm" /> Delete user
+							<TrashBinSolid size="sm" /> Delete
 						</Button>
 					</TableBodyCell>
 				</TableBodyRow>

@@ -16,7 +16,7 @@
 		<div class="flex justify-start items-center">
 			<!-- Branding - DSK Logo -->
 			<NavBrand href="/" class="flex items-center justify-between mr-4">
-				<img src="../images/dsk.svg" class="mr-3 h-8" alt="DSK Logo" />
+				<img src="/images/dsk.svg" class="mr-3 h-8" alt="DSK Logo" />
 				<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
 					Better Teller
 				</span>
@@ -177,7 +177,7 @@
 				data-dropdown-toggle="dropdown"
 			>
 				<span class="sr-only">Open user menu</span>
-				<img class="w-8 h-8 rounded-full" src="../images/profile.jpg" alt="user" />
+				<img class="w-8 h-8 rounded-full" src="/images/profile.jpg" alt="user" />
 			</button>
 			<!-- User dropdown menu -->
 			<div
