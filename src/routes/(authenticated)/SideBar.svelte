@@ -53,9 +53,21 @@
 						class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
 					/>
 				</svelte:fragment>
-				<SidebarDropdownItem label="Retail" href="/clients/retail" />
-				<SidebarDropdownItem label="SME" href="/clients/sme" />
-				<SidebarDropdownItem label="Corporate" href="/clients/corporate" />
+				<SidebarDropdownItem
+					label="Retail"
+					href="/clients/retail"
+					active={activeUrl === '/clients/retail'}
+				/>
+				<SidebarDropdownItem
+					label="SME"
+					href="/clients/sme"
+					active={activeUrl === '/clients/sme'}
+				/>
+				<SidebarDropdownItem
+					label="Corporate"
+					href="/clients/corporate"
+					active={activeUrl === '/clients/corporate'}
+				/>
 			</SidebarDropdownWrapper>
 			<SidebarItem label="Tasks" href="/tasks" {spanClass}>
 				<svelte:fragment slot="icon">
