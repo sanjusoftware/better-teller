@@ -5,7 +5,7 @@
   import SideBar from "./SideBar.svelte";
   import MetaTag from "../utils/MetaTag.svelte";
 
-  const path: string = "Home";
+  const path: string = "/";
   const description: string = "DSK - Better Teller App";
   const title: string = "DSK - Better Teller App";
   const subtitle: string = "Home";

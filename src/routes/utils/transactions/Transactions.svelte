@@ -1,5 +1,4 @@
 <script lang="ts">
-    import LastRange from "../LastRange.svelte";
     import {
         Button,
         Card,
@@ -19,10 +18,10 @@
         ChevronDownOutline,
         ChevronRightOutline,
     } from "flowbite-svelte-icons";
+
+    import LastRange from "./LastRange.svelte";
     import CreditCard from "./CreditCard.svelte";
     import StatusBadge from "./StatusBadge.svelte";
-
-    export let dark: boolean = false;
 
     const headers = [
         "Transaction",
@@ -213,7 +212,7 @@
                         <CreditCard number={method} /> <span>••• {method}</span>
                     </TableBodyCell>
                     <TableBodyCell class="px-4 font-normal"
-                        ><StatusBadge state={status} {dark} /></TableBodyCell
+                        ><StatusBadge state={status} /></TableBodyCell
                     >
                 </TableBodyRow>
             {/each}
