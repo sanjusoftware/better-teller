@@ -18,7 +18,7 @@
 	];
 </script>
 
-<Card title="General Information" class="-mt-px max-w-none">
+<Card title="Personal Information" class="-mt-px max-w-none">
 	<form class="grid grid-cols-6 gap-6">
 		{#each inputs as { label, type, placeholder }}
 			<Label class="col-span-6 space-y-2 sm:col-span-3">
