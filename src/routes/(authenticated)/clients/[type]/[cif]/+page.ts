@@ -1,4 +1,4 @@
-import type { PageLoad } from '../profile/[cif]/$types';
+import type { PageLoad } from './$types';
 import Clients from "../../../../data/clients.json";
 import Accounts from "../../../../data/accounts.json";
 import Cards from "../../../../data/cards.json";
