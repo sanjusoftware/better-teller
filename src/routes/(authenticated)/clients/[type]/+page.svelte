@@ -5,7 +5,6 @@
 		BreadcrumbItem,
 		Button,
 		Checkbox,
-		Heading,
 		Indicator,
 		Input,
 		Table,
@@ -87,7 +86,7 @@
 					/>
 					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 						<div class="text-base font-semibold text-gray-900 dark:text-white">
-							<a href={`/clients/${data.clienttype.toLowerCase()}/profile/${client.id}`}>
+							<a href={`/clients/${data.clienttype.toLowerCase()}/${client.id}`}>
 								{client.name}
 							</a>
 						</div>
@@ -108,7 +107,7 @@
 					<Button
 						size="sm"
 						class="gap-2 px-3"
-						href={`/clients/${data.clienttype.toLowerCase()}/profile/${client.id}`}
+						href={`/clients/${data.clienttype.toLowerCase()}/${client.id}`}
 					>
 						<ProfileCardOutline size="sm" /> Profile
 					</Button>

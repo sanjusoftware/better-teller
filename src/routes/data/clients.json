@@ -1,17 +1,5 @@
 [
 	{
-		"id": 0,
-		"name": "John Doe",
-		"avatar": "/images/profile.jpg",
-		"email": "john.doe@dskbank.bg",
-		"biography": "I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.",
-		"position": "Software Engineer",
-		"country": "United States",
-		"status": "Active",
-		"type": "retail",
-		"phone": "+1 555-1234"
-	},
-	{
 		"id": 1,
 		"name": "Neil Sims",
 		"avatar": "/images/profile.jpg",
