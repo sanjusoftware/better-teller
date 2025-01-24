@@ -82,7 +82,7 @@
 				<TableBodyRow class="text-base">
 					<TableBodyCell class="w-4 p-4"><Checkbox /></TableBodyCell>
 					<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
-						<Avatar border />
+						<Avatar src={client.avatar} border />
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 							<div class="text-base font-semibold text-gray-900 dark:text-white">
 								<a href={`/clients/${data.clienttype.toLowerCase()}/profile/${client.id}`}>

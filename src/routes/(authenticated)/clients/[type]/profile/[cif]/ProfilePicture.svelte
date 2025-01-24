@@ -16,7 +16,7 @@
 	horizontal
 >
 	<div class="flex items-center space-x-4 rtl:space-x-reverse">
-		<Avatar src="/images/profile.jpg" class="mb-4 h-28 w-28 rounded-lg sm:mb-0 xl:mb-4 2xl:mb-0" rounded border size="none"/>
+		<Avatar src="{client.avatar}" class="mb-4 h-28 w-28 rounded-lg sm:mb-0 xl:mb-4 2xl:mb-0" rounded border size="none"/>
 		<div class="space-y-1 font-medium dark:text-white">
 			<Heading tag="h3" class="text-xl">{client.name}</Heading>
 			<div class="text-sm text-gray-500 dark:text-gray-400">{client.email}</div>

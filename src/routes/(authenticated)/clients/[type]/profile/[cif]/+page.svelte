@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Breadcrumb, BreadcrumbItem, Tabs, TabItem } from 'flowbite-svelte';
-  import { UserCircleSolid, GridSolid, AdjustmentsVerticalSolid, LockOpenOutline, DollarOutline, FilterDollarSolid, FilterDollarOutline, CreditCardPlusAltSolid, CreditCardSolid, CreditCardOutline, UserCircleOutline, EuroOutline, ProfileCardOutline, FileInvoiceOutline } from 'flowbite-svelte-icons';
+  import { AdjustmentsVerticalSolid, LockOpenOutline, CreditCardOutline, EuroOutline, ProfileCardOutline, FileInvoiceOutline } from 'flowbite-svelte-icons';
 
 	import Accounts from './Accounts.svelte';
 	import ProfilePicture from './ProfilePicture.svelte';
@@ -13,14 +13,25 @@
 
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
-	let client = data.client;
+	let client = data.client ?? {
+    id: 0,
+    name: '',
+    avatar: '',
+    email: '',
+    biography: '',
+    position: '',
+    country: '',
+    status: '',
+    type: ''
+  };
+	let accounts = data.Accounts;
 </script>
 
 <main class="p-4">
 	<div class="col-span-full xl:mb-0">
 		<Breadcrumb class="mb-6">
 			<BreadcrumbItem href="/" home>Home</BreadcrumbItem>
-			<BreadcrumbItem href="/clients/{client.type}">
+			<BreadcrumbItem href={`/clients/${client.type}`}>
 				{client.type.toLocaleUpperCase()} Clients
 			</BreadcrumbItem>
 			<BreadcrumbItem>{client.name}</BreadcrumbItem>
@@ -47,9 +58,8 @@
 			<FileInvoiceOutline size="md" />
 			Accounts
 		  </div>
-		  <div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
-			<Accounts />
-			<PersonlaInfo />
+		  <div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+			<Accounts accounts={accounts}/>
 		  </div>
 		</TabItem>
 		<TabItem>

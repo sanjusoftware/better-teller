@@ -1,0 +1,178 @@
+[
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2021-01-15",
+        "expiryDate": "2024-01-15",
+        "accountNumber": "123456789",
+        "customerId": 1
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2020-05-20",
+        "expiryDate": "2023-05-20",
+        "accountNumber": "987654321",
+        "customerId": 2
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2019-03-10",
+        "expiryDate": "2022-03-10",
+        "accountNumber": "123456789",
+        "customerId": 3
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2018-07-25",
+        "expiryDate": "2021-07-25",
+        "accountNumber": "987654321",
+        "customerId": 4
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2022-02-14",
+        "expiryDate": "2025-02-14",
+        "accountNumber": "123456789",
+        "customerId": 5
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2021-06-30",
+        "expiryDate": "2024-06-30",
+        "accountNumber": "987654321",
+        "customerId": 6
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2020-11-11",
+        "expiryDate": "2023-11-11",
+        "accountNumber": "123456789",
+        "customerId": 7
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2019-08-08",
+        "expiryDate": "2022-08-08",
+        "accountNumber": "987654321",
+        "customerId": 8
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2018-12-12",
+        "expiryDate": "2021-12-12",
+        "accountNumber": "123456789",
+        "customerId": 9
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2022-03-03",
+        "expiryDate": "2025-03-03",
+        "accountNumber": "987654321",
+        "customerId": 10
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2021-09-09",
+        "expiryDate": "2024-09-09",
+        "accountNumber": "123456789",
+        "customerId": 11
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2020-04-04",
+        "expiryDate": "2023-04-04",
+        "accountNumber": "987654321",
+        "customerId": 1
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2019-10-10",
+        "expiryDate": "2022-10-10",
+        "accountNumber": "123456789",
+        "customerId": 2
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2018-06-06",
+        "expiryDate": "2021-06-06",
+        "accountNumber": "987654321",
+        "customerId": 3
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2022-01-01",
+        "expiryDate": "2025-01-01",
+        "accountNumber": "123456789",
+        "customerId": 4
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2021-07-07",
+        "expiryDate": "2024-07-07",
+        "accountNumber": "987654321",
+        "customerId": 5
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2020-02-02",
+        "expiryDate": "2023-02-02",
+        "accountNumber": "123456789",
+        "customerId": 6
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2019-05-05",
+        "expiryDate": "2022-05-05",
+        "accountNumber": "987654321",
+        "customerId": 7
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2018-11-11",
+        "expiryDate": "2021-11-11",
+        "accountNumber": "123456789",
+        "customerId": 8
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2022-08-08",
+        "expiryDate": "2025-08-08",
+        "accountNumber": "987654321",
+        "customerId": 9
+    },
+    {
+        "cardType": "Visa",
+        "cardNumber": "4111111111111111",
+        "issueDate": "2021-03-03",
+        "expiryDate": "2024-03-03",
+        "accountNumber": "123456789",
+        "customerId": 10
+    },
+    {
+        "cardType": "Master",
+        "cardNumber": "5500000000000004",
+        "issueDate": "2020-09-09",
+        "expiryDate": "2023-09-09",
+        "accountNumber": "987654321",
+        "customerId": 11
+    }
+]
