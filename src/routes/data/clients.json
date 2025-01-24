@@ -1,5 +1,17 @@
 [
 	{
+		"id": 0,
+		"name": "John Doe",
+		"avatar": "/images/profile.jpg",
+		"email": "john.doe@dskbank.bg",
+		"biography": "I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.",
+		"position": "Software Engineer",
+		"country": "United States",
+		"status": "Active",
+		"type": "retail",
+		"phone": "+1 555-1234"
+	},
+	{
 		"id": 1,
 		"name": "Neil Sims",
 		"avatar": "/images/profile.jpg",
@@ -8,7 +20,8 @@
 		"position": "Front-end developer",
 		"country": "United States",
 		"status": "Active",
-		"type": "retail"
+		"type": "retail",
+		"phone": "+1 555-5678"
 	},
 	{
 		"id": 2,
@@ -19,7 +32,8 @@
 		"position": "Designer",
 		"country": "Spain",
 		"status": "Active",
-		"type": "retail"
+		"type": "retail",
+		"phone": "+34 555-1234"
 	},
 	{
 		"id": 3,
@@ -30,7 +44,8 @@
 		"position": "React developer",
 		"country": "United Kingdom",
 		"status": "Active",
-		"type": "retail"
+		"type": "retail",
+		"phone": "+44 555-1234"
 	},
 	{
 		"id": 4,
@@ -41,7 +56,8 @@
 		"position": "Marketing",
 		"country": "United States",
 		"status": "Active",
-		"type": "retail"
+		"type": "retail",
+		"phone": "+1 555-8765"
 	},
 	{
 		"id": 5,
@@ -52,7 +68,8 @@
 		"position": "UI/UX Engineer",
 		"country": "Australia",
 		"status": "InActive",
-		"type": "retail"
+		"type": "retail",
+		"phone": "+61 555-1234"
 	},
 	{
 		"id": 6,
@@ -63,7 +80,8 @@
 		"position": "Vue developer",
 		"country": "Germany",
 		"status": "Active",
-		"type": "retail"
+		"type": "retail",
+		"phone": "+49 555-1234"
 	},
 	{
 		"id": 7,
@@ -74,7 +92,8 @@
 		"position": "Product owner",
 		"country": "Canada",
 		"status": "Active",
-		"type": "retail"
+		"type": "retail",
+		"phone": "+1 555-2345"
 	},
 	{
 		"id": 8,
@@ -85,7 +104,8 @@
 		"position": "Designer",
 		"country": "United States",
 		"status": "Active",
-		"type": "sme"
+		"type": "sme",
+		"phone": "+1 555-3456"
 	},
 	{
 		"id": 9,
@@ -96,7 +116,8 @@
 		"position": "Web developer",
 		"country": "France",
 		"status": "InActive",
-		"type": "sme"
+		"type": "sme",
+		"phone": "+33 555-1234"
 	},
 	{
 		"id": 10,
@@ -107,18 +128,20 @@
 		"position": "Laravel developer",
 		"country": "Russia",
 		"status": "Active",
-		"type": "sme"
+		"type": "sme",
+		"phone": "+7 555-1234"
 	},
 	{
 		"id": 11,
 		"name": "Neil Sims",
 		"avatar": "/images/profile.jpg",
 		"email": "neil.sims@dskbank.bg",
-		"position": "Front-end developer",
 		"biography": "I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.",
+		"position": "Front-end developer",
 		"country": "United States",
 		"status": "Active",
-		"type": "sme"
+		"type": "sme",
+		"phone": "+1 555-6789"
 	},
 	{
 		"id": 12,
@@ -129,7 +152,8 @@
 		"position": "Designer",
 		"country": "Spain",
 		"status": "Active",
-		"type": "sme"
+		"type": "sme",
+		"phone": "+34 555-5678"
 	},
 	{
 		"id": 13,
@@ -140,7 +164,8 @@
 		"position": "React developer",
 		"country": "United Kingdom",
 		"status": "Active",
-		"type": "sme"
+		"type": "sme",
+		"phone": "+44 555-5678"
 	},
 	{
 		"id": 14,
@@ -151,7 +176,8 @@
 		"position": "Marketing",
 		"country": "United States",
 		"status": "Active",
-		"type": "sme"
+		"type": "sme",
+		"phone": "+1 555-7890"
 	},
 	{
 		"id": 15,
@@ -162,7 +188,8 @@
 		"position": "UI/UX Engineer",
 		"country": "Australia",
 		"status": "InActive",
-		"type": "corporate"
+		"type": "corporate",
+		"phone": "+61 555-5678"
 	},
 	{
 		"id": 16,
@@ -173,7 +200,8 @@
 		"position": "Vue developer",
 		"country": "Germany",
 		"status": "Active",
-		"type": "corporate"
+		"type": "corporate",
+		"phone": "+49 555-5678"
 	},
 	{
 		"id": 17,
@@ -184,7 +212,8 @@
 		"position": "Product owner",
 		"country": "Canada",
 		"status": "Active",
-		"type": "corporate"
+		"type": "corporate",
+		"phone": "+1 555-8901"
 	},
 	{
 		"id": 18,
@@ -195,7 +224,8 @@
 		"position": "Designer",
 		"country": "United States",
 		"status": "Active",
-		"type": "corporate"
+		"type": "corporate",
+		"phone": "+1 555-9012"
 	},
 	{
 		"id": 19,
@@ -206,7 +236,8 @@
 		"position": "Web developer",
 		"country": "France",
 		"status": "InActive",
-		"type": "corporate"
+		"type": "corporate",
+		"phone": "+33 555-5678"
 	},
 	{
 		"id": 20,
@@ -217,6 +248,7 @@
 		"position": "Laravel developer",
 		"country": "Russia",
 		"status": "Active",
-		"type": "corporate"
+		"type": "corporate",
+		"phone": "+7 555-5678"
 	}
 ]

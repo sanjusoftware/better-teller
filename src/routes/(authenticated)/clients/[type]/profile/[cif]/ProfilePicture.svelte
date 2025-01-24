@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { Avatar, Button, Card, Heading } from 'flowbite-svelte';
-	import { UploadSolid } from 'flowbite-svelte-icons';
+	import { CheckCircleOutline, UploadSolid } from 'flowbite-svelte-icons';
 	export let client: {
 		avatar: string;
 		name: string;
 		email: string;
+		phone: string;
 		country: string;
 		status: string;
 	};
+	let pictureClass = client.status === 'Active' ? 'mb-4 h-28 w-28 sm:mb-0 xl:mb-4 2xl:mb-0 border-2 border-green-500' : 'mb-4 h-28 w-28 sm:mb-0 xl:mb-4 2xl:mb-0 border-2 border-red-500';
 </script>
 
 <Card
@@ -16,19 +18,28 @@
 	horizontal
 >
 	<div class="flex items-center space-x-4 rtl:space-x-reverse">
-		<Avatar src="{client.avatar}" class="mb-4 h-28 w-28 rounded-lg sm:mb-0 xl:mb-4 2xl:mb-0" rounded border size="none"/>
-		<div class="space-y-1 font-medium dark:text-white">
+		<Avatar src="{client.avatar}" class="{pictureClass}" rounded border size="none"/>
+		<div class="space-y-1 font-small dark:text-white">
 			<Heading tag="h3" class="text-xl">{client.name}</Heading>
 			<div class="text-sm text-gray-500 dark:text-gray-400">{client.email}</div>
-			<div class="text-sm text-gray-500 dark:text-gray-400">+359 1286432</div>
+			<div class="text-sm text-gray-500 dark:text-gray-400">{client.country}: {client.phone}</div>
 		</div>
 	</div>
 	<div class="py-0.5">		
-		<div class="flex items-center space-x-4">
+
+			{#if client.status === 'Active'}
+			<div class="flex items-center space-x-4">
 			<Button size="sm" class="px-3">
-				<UploadSolid size="sm" class="-ms-1 me-2" /> Upload picture
+				<UploadSolid size="md" class="-ms-1 me-2" /> Upload picture
 			</Button>
-		</div>
-		<p class="mb-4 mt-1 pt-px text-sm">JPG, GIF or PNG. Max size of 800K</p>
+			</div>
+			<p class="mb-4 mt-1 pt-px text-sm">JPG, GIF or PNG. Max size of 800K</p>
+			{:else}
+			<div class="flex items-center space-x-4">
+				<Button size="sm" color="red" class="px-3">
+					<CheckCircleOutline size="md" class="-ms-1 me-2" /> Activate account
+				</Button>
+				</div>
+			{/if}
 	</div>
 </Card>

@@ -40,7 +40,7 @@
 					<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 							<div class="text-base font-semibold text-gray-900 dark:text-white">
-								<a href="/#" class="hover:underline">
+								<a href="/transactions" class="hover:underline">
 									{account.accountNumber}
 								</a>
 							</div>

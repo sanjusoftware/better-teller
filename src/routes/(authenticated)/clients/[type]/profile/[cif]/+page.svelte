@@ -22,7 +22,8 @@
     position: '',
     country: '',
     status: '',
-    type: ''
+    type: '',
+	phone: ''
   };
 	let accounts = data.Accounts;
 </script>
