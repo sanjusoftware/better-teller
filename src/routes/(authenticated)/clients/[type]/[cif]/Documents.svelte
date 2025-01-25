@@ -21,6 +21,7 @@
 		PlusOutline,
 		TrashBinOutline
 	} from 'flowbite-svelte-icons';
+	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
 
 	export let documents: Array<{
 		documentId: string;
@@ -102,18 +103,7 @@
 						{new Date(document.expiryDate).toLocaleDateString()}
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
-						<div class="flex items-center gap-2">
-							{#if document.documentStatus === 'Verified'}
-								<Indicator color="green" />
-							{:else if document.documentStatus === 'Pending Verification'}
-								<Indicator color="yellow" />
-							{:else if document.documentStatus === 'Rejected'}
-								<Indicator color="red" />
-							{:else if document.documentStatus === 'Expired'}
-								<Indicator color="red" />
-							{/if}
-							<span>{document.documentStatus}</span>
-						</div>
+						<StatusIndicator status={document.documentStatus} />
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
 						<ButtonGroup>
@@ -125,16 +115,15 @@
 							</Button>
 						</ButtonGroup>
 						{#if document.documentStatus === 'Pending Verification'}
-                        <ButtonGroup>
-							<Button outline color="green" size="xs" class="gap-2 px-3">
-								<CheckOutline size="sm" /> Verify
-							</Button>
-                            <Button outline color="yellow" size="xs" class="gap-2 px-3">
-								<CloseOutline size="sm" /> Reject
-							</Button>
-                            </ButtonGroup>
-						{/if}
-						{#if document.documentStatus === 'Expired'}
+							<ButtonGroup>
+								<Button outline color="green" size="xs" class="gap-2 px-3">
+									<CheckOutline size="sm" /> Verify
+								</Button>
+								<Button outline color="yellow" size="xs" class="gap-2 px-3">
+									<CloseOutline size="sm" /> Reject
+								</Button>
+							</ButtonGroup>
+						{:else if document.documentStatus === 'Expired'}
 							<Button outline color="dark" size="xs" class="gap-2 px-3">
 								<BellRingOutline size="sm" /> Send Renewal Reminder
 							</Button>

@@ -1,16 +1,18 @@
 <script lang="ts">
-	export let status: string;
+	import { Indicator } from 'flowbite-svelte';
 
-	// random assignment to issuer type
-	// $: type = status === 'Active' ? 'Active' : 'Mastercard';
+	export let status: string;
 </script>
 
-{#if status === 'Active'}
-	<Indicator color="green" />
-{:else if status === 'Pending Activation'}
-	<Indicator color="yellow" />
-{:else if status === 'Blocked'}
-	<Indicator color="red" />
-{:else if status === 'Expired'}
-	<Indicator color="gray" />
-{/if}
+<div class="flex items-center gap-2">
+	{#if status === 'Active' || status === 'Verified'}
+		<Indicator color="green" />
+	{:else if status === 'Defaulted' || status === 'Pending Activation' || status === 'Pending Verification'}
+		<Indicator color="yellow" />
+	{:else if status === 'NPA' || status === 'Blocked' || status === 'Rejected'}
+		<Indicator color="red" />
+	{:else if status === 'Closed' || status === 'Expired'}
+		<Indicator color="gray" />
+	{/if}
+	<span>{status}</span>
+</div>

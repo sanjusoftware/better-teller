@@ -22,6 +22,7 @@
 		SalePercentOutline
 
 	} from 'flowbite-svelte-icons';
+	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
 
 	export let accounts: Array<{
 		customerId: number;
@@ -93,16 +94,7 @@
 						{new Date(account.opened_on).toLocaleDateString()}
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
-						<div class="flex items-center gap-2">
-							{#if account.status === 'Active'}
-								<Indicator color="green" />
-							{:else if account.status === 'Blocked'}
-								<Indicator color="red" />
-							{:else if account.status === 'Closed'}
-								<Indicator color="gray" />
-							{/if}
-							<span>{account.status}</span>
-						</div>
+						<StatusIndicator status={account.status} />
 					</TableBodyCell>					
 					<TableBodyCell class="p-4 font-normal">
 							{account.card_issued ? 'Yes' : 'No'}

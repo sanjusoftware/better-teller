@@ -1,9 +1,7 @@
 <script lang="ts">
 	import {
 		Button,
-		ButtonGroup,
 		Card,
-		Indicator,
 		Table,
 		TableBody,
 		TableBodyCell,
@@ -14,14 +12,17 @@
 	import {
 		BanOutline,
 		CheckCircleOutline,
-		CreditCardOutline,
 		CreditCardPlusAltOutline,
 		EyeSolid,
 		LockOpenOutline,
-		PlusOutline
 	} from 'flowbite-svelte-icons';
+
 	import CreditCard from '../../../../utils/CreditCard.svelte';
 	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
+
+	function maskCreditCard(cardNumber: string): string {
+		return `${cardNumber.slice(0, 4)} XXXX XXXX ${cardNumber.slice(cardNumber.length - 4, cardNumber.length)}`;
+	}
 
 	export let bankcards: Array<{
 		cardType: string;
@@ -61,10 +62,7 @@
 							<div class="text-base font-semibold text-gray-900 dark:text-white">
 								<a href="/transactions" class="hover:underline">
 									<span>
-										{bankcard.cardNumber.slice(0, 4)} XXXX XXXX {bankcard.cardNumber.slice(
-											bankcard.cardNumber.length - 4,
-											bankcard.cardNumber.length
-										)}
+										{maskCreditCard(bankcard.cardNumber)}
 									</span>
 								</a>
 							</div>
@@ -88,18 +86,7 @@
 						{new Date(bankcard.expiryDate).toLocaleDateString()}
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
-						<div class="flex items-center gap-2">
-							{#if bankcard.status === 'Active'}
-								<Indicator color="green" />
-							{:else if bankcard.status === 'Pending Activation'}
-								<Indicator color="yellow" />
-							{:else if bankcard.status === 'Blocked'}
-								<Indicator color="red" />
-							{:else if bankcard.status === 'Expired'}
-								<Indicator color="gray" />
-							{/if}
-							<span>{bankcard.status}</span>
-						</div>
+						<StatusIndicator status={bankcard.status} />
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
 						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">

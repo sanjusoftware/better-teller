@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let cardType: string;
-
+	
 	// random assignment to issuer type
 	$: type = cardType === 'Visa' ? 'Visa' : 'Mastercard';
 </script>

@@ -20,6 +20,7 @@
 		PlusOutline,
 		TruckClockOutline
 	} from 'flowbite-svelte-icons';
+	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
 
 	export let loans: Array<{
 		accountNumber: string;
@@ -98,18 +99,7 @@
 						{loan.emi.toLocaleString()}
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
-						<div class="flex items-center gap-2">
-							{#if loan.status === 'Active'}
-								<Indicator color="green" />
-							{:else if loan.status === 'Defaulted'}
-								<Indicator color="yellow" />
-							{:else if loan.status === 'NPA'}
-								<Indicator color="red" />
-							{:else if loan.status === 'Closed'}
-								<Indicator color="gray" />
-							{/if}
-							<span>{loan.status}</span>
-						</div>
+						<StatusIndicator status={loan.status} />
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
 						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
