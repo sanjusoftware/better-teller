@@ -18,6 +18,7 @@
 	import {
 		BanOutline,
 		DownloadSolid,
+		PhoneOutline,
 		PlusOutline,
 		ProfileCardOutline
 	} from 'flowbite-svelte-icons';
@@ -68,7 +69,7 @@
 <Table>
 	<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
 		<TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
-		{#each ['Name', 'Country/Phone', 'Status', 'Actions'] as title}
+		{#each ['Name', 'Primary Contact', 'Status', 'Actions'] as title}
 			<TableHeadCell class="p-4 font-medium">{title}</TableHeadCell>
 		{/each}
 	</TableHead>
@@ -79,6 +80,7 @@
 				<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
 					<Avatar
 						src={client.avatar}
+						href={`/clients/${data.clienttype.toLowerCase()}/${client.id}`} 
 						border
 						class={client.status === 'Active'
 							? 'ring-green-400 dark:ring-green-300'
@@ -92,10 +94,13 @@
 						</div>
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">{client.email}</div>
 					</div>
-				</TableBodyCell>
+				</TableBodyCell>				
 				<TableBodyCell class="p-4">
-					{client.country}
-					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">{client.phone}</div>
+					<span class="flex items-center space-x-2">
+						<a href={`tel:${client.phone}`} class="hover:underline" aria-label="Call client">{client.phone}</a>
+						<PhoneOutline size="md" class="text-gray-500 dark:text-gray-400" />
+					</span>
+					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">{client.country}</div>
 				</TableBodyCell>
 				<TableBodyCell class="p-4 font-normal">
 					<div class="flex items-center gap-2">

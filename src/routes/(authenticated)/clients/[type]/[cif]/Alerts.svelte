@@ -1,34 +1,34 @@
 <script lang="ts">
 	import { Toggle } from 'flowbite-svelte';
-	import CardList from './CardList.svelte';
+	import PhonePreferences from './NotificationPreferences.svelte';
 
 	const items = [
 		{
-			title: 'Company News',
-			subtitle: 'Get Themesberg news, announcements, and product updates',
+			title: 'New Products and Offers',
+			subtitle: 'Get new product announcements, discounts and updates',
 			active: false
 		},
 		{
 			title: 'Account Activity',
-			subtitle: "Get important notifications about you or activity you've missed",
+			subtitle: "Get important notifications about you or account activities",
 			active: true
 		},
 		{
-			title: 'Meetups Near You',
-			subtitle: 'Get an email when a Dribbble Meetup is posted close to my location',
-			active: true
-		},
-		{
-			title: 'New Messages',
-			subtitle: 'Get Themsberg news, announcements, and product updates',
+			title: 'Payment Reminders',
+			subtitle: 'Get reminders about utlity payments, credit card payments, and mortage payments',
 			active: false
+		},
+		{
+			title: 'Security Notifications',
+			subtitle: 'Get notified when you need to enter a one-time password',
+			active: true
 		}
 	];
 </script>
 
-<CardList
+<PhonePreferences
 	title="Alerts & Notifications"
-	subtitle="You can set up Themesberg to get notifications"
+	subtitle="Set up phone alerts and notifications"
 	{items}
 	let:item
 >
@@ -41,4 +41,4 @@
 		</div>
 		<Toggle checked={item.active} class="peer-focus:ring-0 me-0" />
 	</div>
-</CardList>
+</PhonePreferences>

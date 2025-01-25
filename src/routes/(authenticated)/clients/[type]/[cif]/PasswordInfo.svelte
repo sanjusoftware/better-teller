@@ -1,6 +1,6 @@
 <script>
 	import { Button, Input, Label } from 'flowbite-svelte';
-	import Card from './Card.svelte';
+	import Card from './InfoCard.svelte';
 </script>
 
 <Card title="Password Information" class="max-w-none">>

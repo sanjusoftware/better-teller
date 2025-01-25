@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button, Heading } from 'flowbite-svelte';
-	import Card from './Card.svelte';
+	import { Button} from 'flowbite-svelte';
+	import Card from './InfoCard.svelte';
 
 	export let title: string;
 	export let subtitle: string = '';

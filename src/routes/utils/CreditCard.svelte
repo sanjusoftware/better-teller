@@ -1,11 +1,11 @@
 <script lang="ts">
-	export let number: number;
+	export let cardType: string;
 
 	// random assignment to issuer type
-	$: type = number % 2 ? 'visa' : 'master';
+	$: type = cardType === 'Visa' ? 'Visa' : 'Mastercard';
 </script>
 
-{#if type === 'master'}
+{#if type === 'Mastercard'}
 	<svg
 		class="h-7 w-7"
 		aria-hidden="true"
@@ -31,7 +31,7 @@
 		></path></svg
 	>
 {/if}
-{#if type === 'visa'}
+{#if type === 'Visa'}
 	<svg class="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 83"
 		><defs
 			><linearGradient id="logosVisa0" x1="45.974%" x2="54.877%" y1="-2.006%" y2="100%"

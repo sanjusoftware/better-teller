@@ -1,34 +1,34 @@
 <script lang="ts">
 	import { Toggle } from 'flowbite-svelte';
-	import CardList from './CardList.svelte';
+	import EmailPreferences from './NotificationPreferences.svelte';
 
 	const items = [
 		{
-			title: 'Rating reminders',
-			subtitle: 'Send an email reminding me to rate an item a week after purchase',
+			title: 'DSK Newsletters',
+			subtitle: 'Get DSK news, announcements, and product updates',
 			active: true
 		},
 		{
-			title: 'Item update notifications',
-			subtitle: 'Send user and product notifications for you',
+			title: 'Account Statements',
+			subtitle: 'Get monthly account statements and updates',
 			active: false
 		},
 		{
-			title: 'Item comment notifications',
-			subtitle: 'Send me an email when someone comments on one of my items',
+			title: 'Promotions',
+			subtitle: 'Get notified about promotions and special offers',
+			active: false
+		},
+		{
+			title: 'Product Updates',
+			subtitle: 'Get notified about new products and features',
 			active: true
-		},
-		{
-			title: 'Buyer review notifications',
-			subtitle: 'Send me an email when someone leaves a review with their rating',
-			active: false
 		}
 	];
 </script>
 
-<CardList
-	title="Email Notifications"
-	subtitle="You can set up Themesberg to get email notifications "
+<EmailPreferences
+	title="Email Preferences"
+	subtitle="Set Email preferences"
 	{items}
 	let:item
 >
@@ -41,4 +41,4 @@
 		</div>
 		<Toggle checked={item.active} class="peer-focus:ring-0 me-0" />
 	</div>
-</CardList>
+</EmailPreferences>

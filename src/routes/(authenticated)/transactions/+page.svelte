@@ -20,7 +20,7 @@
     } from "flowbite-svelte-icons";
 
     import LastRange from "./LastRange.svelte";
-    import CreditCard from "./CreditCard.svelte";
+    import CreditCard from "../../utils/CreditCard.svelte";
     import StatusBadge from "./StatusBadge.svelte";
 
     const headers = [
@@ -36,7 +36,7 @@
         string,
         string,
         string,
-        number,
+        string,
         CreditCard["state"],
     ][] = [
         [
@@ -44,7 +44,7 @@
             "Apr 23 ,2021",
             "$2300",
             "0047568936",
-            475,
+            "Visa",
             "completed",
         ],
         [
@@ -52,7 +52,7 @@
             "Apr 23 ,2021",
             "-$670",
             "0078568936",
-            924,
+            "Mastercard",
             "completed",
         ],
         [
@@ -60,7 +60,7 @@
             "Apr 18 ,2021",
             "$234",
             "0088568934",
-            826,
+            "Visa",
             "cancelled",
         ],
         [
@@ -68,7 +68,7 @@
             "Apr 15 ,2021",
             "$5000",
             "0018568911",
-            634,
+            "Mastercard",
             "inprogress",
         ],
         [
@@ -76,7 +76,7 @@
             "Apr 15 ,2021",
             "$2300",
             "0045568939",
-            163,
+            "Mastercard",
             "completed",
         ],
         [
@@ -84,7 +84,7 @@
             "Apr 11 ,2021",
             "-$560",
             "0031568935",
-            443,
+            "Visa",
             "inreview",
         ],
         [
@@ -92,7 +92,7 @@
             "Apr 6 ,2021",
             "$1437",
             "0023568934",
-            223,
+            "Mastercard",
             "inreview",
         ],
         [
@@ -100,7 +100,7 @@
             "Apr 1 ,2021",
             "$980",
             "0057568935",
-            362,
+            "Visa",
             "completed",
         ],
         [
@@ -108,7 +108,7 @@
             "Mar 23 ,2021",
             "$11,436",
             "00836143841",
-            772,
+            "Visa",
             "inprogress",
         ],
         [
@@ -116,7 +116,7 @@
             "Mar 23 ,2021",
             "$560",
             "0031568935",
-            123,
+            "Mastercard",
             "completed",
         ],
     ];
@@ -209,7 +209,7 @@
                     <TableBodyCell
                         class="flex items-center gap-2 px-4 font-normal  text-gray-500 dark:text-gray-400"
                     >
-                        <CreditCard number={method} /> <span>••• {method}</span>
+                        <CreditCard cardType={method} /> <span>••• {reference.slice(reference.length - 4, reference.length)}</span>
                     </TableBodyCell>
                     <TableBodyCell class="px-4 font-normal"
                         ><StatusBadge state={status} /></TableBodyCell

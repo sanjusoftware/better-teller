@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { Breadcrumb, BreadcrumbItem, Tabs, TabItem } from 'flowbite-svelte';
 	import {
-		AdjustmentsVerticalSolid,
 		LockOpenOutline,
 		CreditCardOutline,
-		EuroOutline,
 		ProfileCardOutline,
-		FileInvoiceOutline
+		FileInvoiceOutline,
+		BellActiveAltOutline,
+		FolderDuplicateOutline,
+		ChartMixedDollarOutline
 	} from 'flowbite-svelte-icons';
 
 	import Accounts from './Accounts.svelte';
+	import BankCards from './BankCards.svelte';
 	import ProfilePicture from './ProfilePicture.svelte';
 	import Alerts from './Alerts.svelte';
 	import Emails from './Emails.svelte';
@@ -33,6 +35,7 @@
 		phone: ''
 	};
 	let accounts = data.Accounts;
+	let bankcards = data.Cards;
 </script>
 
 <main class="p-4">
@@ -75,19 +78,26 @@
 				<CreditCardOutline size="md" />
 				Cards
 			</div>
-			<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
-				<Accounts />
-				<PersonlaInfo />
+			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+				<BankCards {bankcards} />
 			</div>
 		</TabItem>
 		<TabItem>
 			<div slot="title" class="flex items-center gap-2">
-				<EuroOutline size="md" />
+				<ChartMixedDollarOutline size="md" />
 				Loans
 			</div>
-			<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
-				<Accounts />
-				<PersonlaInfo />
+			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+				<Accounts {accounts} />
+			</div>
+		</TabItem>
+		<TabItem>
+			<div slot="title" class="flex items-center gap-2">
+				<FolderDuplicateOutline size="md" />
+				Documents
+			</div>
+			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+				<Accounts {accounts} />
 			</div>
 		</TabItem>
 		<TabItem>
@@ -102,7 +112,7 @@
 		</TabItem>
 		<TabItem>
 			<div slot="title" class="flex items-center gap-2">
-				<AdjustmentsVerticalSolid size="md" />
+				<BellActiveAltOutline size="md" />
 				Settings
 			</div>
 			<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
