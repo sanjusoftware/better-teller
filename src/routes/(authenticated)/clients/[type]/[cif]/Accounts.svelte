@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {
 		Button,
+		ButtonGroup,
 		Card,
 		Indicator,
 		Table,
@@ -13,6 +14,7 @@
 	import {
 	ChartMixedDollarOutline,
 		CloseOutline,
+		DownloadOutline,
 		EyeSolid,
 		LockTimeOutline,
 		PlusOutline,
@@ -106,9 +108,14 @@
 							{account.card_issued ? 'Yes' : 'No'}
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
-						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
-							<EyeSolid size="sm" /> Statement
-						</Button>
+						<ButtonGroup>
+							<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+								<EyeSolid size="sm" /> Statement
+							</Button>
+							<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+								<DownloadOutline size="sm" /> Download
+							</Button>
+						</ButtonGroup>
 						<Button outline color="yellow" size="xs" class="gap-2 px-3">
 							<LockTimeOutline size="sm" /> Suspend
 						</Button>

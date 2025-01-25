@@ -1,0 +1,140 @@
+[
+    {
+        "documentId": "12345",
+        "documentType": "ID",
+        "documentSubType": "Passport",
+        "documentUrl": "https://example.com/documents/12345",
+        "documentName": "John_Doe_Passport.pdf",
+        "customerId": 1,
+        "issueDate": "2023-01-15",
+        "expiryDate": "2033-01-15",
+        "issuedBy": "Government of Bulgaria",
+        "documentStatus": "Verified",
+        "documentVerificationDate": "2021-01-15",
+        "documentVerificationBy": "John Doe",
+        "documentCategory": "Travel",
+        "documentTags": [
+            "official",
+            "identification",
+            "travel"
+        ],
+        "documentSize": "2MB",
+        "documentFormat": "PDF",
+        "documentLanguage": "English"
+    },
+    {
+        "documentId": "67890",
+        "documentType": "ID",
+        "documentSubType": "Driving License",
+        "documentUrl": "https://example.com/documents/67890",
+        "documentName": "John_Doe_Driving_License.pdf",
+        "customerId": 1,
+        "issueDate": "2023-01-15",
+        "expiryDate": "2033-01-15",
+        "issuedBy": "Government of Bulgaria",
+        "documentStatus": "Pending Verification",
+        "documentVerificationDate": "2021-01-15",
+        "documentVerificationBy": "John Doe",
+        "documentCategory": "Travel",
+        "documentTags": [
+            "official",
+            "identification",
+            "travel"
+        ],
+        "documentSize": "2MB",
+        "documentFormat": "PDF",
+        "documentLanguage": "English"
+    },
+    {
+        "documentId": "13579",
+        "documentType": "ID",
+        "documentSubType": "Passport",
+        "documentUrl": "https://example.com/documents/13579",
+        "documentName": "Jane_Doe_Passport.pdf",
+        "customerId": 1,
+        "issueDate": "2023-01-15",
+        "expiryDate": "2033-01-15",
+        "issuedBy": "Government of Bulgaria",
+        "documentStatus": "Rejected",
+        "documentVerificationDate": "2021-01-15",
+        "documentVerificationBy": "John Doe",
+        "documentCategory": "Travel",
+        "documentTags": [
+            "official",
+            "identification",
+            "travel"
+        ],
+        "documentSize": "2MB",
+        "documentFormat": "PDF",
+        "documentLanguage": "English"
+    },
+    {
+        "documentId": "24680",
+        "documentType": "ID",
+        "documentSubType": "Driving License",
+        "documentUrl": "https://example.com/documents/24680",
+        "documentName": "Jane_Doe_Driving_License.pdf",
+        "customerId": 1,
+        "issueDate": "2023-01-15",
+        "expiryDate": "2033-01-15",
+        "issuedBy": "Government of Bulgaria",
+        "documentStatus": "Expired",
+        "documentVerificationDate": "2021-01-15",
+        "documentVerificationBy": "John Doe",
+        "documentCategory": "Travel",
+        "documentTags": [
+            "official",
+            "identification",
+            "travel"
+        ],
+        "documentSize": "2MB",
+        "documentFormat": "PDF",
+        "documentLanguage": "English"
+    },
+    {
+        "documentId": "36912",
+        "documentType": "ID",
+        "documentSubType": "Passport",
+        "documentUrl": "https://example.com/documents/36912",
+        "documentName": "John_Smith_Passport.pdf",
+        "customerId": 1,
+        "issueDate": "2023-01-15",
+        "expiryDate": "2033-01-15",
+        "issuedBy": "Government of Bulgaria",
+        "documentStatus": "Verified",
+        "documentVerificationDate": "2021-01-15",
+        "documentVerificationBy": "John Doe",
+        "documentCategory": "Travel",
+        "documentTags": [
+            "official",
+            "identification",
+            "travel"
+        ],
+        "documentSize": "2MB",
+        "documentFormat": "PDF",
+        "documentLanguage": "English"
+    },
+    {
+        "documentId": "12345",
+        "documentType": "ID",
+        "documentSubType": "Driving License",
+        "documentUrl": "https://example.com/documents/12345",
+        "documentName": "John_Smith_Driving_License.pdf",
+        "customerId": 1,
+        "issueDate": "2023-01-15",
+        "expiryDate": "2033-01-15",
+        "issuedBy": "Government of Bulgaria",
+        "documentStatus": "Verified",
+        "documentVerificationDate": "2021-01-15",
+        "documentVerificationBy": "John Doe",
+        "documentCategory": "Travel",
+        "documentTags": [
+            "official",
+            "identification",
+            "travel"
+        ],
+        "documentSize": "2MB",
+        "documentFormat": "PDF",
+        "documentLanguage": "English"
+    }
+]

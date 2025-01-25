@@ -7,12 +7,19 @@
 		FileInvoiceOutline,
 		BellActiveAltOutline,
 		FolderDuplicateOutline,
-		ChartMixedDollarOutline
+		ChartMixedDollarOutline,
+
+		WalletOutline,
+
+		FileCopyAltOutline
+
+
 	} from 'flowbite-svelte-icons';
 
 	import Accounts from './Accounts.svelte';
 	import BankCards from './BankCards.svelte';
 	import Loans from './Loans.svelte';
+	import Documents from './Documents.svelte';
 	import ProfilePicture from './ProfilePicture.svelte';
 	import Alerts from './Alerts.svelte';
 	import Emails from './Emails.svelte';
@@ -38,6 +45,7 @@
 	let accounts = data.Accounts;
 	let bankcards = data.Cards;
 	let loans = data.Loans;
+	let documents = data.Documents;
 </script>
 
 <main class="p-4">
@@ -68,7 +76,7 @@
 		</TabItem>
 		<TabItem>
 			<div slot="title" class="flex items-center gap-2">
-				<FileInvoiceOutline size="md" />
+				<WalletOutline size="md" />
 				Accounts
 			</div>
 			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
@@ -95,11 +103,11 @@
 		</TabItem>
 		<TabItem>
 			<div slot="title" class="flex items-center gap-2">
-				<FolderDuplicateOutline size="md" />
+				<FileCopyAltOutline size="md" />
 				Documents
 			</div>
 			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-				<Accounts {accounts} />
+				<Documents {documents} />
 			</div>
 		</TabItem>
 		<TabItem>

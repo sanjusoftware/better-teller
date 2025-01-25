@@ -12,23 +12,12 @@
 		TableHeadCell
 	} from 'flowbite-svelte';
 	import {
-	BadgeCheckOutline,
-		BanOutline,
 		BookOpenOutline,
 		BookOutline,
 		CashOutline,
-		CheckCircleOutline,
-		CheckCircleSolid,
-		CheckOutline,
-		CloseOutline,
-		DownloadSolid,
-		EuroOutline,
 		EyeSolid,
 		HomeOutline,
-		LockTimeOutline,
-		PauseOutline,
 		PlusOutline,
-		TicketSolid,
 		TruckClockOutline
 	} from 'flowbite-svelte-icons';
 
@@ -109,7 +98,7 @@
 						{loan.emi.toLocaleString()}
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
-                        <div class="flex items-center gap-2">
+						<div class="flex items-center gap-2">
 							{#if loan.status === 'Active'}
 								<Indicator color="green" />
 							{:else if loan.status === 'Defaulted'}
@@ -119,7 +108,7 @@
 							{:else if loan.status === 'Closed'}
 								<Indicator color="gray" />
 							{/if}
-                            <span>{loan.status}</span>
+							<span>{loan.status}</span>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
@@ -130,10 +119,10 @@
 							<Button outline color="red" size="xs" class="gap-2 px-3">
 								<BookOutline size="sm" /> Close
 							</Button>
-                        {:else if loan.status === 'Defaulted' || loan.status === 'NPA'} 
-                            <Button outline size="xs" class="gap-2 px-3">
-                                <BookOpenOutline size="sm" /> Reopen   
-                            </Button>
+						{:else if loan.status === 'Defaulted' || loan.status === 'NPA'}
+							<Button outline size="xs" class="gap-2 px-3">
+								<BookOpenOutline size="sm" /> Reopen
+							</Button>
 						{/if}
 					</TableBodyCell>
 				</TableBodyRow>

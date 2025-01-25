@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {
 		Button,
+		ButtonGroup,
 		Card,
 		Indicator,
 		Table,
@@ -10,20 +11,27 @@
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
-	import { BanOutline, CheckCircleOutline, EyeSolid, LockOpenOutline, PlusOutline } from 'flowbite-svelte-icons';
-	import CreditCard from "../../../../utils/CreditCard.svelte";
-	import StatusIndicator from "../../../../utils/StatusIndicator.svelte";
+	import {
+		BanOutline,
+		CheckCircleOutline,
+		CreditCardOutline,
+		CreditCardPlusAltOutline,
+		EyeSolid,
+		LockOpenOutline,
+		PlusOutline
+	} from 'flowbite-svelte-icons';
+	import CreditCard from '../../../../utils/CreditCard.svelte';
+	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
 
 	export let bankcards: Array<{
-        "cardType": string,
-        "cardNumber": string,
-        "issueDate": string,
-        "expiryDate": string,
-        "accountNumber": string,
-        "customerId": number,
-		"status": string
-    }> = [];
-
+		cardType: string;
+		cardNumber: string;
+		issueDate: string;
+		expiryDate: string;
+		accountNumber: string;
+		customerId: number;
+		status: string;
+	}> = [];
 </script>
 
 <Card size="xl">
@@ -33,9 +41,10 @@
 			on:click={() => {
 				/* logic to issue new card */
 			}}
-			class="w-fit"> 
-			<PlusOutline size="md" class="mr-2" />
-				Issue New Card
+			class="w-fit"
+		>
+			<CreditCardPlusAltOutline size="md" class="mr-2" />
+			Issue New Card
 		</Button>
 	</div>
 	<Table>
@@ -51,18 +60,23 @@
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 							<div class="text-base font-semibold text-gray-900 dark:text-white">
 								<a href="/transactions" class="hover:underline">
-									<span>{bankcard.cardNumber.slice(0, 4)} XXXX XXXX {bankcard.cardNumber.slice(bankcard.cardNumber.length - 4, bankcard.cardNumber.length)}</span>
+									<span>
+										{bankcard.cardNumber.slice(0, 4)} XXXX XXXX {bankcard.cardNumber.slice(
+											bankcard.cardNumber.length - 4,
+											bankcard.cardNumber.length
+										)}
+									</span>
 								</a>
 							</div>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell
-					class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"
-				>
-					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-						<CreditCard cardType={bankcard.cardType} /> 
-					</div>
-				</TableBodyCell>
+						class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"
+					>
+						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+							<CreditCard cardType={bankcard.cardType} />
+						</div>
+					</TableBodyCell>
 					<TableBodyCell
 						class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"
 					>
