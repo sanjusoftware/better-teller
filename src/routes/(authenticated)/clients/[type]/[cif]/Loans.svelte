@@ -91,19 +91,22 @@
 						</span>
 					</TableBodyCell>
 					<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
-						{loan.principle_amount}
+						<div class="text-base font-semibold text-gray-900 dark:text-white">
+							{loan.principle_amount.toLocaleString()}
+						</div>
+						<div class="text-sm font-small text-gray-500 dark:text-gray-400">
+							@{loan.roi}%
+						</div>
 					</TableBodyCell>
 					<TableBodyCell
 						class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"
 					>
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-							<div class="text-base font-semibold text-gray-900 dark:text-white">
-								{new Date(loan.created_on).toLocaleDateString()}
-							</div>
+							{new Date(loan.created_on).toLocaleDateString()}
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
-						{loan.emi}
+						{loan.emi.toLocaleString()}
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
                         <div class="flex items-center gap-2">

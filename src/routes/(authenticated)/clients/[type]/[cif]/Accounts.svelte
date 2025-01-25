@@ -30,6 +30,7 @@
 		opened_on: string;
 		card_issued: boolean;
 		currency: string;
+		status: string;
 	}> = [];
 </script>
 
@@ -47,7 +48,7 @@
 	</div>
 	<Table>
 		<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-			{#each ['Account Number', 'Type', 'Balance', 'Opened on', 'Card', 'Actions'] as title}
+			{#each ['Account Number', 'Type', 'Balance', 'Opened', 'Status', 'Card', 'Actions'] as title}
 				<TableHeadCell class="p-4 font-medium">{title}</TableHeadCell>
 			{/each}
 		</TableHead>
@@ -79,9 +80,7 @@
 					>
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 							<div class="text-base font-semibold text-gray-900 dark:text-white">
-								<a href="/#" class="hover:underline">
-									{account.balance}
-								</a>
+								{account.balance.toLocaleString()}
 							</div>
 							<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 								{account.currency}
@@ -93,9 +92,18 @@
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
 						<div class="flex items-center gap-2">
-							<Indicator color={account.card_issued ? 'green' : 'red'} />
-							{account.card_issued ? 'Yes' : 'No'}
+							{#if account.status === 'Active'}
+								<Indicator color="green" />
+							{:else if account.status === 'Blocked'}
+								<Indicator color="red" />
+							{:else if account.status === 'Closed'}
+								<Indicator color="gray" />
+							{/if}
+							<span>{account.status}</span>
 						</div>
+					</TableBodyCell>					
+					<TableBodyCell class="p-4 font-normal">
+							{account.card_issued ? 'Yes' : 'No'}
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
 						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
