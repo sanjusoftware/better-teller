@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		Button,
-		Checkbox,
 		Card,
 		Indicator,
 		Table,
@@ -11,8 +10,9 @@
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
-	import { BanOutline, EyeSolid, LockTimeOutline, PlusOutline } from 'flowbite-svelte-icons';
+	import { BanOutline, CheckCircleOutline, EyeSolid, LockOpenOutline, PlusOutline } from 'flowbite-svelte-icons';
 	import CreditCard from "../../../../utils/CreditCard.svelte";
+	import StatusIndicator from "../../../../utils/StatusIndicator.svelte";
 
 	export let bankcards: Array<{
         "cardType": string,
@@ -20,7 +20,8 @@
         "issueDate": string,
         "expiryDate": string,
         "accountNumber": string,
-        "customerId": number
+        "customerId": number,
+		"status": string
     }> = [];
 
 </script>
@@ -39,7 +40,6 @@
 	</div>
 	<Table>
 		<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-			<TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
 			{#each ['Card Number', 'Type', 'Issue Date', 'Expiry Date', 'Status', 'Actions'] as title}
 				<TableHeadCell class="p-4 font-medium">{title}</TableHeadCell>
 			{/each}
@@ -47,7 +47,6 @@
 		<TableBody>
 			{#each bankcards as bankcard}
 				<TableBodyRow class="text-base">
-					<TableBodyCell class="w-4 p-4"><Checkbox /></TableBodyCell>
 					<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 							<div class="text-base font-semibold text-gray-900 dark:text-white">
@@ -76,20 +75,35 @@
 					</TableBodyCell>
 					<TableBodyCell class="p-4 font-normal">
 						<div class="flex items-center gap-2">
-							<Indicator color={new Date(bankcard.expiryDate) > new Date() ? 'green' : 'red'} />
-							{new Date(bankcard.expiryDate) > new Date() ? 'Active' : 'Expiered'}
+							{#if bankcard.status === 'Active'}
+								<Indicator color="green" />
+							{:else if bankcard.status === 'Pending Activation'}
+								<Indicator color="yellow" />
+							{:else if bankcard.status === 'Blocked'}
+								<Indicator color="red" />
+							{:else if bankcard.status === 'Expired'}
+								<Indicator color="gray" />
+							{/if}
+							<span>{bankcard.status}</span>
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
-						<Button outline size="xs" class="gap-2 px-3" href="/transactions">
+						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
 							<EyeSolid size="sm" /> Transactions
 						</Button>
-						<Button outline color="yellow" size="xs" class="gap-2 px-3">
-							<LockTimeOutline size="sm" /> Suspend
-						</Button>
-						<Button outline color="red" size="xs" class="gap-2 px-3">
-							<BanOutline size="sm" /> Block
-						</Button>
+						{#if bankcard.status === 'Active'}
+							<Button outline color="red" size="xs" class="gap-2 px-3">
+								<BanOutline size="sm" /> Block
+							</Button>
+						{:else if bankcard.status === 'Pending Activation'}
+							<Button outline color="green" size="xs" class="gap-2 px-3">
+								<CheckCircleOutline size="sm" /> Activate
+							</Button>
+						{:else if bankcard.status === 'Blocked'}
+							<Button outline color="green" size="xs" class="gap-2 px-3">
+								<LockOpenOutline size="sm" /> Unblock
+							</Button>
+						{/if}
 					</TableBodyCell>
 				</TableBodyRow>
 			{/each}

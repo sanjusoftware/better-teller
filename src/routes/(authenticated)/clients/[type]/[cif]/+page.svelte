@@ -12,6 +12,7 @@
 
 	import Accounts from './Accounts.svelte';
 	import BankCards from './BankCards.svelte';
+	import Loans from './Loans.svelte';
 	import ProfilePicture from './ProfilePicture.svelte';
 	import Alerts from './Alerts.svelte';
 	import Emails from './Emails.svelte';
@@ -36,6 +37,7 @@
 	};
 	let accounts = data.Accounts;
 	let bankcards = data.Cards;
+	let loans = data.Loans;
 </script>
 
 <main class="p-4">
@@ -88,7 +90,7 @@
 				Loans
 			</div>
 			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-				<Accounts {accounts} />
+				<Loans {loans} />
 			</div>
 		</TabItem>
 		<TabItem>

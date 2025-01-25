@@ -4,7 +4,7 @@
         "accountNumber": "123456780",
         "iban": "BGSOF0009123456780",
         "balance": 150000,
-        "type": "Checking",
+        "type": "Loan",
         "opened_on": "01/01/2021",
         "card_issued": true,
         "currency": "Euro"
@@ -24,17 +24,27 @@
         "accountNumber": "123456782",
         "iban": "BGSOF0009123456782",
         "balance": 175000,
-        "type": "Checking",
+        "type": "Loan",
         "opened_on": "01/03/2021",
         "card_issued": true,
         "currency": "BGN"
     },
     {
-        "customerId": 2,
+        "customerId": 1,
         "accountNumber": "987654322",
         "iban": "BGSOF0009987654322",
         "balance": 300000,
-        "type": "Savings",
+        "type": "Loan",
+        "opened_on": "01/04/2021",
+        "card_issued": true,
+        "currency": "Euro"
+    },
+    {
+        "customerId": 1,
+        "accountNumber": "987654333",
+        "iban": "BGSOF0009987654333",
+        "balance": 300000,
+        "type": "Loan",
         "opened_on": "01/04/2021",
         "card_issued": true,
         "currency": "Euro"
@@ -54,17 +64,17 @@
         "accountNumber": "987654324",
         "iban": "BGSOF0009987654324",
         "balance": 400000,
-        "type": "Savings",
+        "type": "Loan",
         "opened_on": "01/06/2021",
         "card_issued": true,
         "currency": "BGN"
     },
     {
-        "customerId": 3,
+        "customerId": 2,
         "accountNumber": "112233446",
         "iban": "BGSOF0009112233446",
         "balance": 60000,
-        "type": "Checking",
+        "type": "Loan",
         "opened_on": "01/07/2021",
         "card_issued": true,
         "currency": "Euro"
@@ -90,21 +100,21 @@
         "currency": "BGN"
     },
     {
-        "customerId": 4,
+        "customerId": 3,
         "accountNumber": "556677880",
         "iban": "BGSOF0009556677880",
         "balance": 80000,
-        "type": "Savings",
+        "type": "Loan",
         "opened_on": "11/02/2020",
         "card_issued": false,
         "currency": "Euro"
     },
     {
-        "customerId": 4,
+        "customerId": 3,
         "accountNumber": "556677881",
         "iban": "BGSOF0009556677881",
         "balance": 85000,
-        "type": "Checking",
+        "type": "Loan",
         "opened_on": "12/03/2020",
         "card_issued": true,
         "currency": "USD"
@@ -120,17 +130,17 @@
         "currency": "BGN"
     },
     {
-        "customerId": 5,
+        "customerId": 4,
         "accountNumber": "998877660",
         "iban": "BGSOF0009998877660",
         "balance": 125000,
-        "type": "Checking",
+        "type": "Loan",
         "opened_on": "06/08/2017",
         "card_issued": true,
         "currency": "Euro"
     },
     {
-        "customerId": 5,
+        "customerId": 4,
         "accountNumber": "998877661",
         "iban": "BGSOF0009998877661",
         "balance": 130000,

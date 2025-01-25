@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		Button,
-		Checkbox,
 		Card,
 		Indicator,
 		Table,
@@ -12,12 +11,14 @@
 		TableHeadCell
 	} from 'flowbite-svelte';
 	import {
-		BanOutline,
-		DownloadSolid,
-		EuroOutline,
+	ChartMixedDollarOutline,
+		CloseOutline,
 		EyeSolid,
 		LockTimeOutline,
-		PlusOutline
+		PlusOutline,
+
+		SalePercentOutline
+
 	} from 'flowbite-svelte-icons';
 
 	export let accounts: Array<{
@@ -46,7 +47,6 @@
 	</div>
 	<Table>
 		<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-			<TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
 			{#each ['Account Number', 'Type', 'Balance', 'Opened on', 'Card', 'Actions'] as title}
 				<TableHeadCell class="p-4 font-medium">{title}</TableHeadCell>
 			{/each}
@@ -54,7 +54,6 @@
 		<TableBody>
 			{#each accounts as account}
 				<TableBodyRow class="text-base">
-					<TableBodyCell class="w-4 p-4"><Checkbox /></TableBodyCell>
 					<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 							<div class="text-base font-semibold text-gray-900 dark:text-white">
@@ -68,6 +67,11 @@
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
+						{#if account.type === 'Loan'}
+							<ChartMixedDollarOutline class="mr-2" />
+						{:else}
+							<SalePercentOutline class="mr-2" />
+						{/if}
 						{account.type}
 					</TableBodyCell>
 					<TableBodyCell
@@ -94,14 +98,14 @@
 						</div>
 					</TableBodyCell>
 					<TableBodyCell class="space-x-2 p-4">
-						<Button outline size="xs" class="gap-2 px-3" href="/transactions">
+						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
 							<EyeSolid size="sm" /> Statement
 						</Button>
 						<Button outline color="yellow" size="xs" class="gap-2 px-3">
 							<LockTimeOutline size="sm" /> Suspend
 						</Button>
 						<Button outline color="red" size="xs" class="gap-2 px-3">
-							<BanOutline size="sm" /> Block
+							<CloseOutline size="sm" /> Close
 						</Button>
 					</TableBodyCell>
 				</TableBodyRow>
