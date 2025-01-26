@@ -1,240 +1,121 @@
 <script>
-	import { NavBrand, Badge } from 'flowbite-svelte';
-    import { ClockOutline } from 'flowbite-svelte-icons';
+	import {
+		NavBrand,
+		Navbar,
+		NavHamburger,
+		NavUl,
+		NavLi,
+		Avatar,
+		Dropdown,
+		DropdownHeader,
+		DropdownItem,
+		DropdownDivider,
+		Button
+	} from 'flowbite-svelte';
+	import { BellRingSolid, ChevronDownOutline } from 'flowbite-svelte-icons';
+
+	import { page } from '$app/state';
+	$: activeUrl = page.url.pathname;
 </script>
 
-<nav
-	class="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50"
->
-	<div class="flex flex-wrap justify-between items-center">
-		<div class="flex justify-start items-center">
-			<!-- Branding - DSK Logo -->
-			<NavBrand href="/" class="flex items-center justify-between mr-4">
-				<img src="/images/dsk.svg" class="mr-3 h-8" alt="DSK Logo" />
-				<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-					Better Teller
-				</span>
-			</NavBrand>
-		</div>
+<Navbar class="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 start-0 border-b">
+	<NavBrand href="/" class="flex items-center justify-between mr-4">
+		<img src="/images/dsk.svg" class="me-3 h-6 sm:h-9" alt="DSK Logo" />
+		<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+			Better Teller
+		</span>
+	</NavBrand>
 
-        <div class="flex items-center lg:order-2">
-            <!-- Customer queue -->
-            <Badge large border color="red">
-                <ClockOutline class="text-primary-800 dark:text-primary-400 w-5 h-5 me-1.5" />
-                4 Customers waiting for 30 mins
-            </Badge>
-        </div>
-		<div class="flex items-center lg:order-2">
-			<!-- Notifications -->
-			<button
-				type="button"
-				data-dropdown-toggle="notification-dropdown"
-				class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-			>
-				<span class="sr-only">View notifications</span>
-				<!-- Bell icon -->
-				<svg
-					aria-hidden="true"
-					class="w-6 h-6"
-					fill="currentColor"
-					viewBox="0 0 20 20"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
-					></path>
-				</svg>
-			</button>
-
-			<!-- Notifications Dropdown -->
-			<div
-				id="notification-dropdown"
-				class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
-			>
-				<div
-					class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300"
-				>
-					Notifications
-				</div>
-				<!-- Notifications -->
-				<div>
-					<a
-						href="/"
-						class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
-					>
-						<div class="flex-shrink-0">
-							<img
-								class="w-11 h-11 rounded-full"
-								src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-								alt="Bonnie Green avatar"
-							/>
-							<div
-								class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700"
-							>
-								<svg
-									aria-hidden="true"
-									class="w-3 h-3 text-white"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"
-									/>
-									<path
-										d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"
-									/>
-								</svg>
-							</div>
-						</div>
-						<div class="pl-3 w-full">
-							<div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
-								New message from
-								<span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span>
-								: "Hey, what's up? All set for the presentation?"
-							</div>
-							<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
-								a few moments ago
-							</div>
-						</div>
-					</a>
-					<a
-						href="/"
-						class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
-					>
-						<div class="flex-shrink-0">
-							<img
-								class="w-11 h-11 rounded-full"
-								src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-								alt="Jese Leos avatar"
-							/>
-							<div
-								class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-gray-900 rounded-full border border-white dark:border-gray-700"
-							>
-								<svg
-									aria-hidden="true"
-									class="w-3 h-3 text-white"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"
-									/>
-								</svg>
-							</div>
-						</div>
-						<div class="pl-3 w-full">
-							<div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
-								<span class="font-semibold text-gray-900 dark:text-white">Jese leos</span>
-								and
-								<span class="font-medium text-gray-900 dark:text-white">5 others</span>
-								started following you.
-							</div>
-							<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
-								10 minutes ago
-							</div>
-						</div>
-					</a>
-				</div>
-				<!-- View All link -->
-				<a
+	<div class="flex items-center md:order-2">
+		<Button
+			id="notifications-list"
+			color="none"
+			class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+		>
+			<BellRingSolid class="w-6 h-6" />
+		</Button>
+		<Button
+			id="languages-list"
+			color="none"
+			class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+		>
+			<span class="fi fi-us h-5 w-5 mt-0.5"></span>
+		</Button>
+		<div class="mx-2"></div>
+		<Avatar id="avatar-menu" src="/images/profile.jpg" href="#" class="w-8 h-8" />
+		<NavHamburger />
+	</div>
+	
+	<Dropdown placement="bottom" triggeredBy="#avatar-menu">
+		<DropdownHeader>
+			<span class="block text-sm">Sanjeev Mishra</span>
+			<span class="block truncate text-sm font-medium">sanjeev.mishra@dskbank.bg</span>
+		</DropdownHeader>
+		<DropdownItem href="/dashboard">Dashboard</DropdownItem>
+		<DropdownItem href="/settings">Settings</DropdownItem>
+		<DropdownDivider />
+		<DropdownItem>Sign out</DropdownItem>
+	</Dropdown>
+	<Dropdown placement="bottom" triggeredBy="#notifications-list">
+		<DropdownHeader>
+			<span class="block text-md">Notifications</span>
+		</DropdownHeader>
+		<DropdownItem>Notification 1</DropdownItem>
+		<DropdownItem>Notification 2</DropdownItem>
+		<DropdownItem>Notification 3</DropdownItem>
+		<DropdownDivider />
+		<DropdownItem class="text-center" href="/notifcations">View All</DropdownItem>
+	</Dropdown>
+	<Dropdown placement="bottom" triggeredBy="#languages-list">
+		<DropdownItem>
+			<a
 					href="/"
-					class="block py-2 text-md font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-600 dark:text-white dark:hover:underline"
+					class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-600"
+					role="menuitem"
 				>
 					<div class="inline-flex items-center">
-						<svg
-							aria-hidden="true"
-							class="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-							<path
-								fill-rule="evenodd"
-								d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-						View all
+						<span class="fi fi-us h-3.5 w-3.5 mr-2"></span>
+						English (US)
 					</div>
 				</a>
+		</DropdownItem>
+		<DropdownItem>
+			<a
+			href="/"
+			class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-600"
+			role="menuitem"
+		>
+			<div class="inline-flex items-center">
+				<span class="fi fi-bg h-3.5 w-3.5 mr-2"></span>
+				Bulgarian
 			</div>
+		</a>
+		</DropdownItem>
+	</Dropdown>
 
-			<!-- User Menu -->
-			<button
-				type="button"
-				class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-				id="user-menu-button"
-				aria-expanded="false"
-				data-dropdown-toggle="dropdown"
-			>
-				<span class="sr-only">Open user menu</span>
-				<img class="w-8 h-8 rounded-full" src="/images/profile.jpg" alt="user" />
-			</button>
-			<!-- User dropdown menu -->
-			<div
-				id="dropdown"
-				class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
-			>
-				<div class="py-3 px-4">
-					<span class="block text-sm font-semibold text-gray-900 dark:text-white">
-						Sanjeev Mishra
-					</span>
-					<span class="block text-sm text-gray-900 truncate dark:text-white">
-						sanjeev.mishra@dskbank.bg
-					</span>
-				</div>
-				<ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
-					<li>
-						<a
-							href="/"
-							class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-						>
-							My profile
-						</a>
-					</li>
-					<li>
-						<a
-							href="/"
-							class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-						>
-							Account settings
-						</a>
-					</li>
-				</ul>
-				<ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
-					<li>
-						<a
-							href="/"
-							class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-						>
-							<svg
-								class="mr-2 w-5 h-5 text-gray-400"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
-								/>
-							</svg>
-							Collections
-						</a>
-					</li>
-				</ul>
-				<ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
-					<li>
-						<a
-							href="/"
-							class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-						>
-							Sign out
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</nav>
+	<NavUl {activeUrl}>
+		<NavLi href="/dashboard">Dashboard</NavLi>
+		<NavLi class="cursor-pointer">
+			Clients<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
+		</NavLi>
+		<Dropdown class="w-44 z-20">
+			<DropdownItem href="/clients/retail">Retail</DropdownItem>
+			<DropdownItem href="/clients/sme">SME</DropdownItem>
+			<DropdownItem href="/clients/corporate">Corporate</DropdownItem>
+		</Dropdown>
+		<NavLi class="cursor-pointer">
+			Products<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
+		</NavLi>
+		<Dropdown class="w-44 z-20">
+			<DropdownItem href="/">Smart Accounts</DropdownItem>
+			<DropdownItem href="/docs/components/navbar">Credit Cards</DropdownItem>
+			<DropdownItem href="/">Mortgages</DropdownItem>
+			<DropdownItem href="/">Cash Loan</DropdownItem>
+			<DropdownItem href="/">Working Capital Loan</DropdownItem>
+			<DropdownItem href="/">safe Deposit</DropdownItem>
+		</Dropdown>
+		<NavLi href="/transactions">Transactions</NavLi>
+		<NavLi href="/documents">Documents</NavLi>
+		<NavLi href="/help">Help</NavLi>
+	</NavUl>
+</Navbar>

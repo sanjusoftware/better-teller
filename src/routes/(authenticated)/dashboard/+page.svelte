@@ -1,7 +1,5 @@
-<script lang="ts">
-    import Dashboard from "../../utils/dashboard/Dashboard.svelte"
-</script>
-
 <main class="p-4">
-    <Dashboard />
+    <div class="mt-px space-y-4">
+        <h1>Dashboard</h1>
+    </div>
 </main>

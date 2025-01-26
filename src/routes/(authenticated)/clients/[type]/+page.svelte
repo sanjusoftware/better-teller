@@ -41,8 +41,7 @@
 
 <div class="p-4">
 	<Breadcrumb class="mb-5">
-		<BreadcrumbItem home href="/">Home</BreadcrumbItem>
-		<BreadcrumbItem>Clients</BreadcrumbItem>
+		<BreadcrumbItem home>Clients</BreadcrumbItem>
 		<BreadcrumbItem href={clientsPath}>{data.clienttype}</BreadcrumbItem>
 	</Breadcrumb>
 
