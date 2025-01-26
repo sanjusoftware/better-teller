@@ -42,11 +42,11 @@
 <div class="p-4">
 	<Breadcrumb class="mb-5">
 		<BreadcrumbItem home>Clients</BreadcrumbItem>
-		<BreadcrumbItem href={clientsPath}>{data.clienttype}</BreadcrumbItem>
+		<BreadcrumbItem href={clientsPath}>{data.clienttype} Clients</BreadcrumbItem>
 	</Breadcrumb>
 
 	<Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
-		<Input placeholder="Search by Name, CIF, Email, Phone, EGN etc. ..." class="me-4 w-80 border xl:w-96" />
+		<Input placeholder="Search by Name, CIF, Email, Phone, EGN ..." class="me-4 w-80 border xl:w-96" />
 
 		<div slot="end" class="flex items-center space-x-2">
 			<Button

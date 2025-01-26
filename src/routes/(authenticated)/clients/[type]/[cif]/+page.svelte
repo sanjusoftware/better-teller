@@ -4,16 +4,10 @@
 		LockOpenOutline,
 		CreditCardOutline,
 		ProfileCardOutline,
-		FileInvoiceOutline,
 		BellActiveAltOutline,
-		FolderDuplicateOutline,
 		ChartMixedDollarOutline,
-
 		WalletOutline,
-
 		FileCopyAltOutline
-
-
 	} from 'flowbite-svelte-icons';
 
 	import Accounts from './Accounts.svelte';
@@ -51,7 +45,7 @@
 <main class="p-4">
 	<div class="col-span-full xl:mb-0">
 		<Breadcrumb class="mb-6">
-			<BreadcrumbItem href="/" home>Home</BreadcrumbItem>
+			<BreadcrumbItem home>Clients</BreadcrumbItem>
 			<BreadcrumbItem href={`/clients/${client.type}`}>
 				{client.type.toLocaleUpperCase()} Clients
 			</BreadcrumbItem>
