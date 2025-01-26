@@ -64,7 +64,7 @@
 				<ProfileCardOutline size="md" />
 				Profile
 			</div>
-			<div class="grid grid-cols-2 space-y-2 dark:bg-gray-900 xl:grid-cols-3 xl:gap-3.5">
+			<div class="grid grid-cols-2 dark:bg-gray-900 xl:grid-cols-3 xl:gap-3.5">
 				<div class="col-span-full space-y-4 xl:col-auto">
 					<ProfilePicture {client} />
 					<LanguageTime />

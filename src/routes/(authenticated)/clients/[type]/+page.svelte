@@ -5,7 +5,6 @@
 		BreadcrumbItem,
 		Button,
 		Checkbox,
-		Indicator,
 		Input,
 		Table,
 		TableBody,
@@ -16,14 +15,8 @@
 		Toolbar
 	} from 'flowbite-svelte';
 	import {
-		BanOutline,
-		DownloadSolid,
 		PhoneOutline,
-		PlusOutline,
-		ProfileCardOutline,
-
 		UserAddOutline
-
 	} from 'flowbite-svelte-icons';
 
 	import Client from './Client.svelte';
