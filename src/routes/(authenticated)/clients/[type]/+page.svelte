@@ -20,7 +20,10 @@
 		DownloadSolid,
 		PhoneOutline,
 		PlusOutline,
-		ProfileCardOutline
+		ProfileCardOutline,
+
+		UserAddOutline
+
 	} from 'flowbite-svelte-icons';
 
 	import Client from './Client.svelte';
@@ -28,6 +31,7 @@
 	import MetaTag from '../../../utils/MetaTag.svelte';
 
 	import type { PageData } from './$types';
+	import StatusIndicator from '../../../utils/StatusIndicator.svelte';
 	let { data }: { data: PageData } = $props();
 
 	let openUser = $state(false); // modal control
@@ -58,10 +62,7 @@
 				class="gap-2 whitespace-nowrap px-3"
 				on:click={() => ((current_user = {}), (openUser = true))}
 			>
-				<PlusOutline size="sm" />Add New
-			</Button>
-			<Button size="sm" color="alternative" class="gap-2 px-3">
-				<DownloadSolid size="md" class="-ml-1" />Export
+				<UserAddOutline size="sm" />Add New Client
 			</Button>
 		</div>
 	</Toolbar>
@@ -69,7 +70,7 @@
 <Table>
 	<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
 		<TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
-		{#each ['Name', 'Primary Contact', 'Status', 'Actions'] as title}
+		{#each ['Name', 'Primary Contact', 'Status'] as title}
 			<TableHeadCell class="p-4 font-medium">{title}</TableHeadCell>
 		{/each}
 	</TableHead>
@@ -104,24 +105,8 @@
 				</TableBodyCell>
 				<TableBodyCell class="p-4 font-normal">
 					<div class="flex items-center gap-2">
-						<Indicator color={client.status === 'Active' ? 'green' : 'red'} />
-						{client.status}
+						<StatusIndicator status={client.status} />
 					</div>
-				</TableBodyCell>
-				<TableBodyCell class="space-x-2 p-4">
-					<Button
-						size="sm"
-						class="gap-2 px-3"
-						href={`/clients/${data.clienttype.toLowerCase()}/${client.id}`}
-					>
-						<ProfileCardOutline size="sm" /> Profile
-					</Button>
-					{#if client.status === 'Active'}
-						<Button color="red" size="sm" class="gap-2 px-3"
-						on:click={() => ((current_user = client), (openDelete = true))}>
-							<BanOutline size="sm" /> Suspend
-						</Button>
-					{/if}
 				</TableBodyCell>
 			</TableBodyRow>
 		{/each}

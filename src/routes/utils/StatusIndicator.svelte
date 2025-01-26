@@ -9,7 +9,7 @@
 		<Indicator color="green" />
 	{:else if status === 'Defaulted' || status === 'Pending Activation' || status === 'Pending Verification'}
 		<Indicator color="yellow" />
-	{:else if status === 'NPA' || status === 'Blocked' || status === 'Rejected'}
+	{:else if status === 'NPA' || status === 'Blocked' || status === 'Rejected' || status === 'Inactive'}
 		<Indicator color="red" />
 	{:else if status === 'Closed' || status === 'Expired'}
 		<Indicator color="gray" />

@@ -55,7 +55,7 @@
 		"biography": "I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.",
 		"position": "UI/UX Engineer",
 		"country": "Australia",
-		"status": "InActive",
+		"status": "Inactive",
 		"type": "retail",
 		"phone": "+61 555-1234"
 	},
@@ -103,7 +103,7 @@
 		"biography": "I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.",
 		"position": "Web developer",
 		"country": "France",
-		"status": "InActive",
+		"status": "Inactive",
 		"type": "sme",
 		"phone": "+33 555-1234"
 	},
@@ -175,7 +175,7 @@
 		"biography": "I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.",
 		"position": "UI/UX Engineer",
 		"country": "Australia",
-		"status": "InActive",
+		"status": "Inactive",
 		"type": "corporate",
 		"phone": "+61 555-5678"
 	},
@@ -223,7 +223,7 @@
 		"biography": "I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.",
 		"position": "Web developer",
 		"country": "France",
-		"status": "InActive",
+		"status": "Inactive",
 		"type": "corporate",
 		"phone": "+33 555-5678"
 	},
