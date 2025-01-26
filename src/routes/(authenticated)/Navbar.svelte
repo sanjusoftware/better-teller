@@ -54,7 +54,11 @@
 		<DropdownItem href="/dashboard">Dashboard</DropdownItem>
 		<DropdownItem href="/settings">Settings</DropdownItem>
 		<DropdownDivider />
-		<DropdownItem>Sign out</DropdownItem>
+		<DropdownItem>
+			<form method="POST" action="/logout">
+				<button>Sign out</button>
+			</form>
+		</DropdownItem>
 	</Dropdown>
 	<Dropdown placement="bottom" triggeredBy="#notifications-list">
 		<DropdownHeader>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../../app.css';
 	import { Section, Register } from 'flowbite-svelte-blocks';
-	import { Button, Checkbox, Label, Input } from 'flowbite-svelte';
+	import { Button, Label, Input } from 'flowbite-svelte';
 	import Navbar from '../(authenticated)/Navbar.svelte';
 
 	import MetaTag from '../utils/MetaTag.svelte';
