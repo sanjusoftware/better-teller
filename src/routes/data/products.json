@@ -1,0 +1,182 @@
+[
+    {
+        "productName": "Current Account",
+        "customerSegment": "corporate",
+        "productCategory": "casa",
+        "monthlyMaintenanceFee": 10.0,
+        "interestRate": 0.5,
+        "productBenefits": [
+            "10% discount on maintenance fee for the 1st year",
+            "Free cheque book",
+            "Unlimited ATM withdrawals"
+        ]
+    },
+    {
+        "productName": "Savings Account",
+        "customerSegment": "retail",
+        "productCategory": "casa",
+        "monthlyMaintenanceFee": 5.0,
+        "interestRate": 1.5,
+        "productBenefits": [
+            "5% discount on transaction fee for 10 transactions",
+            "Free online banking",
+            "Higher interest rates for balances above $10,000"
+        ]
+    },
+    {
+        "productName": "Term Deposit",
+        "customerSegment": "sme",
+        "productCategory": "casa",
+        "monthlyMaintenanceFee": 0.0,
+        "interestRate": 2.0,
+        "productBenefits": [
+            "Guaranteed returns",
+            "Flexible tenure options",
+            "No monthly maintenance fee"
+        ]
+    },
+    {
+        "productName": "Personal Loan",
+        "customerSegment": "retail",
+        "productCategory": "loan",
+        "monthlyMaintenanceFee": 15.0,
+        "interestRate": 5.0,
+        "productBenefits": [
+            "Quick approval",
+            "Flexible repayment options",
+            "No prepayment penalty"
+        ]
+    },
+    {
+        "productName": "Home Loan",
+        "customerSegment": "corporate",
+        "productCategory": "loan",
+        "monthlyMaintenanceFee": 20.0,
+        "interestRate": 3.5,
+        "productBenefits": [
+            "Low interest rates",
+            "Long tenure options",
+            "Tax benefits"
+        ]
+    },
+    {
+        "productName": "Credit Card",
+        "customerSegment": "retail",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 12.0,
+        "interestRate": 2.5,
+        "productBenefits": [
+            "Cashback on purchases",
+            "Reward points",
+            "Low foreign transaction fees"
+        ]
+    },
+    {
+        "productName": "Business Loan",
+        "customerSegment": "sme",
+        "productCategory": "loan",
+        "monthlyMaintenanceFee": 25.0,
+        "interestRate": 6.0,
+        "productBenefits": [
+            "High loan amount",
+            "Flexible collateral options",
+            "Quick disbursal"
+        ]
+    },
+    {
+        "productName": "Overdraft",
+        "customerSegment": "corporate",
+        "productCategory": "casa",
+        "monthlyMaintenanceFee": 8.0,
+        "interestRate": 4.0,
+        "productBenefits": [
+            "Easy access to funds",
+            "Pay interest only on used amount",
+            "No prepayment charges"
+        ]
+    },
+    {
+        "productName": "Auto Loan",
+        "customerSegment": "retail",
+        "productCategory": "loan",
+        "monthlyMaintenanceFee": 18.0,
+        "interestRate": 4.5,
+        "productBenefits": [
+            "Low interest rates",
+            "Quick processing",
+            "Flexible repayment terms"
+        ]
+    },
+    {
+        "productName": "Gold Loan",
+        "customerSegment": "sme",
+        "productCategory": "loan",
+        "monthlyMaintenanceFee": 10.0,
+        "interestRate": 3.0,
+        "productBenefits": [
+            "High loan-to-value ratio",
+            "Quick disbursal",
+            "Low interest rates"
+        ]
+    },
+    {
+        "productName": "Education Loan",
+        "customerSegment": "retail",
+        "productCategory": "loan",
+        "monthlyMaintenanceFee": 5.0,
+        "interestRate": 2.0,
+        "productBenefits": [
+            "Low interest rates",
+            "Flexible repayment options",
+            "Tax benefits"
+        ]
+    },
+    {
+        "productName": "Travel Card",
+        "customerSegment": "corporate",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 7.0,
+        "interestRate": 1.0,
+        "productBenefits": [
+            "Low foreign transaction fees",
+            "Free travel insurance",
+            "Reward points on travel bookings"
+        ]
+    },
+    {
+        "productName": "Working Capital Loan",
+        "customerSegment": "sme",
+        "productCategory": "loan",
+        "monthlyMaintenanceFee": 30.0,
+        "interestRate": 5.5,
+        "productBenefits": [
+            "High loan amount",
+            "Flexible repayment options",
+            "Quick disbursal"
+        ]
+    },
+    {
+        "productName": "Fixed Deposit",
+        "customerSegment": "corporate",
+        "productCategory": "casa",
+        "monthlyMaintenanceFee": 0.0,
+        "interestRate": 2.5,
+        "productBenefits": [
+            "Guaranteed returns",
+            "Flexible tenure options",
+            "No monthly maintenance fee"
+        ]
+    },
+    {
+        "productName": "Recurring Deposit",
+        "customerSegment": "retail",
+        "productCategory": "casa",
+        "monthlyMaintenanceFee": 0.0,
+        "interestRate": 3.0,
+        "productBenefits": [
+            "Guaranteed returns",
+            "Flexible tenure options",
+            "No monthly maintenance fee"
+        ]
+    }
+]

@@ -44,11 +44,8 @@
 			</NavLi>
 			<Dropdown class="w-44 z-20">
 				<DropdownItem href="/products/casa">Smart Accounts</DropdownItem>
-				<DropdownItem href="/docs/components/navbar">Credit Cards</DropdownItem>
-				<DropdownItem href="/">Mortgages</DropdownItem>
-				<DropdownItem href="/">Cash Loan</DropdownItem>
-				<DropdownItem href="/">Working Capital Loan</DropdownItem>
-				<DropdownItem href="/">safe Deposit</DropdownItem>
+				<DropdownItem href="/products/card">Credit Cards</DropdownItem>
+				<DropdownItem href="/products/loan">Loans</DropdownItem>
 			</Dropdown>
 			<NavLi href="/transactions">Transactions</NavLi>
 			<NavLi href="/documents">Documents</NavLi>
