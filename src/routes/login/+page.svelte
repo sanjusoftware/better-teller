@@ -3,18 +3,18 @@
 	import { Section, Register } from 'flowbite-svelte-blocks';
 	import { Button, Label, Input } from 'flowbite-svelte';
 	import Navbar from '../(authenticated)/Navbar.svelte';
-
 	import MetaTag from '../utils/MetaTag.svelte';
 
 	const path: string = '/';
 	const description: string = 'DSK - Better Teller App';
 	const title: string = 'DSK - Better Teller App';
 	const subtitle: string = 'Home';
+    const loggedIn: boolean = false;
 </script>
 
 <div class="antialiased bg-gray-50 dark:bg-gray-900">
 	<!-- Top Nav -->
-	<Navbar />
+	<Navbar {loggedIn}/>
 
 	<!-- Main Content -->
 	<MetaTag {path} {description} {title} {subtitle} />
