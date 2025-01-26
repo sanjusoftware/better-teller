@@ -2,6 +2,7 @@
 	import {
 		Button,
 		ButtonGroup,
+		Search,
 		Table,
 		TableBody,
 		TableBodyCell,
@@ -19,6 +20,7 @@
 		TrashBinOutline
 	} from 'flowbite-svelte-icons';
 	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
+	import { TableHeader } from 'flowbite-svelte-blocks';
 
 	export let documents: Array<{
 		documentId: string;
@@ -41,8 +43,8 @@
 	}> = [];
 </script>
 
-<div class="flex justify-between items-center mb-4">
-	<h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Client Documents</h1>
+<TableHeader headerType="search">
+	<Search slot="search" size="md" placeholder="Search by File Name, Document Type, Document Id ..." />
 	<Button
 		on:click={() => {
 			/* logic to add new doument */
@@ -50,9 +52,9 @@
 		class="w-fit"
 	>
 		<FileCirclePlusOutline size="md" class="mr-2" />
-		Upload New Document
+		Open New Document
 	</Button>
-</div>
+</TableHeader>
 <Table>
 	<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
 		{#each ['Type', 'File Name', 'Issuer', 'Expiry', 'Status', 'Actions'] as title}

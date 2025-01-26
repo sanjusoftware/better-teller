@@ -2,6 +2,7 @@
 	import {
 		Button,
 		Checkbox,
+		Search,
 		Table,
 		TableBody,
 		TableBodyCell,
@@ -13,12 +14,13 @@
 		BookOpenOutline,
 		BookOutline,
 		CashOutline,
+		ChartMixedDollarOutline,
 		EyeSolid,
 		HomeOutline,
-		PlusOutline,
 		TruckClockOutline
 	} from 'flowbite-svelte-icons';
 	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
+	import { TableHeader } from 'flowbite-svelte-blocks';
 
 	export let loans: Array<{
 		accountNumber: string;
@@ -33,18 +35,18 @@
 	}> = [];
 </script>
 
-<div class="flex justify-between items-center mb-4">
-	<h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Bank Loans</h1>
+<TableHeader headerType="search">
+	<Search slot="search" size="md" placeholder="Search by Account Number, Loan Type ..." />
 	<Button
 		on:click={() => {
-			/* logic to add new loan */
+			/* logic to issue new loan */
 		}}
 		class="w-fit"
 	>
-		<PlusOutline size="md" class="mr-2" />
-		Open New Loan
+		<ChartMixedDollarOutline size="md" class="mr-2" />
+		Issue New Loan
 	</Button>
-</div>
+</TableHeader>
 <Table>
 	<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
 		<TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
@@ -118,6 +120,6 @@
 </Table>
 {#if loans.length === 0}
 	<div class="p-4 text-center text-gray-500 dark:text-gray-400">
-		<h1>No loans issues.</h1>
+		<h1>No loans</h1>
 	</div>
 {/if}
