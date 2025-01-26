@@ -2,7 +2,6 @@
 	import {
 		Button,
 		ButtonGroup,
-		Card,
 		Table,
 		TableBody,
 		TableBodyCell,
@@ -34,7 +33,7 @@
 	}> = [];
 </script>
 
-<Card size="xl">
+
 	<div class="flex justify-between items-center mb-4">
 		<h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Bank Accounts</h1>
 		<Button
@@ -121,4 +120,3 @@
 			<h1>No accounts opened.</h1>
 		</div>
 	{/if}
-</Card>

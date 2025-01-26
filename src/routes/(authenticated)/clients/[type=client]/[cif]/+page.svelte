@@ -43,16 +43,14 @@
 </script>
 
 <main class="p-4">
-	<div class="col-span-full xl:mb-0">
-		<Breadcrumb class="mb-6">
-			<BreadcrumbItem home>Clients</BreadcrumbItem>
-			<BreadcrumbItem href={`/clients/${client.type}`}>
-				{client.type.toLocaleUpperCase()} Clients
-			</BreadcrumbItem>
-			<BreadcrumbItem>{client.name}</BreadcrumbItem>
-		</Breadcrumb>
-	</div>
-	<Tabs tabStyle="underline">
+	<Breadcrumb class="mb-5">
+		<BreadcrumbItem home>Clients</BreadcrumbItem>
+		<BreadcrumbItem href={`/clients/${client.type}`}>
+			{client.type.toLocaleUpperCase()} Clients
+		</BreadcrumbItem>
+		<BreadcrumbItem>{client.name}</BreadcrumbItem>
+	</Breadcrumb>
+	<Tabs tabStyle="underline" contentClass="p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
 		<TabItem open>
 			<div slot="title" class="flex items-center gap-2">
 				<ProfileCardOutline size="md" />

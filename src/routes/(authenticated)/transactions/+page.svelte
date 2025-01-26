@@ -1,5 +1,7 @@
 <script lang="ts">
     import {
+	Breadcrumb,
+        BreadcrumbItem,
         Button,
         Card,
         Checkbox,
@@ -123,6 +125,11 @@
 </script>
 
 <Card size="xl" class="shadow-sm max-w-none">
+    <Breadcrumb class="mb-5">
+		<BreadcrumbItem home>Home</BreadcrumbItem>
+		<BreadcrumbItem href="/transactions">Transactions</BreadcrumbItem>
+	</Breadcrumb>
+
     <div class="items-center justify-between lg:flex">
         <div class="mb-4 mt-px lg:mb-0">
             <Heading
@@ -131,11 +138,6 @@
             >
                 Transactions
             </Heading>
-            <span
-                class="text-base font-normal text-gray-500 dark:text-gray-400"
-            >
-                This is a list of latest transactions
-            </span>
         </div>
         <div
             class="items-center justify-between gap-3 space-y-4 sm:flex sm:space-y-0"

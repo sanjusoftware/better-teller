@@ -14,10 +14,7 @@
 		TableHeadCell,
 		Toolbar
 	} from 'flowbite-svelte';
-	import {
-		PhoneOutline,
-		UserAddOutline
-	} from 'flowbite-svelte-icons';
+	import { PhoneOutline, UserAddOutline } from 'flowbite-svelte-icons';
 
 	import Client from './Client.svelte';
 	import Delete from './Delete.svelte';
@@ -46,7 +43,10 @@
 	</Breadcrumb>
 
 	<Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
-		<Input placeholder="Search by Name, CIF, Email, Phone, EGN ..." class="me-4 w-80 border xl:w-96" />
+		<Input
+			placeholder="Search by Name, CIF, Email, Phone, EGN ..."
+			class="me-4 w-80 border xl:w-96"
+		/>
 
 		<div slot="end" class="flex items-center space-x-2">
 			<Button
@@ -73,7 +73,7 @@
 				<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
 					<Avatar
 						src={client.avatar}
-						href={`/clients/${data.clienttype.toLowerCase()}/${client.id}`} 
+						href={`/clients/${data.clienttype.toLowerCase()}/${client.id}`}
 						border
 						class={client.status === 'Active'
 							? 'ring-green-400 dark:ring-green-300'
@@ -87,10 +87,12 @@
 						</div>
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">{client.email}</div>
 					</div>
-				</TableBodyCell>				
+				</TableBodyCell>
 				<TableBodyCell class="p-4">
 					<span class="flex items-center space-x-2">
-						<a href={`tel:${client.phone}`} class="hover:underline" aria-label="Call client">{client.phone}</a>
+						<a href={`tel:${client.phone}`} class="hover:underline" aria-label="Call client">
+							{client.phone}
+						</a>
 						<PhoneOutline size="md" class="text-gray-500 dark:text-gray-400" />
 					</span>
 					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">{client.country}</div>
