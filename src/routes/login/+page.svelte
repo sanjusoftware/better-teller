@@ -2,7 +2,7 @@
 	import '../../app.css';
 	import { Section, Register } from 'flowbite-svelte-blocks';
 	import { Button, Label, Input } from 'flowbite-svelte';
-	import Navbar from '../(authenticated)/Navbar.svelte';
+	import Navbar from '../utils/Navbar.svelte';
 	import MetaTag from '../utils/MetaTag.svelte';
 
 	const path: string = '/';

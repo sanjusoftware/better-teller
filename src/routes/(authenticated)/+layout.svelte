@@ -1,7 +1,7 @@
 <script lang="ts">
   import "../../app.css";
-  import Navbar from "./Navbar.svelte";
-  import SpeedDial from "./QuickActions.svelte";
+  import Navbar from "../utils/Navbar.svelte";
+  import SpeedDial from "../utils/QuickActions.svelte";
   import MetaTag from "../utils/MetaTag.svelte";
 
   const path: string = "/";

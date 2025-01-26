@@ -115,7 +115,7 @@
 		<TabItem>
 			<div slot="title" class="flex items-center gap-2">
 				<BellActiveAltOutline size="md" />
-				Settings
+				Notification Preferences
 			</div>
 			<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
 				<Alerts />

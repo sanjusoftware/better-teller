@@ -43,7 +43,7 @@
 				Products<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
 			</NavLi>
 			<Dropdown class="w-44 z-20">
-				<DropdownItem href="/">Smart Accounts</DropdownItem>
+				<DropdownItem href="/products/casa">Smart Accounts</DropdownItem>
 				<DropdownItem href="/docs/components/navbar">Credit Cards</DropdownItem>
 				<DropdownItem href="/">Mortgages</DropdownItem>
 				<DropdownItem href="/">Cash Loan</DropdownItem>
