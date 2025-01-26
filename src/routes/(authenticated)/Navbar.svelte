@@ -1,12 +1,6 @@
 <script>
 	import { NavBrand, Badge } from 'flowbite-svelte';
     import { ClockOutline } from 'flowbite-svelte-icons';
-	setInterval(handleHover, 500);
-
-	let color = 'primary';
-	function handleHover() {
-		color = color === 'primary' ? 'dark' : 'primary';
-	}
 </script>
 
 <nav
@@ -177,7 +171,7 @@
 				data-dropdown-toggle="dropdown"
 			>
 				<span class="sr-only">Open user menu</span>
-				<img class="w-8 h-8 rounded-full" src="/images/profile.jpg" alt="user" />
+				<img class="w-8 h-8 rounded-full" src="../images/profile.jpg" alt="user" />
 			</button>
 			<!-- User dropdown menu -->
 			<div

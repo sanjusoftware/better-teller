@@ -1,6 +1,6 @@
 <script>
 	import {
-    UsersGroupSolid,
+		UsersGroupSolid,
 		ChartPieSolid,
 		MailBoxOutline,
 		DollarOutline,

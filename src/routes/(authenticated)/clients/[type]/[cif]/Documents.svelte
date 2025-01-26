@@ -125,7 +125,7 @@
 							</ButtonGroup>
 						{:else if document.documentStatus === 'Expired'}
 							<Button outline color="dark" size="xs" class="gap-2 px-3">
-								<BellRingOutline size="sm" /> Send Renewal Reminder
+								<BellRingOutline size="sm" /> Renewal Reminder
 							</Button>
 						{/if}
 						<Button outline color="red" size="xs" class="gap-2 px-3">

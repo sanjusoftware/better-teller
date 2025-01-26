@@ -3,7 +3,6 @@
 		Button,
 		ButtonGroup,
 		Card,
-		Indicator,
 		Table,
 		TableBody,
 		TableBodyCell,
@@ -18,9 +17,7 @@
 		EyeSolid,
 		LockTimeOutline,
 		PlusOutline,
-
 		SalePercentOutline
-
 	} from 'flowbite-svelte-icons';
 	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
 
