@@ -59,7 +59,7 @@
 	</div>
 	<Table>
 		<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-			{#each ['Type', 'File Name', 'Issuer', 'EXpiry Date', 'Status', 'Actions'] as title}
+			{#each ['Type', 'File Name', 'Issuer', 'Expiry', 'Status', 'Actions'] as title}
 				<TableHeadCell class="p-4 font-medium">{title}</TableHeadCell>
 			{/each}
 		</TableHead>
