@@ -1,5 +1,20 @@
+<script lang="ts">
+    import ActivityList from './ActivityList.svelte';
+    import Insights from './Insights.svelte';
+
+    import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
+
+    let activities = data.Activities;
+  </script>
+
 <main class="p-4">
     <div class="mt-px space-y-4">
-        <h1>Dashboard</h1>
+        <div class="mt-px space-y-4">
+            <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+              <ActivityList {activities}/>
+              <Insights />
+            </div>
+          </div>
     </div>
 </main>

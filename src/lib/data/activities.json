@@ -1,0 +1,58 @@
+[
+    {
+        "activity_heading": "Account Balance Inquiry",
+        "activity_description": "Customer inquired about the current balance of their savings account.",
+        "activity_type": "Request",
+        "customer_name": "John Doe",
+        "customer_segment": "Retail",
+        "date_time": "2023-10-01T10:15:00Z"
+    },
+    {
+        "activity_heading": "Loan Application Status",
+        "activity_description": "Customer requested an update on the status of their home loan application.",
+        "activity_type": "Request",
+        "customer_name": "Jane Smith",
+        "customer_segment": "Retail",
+        "date_time": "2023-10-01T11:30:00Z"
+    },
+    {
+        "activity_heading": "Corporate Account Setup",
+        "activity_description": "Corporate customer requested assistance with setting up a new business account.",
+        "activity_type": "Request",
+        "customer_name": "Tech Solutions Inc.",
+        "customer_segment": "Corporate",
+        "date_time": "2023-10-01T09:45:00Z"
+    },
+    {
+        "activity_heading": "Service Complaint",
+        "activity_description": "Customer complained about the long wait time for teller services.",
+        "activity_type": "Complaint",
+        "customer_name": "Michael Johnson",
+        "customer_segment": "Retail",
+        "date_time": "2023-10-01T12:00:00Z"
+    },
+    {
+        "activity_heading": "Transaction Dispute",
+        "activity_description": "Customer reported an unauthorized transaction on their account.",
+        "activity_type": "Complaint",
+        "customer_name": "Greenfield Enterprises",
+        "customer_segment": "SME",
+        "date_time": "2023-10-01T14:20:00Z"
+    },
+    {
+        "activity_heading": "Cheque Book Request",
+        "activity_description": "Customer requested a new cheque book for their current account.",
+        "activity_type": "Request",
+        "customer_name": "Emily Davis",
+        "customer_segment": "Retail",
+        "date_time": "2023-10-01T15:45:00Z"
+    },
+    {
+        "activity_heading": "Account Closure",
+        "activity_description": "Customer requested to close their savings account.",
+        "activity_type": "Request",
+        "customer_name": "Bright Future Ltd.",
+        "customer_segment": "Corporate",
+        "date_time": "2023-10-01T13:30:00Z"
+    }
+]

@@ -68,17 +68,13 @@
 						Client Segment
 					</h6>
 					<li class="rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-600">
-						<Checkbox>Retail (56)</Checkbox>
+						<Checkbox>Active (2)</Checkbox>
 					</li>
 					<li class="rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-600">
-						<Checkbox>SME (56)</Checkbox>
-					</li>
-					<li class="rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-600">
-						<Checkbox checked>Corporate (56)</Checkbox>
+						<Checkbox>Inavtive (5)</Checkbox>
 					</li>
 				</Dropdown>
 			</TableHeader>
-
 			<Table>
 				<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
 					<TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
