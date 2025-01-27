@@ -10,9 +10,12 @@
 		DropdownHeader,
 		DropdownItem,
 		DropdownDivider,
-		Button
+		Button,
+
+		Span
+
 	} from 'flowbite-svelte';
-	import { BellRingSolid, ChevronDownOutline } from 'flowbite-svelte-icons';
+	import { BarcodeOutline, BellRingSolid, ChartPieOutline, ChevronDownOutline, EyeOutline, FolderDuplicateOutline, GridOutline, LifeSaverOutline, PlusOutline, UserAddOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
 
 	import { page } from '$app/state';
 	$: activeUrl = page.url.pathname;
@@ -30,26 +33,58 @@
 
 	{#if loggedIn}
 		<NavUl {activeUrl}>
-			<NavLi href="/dashboard">Dashboard</NavLi>
+			<NavLi href="/dashboard">
+				<div class="flex items-center gap-2">
+					<ChartPieOutline size="md" />
+					Dashboard
+				</div>
+			</NavLi>
 			<NavLi class="cursor-pointer">
-				Clients<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
+				<div class="flex items-center gap-2">
+					<UsersGroupOutline size="md" />
+					Clients<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
+				</div>				
 			</NavLi>
 			<Dropdown class="w-44 z-20">
 				<DropdownItem href="/clients/retail">Retail</DropdownItem>
 				<DropdownItem href="/clients/sme">SME</DropdownItem>
 				<DropdownItem href="/clients/corporate">Corporate</DropdownItem>
+				<DropdownDivider />
+				<DropdownItem href="/clients/new">
+					<div class="flex items-center gap-2">
+						<UserAddOutline size="md" />Add New Client 
+					</div>
+				</DropdownItem>
 			</Dropdown>
 			<NavLi class="cursor-pointer">
-				Products<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
+				<div class="flex items-center gap-2">
+					<GridOutline size="md" />
+					Products<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
+				</div>		
 			</NavLi>
 			<Dropdown class="w-44 z-20">
 				<DropdownItem href="/products/casa">Smart Accounts</DropdownItem>
 				<DropdownItem href="/products/card">Credit Cards</DropdownItem>
 				<DropdownItem href="/products/loan">Loans</DropdownItem>
 			</Dropdown>
-			<NavLi href="/transactions">Transactions</NavLi>
-			<NavLi href="/documents">Documents</NavLi>
-			<NavLi href="/help">Help</NavLi>
+			<NavLi href="/transactions">
+				<div class="flex items-center gap-2">
+					<BarcodeOutline size="md" />
+					Transactions
+				</div>				
+			</NavLi>
+			<NavLi href="/documents">
+				<div class="flex items-center gap-2">
+					<FolderDuplicateOutline size="md" />
+					Documents
+				</div>	
+			</NavLi>
+			<NavLi href="/help">
+				<div class="flex items-center gap-2">
+					<LifeSaverOutline size="md" />
+					Help
+				</div>	
+			</NavLi>
 		</NavUl>
 
 		<div class="flex items-center md:order-2">
