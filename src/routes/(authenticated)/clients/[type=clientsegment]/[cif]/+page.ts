@@ -1,9 +1,9 @@
 import type { PageLoad } from './$types';
-import Clients from "../../../../data/clients.json";
-import Accounts from "../../../../data/accounts.json";
-import Cards from "../../../../data/cards.json";
-import Loans from "../../../../data/loans.json";
-import Documents from "../../../../data/documents.json";
+import Clients from "$lib/data/clients.json";
+import Accounts from "$lib/data/accounts.json";
+import Cards from "$lib/data/cards.json";
+import Loans from "$lib/data/loans.json";
+import Documents from "$lib/data/documents.json";
 import { error } from '@sveltejs/kit';
 
 export const load: PageLoad = ({ params }) => {
