@@ -3,9 +3,7 @@
 	import {
 		ArrowLeftOutline,
 		ArrowRightOutline,
-		CheckCircleSolid,
 		CheckOutline,
-		FireSolid,
 		LayersSolid,
 		RocketSolid
 	} from 'flowbite-svelte-icons';
