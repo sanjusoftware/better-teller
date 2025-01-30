@@ -19,7 +19,7 @@
 		SalePercentOutline,
 		WalletOutline
 	} from 'flowbite-svelte-icons';
-	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
+	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
 	import { TableHeader } from 'flowbite-svelte-blocks';
 
 	export let accounts: Array<{

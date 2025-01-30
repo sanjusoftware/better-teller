@@ -23,8 +23,8 @@
 
 	import Client from './Client.svelte';
 	import Delete from './Delete.svelte';
-	import MetaTag from '../../../utils/MetaTag.svelte';
-	import StatusIndicator from '../../../utils/StatusIndicator.svelte';
+	import MetaTag from '../../../../lib/utils/MetaTag.svelte';
+	import StatusIndicator from '../../../../lib/utils/StatusIndicator.svelte';
 
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();

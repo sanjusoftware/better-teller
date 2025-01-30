@@ -2,8 +2,8 @@
 	import '../../app.css';
 	import { Section, Register } from 'flowbite-svelte-blocks';
 	import { Button, Label, Input } from 'flowbite-svelte';
-	import Navbar from '../utils/Navbar.svelte';
-	import MetaTag from '../utils/MetaTag.svelte';
+	import Navbar from '../../lib/utils/Navbar.svelte';
+	import MetaTag from '../../lib/utils/MetaTag.svelte';
 
 	const path: string = '/';
 	const description: string = 'DSK - Better Teller App';

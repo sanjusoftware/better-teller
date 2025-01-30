@@ -17,8 +17,8 @@
 		LockOpenOutline
 	} from 'flowbite-svelte-icons';
 
-	import CreditCard from '../../../../utils/CreditCard.svelte';
-	import StatusIndicator from '../../../../utils/StatusIndicator.svelte';
+	import CreditCard from '$lib/utils/CreditCard.svelte';
+	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
 	import { TableHeader } from 'flowbite-svelte-blocks';
 
 	function maskCreditCard(cardNumber: string): string {

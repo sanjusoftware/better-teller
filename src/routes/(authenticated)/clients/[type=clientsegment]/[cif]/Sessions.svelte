@@ -1,7 +1,7 @@
 <script>
 	import { Button } from 'flowbite-svelte';
 	import { DesktopPcOutline, MobilePhoneOutline } from 'flowbite-svelte-icons';
-	import Card from '../../../../utils/InfoCard.svelte';
+	import Card from '$lib/utils/InfoCard.svelte';
 </script>
 
 <Card title="Sessions" class="max-w-none">

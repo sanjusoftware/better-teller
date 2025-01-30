@@ -22,7 +22,7 @@
     } from "flowbite-svelte-icons";
 
     import LastRange from "./LastRange.svelte";
-    import CreditCard from "../../utils/CreditCard.svelte";
+    import CreditCard from "../../../lib/utils/CreditCard.svelte";
     import StatusBadge from "./StatusBadge.svelte";
 
     const headers = [

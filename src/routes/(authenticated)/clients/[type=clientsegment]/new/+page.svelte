@@ -7,7 +7,7 @@
 	} from 'flowbite-svelte-icons';
 	import { superForm } from 'sveltekit-superforms';
 	import SuperDebug from 'sveltekit-superforms';
-	import Card from '../../../../utils/InfoCard.svelte';
+	import Card from '$lib/utils/InfoCard.svelte';
 
 	let { data } = $props();
 	const { form, errors, constraints, message, enhance } = superForm(data.newClientForm);

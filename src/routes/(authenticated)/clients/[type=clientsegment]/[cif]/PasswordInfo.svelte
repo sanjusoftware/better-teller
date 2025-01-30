@@ -1,6 +1,6 @@
 <script>
 	import { Button, Input, Label } from 'flowbite-svelte';
-	import Card from '../../../../utils/InfoCard.svelte';
+	import Card from '$lib/utils/InfoCard.svelte';
 </script>
 
 <Card title="Password Information" class="max-w-none">>
