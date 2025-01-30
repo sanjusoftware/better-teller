@@ -10,12 +10,19 @@
 		DropdownHeader,
 		DropdownItem,
 		DropdownDivider,
-		Button,
-
-		Span
-
+		Button
 	} from 'flowbite-svelte';
-	import { BarcodeOutline, BellRingSolid, ChartPieOutline, ChevronDownOutline, EyeOutline, FolderDuplicateOutline, GridOutline, LifeSaverOutline, PlusOutline, UserAddOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
+	import {
+		BarcodeOutline,
+		BellRingSolid,
+		ChartPieOutline,
+		ChevronDownOutline,
+		FolderDuplicateOutline,
+		GridOutline,
+		LifeSaverOutline,
+		UserAddOutline,
+		UsersGroupOutline
+	} from 'flowbite-svelte-icons';
 
 	import { page } from '$app/state';
 	$: activeUrl = page.url.pathname;
@@ -43,24 +50,36 @@
 				<div class="flex items-center gap-2">
 					<UsersGroupOutline size="md" />
 					Clients<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
-				</div>				
+				</div>
 			</NavLi>
 			<Dropdown class="w-44 z-20">
 				<DropdownItem href="/clients/retail">Retail</DropdownItem>
 				<DropdownItem href="/clients/sme">SME</DropdownItem>
 				<DropdownItem href="/clients/corporate">Corporate</DropdownItem>
 				<DropdownDivider />
-				<DropdownItem href="/clients/new">
+				<DropdownItem href="/clients/retail/new">
 					<div class="flex items-center gap-2">
-						<UserAddOutline size="md" />Add New Client 
+						<UserAddOutline size="md" />Retail Client
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/clients/sme/new">
+					<div class="flex items-center gap-2">
+						<UserAddOutline size="md" />SME Client
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/clients/corporate/new">
+					<div class="flex items-center gap-2">
+						<UserAddOutline size="md" />Corporate Client
 					</div>
 				</DropdownItem>
 			</Dropdown>
 			<NavLi class="cursor-pointer">
 				<div class="flex items-center gap-2">
 					<GridOutline size="md" />
-					Products<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
-				</div>		
+					Products<ChevronDownOutline
+						class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline"
+					/>
+				</div>
 			</NavLi>
 			<Dropdown class="w-44 z-20">
 				<DropdownItem href="/products/casa">Smart Accounts</DropdownItem>
@@ -71,19 +90,19 @@
 				<div class="flex items-center gap-2">
 					<BarcodeOutline size="md" />
 					Transactions
-				</div>				
+				</div>
 			</NavLi>
 			<NavLi href="/documents">
 				<div class="flex items-center gap-2">
 					<FolderDuplicateOutline size="md" />
 					Documents
-				</div>	
+				</div>
 			</NavLi>
 			<NavLi href="/help">
 				<div class="flex items-center gap-2">
 					<LifeSaverOutline size="md" />
 					Help
-				</div>	
+				</div>
 			</NavLi>
 		</NavUl>
 
