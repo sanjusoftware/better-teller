@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { zod } from 'sveltekit-superforms/adapters';
+	import { page } from '$app/state';
+	import { schemaProfileInfo, schemaEmployerInfo } from './clientSchema';
+
 	import { Breadcrumb, BreadcrumbItem, Button, FloatingLabelInput, Helper } from 'flowbite-svelte';
 	import {
 		BellActiveAltOutline,
@@ -10,25 +14,54 @@
 	import Card from '$lib/utils/InfoCard.svelte';
 
 	let { data } = $props();
-	const { form, errors, constraints, message, enhance } = superForm(data.newClientForm);
 
-	let steps = ['Profile Info', 'Employer Info', 'Documents', 'Notification Preferences'];
+	const steps = [zod(schemaProfileInfo), zod(schemaEmployerInfo)];
+
+	let stepNames = ['Personal Information', 'Employer Information'];
+
 	let currentStep = $state(1);
 
-	const handleProgress = (stepIncrement: number) => {
-		if (stepIncrement == 1) {
-			currentStep++;
-			if (currentStep > steps.length) {
-				currentStep = steps.length;
-			}
-		} else {
-			currentStep--;
-			if (currentStep < 1) {
-				currentStep = 1;
+	// $: options.validators = steps[currentStep - 1];
+
+	const { form, errors, message, constraints, enhance, validateForm } = superForm(
+		data.newClientForm,
+		{
+			// set validator to current steps schema, steps has index 0, so it must be (currentStep - 1)
+			validators: steps[(() => currentStep)() - 1],
+
+			// No need for hidden fields with dataType: 'json'
+			dataType: 'json',
+
+			async onSubmit({ cancel }) {
+				console.log('Total steps: ' + steps.length + ' Current step: ' + currentStep);
+				console.log('Validator: ');
+				console.log(steps[currentStep - 1]);
+
+				// If on last step, make a normal request
+				if (currentStep == steps.length) return;
+				else cancel();
+
+				console.log('validting form');
+				// Make a manual client-side validation, since we have cancelled
+				const result = await validateForm({ update: true });
+
+				console.log(result.errors);
+				if (result.valid) currentStep += 1;
+				console.log('Step after validation: ' + currentStep);
+			},
+
+			async onUpdated({ form }) {
+				if (form.valid) currentStep = 1;
 			}
 		}
-	};
+	);
 
+	const goBack = () => {
+		currentStep--;
+		if (currentStep < 1) {
+			currentStep = 1;
+		}
+	};
 	const updateStepLiClass = (step: number) => {
 		return currentStep > step ? finishedStepLiClass : remainingStepLiClass;
 	};
@@ -56,6 +89,7 @@
 		<BreadcrumbItem>New Client</BreadcrumbItem>
 	</Breadcrumb>
 
+	<!-- Progress Bar -->
 	<ol class="flex items-center w-full mb-5">
 		<li class={updateStepLiClass(1)}>
 			<span class={updateStepSpanClass(1)}>
@@ -74,58 +108,59 @@
 		</li>
 	</ol>
 
-	{#if $message}<h3>{$message}</h3>{/if}
+	{#if $message}
+		<!-- eslint-disable-next-line svelte/valid-compile -->
+		<div class="status" class:error={page.status >= 400} class:success={page.status == 200}>
+			{$message}
+		</div>
+	{/if}
 
-	<Card title="Personal Information" class="-mt-px max-w-none">
-		<form method="POST" use:enhance>
-			{currentStep} - {steps[currentStep - 1]}
+	<form method="POST" use:enhance>
+		<Card title={stepNames[currentStep - 1]} class="-mt-px max-w-none">
 			<div class="grid gap-6 mb-6 md:grid-cols-2">
-				{#if steps[currentStep - 1] === 'Profile Info'}
+				{#if stepNames[currentStep - 1] === 'Personal Information'}
 					<div>
 						<FloatingLabelInput
-							bind:value={$form.full_name}
-							aria-invalid={$errors.full_name ? 'true' : undefined}
-							{...$constraints.full_name}
+							bind:value={$form.first_name}
+							aria-invalid={$errors.first_name ? 'true' : undefined}
+							{...$constraints.first_name}
 							required
 							style="outlined"
-							id="full_name"
-							name="full_name"
+							id="first_name"
+							name="first_name"
 							type="text"
-							color={$errors.full_name ? 'red' : undefined}
+							color={$errors.first_name ? 'red' : undefined}
 							class="col-span-6 space-y-2 sm:col-span-3"
 						>
-							Full Name
+							First Name
 						</FloatingLabelInput>
-						{#if $errors.full_name}
+						{#if $errors.first_name}
 							<Helper color="red">
-								{$errors.full_name}
+								{$errors.first_name}
 							</Helper>
-							<span class="invalid"></span>
 						{/if}
 					</div>
-                    <div>
+					<div>
 						<FloatingLabelInput
-							bind:value={$form.email}
-							aria-invalid={$errors.email ? 'true' : undefined}
-							{...$constraints.email}
+							bind:value={$form.last_name}
+							aria-invalid={$errors.last_name ? 'true' : undefined}
+							{...$constraints.last_name}
 							required
 							style="outlined"
-							id="email"
-							name="email"
+							id="last_name"
+							name="last_name"
 							type="text"
-							color={$errors.email ? 'red' : undefined}
+							color={$errors.last_name ? 'red' : undefined}
+							class="col-span-6 space-y-2 sm:col-span-3"
 						>
-							Email
+							Last Name
 						</FloatingLabelInput>
-						{#if $errors.email}
+						{#if $errors.last_name}
 							<Helper color="red">
-								{$errors.email}. Enter correct email format: email@email.email
+								{$errors.last_name}
 							</Helper>
-						{:else}
-							<Helper color="gray">E.g : email@email.email</Helper>
 						{/if}
 					</div>
-				{:else}
 					<div>
 						<FloatingLabelInput
 							bind:value={$form.email}
@@ -146,6 +181,47 @@
 							</Helper>
 						{:else}
 							<Helper color="gray">E.g : email@email.email</Helper>
+						{/if}
+					</div>
+				{:else if stepNames[currentStep - 1] === 'Employer Information'}
+					<div>
+						<FloatingLabelInput
+							bind:value={$form.employer_name}
+							aria-invalid={$errors.employer_name ? 'true' : undefined}
+							{...$constraints.employer_name}
+							required
+							style="outlined"
+							id="employer_name"
+							name="employer_name"
+							type="text"
+							color={$errors.employer_name ? 'red' : undefined}
+						>
+							Employer Name
+						</FloatingLabelInput>
+						{#if $errors.employer_name}
+							<Helper color="red">
+								{$errors.employer_name}
+							</Helper>
+						{/if}
+					</div>
+					<div>
+						<FloatingLabelInput
+							bind:value={$form.designation}
+							aria-invalid={$errors.designation ? 'true' : undefined}
+							{...$constraints.designation}
+							required
+							style="outlined"
+							id="designation"
+							name="designation"
+							type="text"
+							color={$errors.designation ? 'red' : undefined}
+						>
+							Designation
+						</FloatingLabelInput>
+						{#if $errors.designation}
+							<Helper color="red">
+								{$errors.designation}
+							</Helper>
 						{/if}
 					</div>
 				{/if}
@@ -154,21 +230,21 @@
 				<Button
 					class="w-fit whitespace-nowrap"
 					type="submit"
-					on:click={() => handleProgress(-1)}
 					disabled={currentStep == 1}
+					on:click={() => goBack()}
 				>
 					Prev
 				</Button>
-				<Button
-					class="w-fit whitespace-nowrap"
-					type="submit"
-					on:click={() => handleProgress(+1)}
-					disabled={currentStep == steps.length}
-				>
-					Next
+				<Button class="w-fit whitespace-nowrap" type="submit">
+					{#if currentStep == steps.length}
+						Submit
+					{:else}
+						Next
+					{/if}
 				</Button>
 			</div>
-		</form>
-	</Card>
+		</Card>
+	</form>
+
 	<SuperDebug data={$form} />
 </main>
