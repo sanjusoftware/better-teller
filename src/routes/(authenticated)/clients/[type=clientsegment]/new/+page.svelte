@@ -1,17 +1,16 @@
 <script lang="ts">
-	import { zod } from 'sveltekit-superforms/adapters';
 	import { page } from '$app/state';
-	import { schemaProfileInfo, schemaEmployerInfo } from './clientSchema';
+	import { zod } from 'sveltekit-superforms/adapters';
+	import { schemaEmployerInfo, schemaProfileInfo } from './clientSchema';
 
+	import Card from '$lib/utils/InfoCard.svelte';
 	import { Breadcrumb, BreadcrumbItem, Button, FloatingLabelInput, Helper } from 'flowbite-svelte';
 	import {
 		BellActiveAltOutline,
 		FileCopyAltOutline,
 		ProfileCardOutline
 	} from 'flowbite-svelte-icons';
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	import Card from '$lib/utils/InfoCard.svelte';
+	import SuperDebug, { superForm } from 'sveltekit-superforms';
 
 	let { data } = $props();
 
