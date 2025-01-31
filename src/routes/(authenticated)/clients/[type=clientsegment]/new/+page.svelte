@@ -20,8 +20,6 @@
 
 	let currentStep = $state(1);
 
-	// $: options.validators = steps[currentStep - 1];
-
 	const { form, errors, message, constraints, enhance, validateForm } = superForm(
 		data.newClientForm,
 		{
