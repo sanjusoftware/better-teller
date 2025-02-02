@@ -1,30 +1,43 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { zod } from 'sveltekit-superforms/adapters';
-	import { schemaEmployerInfo, schemaProfileInfo } from './clientSchema';
+	import { superForm } from 'sveltekit-superforms';
+	import { zodClient } from 'sveltekit-superforms/adapters';
+	import SuperDebug from 'sveltekit-superforms';
+	import SearchableSelect from 'svelte-select';
+	import {
+		Breadcrumb,
+		BreadcrumbItem,
+		Button,
+		Datepicker,
+		Dropdown,
+		FloatingLabelInput,
+		Helper,
+		Input,
+		Label,
+		Search,
+		Select
+	} from 'flowbite-svelte';
 
-	import Card from '$lib/utils/InfoCard.svelte';
-	import { Breadcrumb, BreadcrumbItem, Button, FloatingLabelInput, Helper } from 'flowbite-svelte';
 	import {
 		BellActiveAltOutline,
+		ChevronDownOutline,
 		FileCopyAltOutline,
 		ProfileCardOutline
 	} from 'flowbite-svelte-icons';
-	import SuperDebug, { superForm } from 'sveltekit-superforms';
+
+	import Card from '$lib/utils/InfoCard.svelte';
+	import { IDTypes, schemaIdInfo, schemaProfileInfo, schemaEmployerInfo } from './clientSchema';
 
 	let { data } = $props();
-
-	const steps = [zod(schemaProfileInfo), zod(schemaEmployerInfo)];
-
-	let stepNames = ['Personal Information', 'Employer Information'];
-
+	const steps = [schemaIdInfo, schemaProfileInfo, schemaEmployerInfo];
+	let stepNames = ['ID Information', 'Personal Information', 'Employer Information'];
 	let currentStep = $state(1);
 
 	const { form, errors, message, constraints, enhance, validateForm } = superForm(
 		data.newClientForm,
 		{
 			// set validator to current steps schema, steps has index 0, so it must be (currentStep - 1)
-			validators: steps[(() => currentStep)() - 1],
+			validators: zodClient(steps[(() => currentStep)() - 1]),
 
 			// No need for hidden fields with dataType: 'json'
 			dataType: 'json',
@@ -75,6 +88,12 @@
 		"flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700";
 	let remainingStepSpanClass =
 		'flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0';
+
+	let countries = [
+		{ label: 'Bulgaria', value: 'bg' },
+		{ label: 'USA', value: 'usa' },
+		{ label: 'India', value: 'in' }
+	];
 </script>
 
 <main class="p-4 relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
@@ -115,46 +134,97 @@
 	<form method="POST" use:enhance>
 		<Card title={stepNames[currentStep - 1]} class="-mt-px max-w-none">
 			<div class="grid gap-6 mb-6 md:grid-cols-2">
-				{#if stepNames[currentStep - 1] === 'Personal Information'}
+				{#if stepNames[currentStep - 1] === 'ID Information'}
 					<div>
-						<FloatingLabelInput
-							bind:value={$form.first_name}
-							aria-invalid={$errors.first_name ? 'true' : undefined}
-							{...$constraints.first_name}
-							required
-							style="outlined"
-							id="first_name"
-							name="first_name"
+						<Label class="mb-2">Client Nationality</Label>
+						<SearchableSelect
+							showChevron={true}
+							id="issuing_country"
+							name="issuing_country"
+							class="py-2"
+							bind:justValue={$form.issuing_country}
+							items={countries}
+							placeholder="Select or search country..."
+							--font-size="1"
+						/>
+						{#if $errors.issuing_country}
+							<Helper class="mt-2" color="red">
+								{$errors.issuing_country}
+							</Helper>
+						{/if}
+					</div>
+					<Label>
+						Select ID Type
+						<Select
+							class="mt-2"
+							id="id_type"
+							bind:value={$form.id_type}
+							items={IDTypes}
+							placeholder="Choose ID type..."
+						/>
+						{#if $errors.id_type}
+							<Helper class="mt-2" color="red">
+								{$errors.id_type}
+							</Helper>
+						{/if}
+					</Label>
+					<div>
+						<Label for="id_number" class="mb-2">ID Number</Label>
+						<Input
+							bind:value={$form.id_number}
+							aria-invalid={$errors.id_number ? 'true' : undefined}
+							{...$constraints.id_number}
 							type="text"
-							color={$errors.first_name ? 'red' : undefined}
-							class="col-span-6 space-y-2 sm:col-span-3"
-						>
-							First Name
-						</FloatingLabelInput>
-						{#if $errors.first_name}
-							<Helper color="red">
-								{$errors.first_name}
+							id="id_number"
+							placeholder="Enter ID Number"
+							required
+							color={$errors.id_number ? 'red' : undefined}
+						/>
+						{#if $errors.id_number}
+							<Helper class="mt-2" color="red">
+								{$errors.id_number}
 							</Helper>
 						{/if}
 					</div>
 					<div>
+						<Label for="id_issue_date" class="mb-2">ID Issue Date</Label>
+						<Datepicker bind:value={$form.id_issue_date} {...$constraints.id_issue_date}
+						></Datepicker>
+						{#if $errors.id_issue_date}
+							<Helper class="mt-2" color="red">
+								{$errors.id_issue_date}
+							</Helper>
+						{/if}
+					</div>
+					<div>
+						<Label for="id_issue_date" class="mb-2">ID Expiry Date</Label>
+						<Datepicker bind:value={$form.id_expiry_date} {...$constraints.id_expiry_date}
+						></Datepicker>
+						{#if $errors.id_expiry_date}
+							<Helper class="mt-2" color="red">
+								{$errors.id_expiry_date}
+							</Helper>
+						{/if}
+					</div>
+				{:else if stepNames[currentStep - 1] === 'Personal Information'}
+					<div>
 						<FloatingLabelInput
-							bind:value={$form.last_name}
-							aria-invalid={$errors.last_name ? 'true' : undefined}
-							{...$constraints.last_name}
+							bind:value={$form.full_name}
+							aria-invalid={$errors.full_name ? 'true' : undefined}
+							{...$constraints.full_name}
 							required
 							style="outlined"
-							id="last_name"
-							name="last_name"
+							id="full_name"
+							name="full_name"
 							type="text"
-							color={$errors.last_name ? 'red' : undefined}
+							color={$errors.full_name ? 'red' : undefined}
 							class="col-span-6 space-y-2 sm:col-span-3"
 						>
-							Last Name
+							First Name
 						</FloatingLabelInput>
-						{#if $errors.last_name}
+						{#if $errors.full_name}
 							<Helper color="red">
-								{$errors.last_name}
+								{$errors.full_name}
 							</Helper>
 						{/if}
 					</div>
