@@ -3,7 +3,7 @@ export const IDTypes = [{ value: 'passport', name: 'Passport' }, { value: 'dl', 
 
 let idTypeEnum = IDTypes.map((k) => k.value);
 
-export const schemaIdInfo = z.object({
+export const IDSchema = z.object({
   id_number: z.string().nonempty(),
   id_type: z.enum([idTypeEnum[0], ...idTypeEnum.slice(1)], {
     errorMap(issue, ctx) {
@@ -11,7 +11,7 @@ export const schemaIdInfo = z.object({
         case 'invalid_type': {
           if (ctx.data === undefined)
             return { message: 'ID Type is required' }
-          return { message: 'Privacy setting must be a string' }
+          return { message: 'ID Type must be Passport, Driving License, National ID, or EGN' }
         }
         case 'invalid_enum_value':
           return { message: 'Select one of the allowed ID types from Passport, Driving License, National ID, or EGN' }
@@ -24,26 +24,28 @@ export const schemaIdInfo = z.object({
   issuing_country: z.string()
 });
 
-export const schemaProfileInfo = schemaIdInfo.extend({
-  profile_picture: z.string().url().default('/images/profile.jpg'),
-  full_name: z.string().min(1),
+const phoneNumberSchema = z.string().regex(/^\+?[1-9]\d{1,14}$/, {
+  message: "Invalid phone number format. It should start with an optional '+' followed by 1 to 15 digits."
+});
+
+export const profileSchema = IDSchema.extend({
+  profile_picture: z.string().optional(),
+  full_name: z.string().nonempty(),
   email: z.string().email(),
-  phone_number: z.string().optional(),
-  nationality: z.string().nonempty(),
+  phone_number: phoneNumberSchema,
   address: z.object({
     street: z.string(),
     city: z.string(),
     country: z.string(),
     zip_code: z.string().length(5)
-  }).optional(),
-  date_of_birth: z.date().optional(),
+  }),
+  date_of_birth: z.date().max(new Date(), { message: "Date of birth cannot be in future." }),
 });
 
-export const schemaEmployerInfo = schemaProfileInfo.extend({
+export const employerSchema = profileSchema.extend({
   employer_name: z.string(),
   designation: z.string(),
   employment_start_date: z.date(),
-  salary: z.number().positive(),
-  department: z.string().optional()
+  salary: z.number().positive()
 });
 
