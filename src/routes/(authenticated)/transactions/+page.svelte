@@ -48,8 +48,8 @@
 	let endPage: number;
 
 	const updateDataAndPagination = () => {
-		const currentPageItems = transactions.slice(currentPosition, currentPosition + itemsPerPage);
-		renderPagination(currentPageItems.length);
+		transactions.slice(currentPosition, currentPosition + itemsPerPage);
+		renderPagination();
 	};
 
 	const loadNextPage = () => {
@@ -66,14 +66,12 @@
 		}
 	};
 
-	const renderPagination = (totalItems: number) => {
+	const renderPagination = () => {
 		totalPages = Math.ceil(totalItems / itemsPerPage);
 		const currentPage = Math.ceil((currentPosition + 1) / itemsPerPage);
-
 		startPage = currentPage - Math.floor(showPage / 2);
 		startPage = Math.max(1, startPage);
 		endPage = Math.min(startPage + showPage - 1, totalPages);
-
 		pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 	};
 
@@ -87,7 +85,7 @@
 
 	onMount(() => {
 		// Call renderPagination when the component initially mounts
-		renderPagination(transactions.length);
+		renderPagination();
 	});
 
 	$: currentPageItems = transactions.slice(currentPosition, currentPosition + itemsPerPage);
@@ -103,6 +101,14 @@
 	let searchClass = 'w-full md:w-1/2 relative';
 	let classInput =
 		'text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2  pl-10';
+
+	const toggleAll = (event: Event) => {
+        console.log('toggle called');
+		const isChecked = (event.target as HTMLInputElement).checked;
+		document.querySelectorAll('.chk').forEach((checkbox) => {
+			(checkbox as HTMLInputElement).checked = isChecked;
+		});
+	};
 
 </script>
 
@@ -152,7 +158,7 @@
             </Dropdown>
 		</div>
 		<TableHead>
-			<TableHeadCell class="!p-4"><Checkbox /></TableHeadCell>
+			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll}/></TableHeadCell>            
 			{#each headers as header}
 				<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
 			{/each}
@@ -162,7 +168,7 @@
 				{#each filteredItems as item}
 					<TableBodyRow>
 						<TableBodyCell class="!p-4">
-							<Checkbox />
+							<Checkbox class="chk"/>
 						</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal">{item.id}</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal">{item.type}</TableBodyCell>
@@ -189,7 +195,7 @@
 				{#each currentPageItems as item}
 					<TableBodyRow>
 						<TableBodyCell class="!p-4">
-							<Checkbox />
+							<Checkbox class="chk"/>
 						</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal">{item.id}</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal">{item.type}</TableBodyCell>
