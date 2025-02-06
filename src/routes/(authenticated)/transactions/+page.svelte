@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Transactions from './Transactions.svelte';
+
 	import {
 		Breadcrumb,
 		BreadcrumbItem,
@@ -6,23 +8,15 @@
 		Checkbox,
 		Dropdown,
 		TableBody,
-		TableBodyCell,
-		TableBodyRow,
 		TableHead,
 		TableHeadCell,
 		TableSearch,
 		ButtonGroup
 	} from 'flowbite-svelte';
 
-	import {
-		FilterSolid,
-		ChevronLeftOutline,
-		ChevronRightOutline
-	} from 'flowbite-svelte-icons';
+	import { FilterSolid, ChevronLeftOutline, ChevronRightOutline } from 'flowbite-svelte-icons';
 
 	import { Section } from 'flowbite-svelte-blocks';
-	import CreditCard from '$lib/utils/CreditCard.svelte';
-	import StatusBadge from '$lib/utils/StatusBadge.svelte';
 	import { onMount } from 'svelte';
 	import transactions from '$lib/data/transactions.json';
 
@@ -90,11 +84,12 @@
 
 	$: currentPageItems = transactions.slice(currentPosition, currentPosition + itemsPerPage);
 	$: filteredItems = transactions.filter(
-		(item) => item.description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        item.detail.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        item.id.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+		(item) =>
+			item.description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+			item.detail.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+			item.id.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
 	);
-    
+
 	let divClass = 'bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden';
 	let innerDivClass =
 		'flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4';
@@ -103,13 +98,12 @@
 		'text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2  pl-10';
 
 	const toggleAll = (event: Event) => {
-        console.log('toggle called');
+		console.log('toggle called');
 		const isChecked = (event.target as HTMLInputElement).checked;
 		document.querySelectorAll('.chk').forEach((checkbox) => {
 			(checkbox as HTMLInputElement).checked = isChecked;
 		});
 	};
-
 </script>
 
 <Breadcrumb class="mb-5">
@@ -155,69 +149,19 @@
 				<li>
 					<Checkbox>International (74)</Checkbox>
 				</li>
-            </Dropdown>
+			</Dropdown>
 		</div>
 		<TableHead>
-			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll}/></TableHeadCell>            
+			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
 			{#each headers as header}
 				<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
 			{/each}
 		</TableHead>
 		<TableBody class="divide-y">
 			{#if searchTerm !== ''}
-				{#each filteredItems as item}
-					<TableBodyRow>
-						<TableBodyCell class="!p-4">
-							<Checkbox class="chk"/>
-						</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.id}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.type}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.detail}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.description}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
-							{item.date}
-						</TableBodyCell>
-						<TableBodyCell class="px-4">{item.amount}</TableBodyCell>
-						<TableBodyCell
-							class="flex items-center gap-2 px-4 font-normal  text-gray-500 dark:text-gray-400"
-						>
-							<CreditCard cardType={item.method} />
-							<span>
-								••• {item.id.slice(item.id.length - 4, item.id.length)}
-							</span>
-						</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">
-							<StatusBadge status={item.status} />
-						</TableBodyCell>
-					</TableBodyRow>
-				{/each}
+				<Transactions transactions={filteredItems}></Transactions>
 			{:else}
-				{#each currentPageItems as item}
-					<TableBodyRow>
-						<TableBodyCell class="!p-4">
-							<Checkbox class="chk"/>
-						</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.id}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.type}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.detail}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">{item.description}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
-							{item.date}
-						</TableBodyCell>
-						<TableBodyCell class="px-4">{item.amount}</TableBodyCell>
-						<TableBodyCell
-							class="flex items-center gap-2 px-4 font-normal  text-gray-500 dark:text-gray-400"
-						>
-							<CreditCard cardType={item.method} />
-							<span>
-								••• {item.id.slice(item.id.length - 4, item.id.length)}
-							</span>
-						</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal">
-							<StatusBadge status={item.status} />
-						</TableBodyCell>
-					</TableBodyRow>
-				{/each}
+				<Transactions transactions={currentPageItems}></Transactions>
 			{/if}
 		</TableBody>
 		<div
