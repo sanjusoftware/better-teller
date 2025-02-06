@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({params}) => {
 
   return { 
     newClientForm: newClientForm, 
-    clientType: params.type.toLocaleUpperCase()
+    clientType: params.type
    };
 };
 

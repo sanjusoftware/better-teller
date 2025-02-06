@@ -42,85 +42,83 @@
 	let documents = data.Documents;
 </script>
 
-<main class="p-4">
-	<Breadcrumb class="mb-5">
-		<BreadcrumbItem home>Clients</BreadcrumbItem>
-		<BreadcrumbItem href={`/clients/${client.type}`}>
-			{client.type.toLocaleUpperCase()} Clients
-		</BreadcrumbItem>
-		<BreadcrumbItem>{client.name}</BreadcrumbItem>
-	</Breadcrumb>
-	<Tabs tabStyle="underline" contentClass="p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
-		<TabItem open>
-			<div slot="title" class="flex items-center gap-2">
-				<ProfileCardOutline size="md" />
-				Profile
+<Breadcrumb class="mb-5">
+	<BreadcrumbItem home>Clients</BreadcrumbItem>
+	<BreadcrumbItem href={`/clients/${client.type}`}>
+		{client.type.toLocaleUpperCase()} Clients
+	</BreadcrumbItem>
+	<BreadcrumbItem>{client.name}</BreadcrumbItem>
+</Breadcrumb>
+<Tabs tabStyle="underline" contentClass="p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
+	<TabItem open>
+		<div slot="title" class="flex items-center gap-2">
+			<ProfileCardOutline size="md" />
+			Profile
+		</div>
+		<div class="grid grid-cols-2 dark:bg-gray-900 xl:grid-cols-3 xl:gap-3.5">
+			<div class="col-span-full space-y-4 xl:col-auto">
+				<ProfilePicture {client} />
+				<LanguageTime />
 			</div>
-			<div class="grid grid-cols-2 dark:bg-gray-900 xl:grid-cols-3 xl:gap-3.5">
-				<div class="col-span-full space-y-4 xl:col-auto">
-					<ProfilePicture {client} />
-					<LanguageTime />
-				</div>
-				<div class="col-span-2 space-y-4">
-					<PersonlaInfo />
-				</div>
+			<div class="col-span-2 space-y-4">
+				<PersonlaInfo />
 			</div>
-		</TabItem>
-		<TabItem>
-			<div slot="title" class="flex items-center gap-2">
-				<WalletOutline size="md" />
-				Accounts
-			</div>
-			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-				<Accounts {accounts} />
-			</div>
-		</TabItem>
-		<TabItem>
-			<div slot="title" class="flex items-center gap-2">
-				<CreditCardOutline size="md" />
-				Cards
-			</div>
-			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-				<BankCards {bankcards} />
-			</div>
-		</TabItem>
-		<TabItem>
-			<div slot="title" class="flex items-center gap-2">
-				<ChartMixedDollarOutline size="md" />
-				Loans
-			</div>
-			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-				<Loans {loans} />
-			</div>
-		</TabItem>
-		<TabItem>
-			<div slot="title" class="flex items-center gap-2">
-				<FileCopyAltOutline size="md" />
-				Documents
-			</div>
-			<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-				<Documents {documents} />
-			</div>
-		</TabItem>
-		<TabItem>
-			<div slot="title" class="flex items-center gap-2">
-				<LockOpenOutline size="md" />
-				Security
-			</div>
-			<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
-				<PasswordInfo />
-				<Sessions />
-			</div>
-		</TabItem>
-		<TabItem>
-			<div slot="title" class="flex items-center gap-2">
-				<BellActiveAltOutline size="md" />
-				Notification Preferences
-			</div>
-			<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
-				<Alerts />
-				<Emails />
-			</div>
-		</TabItem>
-	</Tabs>
-</main>
+		</div>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<WalletOutline size="md" />
+			Accounts
+		</div>
+		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+			<Accounts {accounts} />
+		</div>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<CreditCardOutline size="md" />
+			Cards
+		</div>
+		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+			<BankCards {bankcards} />
+		</div>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<ChartMixedDollarOutline size="md" />
+			Loans
+		</div>
+		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+			<Loans {loans} />
+		</div>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<FileCopyAltOutline size="md" />
+			Documents
+		</div>
+		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
+			<Documents {documents} />
+		</div>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<LockOpenOutline size="md" />
+			Security
+		</div>
+		<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
+			<PasswordInfo />
+			<Sessions />
+		</div>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<BellActiveAltOutline size="md" />
+			Notification Preferences
+		</div>
+		<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
+			<Alerts />
+			<Emails />
+		</div>
+	</TabItem>
+</Tabs>
