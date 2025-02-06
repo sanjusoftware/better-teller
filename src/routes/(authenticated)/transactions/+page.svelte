@@ -11,39 +11,31 @@
 		TableHead,
 		TableHeadCell,
 		TableSearch,
-		DropdownItem,
 		ButtonGroup
 	} from 'flowbite-svelte';
 
 	import {
-		PlusOutline,
 		FilterSolid,
 		ChevronLeftOutline,
-		ChevronDownOutline,
 		ChevronRightOutline
 	} from 'flowbite-svelte-icons';
 
 	import { Section } from 'flowbite-svelte-blocks';
 	import CreditCard from '$lib/utils/CreditCard.svelte';
 	import StatusBadge from '$lib/utils/StatusBadge.svelte';
-    import { onMount } from 'svelte';
-	import paginationData from '$lib/data/transactions.json';
+	import { onMount } from 'svelte';
+	import transactions from '$lib/data/transactions.json';
 
-    const headers = [
-		'Transaction',
+	const headers = [
+		'Transaction ID',
+		'Type',
+		'Details',
+		'Description',
 		'Date & Time',
 		'Amount',
-		'Reference number',
 		'Payment method',
 		'Status'
 	];
-    
-	let divClass = 'bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden';
-	let innerDivClass =
-		'flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4';
-	let searchClass = 'w-full md:w-1/2 relative';
-	let classInput =
-		'text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2  pl-10';
 
 	let searchTerm = '';
 	let currentPosition = 0;
@@ -51,17 +43,17 @@
 	const showPage = 5;
 	let totalPages = 0;
 	let pagesToShow: number[] = [];
-	let totalItems = paginationData.length;
+	let totalItems = transactions.length;
 	let startPage: number;
 	let endPage: number;
 
 	const updateDataAndPagination = () => {
-		const currentPageItems = paginationData.slice(currentPosition, currentPosition + itemsPerPage);
+		const currentPageItems = transactions.slice(currentPosition, currentPosition + itemsPerPage);
 		renderPagination(currentPageItems.length);
 	};
 
 	const loadNextPage = () => {
-		if (currentPosition + itemsPerPage < paginationData.length) {
+		if (currentPosition + itemsPerPage < transactions.length) {
 			currentPosition += itemsPerPage;
 			updateDataAndPagination();
 		}
@@ -95,13 +87,23 @@
 
 	onMount(() => {
 		// Call renderPagination when the component initially mounts
-		renderPagination(paginationData.length);
+		renderPagination(transactions.length);
 	});
 
-	$: currentPageItems = paginationData.slice(currentPosition, currentPosition + itemsPerPage);
-	$: filteredItems = paginationData.filter(
-		(item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+	$: currentPageItems = transactions.slice(currentPosition, currentPosition + itemsPerPage);
+	$: filteredItems = transactions.filter(
+		(item) => item.description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        item.detail.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        item.id.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
 	);
+    
+	let divClass = 'bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden';
+	let innerDivClass =
+		'flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4';
+	let searchClass = 'w-full md:w-1/2 relative';
+	let classInput =
+		'text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2  pl-10';
+
 </script>
 
 <Breadcrumb class="mb-5">
@@ -111,7 +113,7 @@
 
 <Section name="advancedTable" classSection="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
 	<TableSearch
-		placeholder="Search"
+		placeholder="Search by TransactionID or Description..."
 		hoverable={true}
 		bind:inputValue={searchTerm}
 		{divClass}
@@ -123,35 +125,34 @@
 			slot="header"
 			class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
 		>
-			<Button>
-				<PlusOutline class="h-3.5 w-3.5 mr-2" />Add product
-			</Button>
-			<Button color="alternative">Actions<ChevronDownOutline class="w-3 h-3 ml-2 " /></Button>
-			<Dropdown class="w-44 divide-y divide-gray-100">
-				<DropdownItem>Mass Edit</DropdownItem>
-				<DropdownItem>Delete all</DropdownItem>
-			</Dropdown>
 			<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
 			<Dropdown class="w-48 p-3 space-y-2 text-sm">
-				<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Choose brand</h6>
+				<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
 				<li>
-					<Checkbox>Apple (56)</Checkbox>
+					<Checkbox>Incoming (56)</Checkbox>
 				</li>
 				<li>
-					<Checkbox>Microsoft (16)</Checkbox>
+					<Checkbox>Outgoing (16)</Checkbox>
 				</li>
 				<li>
-					<Checkbox>Razor (49)</Checkbox>
+					<Checkbox>Utility Payment (49)</Checkbox>
 				</li>
 				<li>
-					<Checkbox>Nikon (12)</Checkbox>
+					<Checkbox>Reversal (12)</Checkbox>
 				</li>
 				<li>
-					<Checkbox>BenQ (74)</Checkbox>
+					<Checkbox>Domestic (74)</Checkbox>
 				</li>
-			</Dropdown>
+				<li>
+					<Checkbox>Intrabank (74)</Checkbox>
+				</li>
+				<li>
+					<Checkbox>International (74)</Checkbox>
+				</li>
+            </Dropdown>
 		</div>
 		<TableHead>
+			<TableHeadCell class="!p-4"><Checkbox /></TableHeadCell>
 			{#each headers as header}
 				<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
 			{/each}
@@ -160,20 +161,23 @@
 			{#if searchTerm !== ''}
 				{#each filteredItems as item}
 					<TableBodyRow>
-						<TableBodyCell class="px-4 font-normal">{item.name}</TableBodyCell>
+						<TableBodyCell class="!p-4">
+							<Checkbox />
+						</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.id}</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.type}</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.detail}</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.description}</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
 							{item.date}
 						</TableBodyCell>
 						<TableBodyCell class="px-4">{item.amount}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal  text-gray-500 dark:text-gray-400">
-							{item.reference}
-						</TableBodyCell>
 						<TableBodyCell
 							class="flex items-center gap-2 px-4 font-normal  text-gray-500 dark:text-gray-400"
 						>
 							<CreditCard cardType={item.method} />
 							<span>
-								••• {item.reference.slice(item.reference.length - 4, item.reference.length)}
+								••• {item.id.slice(item.id.length - 4, item.id.length)}
 							</span>
 						</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal">
@@ -184,20 +188,23 @@
 			{:else}
 				{#each currentPageItems as item}
 					<TableBodyRow>
-						<TableBodyCell class="px-4 font-normal">{item.name}</TableBodyCell>
+						<TableBodyCell class="!p-4">
+							<Checkbox />
+						</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.id}</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.type}</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.detail}</TableBodyCell>
+						<TableBodyCell class="px-4 font-normal">{item.description}</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
 							{item.date}
 						</TableBodyCell>
 						<TableBodyCell class="px-4">{item.amount}</TableBodyCell>
-						<TableBodyCell class="px-4 font-normal  text-gray-500 dark:text-gray-400">
-							{item.reference}
-						</TableBodyCell>
 						<TableBodyCell
 							class="flex items-center gap-2 px-4 font-normal  text-gray-500 dark:text-gray-400"
 						>
 							<CreditCard cardType={item.method} />
 							<span>
-								••• {item.reference.slice(item.reference.length - 4, item.reference.length)}
+								••• {item.id.slice(item.id.length - 4, item.id.length)}
 							</span>
 						</TableBodyCell>
 						<TableBodyCell class="px-4 font-normal">
