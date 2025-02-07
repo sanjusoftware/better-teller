@@ -8,9 +8,6 @@
 		ButtonGroup,
 		Checkbox,
 		Dropdown,
-		TableBody,
-		TableHead,
-		TableHeadCell,
 		TableSearch
 	} from 'flowbite-svelte';
 	import { UserAddOutline } from 'flowbite-svelte-icons';

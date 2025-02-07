@@ -22,7 +22,7 @@
 		WalletOutline
 	} from 'flowbite-svelte-icons';
 	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
-	import { TableHeader } from 'flowbite-svelte-blocks';
+	import { TableHeader } from 'flowbite-svelte-blocks';	
 
 	export let accounts: Array<{
 		customerId: number;
@@ -52,14 +52,14 @@
 
 <Table>
 	<TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-		{#each ['Account Number', 'Type', 'Balance', 'Opened', 'Status', 'Card', 'Actions'] as title}
+		{#each ['Account Number', 'CIF', 'Type', 'Balance', 'Opened', 'Status', 'Card', 'Actions'] as title}
 			<TableHeadCell class="p-4 font-medium">{title}</TableHeadCell>
 		{/each}
 	</TableHead>
 	<TableBody>
 		{#each accounts as account}
 			<TableBodyRow class="text-base">
-				<TableBodyCell class="mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
+				<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
 					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 						<div class="text-base font-semibold text-gray-900 dark:text-white">
 							<a href="/transactions" class="hover:underline">
@@ -84,6 +84,9 @@
 							</button>
 						</div>
 					</div>
+				</TableBodyCell>
+				<TableBodyCell class="text-sm font-normal p-4">
+					{account.customerId}
 				</TableBodyCell>
 				<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
 					{#if account.type === 'Loan'}

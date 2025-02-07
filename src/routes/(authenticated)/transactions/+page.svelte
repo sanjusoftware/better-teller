@@ -96,14 +96,6 @@
 	let searchClass = 'w-full md:w-1/2 relative';
 	let classInput =
 		'text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 pl-10';
-
-	const toggleAll = (event: Event) => {
-		console.log('toggle called');
-		const isChecked = (event.target as HTMLInputElement).checked;
-		document.querySelectorAll('.chk').forEach((checkbox) => {
-			(checkbox as HTMLInputElement).checked = isChecked;
-		});
-	};
 </script>
 
 <Breadcrumb class="mb-5">
