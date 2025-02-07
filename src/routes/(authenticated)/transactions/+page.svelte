@@ -95,7 +95,7 @@
 		'flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4';
 	let searchClass = 'w-full md:w-1/2 relative';
 	let classInput =
-		'text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2  pl-10';
+		'text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 pl-10';
 
 	const toggleAll = (event: Event) => {
 		console.log('toggle called');
@@ -111,7 +111,7 @@
 	<BreadcrumbItem href="/transactions">Transactions</BreadcrumbItem>
 </Breadcrumb>
 
-<Section name="advancedTable" classSection="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+<Section name="advancedTable" classSection="bg-gray-50 dark:bg-gray-900 p-3">
 	<TableSearch
 		placeholder="Search by TransactionID or Description..."
 		hoverable={true}
@@ -119,7 +119,7 @@
 		{divClass}
 		{innerDivClass}
 		{searchClass}
-		{classInput}
+		{classInput}		
 	>
 		<div
 			slot="header"
@@ -151,19 +151,9 @@
 				</li>
 			</Dropdown>
 		</div>
-		<TableHead>
-			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
-			{#each headers as header}
-				<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
-			{/each}
-		</TableHead>
-		<TableBody class="divide-y">
-			{#if searchTerm !== ''}
-				<Transactions transactions={filteredItems}></Transactions>
-			{:else}
-				<Transactions transactions={currentPageItems}></Transactions>
-			{/if}
-		</TableBody>
+
+		<Transactions transactions={searchTerm !== '' ? filteredItems : currentPageItems}/>
+
 		<div
 			slot="footer"
 			class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"

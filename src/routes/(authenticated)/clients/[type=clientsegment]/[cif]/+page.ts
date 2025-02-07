@@ -7,7 +7,7 @@ import Documents from "$lib/data/documents.json";
 import { error } from '@sveltejs/kit';
 
 export const load: PageLoad = ({ params }) => {
-    const client = Clients.find((client) => client.id === Number(params.cif) && client.type === params.type)
+    const client = Clients.find((client) => client.cif === Number(params.cif) && client.type === params.type)
     if (!client) {
         throw error(404, 'Client not found')
     }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { copy } from 'svelte-copy';
 	import {
 		Button,
 		ButtonGroup,
@@ -15,6 +16,7 @@
 		CloseOutline,
 		DownloadOutline,
 		EyeSolid,
+		FileCopyOutline,
 		LockTimeOutline,
 		SalePercentOutline,
 		WalletOutline
@@ -34,6 +36,7 @@
 		status: string;
 	}> = [];
 </script>
+
 <TableHeader headerType="search">
 	<Search slot="search" size="md" placeholder="Search by Account Number, CIF, IBAN ..." />
 	<Button
@@ -65,6 +68,20 @@
 						</div>
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 							IBAN: {account.iban}
+							<button
+								use:copy={{
+									text: account.iban,
+									events: ['click'],
+									onCopy({ text, event }) {
+										alert(`IBAN copied to clipboard: ${text}`);
+									},
+									onError({ error, event }) {
+										alert(error.message);
+									}
+								}}
+							>
+							<FileCopyOutline class="mr-2" />
+							</button>
 						</div>
 					</div>
 				</TableBodyCell>
