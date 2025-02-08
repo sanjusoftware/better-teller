@@ -95,7 +95,8 @@
 			(document) =>
 				document.documentId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
 				document.documentName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-				document.documentType.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+				document.documentType.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+				document.issuedBy.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
 		)
 	);
 

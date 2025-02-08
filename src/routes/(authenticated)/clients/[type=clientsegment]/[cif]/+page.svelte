@@ -7,7 +7,10 @@
 		BellActiveAltOutline,
 		ChartMixedDollarOutline,
 		WalletOutline,
-		FileCopyAltOutline
+		FileCopyAltOutline,
+
+		ShieldCheckOutline
+
 	} from 'flowbite-svelte-icons';
 
 	import Accounts from './Accounts.svelte';
@@ -99,7 +102,7 @@
 	</TabItem>
 	<TabItem>
 		<div slot="title" class="flex items-center gap-2">
-			<LockOpenOutline size="md" />
+			<ShieldCheckOutline size="md" />
 			Security
 		</div>
 		<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
