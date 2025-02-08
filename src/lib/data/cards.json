@@ -6,7 +6,8 @@
         "expiryDate": "2029-01-15",
         "accountNumber": "123456780",
         "customerId": 22334455,
-        "status": "Active"
+        "status": "Active",
+        "outstanding_balance": 1234.56
     },
     {
         "cardType": "Master",
@@ -15,7 +16,8 @@
         "expiryDate": "2034-05-20",
         "accountNumber": "123456781",
         "customerId": 22334455,
-        "status": "Pending Activation"
+        "status": "Pending Activation",
+        "outstanding_balance": 789.01
     },
     {
         "cardType": "Master",
@@ -24,7 +26,8 @@
         "expiryDate": "2027-04-04",
         "accountNumber": "123456782",
         "customerId": 22334455,
-        "status": "Blocked"
+        "status": "Blocked",
+        "outstanding_balance": 456.78
     },
     {
         "cardType": "Visa",
@@ -33,7 +36,8 @@
         "expiryDate": "2029-10-10",
         "accountNumber": "987654322",
         "customerId": 22334455,
-        "status": "Active"
+        "status": "Active",
+        "outstanding_balance": 2345.67
     },
     {
         "cardType": "Visa",
@@ -42,7 +46,8 @@
         "expiryDate": "2022-03-10",
         "accountNumber": "987654333",
         "customerId": 22334455,
-        "status": "Expired"
+        "status": "Expired",
+        "outstanding_balance": 567.89
     },
     {
         "cardType": "Master",
@@ -51,7 +56,8 @@
         "expiryDate": "2021-07-25",
         "accountNumber": "987654321",
         "customerId": 11223344,
-        "status": "Blocked"
+        "status": "Blocked",
+        "outstanding_balance": 123.45
     },
     {
         "cardType": "Visa",
@@ -60,7 +66,8 @@
         "expiryDate": "2025-02-14",
         "accountNumber": "123456789",
         "customerId": 33445566,
-        "status": "Active"
+        "status": "Active",
+        "outstanding_balance": 678.90
     },
     {
         "cardType": "Master",
@@ -69,7 +76,8 @@
         "expiryDate": "2024-06-30",
         "accountNumber": "987654321",
         "customerId": 33445566,
-        "status": "Pending Activation"
+        "status": "Pending Activation",
+        "outstanding_balance": 345.67
     },
     {
         "cardType": "Visa",
@@ -78,7 +86,8 @@
         "expiryDate": "2023-11-11",
         "accountNumber": "123456789",
         "customerId": 22232425,
-        "status": "Expired"
+        "status": "Expired",
+        "outstanding_balance": 890.12
     },
     {
         "cardType": "Master",
@@ -87,7 +96,8 @@
         "expiryDate": "2022-08-08",
         "accountNumber": "987654321",
         "customerId": 22232425,
-        "status": "Blocked"
+        "status": "Blocked",
+        "outstanding_balance": 234.56
     },
     {
         "cardType": "Visa",
@@ -96,7 +106,8 @@
         "expiryDate": "2021-12-12",
         "accountNumber": "123456789",
         "customerId": 12131415,
-        "status": "Active"
+        "status": "Active",
+        "outstanding_balance": 789.01
     },
     {
         "cardType": "Master",
@@ -105,7 +116,8 @@
         "expiryDate": "2025-03-03",
         "accountNumber": "987654321",
         "customerId": 12131415,
-        "status": "Pending Activation"
+        "status": "Pending Activation",
+        "outstanding_balance": 456.78
     },
     {
         "cardType": "Visa",
@@ -114,7 +126,8 @@
         "expiryDate": "2024-09-09",
         "accountNumber": "123456789",
         "customerId": 12131415,
-        "status": "Expired"
+        "status": "Expired",
+        "outstanding_balance": 1234.56
     },
     {
         "cardType": "Master",
@@ -123,7 +136,8 @@
         "expiryDate": "2021-06-06",
         "accountNumber": "987654321",
         "customerId": 11223344,
-        "status": "Pending Activation"
+        "status": "Pending Activation",
+        "outstanding_balance": 2345.67
     },
     {
         "cardType": "Visa",
@@ -132,7 +146,8 @@
         "expiryDate": "2025-01-01",
         "accountNumber": "123456789",
         "customerId": 11223344,
-        "status": "Expired"
+        "status": "Expired",
+        "outstanding_balance": 567.89
     },
     {
         "cardType": "Master",
@@ -141,7 +156,8 @@
         "expiryDate": "2024-07-07",
         "accountNumber": "987654321",
         "customerId": 33445566,
-        "status": "Blocked"
+        "status": "Blocked",
+        "outstanding_balance": 123.45
     },
     {
         "cardType": "Visa",
@@ -150,7 +166,8 @@
         "expiryDate": "2023-02-02",
         "accountNumber": "123456789",
         "customerId": 33445566,
-        "status": "Active"
+        "status": "Active",
+        "outstanding_balance": 678.90
     },
     {
         "cardType": "Master",
@@ -159,7 +176,8 @@
         "expiryDate": "2022-05-05",
         "accountNumber": "987654321",
         "customerId": 22232425,
-        "status": "Pending Activation"
+        "status": "Pending Activation",
+        "outstanding_balance": 345.67
     },
     {
         "cardType": "Visa",
@@ -168,7 +186,8 @@
         "expiryDate": "2021-11-11",
         "accountNumber": "123456789",
         "customerId": 22232425,
-        "status": "Expired"
+        "status": "Expired",
+        "outstanding_balance": 890.12
     },
     {
         "cardType": "Master",
@@ -177,7 +196,8 @@
         "expiryDate": "2025-08-08",
         "accountNumber": "987654321",
         "customerId": 12131415,
-        "status": "Blocked"
+        "status": "Blocked",
+        "outstanding_balance": 234.56
     },
     {
         "cardType": "Visa",
@@ -186,7 +206,8 @@
         "expiryDate": "2024-03-03",
         "accountNumber": "123456789",
         "customerId": 12131415,
-        "status": "Active"
+        "status": "Active",
+        "outstanding_balance": 789.01
     },
     {
         "cardType": "Master",
@@ -195,6 +216,7 @@
         "expiryDate": "2023-09-09",
         "accountNumber": "987654321",
         "customerId": 12131415,
-        "status": "Pending Activation"
+        "status": "Pending Activation",
+        "outstanding_balance": 456.78
     }
 ]

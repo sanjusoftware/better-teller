@@ -20,24 +20,27 @@
 		Tooltip
 	} from 'flowbite-svelte';
 	import {
-		ChartMixedDollarOutline,
-		CheckOutline,
+		BanOutline,
+		CheckCircleOutline,
 		ChevronLeftOutline,
 		ChevronRightOutline,
-		CloseOutline,
-		DownloadOutline,
+		CreditCardPlusAltOutline,
 		EyeSolid,
 		FileCopyOutline,
 		FilterSolid,
-		LockTimeOutline,
-		SalePercentOutline,
-		WalletOutline
+		LockOpenOutline
 	} from 'flowbite-svelte-icons';
+
+	import CreditCard from '$lib/utils/CreditCard.svelte';
 	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
+
+	function maskCreditCard(cardNumber: string): string {
+		return `${cardNumber.slice(0, 4)} XXXX XXXX ${cardNumber.slice(cardNumber.length - 4, cardNumber.length)}`;
+	}
 
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
-	let accounts = data.Accounts;
+	let cards = data.Cards;
 	let client = data.client;
 
 	import { onMount } from 'svelte';
@@ -48,17 +51,17 @@
 	const showPage = 5;
 	let totalPages = $state(0);
 	let pagesToShow: number[] = $state([]);
-	let totalItems = $derived(accounts.length);
+	let totalItems = $derived(cards.length);
 	let startPage: number;
 	let endPage = $state(0);
 
 	const updateDataAndPagination = () => {
-		accounts.slice(currentPosition, currentPosition + itemsPerPage);
+		cards.slice(currentPosition, currentPosition + itemsPerPage);
 		renderPagination();
 	};
 
 	const loadNextPage = () => {
-		if (currentPosition + itemsPerPage < accounts.length) {
+		if (currentPosition + itemsPerPage < cards.length) {
 			currentPosition += itemsPerPage;
 			updateDataAndPagination();
 		}
@@ -92,14 +95,12 @@
 		renderPagination();
 	});
 
-	const currentPageItems = $derived(
-		accounts.slice(currentPosition, currentPosition + itemsPerPage)
-	);
+	const currentPageItems = $derived(cards.slice(currentPosition, currentPosition + itemsPerPage));
 	const filteredItems = $derived(
-		accounts.filter(
-			(account) =>
-				account.accountNumber.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-				account.iban.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+		cards.filter(
+			(card) =>
+				card.accountNumber.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+				card.cardNumber.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
 		)
 	);
 
@@ -119,7 +120,7 @@
 </script>
 
 <TableSearch
-	placeholder="Search by Account Number or IBAN ..."
+	placeholder="Search by Card Number, Account Number, IBAN ..."
 	hoverable={true}
 	bind:inputValue={searchTerm}
 	{divClass}
@@ -134,110 +135,98 @@
 		<Button
 			size="sm"
 			class="gap-2 whitespace-nowrap px-3"
-			href={`/clients/${client.type}/${client.cif}/accounts/new`}
+			href={`/clients/${client.type}/${client.cif}/cards/new`}
 		>
-			<WalletOutline size="sm" />Open New Account
+			<CreditCardPlusAltOutline size="sm" />Issue New Card
 		</Button>
 		<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
 		<Dropdown class="w-48 p-3 space-y-2 text-sm">
 			<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
-			<li>
-				<Checkbox>Checking (5)</Checkbox>
-			</li>
-			<li>
-				<Checkbox>Savings (16)</Checkbox>
-			</li>
+			{#each ['Active', 'Pending Activation', 'Expiered', 'Blocked'] as cardStatus}
+				<li>
+					<Checkbox>{cardStatus} (5)</Checkbox>
+				</li>
+			{/each}
 		</Dropdown>
 	</div>
 	<TableHead>
 		<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
-		{#each ['Account Number', 'CIF', 'Type', 'Balance', 'Opened On', 'Status', 'Card', 'Actions'] as header}
+		{#each ['Card Number', 'Cif', 'Type', 'Outdtanding Balance', 'Issued On', 'Expiry Date', 'Status', 'Actions'] as header}
 			<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
 		{/each}
 	</TableHead>
 	<TableBody class="divide-y">
-		{#each searchTerm != '' ? filteredItems : currentPageItems as account}
+		{#each searchTerm != '' ? filteredItems : currentPageItems as card}
 			<TableBodyRow class="text-base">
 				<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
 				<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
 					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 						<div class="text-base font-semibold text-gray-900 dark:text-white">
 							<a href="/transactions" class="hover:underline">
-								{account.accountNumber}
+								{maskCreditCard(card.cardNumber)}
 							</a>
-							<button use:copy={account.accountNumber}>
-								<FileCopyOutline size="sm" class="mr-2" />
-							</button>
-							<Tooltip placement="right" trigger="click" class="text-sm font-light">
-								Copied account number: {account.accountNumber}
-							</Tooltip>
 						</div>
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-							IBAN: {account.iban}
-							<button use:copy={account.iban}>
+							Account: {card.accountNumber}
+							<button use:copy={card.accountNumber}>
 								<FileCopyOutline size="sm" class="mr-2" />
 							</button>
 							<Tooltip placement="right" trigger="click" class="text-sm font-light">
-								Copied IBAN: {account.iban}
+								Copied Account Number: {card.accountNumber}
 							</Tooltip>
 						</div>
 					</div>
 				</TableBodyCell>
 				<TableBodyCell class="text-sm font-normal p-4">
-					{account.customerId}
+					{card.customerId}
 				</TableBodyCell>
-				<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
-					{#if account.type === 'Loan'}
-						<ChartMixedDollarOutline class="mr-2" />
-					{:else}
-						<SalePercentOutline class="mr-2" />
-					{/if}
-					{account.type}
+				<TableBodyCell
+					class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"
+				>
+					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+						<CreditCard cardType={card.cardType} />
+					</div>
 				</TableBodyCell>
 				<TableBodyCell
 					class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"
 				>
 					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 						<div class="text-base font-semibold text-gray-900 dark:text-white">
-							{account.balance.toLocaleString()}
+							{card.outstanding_balance.toLocaleString()}
 						</div>
 						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-							{account.currency}
+							BGN
 						</div>
 					</div>
 				</TableBodyCell>
+				<TableBodyCell
+					class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"
+				>
+					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+						{dayjs(card.issueDate).format('ll')}
+					</div>
+				</TableBodyCell>
 				<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
-					{dayjs(account.opened_on).format('ll')}
+					{new Date(card.expiryDate).toLocaleDateString()}
 				</TableBodyCell>
 				<TableBodyCell class="p-4 font-normal">
-					<StatusIndicator status={account.status} />
-				</TableBodyCell>
-				<TableBodyCell class="p-4 font-normal">
-					{account.card_issued ? 'Yes' : 'No'}
+					<StatusIndicator status={card.status} />
 				</TableBodyCell>
 				<TableBodyCell class="space-x-2 p-4">
-					<ButtonGroup>
-						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
-							<EyeSolid size="sm" /> Statement
-						</Button>
-						<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
-							<DownloadOutline size="sm" /> Download
-						</Button>
-					</ButtonGroup>
-					{#if account.status === 'Active'}
-						<Button outline color="yellow" size="xs" class="gap-2 px-3">
-							<LockTimeOutline size="sm" /> Suspend
-						</Button>
+					<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+						<EyeSolid size="sm" /> Transactions
+					</Button>
+					{#if card.status === 'Active'}
 						<Button outline color="red" size="xs" class="gap-2 px-3">
-							<CloseOutline size="sm" /> Close
+							<BanOutline size="sm" /> Block
 						</Button>
-					{:else if account.status === 'Pending Activation' || account.status === 'Blocked'}
+					{:else if card.status === 'Pending Activation'}
 						<Button outline color="green" size="xs" class="gap-2 px-3">
-							<CheckOutline size="sm" /> Activate
+							<CheckCircleOutline size="sm" /> Activate
 						</Button>
-					{:else if account.status === 'Suspended'}
+					{:else if card.status === 'Blocked'}
 						<Button outline color="green" size="xs" class="gap-2 px-3">
-							<LockTimeOutline size="sm" /> Unsuspend
+							<LockOpenOutline size="sm" /> Unblock
 						</Button>
 					{/if}
 				</TableBodyCell>
@@ -269,8 +258,8 @@
 	</div>
 </TableSearch>
 
-{#if accounts.length === 0}
+{#if cards.length === 0}
 	<div class="p-4 text-center text-gray-500 dark:text-gray-400">
-		<h1>No accounts opened.</h1>
+		<h1>No cards issued.</h1>
 	</div>
 {/if}

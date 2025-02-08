@@ -11,7 +11,7 @@
 	} from 'flowbite-svelte-icons';
 
 	import Accounts from './Accounts.svelte';
-	import BankCards from './BankCards.svelte';
+	import BankCards from './Cards.svelte';
 	import Loans from './Loans.svelte';
 	import Documents from './Documents.svelte';
 	import ProfilePicture from './ProfilePicture.svelte';
@@ -36,7 +36,7 @@
 		type: '',
 		phone: ''
 	};
-	let bankcards = data.Cards;
+
 	let loans = data.Loans;
 	let documents = data.Documents;
 </script>
@@ -78,7 +78,7 @@
 			Cards
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<BankCards {bankcards} />
+			<BankCards {data} />
 		</div>
 	</TabItem>
 	<TabItem>
