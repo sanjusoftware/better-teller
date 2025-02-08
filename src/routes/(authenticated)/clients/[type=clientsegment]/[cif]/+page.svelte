@@ -36,7 +36,6 @@
 		type: '',
 		phone: ''
 	};
-	let accounts = data.Accounts;
 	let bankcards = data.Cards;
 	let loans = data.Loans;
 	let documents = data.Documents;
@@ -71,7 +70,7 @@
 			Accounts
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<Accounts {accounts} />
+			<Accounts {data} />
 		</div>
 	</TabItem>
 	<TabItem>

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import Clients from './Clients.svelte';
+	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
+	import { copy } from 'svelte-copy';
 
 	import {
 		Breadcrumb,
@@ -8,25 +9,41 @@
 		ButtonGroup,
 		Checkbox,
 		Dropdown,
-		TableSearch
+		TableSearch,
+		Avatar,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell,
+
+		Tooltip
+
 	} from 'flowbite-svelte';
-	import { UserAddOutline } from 'flowbite-svelte-icons';
+	import {
+		EnvelopeOutline,
+		FileCopyOutline,
+		MailBoxOutline,
+		PhoneOutline,
+		UserAddOutline,
+		ChevronLeftOutline,
+		ChevronRightOutline,
+		FilterSolid
+	} from 'flowbite-svelte-icons';
 
 	import MetaTag from '$lib/utils/MetaTag.svelte';
 
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
+	let clients = $derived(data.clients);
 
 	const clientsPath: string = `/clients/${data.clienttype.toLowerCase()}`;
 	const description: string = 'Clients List';
 	const title: string = `Better Teller - Manage Clients`;
 	const subtitle: string = 'Manage Clients';
 
-	import { ChevronLeftOutline, ChevronRightOutline, FilterSolid } from 'flowbite-svelte-icons';
-
 	import { Section } from 'flowbite-svelte-blocks';
 	import { onMount } from 'svelte';
-	let clients = $derived(data.clients);	
 
 	let searchTerm = $state('');
 	let currentPosition = $state(0);
@@ -85,9 +102,16 @@
 				client.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
 				client.email.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
 				client.phone.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-				client.country.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-		)		
+				client.cif.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+		)
 	);
+
+	const toggleAll = (event: Event) => {
+		const isChecked = (event.target as HTMLInputElement).checked;
+		document.querySelectorAll('.chk').forEach((checkbox) => {
+			(checkbox as HTMLInputElement).checked = isChecked;
+		});
+	};
 
 	let divClass = 'bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden';
 	let innerDivClass =
@@ -131,8 +155,79 @@
 					<Checkbox>Inactive (16)</Checkbox>
 				</li>
 			</Dropdown>
-		</div>		
-		<Clients clients={searchTerm !== '' ? filteredItems : currentPageItems}/>
+		</div>
+		<TableHead>
+			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
+			{#each ['Name', 'Status', 'Type', 'Primary Contact', 'Email', 'Mailing Address'] as header}
+				<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
+			{/each}
+		</TableHead>
+		<TableBody class="divide-y">
+			{#each searchTerm != '' ? filteredItems : currentPageItems as client}
+				<TableBodyRow>
+					<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
+					<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
+						<Avatar
+							src={client.avatar}
+							href={`/clients/${client.type}/${client.cif}`}
+							border
+							class={client.status === 'Active'
+								? 'ring-green-400 dark:ring-green-300'
+								: 'ring-red-400 dark:ring-red-300'}
+						/>
+						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+							<div class="text-base font-semibold text-gray-900 dark:text-white">
+								<a href={`/clients/${client.type}/${client.cif}`}>
+									{client.name}
+								</a>
+							</div>
+							<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+								CIF: {client.cif}
+								<button
+									use:copy={client.cif.toString()}
+								>
+									<FileCopyOutline size="sm" class="mr-2" />
+								</button>
+								<Tooltip placement="right" trigger="click" class="text-sm font-light">
+									Copied CIF: {client.cif}
+								</Tooltip>
+							</div>
+						</div>
+					</TableBodyCell>
+					<TableBodyCell class="p-4 font-normal">
+						<div class="flex items-center gap-2">
+							<StatusIndicator status={client.status} />
+						</div>
+					</TableBodyCell>
+					<TableBodyCell class="px-4 font-normal">{client.type.toLocaleUpperCase()}</TableBodyCell>
+					<TableBodyCell class="p-4">
+						<span class="flex items-center space-x-2">
+							<a href={`tel:${client.phone}`} class="hover:underline" aria-label="Call client">
+								{client.phone}
+							</a>
+							<PhoneOutline size="md" class="text-gray-500 dark:text-gray-400" />
+						</span>
+						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+							{client.country}
+						</div>
+					</TableBodyCell>
+					<TableBodyCell class="px-4 font-normal">
+						<span class="flex items-center space-x-2">
+							<EnvelopeOutline size="md" class="text-gray-500 dark:text-gray-400" />
+							<a href={`mailto:${client.email}`} class="hover:underline" aria-label="Email client">
+								{client.email}
+							</a>
+						</span>
+					</TableBodyCell>
+					<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
+						<span class="flex items-center space-x-2">
+							<MailBoxOutline size="md" class="text-gray-500 dark:text-gray-400" />
+							{client.address}
+						</span>
+					</TableBodyCell>
+				</TableBodyRow>
+			{/each}
+		</TableBody>
 		<div
 			slot="footer"
 			class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
