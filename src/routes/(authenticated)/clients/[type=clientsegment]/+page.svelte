@@ -35,7 +35,7 @@
 	let { data }: { data: PageData } = $props();
 	let clients = $derived(data.clients);
 
-	const clientsPath: string = `/clients/${data.clienttype.toLowerCase()}`;
+	const clientsPath: string = `/clients/${data.clienttype}`;
 	const description: string = 'Clients List';
 	const title: string = `Better Teller - Manage Clients`;
 	const subtitle: string = 'Manage Clients';
@@ -123,7 +123,7 @@
 
 <Breadcrumb class="mb-5">
 	<BreadcrumbItem home>Clients</BreadcrumbItem>
-	<BreadcrumbItem>{data.clienttype}</BreadcrumbItem>
+	<BreadcrumbItem>{data.clienttype.toLocaleUpperCase()}</BreadcrumbItem>
 </Breadcrumb>
 
 <TableSearch

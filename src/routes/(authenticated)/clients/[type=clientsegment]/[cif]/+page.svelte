@@ -50,7 +50,7 @@
 </Breadcrumb>
 
 <Tabs tabStyle="underline" contentClass="py-4 bg-gray-50 rounded-lg dark:bg-gray-800">
-	<TabItem >
+	<TabItem open>
 		<div slot="title" class="flex items-center gap-2">
 			<ProfileCardOutline size="md" />
 			Profile
@@ -65,7 +65,7 @@
 			</div>
 		</div>
 	</TabItem>
-	<TabItem open>
+	<TabItem >
 		<div slot="title" class="flex items-center gap-2">
 			<WalletOutline size="md" />
 			Accounts
