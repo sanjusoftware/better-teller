@@ -37,7 +37,6 @@
 		phone: ''
 	};
 
-	let documents = data.Documents;
 </script>
 
 <Breadcrumb class="mb-5">
@@ -95,7 +94,7 @@
 			Documents
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<Documents {documents} />
+			<Documents {data} />
 		</div>
 	</TabItem>
 	<TabItem>
