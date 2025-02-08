@@ -48,8 +48,9 @@
 	</BreadcrumbItem>
 	<BreadcrumbItem>{client.name}</BreadcrumbItem>
 </Breadcrumb>
-<Tabs tabStyle="underline" contentClass="p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
-	<TabItem open>
+
+<Tabs tabStyle="underline" contentClass="py-4 bg-gray-50 rounded-lg dark:bg-gray-800">
+	<TabItem >
 		<div slot="title" class="flex items-center gap-2">
 			<ProfileCardOutline size="md" />
 			Profile
@@ -64,14 +65,12 @@
 			</div>
 		</div>
 	</TabItem>
-	<TabItem>
+	<TabItem open>
 		<div slot="title" class="flex items-center gap-2">
 			<WalletOutline size="md" />
 			Accounts
 		</div>
-		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<Accounts {data} />
-		</div>
+		<Accounts {data} />
 	</TabItem>
 	<TabItem>
 		<div slot="title" class="flex items-center gap-2">

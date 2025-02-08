@@ -4,8 +4,8 @@
         "cardNumber": "4539578763621486",
         "issueDate": "2021-01-15",
         "expiryDate": "2029-01-15",
-        "accountNumber": "123456789",
-        "customerId": 1,
+        "accountNumber": "123456780",
+        "customerId": 22334455,
         "status": "Active"
     },
     {
@@ -13,8 +13,8 @@
         "cardNumber": "5298745632147893",
         "issueDate": "2024-05-20",
         "expiryDate": "2034-05-20",
-        "accountNumber": "987654321",
-        "customerId": 1,
+        "accountNumber": "123456781",
+        "customerId": 22334455,
         "status": "Pending Activation"
     },
     {
@@ -22,8 +22,8 @@
         "cardNumber": "5487963214789652",
         "issueDate": "2020-04-04",
         "expiryDate": "2027-04-04",
-        "accountNumber": "987654321",
-        "customerId": 1,
+        "accountNumber": "123456782",
+        "customerId": 22334455,
         "status": "Blocked"
     },
     {
@@ -31,8 +31,8 @@
         "cardNumber": "4539876543214789",
         "issueDate": "2019-10-10",
         "expiryDate": "2029-10-10",
-        "accountNumber": "123456789",
-        "customerId": 1,
+        "accountNumber": "987654322",
+        "customerId": 22334455,
         "status": "Active"
     },
     {
@@ -40,8 +40,8 @@
         "cardNumber": "4716987456321458",
         "issueDate": "2019-03-10",
         "expiryDate": "2022-03-10",
-        "accountNumber": "123456789",
-        "customerId": 1,
+        "accountNumber": "987654333",
+        "customerId": 22334455,
         "status": "Expired"
     },
     {
@@ -50,7 +50,7 @@
         "issueDate": "2018-07-25",
         "expiryDate": "2021-07-25",
         "accountNumber": "987654321",
-        "customerId": 4,
+        "customerId": 11223344,
         "status": "Blocked"
     },
     {
@@ -59,7 +59,7 @@
         "issueDate": "2022-02-14",
         "expiryDate": "2025-02-14",
         "accountNumber": "123456789",
-        "customerId": 5,
+        "customerId": 33445566,
         "status": "Active"
     },
     {
@@ -68,7 +68,7 @@
         "issueDate": "2021-06-30",
         "expiryDate": "2024-06-30",
         "accountNumber": "987654321",
-        "customerId": 6,
+        "customerId": 33445566,
         "status": "Pending Activation"
     },
     {
@@ -77,7 +77,7 @@
         "issueDate": "2020-11-11",
         "expiryDate": "2023-11-11",
         "accountNumber": "123456789",
-        "customerId": 7,
+        "customerId": 22232425,
         "status": "Expired"
     },
     {
@@ -86,7 +86,7 @@
         "issueDate": "2019-08-08",
         "expiryDate": "2022-08-08",
         "accountNumber": "987654321",
-        "customerId": 8,
+        "customerId": 22232425,
         "status": "Blocked"
     },
     {
@@ -95,7 +95,7 @@
         "issueDate": "2018-12-12",
         "expiryDate": "2021-12-12",
         "accountNumber": "123456789",
-        "customerId": 9,
+        "customerId": 12131415,
         "status": "Active"
     },
     {
@@ -104,7 +104,7 @@
         "issueDate": "2022-03-03",
         "expiryDate": "2025-03-03",
         "accountNumber": "987654321",
-        "customerId": 10,
+        "customerId": 12131415,
         "status": "Pending Activation"
     },
     {
@@ -113,7 +113,7 @@
         "issueDate": "2021-09-09",
         "expiryDate": "2024-09-09",
         "accountNumber": "123456789",
-        "customerId": 11,
+        "customerId": 12131415,
         "status": "Expired"
     },
     {
@@ -122,7 +122,7 @@
         "issueDate": "2018-06-06",
         "expiryDate": "2021-06-06",
         "accountNumber": "987654321",
-        "customerId": 3,
+        "customerId": 11223344,
         "status": "Pending Activation"
     },
     {
@@ -131,7 +131,7 @@
         "issueDate": "2022-01-01",
         "expiryDate": "2025-01-01",
         "accountNumber": "123456789",
-        "customerId": 4,
+        "customerId": 11223344,
         "status": "Expired"
     },
     {
@@ -140,7 +140,7 @@
         "issueDate": "2021-07-07",
         "expiryDate": "2024-07-07",
         "accountNumber": "987654321",
-        "customerId": 5,
+        "customerId": 33445566,
         "status": "Blocked"
     },
     {
@@ -149,7 +149,7 @@
         "issueDate": "2020-02-02",
         "expiryDate": "2023-02-02",
         "accountNumber": "123456789",
-        "customerId": 6,
+        "customerId": 33445566,
         "status": "Active"
     },
     {
@@ -158,7 +158,7 @@
         "issueDate": "2019-05-05",
         "expiryDate": "2022-05-05",
         "accountNumber": "987654321",
-        "customerId": 7,
+        "customerId": 22232425,
         "status": "Pending Activation"
     },
     {
@@ -167,7 +167,7 @@
         "issueDate": "2018-11-11",
         "expiryDate": "2021-11-11",
         "accountNumber": "123456789",
-        "customerId": 8,
+        "customerId": 22232425,
         "status": "Expired"
     },
     {
@@ -176,7 +176,7 @@
         "issueDate": "2022-08-08",
         "expiryDate": "2025-08-08",
         "accountNumber": "987654321",
-        "customerId": 9,
+        "customerId": 12131415,
         "status": "Blocked"
     },
     {
@@ -185,7 +185,7 @@
         "issueDate": "2021-03-03",
         "expiryDate": "2024-03-03",
         "accountNumber": "123456789",
-        "customerId": 10,
+        "customerId": 12131415,
         "status": "Active"
     },
     {
@@ -194,7 +194,7 @@
         "issueDate": "2020-09-09",
         "expiryDate": "2023-09-09",
         "accountNumber": "987654321",
-        "customerId": 11,
+        "customerId": 12131415,
         "status": "Pending Activation"
     }
 ]

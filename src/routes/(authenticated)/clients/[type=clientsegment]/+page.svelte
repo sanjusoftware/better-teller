@@ -16,9 +16,7 @@
 		TableBodyRow,
 		TableHead,
 		TableHeadCell,
-
 		Tooltip
-
 	} from 'flowbite-svelte';
 	import {
 		EnvelopeOutline,
@@ -128,128 +126,126 @@
 	<BreadcrumbItem>{data.clienttype}</BreadcrumbItem>
 </Breadcrumb>
 
-<Section name="advancedTable" classSection="bg-gray-50 dark:bg-gray-900 p-3">
-	<TableSearch
-		placeholder="Search by Name, Email, Phone, CIF, EGN, Country ..."
-		hoverable={true}
-		bind:inputValue={searchTerm}
-		{divClass}
-		{innerDivClass}
-		{searchClass}
-		{classInput}
+<TableSearch
+	placeholder="Search by Name, Email, Phone, CIF, EGN, Country ..."
+	hoverable={true}
+	bind:inputValue={searchTerm}
+	{divClass}
+	{innerDivClass}
+	{searchClass}
+	{classInput}
+>
+	<div
+		slot="header"
+		class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
 	>
-		<div
-			slot="header"
-			class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
-		>
-			<Button size="sm" class="gap-2 whitespace-nowrap px-3" href="{clientsPath}/new">
-				<UserAddOutline size="sm" />Add New Client
+		<Button size="sm" class="gap-2 whitespace-nowrap px-3" href="{clientsPath}/new">
+			<UserAddOutline size="sm" />Add New Client
+		</Button>
+		<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
+		<Dropdown class="w-48 p-3 space-y-2 text-sm">
+			<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
+			<li>
+				<Checkbox>Active (56)</Checkbox>
+			</li>
+			<li>
+				<Checkbox>Inactive (16)</Checkbox>
+			</li>
+		</Dropdown>
+	</div>
+	<TableHead>
+		<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
+		{#each ['Name', 'Status', 'Type', 'Primary Contact', 'Email', 'Mailing Address'] as header}
+			<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
+		{/each}
+	</TableHead>
+	<TableBody class="divide-y">
+		{#each searchTerm != '' ? filteredItems : currentPageItems as client}
+			<TableBodyRow>
+				<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
+				<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
+					<Avatar
+						src={client.avatar}
+						href={`/clients/${client.type}/${client.cif}`}
+						border
+						class={client.status === 'Active'
+							? 'ring-green-400 dark:ring-green-300'
+							: 'ring-red-400 dark:ring-red-300'}
+					/>
+					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+						<div class="text-base font-semibold text-gray-900 dark:text-white">
+							<a href={`/clients/${client.type}/${client.cif}`}>
+								{client.name}
+							</a>
+						</div>
+						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+							CIF: {client.cif}
+							<button use:copy={client.cif.toString()}>
+								<FileCopyOutline size="sm" class="mr-2" />
+							</button>
+							<Tooltip placement="right" trigger="click" class="text-sm font-light">
+								Copied CIF: {client.cif}
+							</Tooltip>
+						</div>
+					</div>
+				</TableBodyCell>
+				<TableBodyCell class="p-4 font-normal">
+					<div class="flex items-center gap-2">
+						<StatusIndicator status={client.status} />
+					</div>
+				</TableBodyCell>
+				<TableBodyCell class="px-4 font-normal">
+					{client.type.toLocaleUpperCase()}
+				</TableBodyCell>
+				<TableBodyCell class="p-4">
+					<span class="flex items-center space-x-2">
+						<PhoneOutline size="sm" class="text-gray-500 dark:text-gray-400" />
+						<a href={`tel:${client.phone}`} class="hover:underline" aria-label="Call client">
+							{client.phone}
+						</a>
+					</span>
+					<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+						{client.country}
+					</div>
+				</TableBodyCell>
+				<TableBodyCell class="px-4 font-normal">
+					<span class="flex items-center space-x-2">
+						<EnvelopeOutline size="sm" class="text-gray-500 dark:text-gray-400" />
+						<a href={`mailto:${client.email}`} class="hover:underline" aria-label="Email client">
+							{client.email}
+						</a>
+					</span>
+				</TableBodyCell>
+				<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
+					<span class="flex items-center space-x-2">
+						<MailBoxOutline size="md" class="text-gray-500 dark:text-gray-400" />
+						{client.address}
+					</span>
+				</TableBodyCell>
+			</TableBodyRow>
+		{/each}
+	</TableBody>
+	<div
+		slot="footer"
+		class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+		aria-label="Table navigation"
+	>
+		<span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+			Showing
+			<span class="font-semibold text-gray-900 dark:text-white">{startRange}-{endRange}</span>
+			of
+			<span class="font-semibold text-gray-900 dark:text-white">{totalItems}</span>
+		</span>
+		<ButtonGroup>
+			<Button on:click={loadPreviousPage} disabled={currentPosition === 0}>
+				<ChevronLeftOutline size="xs" class="m-1.5" />
 			</Button>
-			<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
-			<Dropdown class="w-48 p-3 space-y-2 text-sm">
-				<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
-				<li>
-					<Checkbox>Active (56)</Checkbox>
-				</li>
-				<li>
-					<Checkbox>Inactive (16)</Checkbox>
-				</li>
-			</Dropdown>
-		</div>
-		<TableHead>
-			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
-			{#each ['Name', 'Status', 'Type', 'Primary Contact', 'Email', 'Mailing Address'] as header}
-				<TableHeadCell padding="px-4 py-3" scope="col">{header}</TableHeadCell>
+			{#each pagesToShow as pageNumber}
+				<Button on:click={() => goToPage(pageNumber)}>{pageNumber}</Button>
 			{/each}
-		</TableHead>
-		<TableBody class="divide-y">
-			{#each searchTerm != '' ? filteredItems : currentPageItems as client}
-				<TableBodyRow>
-					<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
-					<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
-						<Avatar
-							src={client.avatar}
-							href={`/clients/${client.type}/${client.cif}`}
-							border
-							class={client.status === 'Active'
-								? 'ring-green-400 dark:ring-green-300'
-								: 'ring-red-400 dark:ring-red-300'}
-						/>
-						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-							<div class="text-base font-semibold text-gray-900 dark:text-white">
-								<a href={`/clients/${client.type}/${client.cif}`}>
-									{client.name}
-								</a>
-							</div>
-							<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-								CIF: {client.cif}
-								<button
-									use:copy={client.cif.toString()}
-								>
-									<FileCopyOutline size="sm" class="mr-2" />
-								</button>
-								<Tooltip placement="right" trigger="click" class="text-sm font-light">
-									Copied CIF: {client.cif}
-								</Tooltip>
-							</div>
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="p-4 font-normal">
-						<div class="flex items-center gap-2">
-							<StatusIndicator status={client.status} />
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="px-4 font-normal">{client.type.toLocaleUpperCase()}</TableBodyCell>
-					<TableBodyCell class="p-4">
-						<span class="flex items-center space-x-2">
-							<a href={`tel:${client.phone}`} class="hover:underline" aria-label="Call client">
-								{client.phone}
-							</a>
-							<PhoneOutline size="md" class="text-gray-500 dark:text-gray-400" />
-						</span>
-						<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-							{client.country}
-						</div>
-					</TableBodyCell>
-					<TableBodyCell class="px-4 font-normal">
-						<span class="flex items-center space-x-2">
-							<EnvelopeOutline size="md" class="text-gray-500 dark:text-gray-400" />
-							<a href={`mailto:${client.email}`} class="hover:underline" aria-label="Email client">
-								{client.email}
-							</a>
-						</span>
-					</TableBodyCell>
-					<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
-						<span class="flex items-center space-x-2">
-							<MailBoxOutline size="md" class="text-gray-500 dark:text-gray-400" />
-							{client.address}
-						</span>
-					</TableBodyCell>
-				</TableBodyRow>
-			{/each}
-		</TableBody>
-		<div
-			slot="footer"
-			class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-			aria-label="Table navigation"
-		>
-			<span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-				Showing
-				<span class="font-semibold text-gray-900 dark:text-white">{startRange}-{endRange}</span>
-				of
-				<span class="font-semibold text-gray-900 dark:text-white">{totalItems}</span>
-			</span>
-			<ButtonGroup>
-				<Button on:click={loadPreviousPage} disabled={currentPosition === 0}>
-					<ChevronLeftOutline size="xs" class="m-1.5" />
-				</Button>
-				{#each pagesToShow as pageNumber}
-					<Button on:click={() => goToPage(pageNumber)}>{pageNumber}</Button>
-				{/each}
-				<Button on:click={loadNextPage} disabled={totalPages === endPage}>
-					<ChevronRightOutline size="xs" class="m-1.5" />
-				</Button>
-			</ButtonGroup>
-		</div>
-	</TableSearch>
-</Section>
+			<Button on:click={loadNextPage} disabled={totalPages === endPage}>
+				<ChevronRightOutline size="xs" class="m-1.5" />
+			</Button>
+		</ButtonGroup>
+	</div>
+</TableSearch>
