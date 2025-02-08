@@ -37,7 +37,6 @@
 		phone: ''
 	};
 
-	let loans = data.Loans;
 	let documents = data.Documents;
 </script>
 
@@ -87,7 +86,7 @@
 			Loans
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<Loans {loans} />
+			<Loans {data} />
 		</div>
 	</TabItem>
 	<TabItem>

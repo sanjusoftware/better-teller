@@ -119,7 +119,7 @@
 </script>
 
 <TableSearch
-	placeholder="Search by Account Number or IBAN ..."
+	placeholder="Search by Account Number, IBAN ..."
 	hoverable={true}
 	bind:inputValue={searchTerm}
 	{divClass}

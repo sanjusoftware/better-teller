@@ -1,112 +1,122 @@
 [
     {
         "accountNumber": "123456780",
-        "customerId": 1,
+        "customerId": 22334455,
         "principle_amount": 10000,
         "roi": 5.25,
         "created_on": "2023-01-01",
         "emi": 500,
         "maturity_date": "2025-01-01",
         "type": "Home",
-        "status": "Active"
+        "status": "Active",
+        "iban": "BGSOF0009123456780"
     },
     {
         "accountNumber": "123456782",
-        "customerId": 1,
+        "customerId": 22334455,
         "principle_amount": 15000,
         "roi": 6.75,
         "created_on": "2023-02-01",
         "emi": 750,
         "maturity_date": "2026-02-01",
         "type": "Auto",
-        "status": "NPA"
+        "status": "NPA",
+        "iban": "BGSOF0009123456782"
     },
     {
         "accountNumber": "987654322",
-        "customerId": 1,
+        "customerId": 22334455,
         "principle_amount": 20000,
         "roi": 4.50,
         "created_on": "2023-03-01",
         "emi": 1000,
         "maturity_date": "2027-03-01",
         "type": "WCL",
-        "status": "Defaulted"
+        "status": "Defaulted",
+        "iban": "BGSOF0009987654322"
     },
     {
         "accountNumber": "987654333",
-        "customerId": 1,
+        "customerId": 22334455,
         "principle_amount": 20000,
         "roi": 4.50,
         "created_on": "2015-03-01",
         "emi": 1000,
         "maturity_date": "2023-03-01",
         "type": "WCL",
-        "status": "Closed"
+        "status": "Closed",
+        "iban": "BGSOF0009987654333"
     },
     {
         "accountNumber": "987654324",
-        "customerId": 2,
+        "customerId": 11223344,
         "principle_amount": 25000,
         "roi": 5.00,
         "created_on": "2023-04-01",
         "emi": 1250,
         "maturity_date": "2028-04-01",
         "type": "Home",
-        "status": "Active"
+        "status": "Active",
+        "iban": "BGSOF0009987654324"
     },
     {
         "accountNumber": "112233446",
-        "customerId": 2,
+        "customerId": 11223344,
         "principle_amount": 30000,
         "roi": 7.25,
         "created_on": "2023-05-01",
         "emi": 1500,
         "maturity_date": "2029-05-01",
         "type": "Auto",
-        "status": "NPA"
+        "status": "NPA",
+        "iban": "BGSOF0009112233446"
     },
     {
         "accountNumber": "556677880",
-        "customerId": 3,
+        "customerId": 11223344,
         "principle_amount": 35000,
         "roi": 6.00,
         "created_on": "2023-06-01",
         "emi": 1750,
         "maturity_date": "2030-06-01",
         "type": "WCL",
-        "status": "Defaulted"
+        "status": "Defaulted",
+        "iban": "BGSOF0009556677880"
     },
     {
         "accountNumber": "556677881",
-        "customerId": 3,
+        "customerId": 11223344,
         "principle_amount": 40000,
         "roi": 5.75,
         "created_on": "2023-07-01",
         "emi": 2000,
         "maturity_date": "2031-07-01",
         "type": "Home",
-        "status": "Active"
+        "status": "Active",
+        "iban": "BGSOF0009556677881"
     },
     {
         "accountNumber": "998877660",
-        "customerId": 4,
+        "customerId": 22232425,
         "principle_amount": 45000,
         "roi": 6.50,
         "created_on": "2023-08-01",
         "emi": 2250,
         "maturity_date": "2032-08-01",
         "type": "Auto",
-        "status": "Active"
+        "status": "Active",
+        "iban": "BGSOF0009998877660"
     },
     {
         "accountNumber": "998877661",
-        "customerId": 4,
+        "customerId": 22232425,
         "principle_amount": 50000,
         "roi": 7.00,
         "created_on": "2023-09-01",
         "emi": 2500,
         "maturity_date": "2033-09-01",
         "type": "WCL",
-        "status": "Defaulted"
+        "status": "Defaulted",
+        "iban": "BGSOF0009998877661"
     }
 ]
