@@ -60,7 +60,7 @@
 				<LanguageTime />
 			</div>
 			<div class="col-span-2 space-y-4">
-				<PersonlaInfo />
+				<PersonlaInfo {client}/>
 			</div>
 		</div>
 	</TabItem>
