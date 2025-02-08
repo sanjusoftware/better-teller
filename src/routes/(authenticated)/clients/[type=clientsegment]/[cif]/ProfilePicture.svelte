@@ -3,7 +3,7 @@
 	import { CheckCircleOutline, UploadSolid, FileCopyAltOutline, EnvelopeOutline, PhoneOutline } from 'flowbite-svelte-icons';
 	import { copy } from 'svelte-copy';
 	export let client: {
-		cif: string;
+		cif: number;
 		avatar: string;
 		name: string;
 		email: string;

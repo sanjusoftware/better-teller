@@ -25,7 +25,7 @@
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 	let client = data.client ?? {
-		id: 0,
+		cif: '',
 		name: '',
 		avatar: '',
 		email: '',
