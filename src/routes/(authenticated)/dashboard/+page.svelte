@@ -1,11 +1,10 @@
 <script lang="ts">
 	import ActivityList from './ActivityList.svelte';
 	import Insights from './Insights.svelte';
+	import { Breadcrumb, BreadcrumbItem } from 'flowbite-svelte';
 
 	import type { PageData } from './$types';
-	import { Breadcrumb, BreadcrumbItem } from 'flowbite-svelte';
 	let { data }: { data: PageData } = $props();
-
 	let activities = data.Activities;
 </script>
 

@@ -6,6 +6,7 @@ export function load({ cookies, url }) {
 		redirect(303, `/login?redirectTo=${url.pathname}`);
 	}
 	return {
+		loggedIn: true,
         Activities: Activities
     }
 }

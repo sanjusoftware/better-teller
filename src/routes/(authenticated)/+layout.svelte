@@ -1,19 +1,21 @@
 <script lang="ts">
   import "../../app.css";
+  import MetaTag from "../../lib/utils/MetaTag.svelte";
   import Navbar from "../../lib/utils/Navbar.svelte";
   import SpeedDial from "../../lib/utils/QuickActions.svelte";
-  import MetaTag from "../../lib/utils/MetaTag.svelte";
 
   const path: string = "/";
   const description: string = "DSK - Better Teller App";
   const title: string = "DSK - Better Teller App";
   const subtitle: string = "Home";
-  const loggedIn: boolean = true;
+  
+
+
 </script>
 
 <div class="antialiased bg-gray-50 dark:bg-gray-900">
   <!-- Top Nav -->
-  <Navbar {loggedIn}/>
+  <Navbar />
 
   <!-- Main Content -->
   <MetaTag {path} {description} {title} {subtitle} />

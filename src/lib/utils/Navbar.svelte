@@ -1,33 +1,48 @@
 <script lang="ts">
 	import {
-		NavBrand,
-		Navbar,
-		NavHamburger,
-		NavUl,
-		NavLi,
 		Avatar,
+		Button,
 		Dropdown,
+		DropdownDivider,
 		DropdownHeader,
 		DropdownItem,
-		DropdownDivider,
-		Button
+		Navbar,
+		NavBrand,
+		NavHamburger,
+		NavLi,
+		NavUl
 	} from 'flowbite-svelte';
 	import {
-		BarcodeOutline,
 		BellRingSolid,
+		BuildingOutline,
+		ChartMixedDollarOutline,
 		ChartPieOutline,
 		ChevronDownOutline,
-		FolderDuplicateOutline,
+		ChevronRightOutline,
+		CreditCardOutline,
+		CreditCardPlusAltOutline,
+		GlobeOutline,
 		GridOutline,
+		HomeOutline,
+		LandmarkOutline,
+		LayersOutline,
 		LifeSaverOutline,
-		UserAddOutline,
+		LightbulbOutline,
+		MapPinOutline,
+		MobilePhoneOutline,
+		PlusOutline,
+		QrCodeOutline,
+		UserOutline,
 		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
 
 	import { page } from '$app/state';
-	$: activeUrl = page.url.pathname;
+	let activeUrl = $derived(page.url.pathname);
+	let loggedIn: boolean = page.data.loggedIn;
+	let clientsOpen = $state(false);
+	let productsOpen = $state(false);
+	let paymentsOpen = $state(false);
 
-	export let loggedIn = false;
 </script>
 
 <Navbar class="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 start-0 border-b">
@@ -37,7 +52,7 @@
 			Better Teller
 		</span>
 	</NavBrand>
-
+	<NavHamburger />
 	{#if loggedIn}
 		<NavUl {activeUrl}>
 			<NavLi href="/dashboard">
@@ -49,55 +64,125 @@
 			<NavLi class="cursor-pointer">
 				<div class="flex items-center gap-2">
 					<UsersGroupOutline size="md" />
-					Clients<ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
+					Clients<ChevronDownOutline class="w-6 h-6 text-primary-800 dark:text-white inline" />
 				</div>
 			</NavLi>
-			<Dropdown class="w-44 z-20">
-				<DropdownItem href="/clients/retail">Retail</DropdownItem>
-				<DropdownItem href="/clients/sme">SME</DropdownItem>
-				<DropdownItem href="/clients/corporate">Corporate</DropdownItem>
+			<Dropdown class="w-44 z-20" {activeUrl} bind:open={clientsOpen}>
+				<DropdownItem href="/clients/retail" on:click={() => (clientsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<UserOutline size="md" />Individual
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/clients/sme" on:click={() => (clientsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<UsersGroupOutline size="md" />SME
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/clients/corporate" on:click={() => (clientsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<BuildingOutline size="md" />Corporate
+					</div>
+				</DropdownItem>
 				<DropdownDivider />
-				<DropdownItem href="/clients/retail/new">
+				<DropdownItem href="/clients/retail/new" on:click={() => (clientsOpen = false)}>
 					<div class="flex items-center gap-2">
-						<UserAddOutline size="md" />Retail Client
+						<PlusOutline size="xs" />
+						<UserOutline size="md" />Add Individual
 					</div>
 				</DropdownItem>
-				<DropdownItem href="/clients/sme/new">
+				<DropdownItem href="/clients/sme/new" on:click={() => (clientsOpen = false)}>
 					<div class="flex items-center gap-2">
-						<UserAddOutline size="md" />SME Client
+						<PlusOutline size="xs" />
+						<UsersGroupOutline size="md" />Add SME
 					</div>
 				</DropdownItem>
-				<DropdownItem href="/clients/corporate/new">
+				<DropdownItem href="/clients/corporate/new" on:click={() => (clientsOpen = false)}>
 					<div class="flex items-center gap-2">
-						<UserAddOutline size="md" />Corporate Client
+						<PlusOutline size="xs" />
+						<BuildingOutline size="md" />Add Corporate
 					</div>
 				</DropdownItem>
 			</Dropdown>
 			<NavLi class="cursor-pointer">
 				<div class="flex items-center gap-2">
 					<GridOutline size="md" />
-					Products<ChevronDownOutline
-						class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline"
-					/>
+					Products<ChevronDownOutline class="w-6 h-6 text-primary-800 dark:text-white inline" />
 				</div>
 			</NavLi>
-			<Dropdown class="w-44 z-20">
-				<DropdownItem href="/products/casa">Smart Accounts</DropdownItem>
-				<DropdownItem href="/products/card">Credit Cards</DropdownItem>
-				<DropdownItem href="/products/loan">Loans</DropdownItem>
+			<Dropdown class="w-44 z-20" {activeUrl} bind:open={productsOpen}>
+				<DropdownItem href="/products/casa" on:click={() => (productsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<QrCodeOutline size="md" />Smart Accounts
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/products/card" on:click={() => (productsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<CreditCardPlusAltOutline size="md" />Cards
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/products/loan" on:click={() => (productsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<ChartMixedDollarOutline size="md" />loans
+					</div>
+				</DropdownItem>
 			</Dropdown>
-			<NavLi href="/transactions">
+			<NavLi class="cursor-pointer">
 				<div class="flex items-center gap-2">
-					<BarcodeOutline size="md" />
-					Transactions
+					<LayersOutline size="md" />
+					Payments<ChevronDownOutline class="w-6 h-6 text-primary-800 dark:text-white inline" />
 				</div>
 			</NavLi>
-			<NavLi href="/documents">
-				<div class="flex items-center gap-2">
-					<FolderDuplicateOutline size="md" />
-					Documents
-				</div>
-			</NavLi>
+			<Dropdown class="w-44 z-20" {activeUrl} bind:open={paymentsOpen}>
+				<DropdownItem class="flex items-center justify-between">
+					<div class="flex items-center gap-2">
+						<HomeOutline size="md" />Utilities
+						<ChevronRightOutline class="w-6 h-6 ms-2 text-primary-700 dark:text-white" />
+					</div>
+				</DropdownItem>
+				<Dropdown placement="right-start">
+					<DropdownItem href="/payments/electricity" on:click={() => (paymentsOpen = false)}>
+						<div class="flex items-center gap-2">
+							<LightbulbOutline size="md" />Electricity
+						</div>
+					</DropdownItem>
+					<DropdownItem href="/payments/water" on:click={() => (paymentsOpen = false)}>
+						<div class="flex items-center gap-2">
+							<MapPinOutline size="md" />Water
+						</div>
+					</DropdownItem>
+					<DropdownItem href="/payments/gas" on:click={() => (paymentsOpen = false)}>
+						<div class="flex items-center gap-2">
+							<GlobeOutline size="md" />Intenet
+						</div>
+					</DropdownItem>
+					<DropdownItem href="/payments/phone" on:click={() => (paymentsOpen = false)}>
+						<div class="flex items-center gap-2">
+							<MobilePhoneOutline size="md" />Phone
+						</div>
+					</DropdownItem>
+					<DropdownItem href="/payments/municipality" on:click={() => (paymentsOpen = false)}>
+						<div class="flex items-center gap-2">
+							<LandmarkOutline size="md" />Municipality
+						</div>						
+					</DropdownItem>
+				</Dropdown>
+				<DropdownDivider />
+				<DropdownItem href="/payments/card" on:click={() => (paymentsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<CreditCardOutline size="md" />Card Payments
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/payments/fees" on:click={() => (paymentsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<CreditCardOutline size="md" />Collage Fees
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/products/loan" on:click={() => (paymentsOpen = false)}>
+					<div class="flex items-center gap-2">
+						<ChartMixedDollarOutline size="md" />Loan Payments
+					</div>
+				</DropdownItem>
+			</Dropdown>
 			<NavLi href="/help">
 				<div class="flex items-center gap-2">
 					<LifeSaverOutline size="md" />
@@ -123,9 +208,7 @@
 			</Button>
 			<div class="mx-2"></div>
 			<Avatar id="avatar-menu" src="/images/profile.jpg" href="#" class="w-8 h-8" />
-			<NavHamburger />
 		</div>
-
 		<Dropdown placement="bottom" triggeredBy="#avatar-menu">
 			<DropdownHeader>
 				<span class="block text-sm">Sanjeev Mishra</span>
