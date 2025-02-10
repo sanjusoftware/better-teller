@@ -15,6 +15,7 @@
 	import {
 		BellRingSolid,
 		BuildingOutline,
+		CashOutline,
 		ChartMixedDollarOutline,
 		ChartPieOutline,
 		ChevronDownOutline,
@@ -122,7 +123,7 @@
 				</DropdownItem>
 				<DropdownItem href="/products/loan" on:click={() => (productsOpen = false)}>
 					<div class="flex items-center gap-2">
-						<ChartMixedDollarOutline size="md" />loans
+						<ChartMixedDollarOutline size="md" />Loans
 					</div>
 				</DropdownItem>
 			</Dropdown>
@@ -174,10 +175,10 @@
 				</DropdownItem>
 				<DropdownItem href="/payments/fees" on:click={() => (paymentsOpen = false)}>
 					<div class="flex items-center gap-2">
-						<CreditCardOutline size="md" />Collage Fees
+						<CashOutline size="md" />Fees Payments
 					</div>
 				</DropdownItem>
-				<DropdownItem href="/products/loan" on:click={() => (paymentsOpen = false)}>
+				<DropdownItem href="/payments/loan" on:click={() => (paymentsOpen = false)}>
 					<div class="flex items-center gap-2">
 						<ChartMixedDollarOutline size="md" />Loan Payments
 					</div>

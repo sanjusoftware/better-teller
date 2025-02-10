@@ -27,7 +27,7 @@
 			Top selling {data.productCateory.toLocaleUpperCase()} products for DSK customers .
 		</svelte:fragment>
 	</PricingHead>
-	<div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+	<div class="space-y-8 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0">
 		{#each data.products as product}
 			<PricingCard>
 				<PricingBodyHead>

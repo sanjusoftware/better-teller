@@ -72,6 +72,126 @@
         ]
     },
     {
+        "productName": "Travel Card",
+        "customerSegment": "corporate",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 7.0,
+        "interestRate": 1.0,
+        "productBenefits": [
+            "Low foreign transaction fees",
+            "Free travel insurance",
+            "Reward points on travel bookings"
+        ]
+    },
+    {
+        "productName": "Platinum Credit Card",
+        "customerSegment": "retail",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 20.0,
+        "interestRate": 3.0,
+        "productBenefits": [
+            "High credit limit",
+            "Exclusive rewards program",
+            "Complimentary airport lounge access"
+        ]
+    },
+    {
+        "productName": "Student Credit Card",
+        "customerSegment": "retail",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 5.0,
+        "interestRate": 1.5,
+        "productBenefits": [
+            "Low interest rates",
+            "Cashback on purchases",
+            "No annual fee for the first year"
+        ]
+    },
+    {
+        "productName": "Senior Citizen Credit Card",
+        "customerSegment": "retail",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 8.0,
+        "interestRate": 1.0,
+        "productBenefits": [
+            "Low interest rates",
+            "Discounts on medical expenses",
+            "Priority customer service"
+        ]
+    },
+    {
+        "productName": "Business Credit Card",
+        "customerSegment": "sme",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 10.0,
+        "interestRate": 2.0,
+        "productBenefits": [
+            "High credit limit",
+            "Cashback on business expenses",
+            "Reward points"
+        ]
+    },
+    {
+        "productName": "Business Travel Card",
+        "customerSegment": "sme",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 5.0,
+        "interestRate": 1.5,
+        "productBenefits": [
+            "Low foreign transaction fees",
+            "Free travel insurance",
+            "Airport lounge access"
+        ]
+    },
+    {
+        "productName": "Business Purchase Card",
+        "customerSegment": "sme",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 15.0,
+        "interestRate": 2.5,
+        "productBenefits": [
+            "Streamlined expense management",
+            "Detailed transaction reports",
+            "Extended payment terms"
+        ]
+    },
+    {
+        "productName": "Corporate Credit Card",
+        "customerSegment": "corporate",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 15.0,
+        "interestRate": 2.0,
+        "productBenefits": [
+            "High credit limit",
+            "Cashback on business expenses",
+            "Reward points"
+        ]
+    },
+    {
+        "productName": "Corporate Travel Card",
+        "customerSegment": "corporate",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 10.0,
+        "interestRate": 1.5,
+        "productBenefits": [
+            "Low foreign transaction fees",
+            "Free travel insurance",
+            "Airport lounge access"
+        ]
+    },
+    {
+        "productName": "Corporate Purchase Card",
+        "customerSegment": "corporate",
+        "productCategory": "card",
+        "monthlyMaintenanceFee": 20.0,
+        "interestRate": 2.5,
+        "productBenefits": [
+            "Streamlined expense management",
+            "Detailed transaction reports",
+            "Extended payment terms"
+        ]
+    },
+    {
         "productName": "Business Loan",
         "customerSegment": "sme",
         "productCategory": "loan",
@@ -129,18 +249,6 @@
             "Low interest rates",
             "Flexible repayment options",
             "Tax benefits"
-        ]
-    },
-    {
-        "productName": "Travel Card",
-        "customerSegment": "corporate",
-        "productCategory": "card",
-        "monthlyMaintenanceFee": 7.0,
-        "interestRate": 1.0,
-        "productBenefits": [
-            "Low foreign transaction fees",
-            "Free travel insurance",
-            "Reward points on travel bookings"
         ]
     },
     {
