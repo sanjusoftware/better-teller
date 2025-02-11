@@ -62,7 +62,7 @@
 	</Dropdown>
 {/snippet}
 
-{#snippet tableRow(document)}
+{#snippet tableRow(document: any)}
 	<TableBodyRow class="text-base">
 		<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
 		<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">

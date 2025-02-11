@@ -76,7 +76,7 @@
 	</Dropdown>
 {/snippet}
 
-{#snippet tableRow(loan)}
+{#snippet tableRow(loan: any)}
 	<TableBodyRow class="text-base">
 		<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
 		<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">

@@ -82,7 +82,7 @@
 	</Dropdown>
 {/snippet}
 
-{#snippet tableRow(transaction)}
+{#snippet tableRow(transaction: any)}
 	<TableBodyRow>
 		<TableBodyCell class="!p-4">
 			<Checkbox class="chk" />
