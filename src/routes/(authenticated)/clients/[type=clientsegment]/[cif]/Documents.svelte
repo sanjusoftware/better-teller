@@ -12,6 +12,7 @@
 		ButtonGroup,
 		Checkbox,
 		Dropdown,
+		Modal,
 		TableBodyCell,
 		TableBodyRow
 	} from 'flowbite-svelte';
@@ -31,6 +32,7 @@
 	let documents = data.Documents;
 	let client = data.client;
 	let searchPlaceholder = 'Search by File Name, Document Type, Document Id ...';
+	let documentOpen = $state(false);
 </script>
 
 <Pagination
@@ -79,9 +81,14 @@
 		<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
 			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 				<div class="text-base font-semibold text-gray-900 dark:text-white">
-					<a href={document.documentUrl} class="hover:underline">
+					<button
+						type="button"
+						onclick={() => (documentOpen = true)}
+						class="hover:underline"
+						aria-label="Open document {document.documentName}"
+					>
 						{document.documentName}
-					</a>
+					</button>
 				</div>
 				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 					Size: {document.documentSize}
@@ -107,7 +114,13 @@
 		</TableBodyCell>
 		<TableBodyCell class="space-x-2 p-4">
 			<ButtonGroup>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+				<Button
+					onclick={() => (documentOpen = true)}
+					outline
+					color="light"
+					size="xs"
+					class="gap-2 px-3"
+				>
 					<EyeSolid size="sm" /> View
 				</Button>
 				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
@@ -132,6 +145,18 @@
 				<TrashBinOutline size="sm" /> Delete
 			</Button>
 		</TableBodyCell>
+		<Modal
+			id={document.documentId}
+			title="{document.documentSubType} - {document.documentName}"
+			bind:open={documentOpen}
+			classBackdrop="bg-opacity-20 dark:bg-opacity-20"
+			size="xl"
+		>
+			<iframe src="/images/sample.pdf?url" width="100%" height="1000px" title="PDF"></iframe>
+			<svelte:fragment slot="footer">
+				<Button on:click={() => alert('E-Signature Initiated"')}>Initiate E-Signature</Button>
+			</svelte:fragment>
+		</Modal>
 	</TableBodyRow>
 {/snippet}
 

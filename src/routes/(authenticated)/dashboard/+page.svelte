@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { Breadcrumb, BreadcrumbItem } from 'flowbite-svelte';
 	import ActivityList from './ActivityList.svelte';
 	import Insights from './Insights.svelte';
-	import { Breadcrumb, BreadcrumbItem } from 'flowbite-svelte';
 
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
@@ -9,10 +9,11 @@
 </script>
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home>My Dashboard</BreadcrumbItem>
+	<BreadcrumbItem home>Home</BreadcrumbItem>
+	<BreadcrumbItem >My Dashboard</BreadcrumbItem>
 </Breadcrumb>
 
-<div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+<div class="grid grid-cols-1 gap-4 xl:grid-cols-2">	
 	<ActivityList {activities} />
 	<Insights />
 </div>
