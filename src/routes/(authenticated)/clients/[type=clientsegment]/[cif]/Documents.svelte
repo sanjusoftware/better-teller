@@ -32,7 +32,19 @@
 	let documents = data.Documents;
 	let client = data.client;
 	let searchPlaceholder = 'Search by File Name, Document Type, Document Id ...';
-	let documentOpen = $state(false);
+	import { onMount } from 'svelte';
+
+	const modalStates: { [key: string]: boolean } = $state({});
+
+	onMount(() => {
+		documents.forEach((doc) => {
+			modalStates[doc.documentId] = false;
+		});
+	});
+
+	function openModal(documentId: string) {
+		modalStates[documentId] = true;
+	}
 </script>
 
 <Pagination
@@ -83,7 +95,7 @@
 				<div class="text-base font-semibold text-gray-900 dark:text-white">
 					<button
 						type="button"
-						onclick={() => (documentOpen = true)}
+						onclick={() => openModal(document.documentId)}
 						class="hover:underline"
 						aria-label="Open document {document.documentName}"
 					>
@@ -115,7 +127,7 @@
 		<TableBodyCell class="space-x-2 p-4">
 			<ButtonGroup>
 				<Button
-					onclick={() => (documentOpen = true)}
+					onclick={() => openModal(document.documentId)}
 					outline
 					color="light"
 					size="xs"
@@ -146,9 +158,8 @@
 			</Button>
 		</TableBodyCell>
 		<Modal
-			id={document.documentId}
+			bind:open={modalStates[document.documentId]}
 			title="{document.documentSubType} - {document.documentName}"
-			bind:open={documentOpen}
 			classBackdrop="bg-opacity-20 dark:bg-opacity-20"
 			size="xl"
 		>
