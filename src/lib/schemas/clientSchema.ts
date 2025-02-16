@@ -1,7 +1,10 @@
 import { z } from 'zod';
-export const IDTypes = [{ value: 'passport', name: 'Passport' }, { value: 'dl', name: 'Driving Licence' }, { value: 'national_id', name: 'National ID' }, { value: 'egn', name: 'EGN' }];
-
+import {IDTypes}  from '$lib/utils/constants';
 let idTypeEnum = IDTypes.map((k) => k.value);
+let idTypeNames = IDTypes.map((k) => k.name).join(', ');
+const phoneNumberSchema = z.string().regex(/^\+?[1-9]\d{1,14}$/, {
+  message: "Invalid phone number format. It should start with an optional '+' followed by 1 to 15 digits."
+});
 
 export const IDSchema = z.object({
   id_number: z.string().nonempty(),
@@ -11,10 +14,10 @@ export const IDSchema = z.object({
         case 'invalid_type': {
           if (ctx.data === undefined)
             return { message: 'ID Type is required' }
-          return { message: 'ID Type must be Passport, Driving License, National ID, or EGN' }
+          return { message: 'ID Type must be '+ idTypeNames }
         }
         case 'invalid_enum_value':
-          return { message: 'Select one of the allowed ID types from Passport, Driving License, National ID, or EGN' }
+          return { message: 'ID Type must be '+ idTypeNames }
       }
       return { message: ctx.defaultError }
     }
@@ -22,10 +25,6 @@ export const IDSchema = z.object({
   id_issue_date: z.date().max(new Date(), { message: "Issue date should be the past." }),
   id_expiry_date: z.date().min(new Date(), { message: "Expiry date should be the future." }),
   issuing_country: z.string()
-});
-
-const phoneNumberSchema = z.string().regex(/^\+?[1-9]\d{1,14}$/, {
-  message: "Invalid phone number format. It should start with an optional '+' followed by 1 to 15 digits."
 });
 
 export const profileSchema = IDSchema.extend({
@@ -39,7 +38,7 @@ export const profileSchema = IDSchema.extend({
     country: z.string(),
     zip_code: z.string().length(5)
   }),
-  date_of_birth: z.date().max(new Date(), { message: "Date of birth cannot be in future." }),
+  date_of_birth: z.date().max(new Date(), { message: "Date of birth should be the past." }),
 });
 
 export const employerSchema = profileSchema.extend({

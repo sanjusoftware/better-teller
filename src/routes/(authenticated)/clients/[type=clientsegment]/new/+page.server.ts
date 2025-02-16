@@ -1,7 +1,7 @@
 import { superValidate, message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
-import { employerSchema as lastStep } from './clientSchema';
+import { employerSchema as lastStep } from '$lib/schemas/clientSchema';
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({params}) => {

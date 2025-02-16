@@ -8,13 +8,21 @@
 	dayjs.extend(localizedFormat);
 
 	import {
+		Alert,
 		Button,
 		ButtonGroup,
 		Checkbox,
+		Datepicker,
 		Dropdown,
+		Fileupload,
+		Helper,
+		Input,
+		Label,
 		Modal,
+		Select,
 		TableBodyCell,
-		TableBodyRow
+		TableBodyRow,
+		Spinner
 	} from 'flowbite-svelte';
 	import {
 		BellRingOutline,
@@ -26,25 +34,40 @@
 		TrashBinOutline,
 		UploadOutline
 	} from 'flowbite-svelte-icons';
-
+	import SearchableSelect from 'svelte-select';
+	import { superForm, fileProxy, dateProxy } from 'sveltekit-superforms';
+	import SuperDebug from 'sveltekit-superforms';
+	import { onMount } from 'svelte';
+	import { documentTypes } from '$lib/utils/constants';
 	import type { PageData } from './$types';
+	import { countries } from '$lib/utils/constants';
+	import { page } from '$app/state';
+	import { documentSchema } from '$lib/schemas/documentSchema';
+	import { zodClient } from 'sveltekit-superforms/adapters';
+
 	let { data }: { data: PageData } = $props();
 	let documents = data.Documents;
-	let client = data.client;
 	let searchPlaceholder = 'Search by File Name, Document Type, Document Id ...';
-	import { onMount } from 'svelte';
-
+	let newDocumentModal = $state(false);
 	const modalStates: { [key: string]: boolean } = $state({});
+
+	const { form, errors, message, enhance, constraints, delayed } = superForm(data.documentForm, {
+		validators: zodClient(documentSchema)
+	});
+
+	const proxyFile = fileProxy(form, 'document_file');
+	const issueDateProxy = dateProxy(form, 'document_issue_date', { format: 'date' });
+	const expiryDateProxy = dateProxy(form, 'document_expiry_date', { format: 'date' });
+
+	function openModal(documentId: string) {
+		modalStates[documentId] = true;
+	}
 
 	onMount(() => {
 		documents.forEach((doc) => {
 			modalStates[doc.documentId] = false;
 		});
 	});
-
-	function openModal(documentId: string) {
-		modalStates[documentId] = true;
-	}
 </script>
 
 <Pagination
@@ -57,11 +80,7 @@
 />
 
 {#snippet searchHeader()}
-	<Button
-		size="sm"
-		class="gap-2 whitespace-nowrap px-3"
-		href={`/clients/${client.type}/${client.cif}/documents/new`}
-	>
+	<Button size="sm" class="gap-2 whitespace-nowrap px-3" on:click={() => (newDocumentModal = true)}>
 		<UploadOutline size="sm" />Upload New Document
 	</Button>
 	<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
@@ -170,6 +189,112 @@
 		</Modal>
 	</TableBodyRow>
 {/snippet}
+
+<Modal bind:open={newDocumentModal} size="md" autoclose={false} class="w-full">
+	<Alert color={page.status == 200 ? 'green' : 'red'}>
+		{page.status == 200 ? 'Success!' : 'Error!'}
+		{$message}
+	</Alert>
+	<form method="POST" use:enhance enctype="multipart/form-data" class="flex flex-col space-y-3">
+		<SuperDebug data={$form} />
+		<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+			New document for {data.client.name}
+		</h3>
+		<div>
+			<Label for="document_file" class="mb-2">Choose Document</Label>
+			<Fileupload
+				required
+				clearable
+				bind:files={$proxyFile}
+				accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+				type="file"
+				name="document_file"
+			/>
+			<Helper class="mt-2" color="green">
+				Allowed file types: .PDF, .DOC, .DOCX, .JPG, .JPEG, or .PNG
+				<span class="font-medium">(Max 100 kB upload size).</span>
+			</Helper>
+			{#if $errors.document_file}
+				<Helper class="mt-2" color="red">
+					{$errors.document_file}
+				</Helper>
+			{/if}
+		</div>
+		<div class="grid gap-6 mb-6 md:grid-cols-2">
+			<div>
+				<Label for="document_issuer" class="mb-2">Document Issuer</Label>
+				<Input
+					bind:value={$form.document_issuer}
+					aria-invalid={$errors.document_issuer ? 'true' : undefined}
+					{...$constraints.document_issuer}
+					type="text"
+					id="document_issuer"
+					name="document_issuer"
+					placeholder="Enter Document Issuer"
+					required
+					color={$errors.document_issuer ? 'red' : undefined}
+				/>
+				{#if $errors.document_issuer}
+					<Helper class="mt-2" color="red">
+						{$errors.document_issuer}
+					</Helper>
+				{/if}
+			</div>
+			<Label>
+				Document Type
+				<Select
+					class="mt-2"
+					id="document_type"
+					name="document_type"
+					bind:value={$form.document_type}
+					items={documentTypes}
+					placeholder="Choose Document type..."
+				/>
+				{#if $errors.document_type}
+					<Helper class="mt-2" color="red">
+						{$errors.document_type}
+					</Helper>
+				{/if}
+			</Label>
+			<div>
+				<Label for="document_issue_date" class="mb-2">Document Issue Date</Label>
+				<input
+					name="document_issue_date"
+					type="date"
+					bind:value={$issueDateProxy}
+					aria-invalid={$errors.document_issue_date ? 'true' : undefined}
+					{...$constraints.document_issue_date}
+					min={$constraints.document_issue_date?.min?.toString().slice(0, 10)}
+					max={$constraints.document_issue_date?.max?.toString().slice(0, 10)}
+				/>
+				{#if $errors.document_issue_date}
+					<Helper class="mt-2" color="red">
+						{$errors.document_issue_date}
+					</Helper>
+				{/if}
+			</div>
+			<div>
+				<Label for="document_expiry_date" class="mb-2">Document Issue Date</Label>
+				<input
+					name="document_expiry_date"
+					type="date"
+					bind:value={$expiryDateProxy}
+					aria-invalid={$errors.document_expiry_date ? 'true' : undefined}
+					{...$constraints.document_expiry_date}
+					min={$constraints.document_expiry_date?.min?.toString().slice(0, 10)}
+					max={$constraints.document_expiry_date?.max?.toString().slice(0, 10)}
+				/>
+				{#if $errors.document_expiry_date}
+					<Helper class="mt-2" color="red">
+						{$errors.document_expiry_date}
+					</Helper>
+				{/if}
+			</div>
+			<Button type="submit" class="w-fit">Submit</Button>
+			{#if $delayed}<Spinner />{/if}
+		</div>
+	</form>
+</Modal>
 
 {#if documents.length === 0}
 	<div class="p-4 text-center text-gray-500 dark:text-gray-400">

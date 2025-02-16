@@ -1,9 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { superForm } from 'sveltekit-superforms';
-	import { zod } from 'sveltekit-superforms/adapters';
-	import SuperDebug from 'sveltekit-superforms';
-	import SearchableSelect from 'svelte-select';
 	import {
 		Alert,
 		ArrowKeyLeft,
@@ -18,26 +14,27 @@
 		Select,
 		StepIndicator
 	} from 'flowbite-svelte';
-
+	import SearchableSelect from 'svelte-select';
+	import { superForm } from 'sveltekit-superforms';
+	import { zod } from 'sveltekit-superforms/adapters';
+	import SuperDebug from 'sveltekit-superforms';
 	import Card from '$lib/utils/InfoCard.svelte';
-	import { IDTypes, IDSchema, profileSchema, employerSchema } from './clientSchema';
+	import { IDTypes } from '$lib/utils/constants';
+	import { employerSchema, IDSchema, profileSchema } from '$lib/schemas/clientSchema';
 
 	let { data } = $props();
 	let stepNames = ['ID Information', 'Personal Information', 'Employer Information'];
-	let currentStep = $state(1);
 
+	let currentStep = $state(1);
 	function previousStep() {
 		currentStep = currentStep - 1;
 	}
 
-	let countries = [
-		{ label: 'Bulgaria', value: 'bg' },
-		{ label: 'USA', value: 'usa' },
-		{ label: 'India', value: 'in' }
-	];
+	import { countries } from '$lib/utils/constants';
 
-	const { form, errors, allErrors, message, constraints, enhance, validateForm, options } =
-		superForm(data.newClientForm, {
+	const { form, errors, message, constraints, enhance, validateForm, options } = superForm(
+		data.newClientForm,
+		{
 			// No need for hidden fields with dataType: 'json'
 			dataType: 'json',
 			async onSubmit({ cancel }) {
@@ -77,7 +74,8 @@
 					});
 				}
 			}
-		});
+		}
+	);
 </script>
 
 <Breadcrumb class="mb-5">
@@ -92,22 +90,9 @@
 
 <form method="POST" use:enhance>
 	<Card class="-mt-px max-w-none mt-5">
-		{#if $allErrors.length}
-			<Alert color="red">
-				<span class="font-medium">To continue, you need to have the following information:</span>
-				<ul>
-					{#each $allErrors as error}
-						<li>
-							{error.messages.join('. ')}
-						</li>
-					{/each}
-				</ul>
-			</Alert>
-		{/if}
-
 		{#if $message}
 			<Alert color={page.status == 200 ? 'green' : 'red'}>
-				<span class="font-medium">Success!!</span>
+				{page.status == 200 ? 'Success!' : 'Error!'}				
 				{$message}
 			</Alert>
 		{/if}
@@ -176,7 +161,7 @@
 					{/if}
 				</div>
 				<div>
-					<Label for="id_issue_date" class="mb-2">ID Expiry Date</Label>
+					<Label for="id_expiry_date" class="mb-2">ID Expiry Date</Label>
 					<Datepicker bind:value={$form.id_expiry_date} {...$constraints.id_expiry_date}
 					></Datepicker>
 					{#if $errors.id_expiry_date}
@@ -422,3 +407,4 @@
 		</div>
 	</Card>
 </form>
+<SuperDebug data={$form} />

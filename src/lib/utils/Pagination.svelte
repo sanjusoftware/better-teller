@@ -11,7 +11,6 @@
 	} from 'flowbite-svelte';
 	import { ChevronLeftOutline, ChevronRightOutline, SearchOutline } from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
-	import { effect } from 'zod';
 
 	let { items, searchPlaceholder, fieldsToSearch, tableHeaders, searchHeader, tableRow } = $props();
 
@@ -63,8 +62,8 @@
 
 	const currentPageItems = $derived(items.slice(currentPosition, currentPosition + itemsPerPage));
 	const filteredItems = $derived(
-		items.filter((item) =>
-			fieldsToSearch.some((field) => item[field].toLowerCase().includes(searchTerm.toLowerCase()))
+		items.filter((item: any) =>
+			fieldsToSearch.some((field: string) => item[field].toLowerCase().includes(searchTerm.toLowerCase()))
 		));
 
 	const toggleAll = (event: Event) => {

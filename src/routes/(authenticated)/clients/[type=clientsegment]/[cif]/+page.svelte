@@ -1,28 +1,25 @@
 <script lang="ts">
-	import { Breadcrumb, BreadcrumbItem, Tabs, TabItem } from 'flowbite-svelte';
+	import { Breadcrumb, BreadcrumbItem, TabItem, Tabs } from 'flowbite-svelte';
 	import {
-		LockOpenOutline,
-		CreditCardOutline,
-		ProfileCardOutline,
 		BellActiveAltOutline,
 		ChartMixedDollarOutline,
-		WalletOutline,
+		CreditCardOutline,
 		FileCopyAltOutline,
-
-		ShieldCheckOutline
-
+		ProfileCardOutline,
+		ShieldCheckOutline,
+		WalletOutline
 	} from 'flowbite-svelte-icons';
 
 	import Accounts from './Accounts.svelte';
-	import BankCards from './Cards.svelte';
-	import Loans from './Loans.svelte';
-	import Documents from './Documents.svelte';
-	import ProfilePicture from './ProfilePicture.svelte';
 	import Alerts from './Alerts.svelte';
+	import BankCards from './Cards.svelte';
+	import Documents from './Documents.svelte';
 	import Emails from './Emails.svelte';
-	import PersonlaInfo from './PersonalInfo.svelte';
 	import LanguageTime from './LanguageTime.svelte';
+	import Loans from './Loans.svelte';
 	import PasswordInfo from './PasswordInfo.svelte';
+	import PersonlaInfo from './PersonalInfo.svelte';
+	import ProfilePicture from './ProfilePicture.svelte';
 	import Sessions from './Sessions.svelte';
 
 	import type { PageData } from './$types';
