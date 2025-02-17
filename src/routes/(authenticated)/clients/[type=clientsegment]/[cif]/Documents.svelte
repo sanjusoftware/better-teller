@@ -7,12 +7,14 @@
 	dayjs.extend(customParseFormat);
 	dayjs.extend(localizedFormat);
 
+	import { page } from '$app/state';
+	import { documentSchema } from '$lib/schemas/documentSchema';
+	import { documentTypes } from '$lib/utils/constants';
 	import {
 		Alert,
 		Button,
 		ButtonGroup,
 		Checkbox,
-		Datepicker,
 		Dropdown,
 		Fileupload,
 		Helper,
@@ -20,9 +22,9 @@
 		Label,
 		Modal,
 		Select,
+		Spinner,
 		TableBodyCell,
-		TableBodyRow,
-		Spinner
+		TableBodyRow
 	} from 'flowbite-svelte';
 	import {
 		BellRingOutline,
@@ -34,16 +36,10 @@
 		TrashBinOutline,
 		UploadOutline
 	} from 'flowbite-svelte-icons';
-	import SearchableSelect from 'svelte-select';
-	import { superForm, fileProxy, dateProxy } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
 	import { onMount } from 'svelte';
-	import { documentTypes } from '$lib/utils/constants';
-	import type { PageData } from './$types';
-	import { countries } from '$lib/utils/constants';
-	import { page } from '$app/state';
-	import { documentSchema } from '$lib/schemas/documentSchema';
+	import SuperDebug, { dateProxy, fileProxy, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 	let documents = data.Documents;
@@ -195,7 +191,7 @@
 		{page.status == 200 ? 'Success!' : 'Error!'}
 		{$message}
 	</Alert>
-	<form method="POST" use:enhance enctype="multipart/form-data" class="flex flex-col space-y-3">
+	<form method="POST" action="?/upload_document" use:enhance enctype="multipart/form-data" class="flex flex-col space-y-3">
 		<SuperDebug data={$form} />
 		<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
 			New document for {data.client.name}

@@ -10,6 +10,7 @@ import { error } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
 import { promises as fs } from 'node:fs';
 import path from 'path';
+import type { Actions } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
     const client = Clients.find((client) => client.cif === Number(params.cif) && client.type === params.type)
@@ -29,9 +30,8 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions = {
-    default: async ({ request }) => {
+    upload_document: async ({ request }) => {
         const form = await superValidate(request, zod(documentSchema));
-        console.log("form data is: ", form);
 
         if (!form.valid) return fail(400, { form });
 
@@ -44,13 +44,13 @@ export const actions = {
         const buffer = Buffer.from(await file.arrayBuffer());
         const filePath = path.join('uploads', file.name);
 
-         // Ensure the uploads directory exists
-         await fs.mkdir(path.dirname(filePath), { recursive: true });
+        // Ensure the uploads directory exists
+        await fs.mkdir(path.dirname(filePath), { recursive: true });
 
-         // Save the file to the uploads directory
-         await fs.writeFile(filePath, buffer);
+        // Save the file to the uploads directory
+        await fs.writeFile(filePath, buffer);
 
         // Display a success status message
         return message(form, 'Document uploaded successfully!');
     }
-};
+} satisfies Actions;
