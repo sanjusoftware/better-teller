@@ -8,6 +8,8 @@ import { documentSchema } from '$lib/schemas/documentSchema';
 import { message, fail, superValidate } from 'sveltekit-superforms';
 import { error } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
+import { promises as fs } from 'node:fs';
+import path from 'path';
 
 export const load: PageServerLoad = async ({ params }) => {
     const client = Clients.find((client) => client.cif === Number(params.cif) && client.type === params.type)
@@ -33,7 +35,20 @@ export const actions = {
 
         if (!form.valid) return fail(400, { form });
 
-        // save the file to the server        
+        // save the file to the server
+        const file = form.data.document_file;
+        if (!(file instanceof Object) || !file.name) {
+            return fail(400, { form });
+        }
+
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const filePath = path.join('uploads', file.name);
+
+         // Ensure the uploads directory exists
+         await fs.mkdir(path.dirname(filePath), { recursive: true });
+
+         // Save the file to the uploads directory
+         await fs.writeFile(filePath, buffer);
 
         // Display a success status message
         return message(form, 'Document uploaded successfully!');
