@@ -80,14 +80,18 @@
 		<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
 			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 				<div class="text-base font-semibold text-gray-900 dark:text-white">
-					<a href="/transactions" class="hover:underline">
+					<a href="/transactions?accountnumber={account.accountNumber}" class="hover:underline">
 						{account.accountNumber}
 					</a>
+					<Tooltip placement="top" class="text-sm font-light">
+						View Transactions
+					</Tooltip>
+
 					<button use:copy={account.accountNumber}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
-					<Tooltip placement="right" trigger="click" class="text-sm font-light">
-						Copied account number: {account.accountNumber}
+					<Tooltip placement="right" class="text-sm font-light">
+						Copy account number: {account.accountNumber}
 					</Tooltip>
 				</div>
 				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">

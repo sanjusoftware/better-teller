@@ -1,5 +1,4 @@
 <script lang="ts">
-	import transactions from '$lib/data/transactions.json';
 	import CreditCard from '$lib/utils/CreditCard.svelte';
 	import Pagination from '$lib/utils/Pagination.svelte';
 	import StatusBadge from '$lib/utils/StatusBadge.svelte';
@@ -9,6 +8,9 @@
 	dayjs.extend(customParseFormat);
 	dayjs.extend(localizedFormat);
 	import { copy } from 'svelte-copy';
+	import type { PageServerData } from './$types';
+	let { data }: { data: PageServerData } = $props();
+	let transactions = $derived(data.transactions)
 
 	import {
 		Breadcrumb,
@@ -28,7 +30,7 @@
 		FilterSolid
 	} from 'flowbite-svelte-icons';
 
-	let searchPlaceholder = 'Search by Transaction Id, Description, Details ...';
+	let searchPlaceholder = 'Search by Transaction Id, Account Number, Description, Details ...';
 </script>
 
 <Breadcrumb class="mb-5">
@@ -39,9 +41,11 @@
 <Pagination
 	items={transactions}
 	{searchPlaceholder}
-	fieldsToSearch={['description', 'detail', 'id']}
+	fieldsToSearch={['description', 'from_account', 'to_account', 'detail', 'id']}
 	tableHeaders={[
 		'Transaction ID',
+		'From Account',
+		'To Account',
 		'Type',
 		'Details',
 		'Description',
@@ -93,11 +97,38 @@
 				<button use:copy={transaction.id}>
 					<FileCopyOutline size="sm" class="mr-2" />
 				</button>
-				<Tooltip placement="right" trigger="click" class="text-sm font-light">
-					Copied Transaction ID: {transaction.id}
+				<Tooltip placement="right" class="text-sm font-light">
+					Copy Transaction ID: {transaction.id}
 				</Tooltip>
-			</div>
-			
+			</div>			
+		</TableBodyCell>
+		<TableBodyCell class="px-4 font-normal">
+			<a href="/transactions?accountnumber={transaction.from_account}" class="hover:underline">
+				{transaction.from_account}
+			</a>
+			<Tooltip placement="top" class="text-sm font-light">
+				View Transactions
+			</Tooltip>
+			<button use:copy={transaction.from_account}>
+				<FileCopyOutline size="sm" class="mr-2" />
+			</button>
+			<Tooltip placement="right" class="text-sm font-light">
+				Copy account number: {transaction.from_account}
+			</Tooltip>
+		</TableBodyCell>
+		<TableBodyCell class="px-4 font-normal">
+			<a href="/transactions?accountnumber={transaction.to_account}" class="hover:underline">
+				{transaction.to_account}
+			</a>
+			<Tooltip placement="top" class="text-sm font-light">
+				View Transactions
+			</Tooltip>
+			<button use:copy={transaction.to_account}>
+				<FileCopyOutline size="sm" class="mr-2" />
+			</button>
+			<Tooltip placement="right" class="text-sm font-light">
+				Copy account number: {transaction.to_account}
+			</Tooltip>
 		</TableBodyCell>
 		<TableBodyCell class="px-4 font-normal">{transaction.type}</TableBodyCell>
 		<TableBodyCell class="px-4 font-normal">{transaction.detail}</TableBodyCell>

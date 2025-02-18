@@ -66,6 +66,72 @@
         "status": "Blocked"
     },
     {
+        "customerId": 22334455,
+        "accountNumber": "778899000",
+        "iban": "BGSOF0009778899000",
+        "balance": 115000,
+        "type": "Savings",
+        "opened_on": "21/03/2021",
+        "card_issued": false,
+        "currency": "Euro",
+        "status": "In Active"
+    },
+    {
+        "customerId": 22334455,
+        "accountNumber": "778899002",
+        "iban": "BGSOF0009778899002",
+        "balance": 120000,
+        "type": "Checking",
+        "opened_on": "22/04/2021",
+        "card_issued": true,
+        "currency": "USD",
+        "status": "Active"
+    },
+    {
+        "customerId": 22334455,
+        "accountNumber": "778899003",
+        "iban": "BGSOF0009778899003",
+        "balance": 125000,
+        "type": "Savings",
+        "opened_on": "23/05/2021",
+        "card_issued": false,
+        "currency": "BGN",
+        "status": "Closed"
+    },
+    {
+        "customerId": 22334455,
+        "accountNumber": "556677000",
+        "iban": "BGSOF0009556677000",
+        "balance": 90000,
+        "type": "Checking",
+        "opened_on": "09/05/2018",
+        "card_issued": true,
+        "currency": "Euro",
+        "status": "Blocked"
+    },
+    {
+        "customerId": 22334455,
+        "accountNumber": "556677002",
+        "iban": "BGSOF0009556677002",
+        "balance": 95000,
+        "type": "Savings",
+        "opened_on": "10/06/2018",
+        "card_issued": false,
+        "currency": "USD",
+        "status": "In Active"
+    },
+    {
+        "customerId": 22334455,
+        "accountNumber": "556677003",
+        "iban": "BGSOF0009556677003",
+        "balance": 100000,
+        "type": "Checking",
+        "opened_on": "11/07/2018",
+        "card_issued": true,
+        "currency": "BGN",
+        "status": "Active"
+    },
+    {
         "customerId": 11223344,
         "accountNumber": "987654323",
         "iban": "BGSOF0009987654323",
@@ -317,71 +383,5 @@
         "card_issued": true,
         "currency": "BGN",
         "status": "Blocked"
-    },
-    {
-        "customerId": 22334455,
-        "accountNumber": "778899000",
-        "iban": "BGSOF0009778899000",
-        "balance": 115000,
-        "type": "Savings",
-        "opened_on": "21/03/2021",
-        "card_issued": false,
-        "currency": "Euro",
-        "status": "In Active"
-    },
-    {
-        "customerId": 22334455,
-        "accountNumber": "778899002",
-        "iban": "BGSOF0009778899002",
-        "balance": 120000,
-        "type": "Checking",
-        "opened_on": "22/04/2021",
-        "card_issued": true,
-        "currency": "USD",
-        "status": "Active"
-    },
-    {
-        "customerId": 22334455,
-        "accountNumber": "778899003",
-        "iban": "BGSOF0009778899003",
-        "balance": 125000,
-        "type": "Savings",
-        "opened_on": "23/05/2021",
-        "card_issued": false,
-        "currency": "BGN",
-        "status": "Closed"
-    },
-    {
-        "customerId": 22334455,
-        "accountNumber": "556677000",
-        "iban": "BGSOF0009556677000",
-        "balance": 90000,
-        "type": "Checking",
-        "opened_on": "09/05/2018",
-        "card_issued": true,
-        "currency": "Euro",
-        "status": "Blocked"
-    },
-    {
-        "customerId": 22334455,
-        "accountNumber": "556677002",
-        "iban": "BGSOF0009556677002",
-        "balance": 95000,
-        "type": "Savings",
-        "opened_on": "10/06/2018",
-        "card_issued": false,
-        "currency": "USD",
-        "status": "In Active"
-    },
-    {
-        "customerId": 22334455,
-        "accountNumber": "556677003",
-        "iban": "BGSOF0009556677003",
-        "balance": 100000,
-        "type": "Checking",
-        "opened_on": "11/07/2018",
-        "card_issued": true,
-        "currency": "BGN",
-        "status": "Active"
     }
 ]

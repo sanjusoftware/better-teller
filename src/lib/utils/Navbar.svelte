@@ -13,6 +13,9 @@
 		NavUl
 	} from 'flowbite-svelte';
 	import {
+	ArrowRightAltOutline,
+	ArrowRightToBracketOutline,
+	ArrowsRepeatOutline,
 		BellRingSolid,
 		BuildingOutline,
 		CashOutline,
@@ -22,6 +25,7 @@
 		ChevronRightOutline,
 		CreditCardOutline,
 		CreditCardPlusAltOutline,
+		EuroOutline,
 		GlobeOutline,
 		GridOutline,
 		HomeOutline,
@@ -33,6 +37,7 @@
 		MobilePhoneOutline,
 		PlusOutline,
 		QrCodeOutline,
+		ShareAllOutline,
 		UserOutline,
 		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
@@ -43,6 +48,7 @@
 	let clientsOpen = $state(false);
 	let productsOpen = $state(false);
 	let paymentsOpen = $state(false);
+	let trasnfersOpen = $state(false);
 
 </script>
 
@@ -184,12 +190,29 @@
 					</div>
 				</DropdownItem>
 			</Dropdown>
-			<NavLi href="/help">
+			<NavLi class="cursor-pointer">
 				<div class="flex items-center gap-2">
-					<LifeSaverOutline size="md" />
-					Help
+					<EuroOutline size="md" />
+					Transfers<ChevronDownOutline class="w-6 h-6 text-primary-800 dark:text-white inline" />
 				</div>
 			</NavLi>
+			<Dropdown class="w-44 z-20" {activeUrl} bind:open={trasnfersOpen}>				
+				<DropdownItem href="/payments/card" on:click={() => (trasnfersOpen = false)}>
+					<div class="flex items-center gap-2">
+						<ArrowsRepeatOutline size="md" />Within DSK Bank
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/payments/fees" on:click={() => (trasnfersOpen = false)}>
+					<div class="flex items-center gap-2">
+						<ArrowRightToBracketOutline size="md" />Other Bulgarian Banks
+					</div>
+				</DropdownItem>
+				<DropdownItem href="/payments/loan" on:click={() => (trasnfersOpen = false)}>
+					<div class="flex items-center gap-2">
+						<ShareAllOutline size="md" />International Banks
+					</div>
+				</DropdownItem>
+			</Dropdown>
 		</NavUl>
 
 		<div class="flex items-center md:order-2">
