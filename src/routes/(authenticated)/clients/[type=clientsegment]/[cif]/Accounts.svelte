@@ -139,10 +139,10 @@
 		</TableBodyCell>
 		<TableBodyCell class="space-x-2 p-4">
 			<ButtonGroup>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions?accountnumber={account.accountNumber}">
 					<EyeSolid size="sm" /> Statement
 				</Button>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions?accountnumber={account.accountNumber}">
 					<DownloadOutline size="sm" /> Download
 				</Button>
 			</ButtonGroup>

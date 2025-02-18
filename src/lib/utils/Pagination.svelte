@@ -15,6 +15,7 @@
 	let { items, searchPlaceholder, fieldsToSearch, tableHeaders, searchHeader, tableRow } = $props();
 
 	let searchTerm = $state('');
+	let filters = $state([]);
 	let currentPosition = $state(0);
 	const itemsPerPage = 10;
 	const showPage = 5;
@@ -72,6 +73,12 @@
 			(checkbox as HTMLInputElement).checked = isChecked;
 		});
 	};
+
+	// function filterTransactions(type: string) {
+	// 	// Implement your filtering logic here
+	// 	console.log(`Filtering transactions by type: ${type}`);
+	// 	items.filter((t) => t.type === type);
+	// }
 
 	onMount(() => {
 		renderPagination();

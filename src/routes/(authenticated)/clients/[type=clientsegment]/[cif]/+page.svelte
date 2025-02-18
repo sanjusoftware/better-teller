@@ -5,6 +5,7 @@
 		ChartMixedDollarOutline,
 		CreditCardOutline,
 		FileCopyAltOutline,
+		FingerprintOutline,
 		ProfileCardOutline,
 		ShieldCheckOutline,
 		WalletOutline
@@ -99,7 +100,7 @@
 	</TabItem>
 	<TabItem>
 		<div slot="title" class="flex items-center gap-2">
-			<ShieldCheckOutline size="md" />
+			<FingerprintOutline size="md" />
 			Security
 		</div>
 		<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">

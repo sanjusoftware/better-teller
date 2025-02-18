@@ -10,7 +10,7 @@
 	import { copy } from 'svelte-copy';
 	import type { PageServerData } from './$types';
 	let { data }: { data: PageServerData } = $props();
-	let transactions = $derived(data.transactions)
+	let transactions = $derived(data.transactions);
 
 	import {
 		Breadcrumb,
@@ -20,22 +20,22 @@
 		Dropdown,
 		TableBodyCell,
 		TableBodyRow,
-
 		Tooltip
-
 	} from 'flowbite-svelte';
 
-	import {
-	FileCopyOutline,
-		FilterSolid
-	} from 'flowbite-svelte-icons';
+	import { FileCopyOutline, FilterSolid } from 'flowbite-svelte-icons';
 
 	let searchPlaceholder = 'Search by Transaction Id, Account Number, Description, Details ...';
 </script>
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home href="/dashboard">Home</BreadcrumbItem>
-	<BreadcrumbItem href="/transactions">Transactions</BreadcrumbItem>
+	<BreadcrumbItem home>Transactions</BreadcrumbItem>
+	<BreadcrumbItem href="/transactions?cif={data.cif}">CIF: {data.cif}</BreadcrumbItem>
+	{#if data.acountNumber !== null}
+		<BreadcrumbItem href="/transactions?accountnumber={data.acountNumber}">
+			Account: {data.acountNumber}
+		</BreadcrumbItem>
+	{/if}
 </Breadcrumb>
 
 <Pagination
@@ -58,7 +58,7 @@
 	{tableRow}
 />
 
-{#snippet searchHeader()}
+{#snippet searchHeader()}	
 	<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
 	<Dropdown class="w-48 p-3 space-y-2 text-sm">
 		<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
@@ -67,21 +67,6 @@
 		</li>
 		<li>
 			<Checkbox>Outgoing (16)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>Utility Payment (49)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>Reversal (12)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>Domestic (74)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>Intrabank (74)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>International (74)</Checkbox>
 		</li>
 	</Dropdown>
 {/snippet}
@@ -100,15 +85,13 @@
 				<Tooltip placement="right" class="text-sm font-light">
 					Copy Transaction ID: {transaction.id}
 				</Tooltip>
-			</div>			
+			</div>
 		</TableBodyCell>
 		<TableBodyCell class="px-4 font-normal">
 			<a href="/transactions?accountnumber={transaction.from_account}" class="hover:underline">
 				{transaction.from_account}
 			</a>
-			<Tooltip placement="top" class="text-sm font-light">
-				View Transactions
-			</Tooltip>
+			<Tooltip placement="top" class="text-sm font-light">View Transactions</Tooltip>
 			<button use:copy={transaction.from_account}>
 				<FileCopyOutline size="sm" class="mr-2" />
 			</button>
@@ -120,9 +103,7 @@
 			<a href="/transactions?accountnumber={transaction.to_account}" class="hover:underline">
 				{transaction.to_account}
 			</a>
-			<Tooltip placement="top" class="text-sm font-light">
-				View Transactions
-			</Tooltip>
+			<Tooltip placement="top" class="text-sm font-light">View Transactions</Tooltip>
 			<button use:copy={transaction.to_account}>
 				<FileCopyOutline size="sm" class="mr-2" />
 			</button>

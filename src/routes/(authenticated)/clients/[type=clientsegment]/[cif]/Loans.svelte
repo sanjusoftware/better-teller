@@ -82,14 +82,17 @@
 		<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
 			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 				<div class="text-base font-semibold text-gray-900 dark:text-white">
-					<a href="/transactions" class="hover:underline">
+					<a href="/transactions?accountnumber={loan.accountNumber}" class="hover:underline">
 						{loan.accountNumber}
 					</a>
+					<Tooltip placement="top" class="text-sm font-light">
+						View Transactions
+					</Tooltip>
 					<button use:copy={loan.accountNumber}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
-					<Tooltip placement="right" trigger="click" class="text-sm font-light">
-						Copied account number: {loan.accountNumber}
+					<Tooltip placement="right" class="text-sm font-light">
+						Copy account number: {loan.accountNumber}
 					</Tooltip>
 				</div>
 				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -97,8 +100,8 @@
 					<button use:copy={loan.iban}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
-					<Tooltip placement="right" trigger="click" class="text-sm font-light">
-						Copied IBAN: {loan.iban}
+					<Tooltip placement="right" class="text-sm font-light">
+						Copy IBAN: {loan.iban}
 					</Tooltip>
 				</div>
 			</div>
@@ -140,10 +143,10 @@
 		</TableBodyCell>
 		<TableBodyCell class="space-x-2 p-4">
 			<ButtonGroup>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions?accountnumber={loan.accountNumber}">
 					<EyeSolid size="sm" /> Statement
 				</Button>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions?accountnumber={loan.accountNumber}">
 					<DownloadOutline size="sm" /> Download
 				</Button>
 			</ButtonGroup>

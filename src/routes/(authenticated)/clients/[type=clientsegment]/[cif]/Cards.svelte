@@ -80,12 +80,13 @@
 	<TableBodyRow class="text-base">
 		<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
 		<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
-			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-				<div class="text-base font-semibold text-gray-900 dark:text-white">
-					<a href="/transactions" class="hover:underline">
-						{maskCreditCard(card.cardNumber)}
-					</a>
-				</div>
+			<div class="text-base font-semibold text-gray-900 dark:text-white">
+				<a href="/transactions?accountnumber={card.accountNumber}" class="hover:underline">
+					{maskCreditCard(card.cardNumber)}
+				</a>
+				<Tooltip placement="top" class="text-sm font-light">
+					View Transactions
+				</Tooltip>
 				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 					Account: {card.accountNumber}
 					<button use:copy={card.accountNumber}>
@@ -131,7 +132,7 @@
 			<StatusIndicator status={card.status} />
 		</TableBodyCell>
 		<TableBodyCell class="space-x-2 p-4">
-			<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
+			<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions?accountnumber={card.accountNumber}">
 				<EyeSolid size="sm" /> Transactions
 			</Button>
 			{#if card.status === 'Active'}

@@ -187,12 +187,14 @@
 {/snippet}
 
 <Modal bind:open={newDocumentModal} size="md" autoclose={false} class="w-full">
-	<Alert color={page.status == 200 ? 'green' : 'red'}>
+	{#if $message}
+	<Alert dismissable color={page.status == 200 ? 'green' : 'red'}>
 		{page.status == 200 ? 'Success!' : 'Error!'}
 		{$message}
 	</Alert>
+	{/if}
 	<form method="POST" action="?/upload_document" use:enhance enctype="multipart/form-data" class="flex flex-col space-y-3">
-		<SuperDebug data={$form} />
+		<!-- <SuperDebug data={$form} /> -->
 		<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
 			New document for {data.client.name}
 		</h3>
