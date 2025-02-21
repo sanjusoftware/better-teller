@@ -43,6 +43,7 @@
 	items={loans}
 	{searchPlaceholder}
 	fieldsToSearch={['accountNumber', 'iban']}
+	filtersToApply={['type', 'status']}
 	tableHeaders={[
 		'Account Number',
 		'Cif',
@@ -63,17 +64,8 @@
 		class="gap-2 whitespace-nowrap px-3"
 		href={`/clients/${client.type}/${client.cif}/loans/new`}
 	>
-		<ChartMixedDollarOutline size="sm" />New Loan
+		<ChartMixedDollarOutline size="sm" />Open New Loan
 	</Button>
-	<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
-	<Dropdown class="w-48 p-3 space-y-2 text-sm">
-		<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
-		{#each ['Active', 'NPA', 'Closed'] as loanStatus}
-			<li>
-				<Checkbox>{loanStatus} (5)</Checkbox>
-			</li>
-		{/each}
-	</Dropdown>
 {/snippet}
 
 {#snippet tableRow(loan: any)}

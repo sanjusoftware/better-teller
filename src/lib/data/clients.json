@@ -9,7 +9,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-1111"
+		"phone": "+1 555-1111",
+		"egn": "1234567890"
 	},
 	{
 		"cif": 22334455,
@@ -21,7 +22,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-2222"
+		"phone": "+1 555-2222",
+		"egn": "2345678901"
 	},
 	{
 		"cif": 33445566,
@@ -33,7 +35,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-3333"
+		"phone": "+1 555-3333",
+		"egn": "3456789012"
 	},
 	{
 		"cif": 44556677,
@@ -45,7 +48,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-4444"
+		"phone": "+1 555-4444",
+		"egn": "4567890123"
 	},
 	{
 		"cif": 55667788,
@@ -57,7 +61,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-5555"
+		"phone": "+1 555-5555",
+		"egn": "5678901234"
 	},
 	{
 		"cif": 66778899,
@@ -69,7 +74,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-6666"
+		"phone": "+1 555-6666",
+		"egn": "6789012345"
 	},
 	{
 		"cif": 77889900,
@@ -81,7 +87,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-7777"
+		"phone": "+1 555-7777",
+		"egn": "7890123456"
 	},
 	{
 		"cif": 88990011,
@@ -93,7 +100,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-8888"
+		"phone": "+1 555-8888",
+		"egn": "8901234567"
 	},
 	{
 		"cif": 99001122,
@@ -105,7 +113,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-9999"
+		"phone": "+1 555-9999",
+		"egn": "9012345678"
 	},
 	{
 		"cif": 10111213,
@@ -117,235 +126,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-1010"
-	},
-	{
-		"cif": 12131415,
-		"name": "Karen Harris",
-		"avatar": "/images/profile.jpg",
-		"email": "karen.harris@dskbank.bg",
-		"address": "456 Poplar St, Anytown, USA",
-		"position": "Business Analyst",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1112"
-	},
-	{
-		"cif": 13141516,
-		"name": "Leo Clark",
-		"avatar": "/images/profile.jpg",
-		"email": "leo.clark@dskbank.bg",
-		"address": "789 Fir St, Anytown, USA",
-		"position": "Project Manager",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1213"
-	},
-	{
-		"cif": 14151617,
-		"name": "Mia Lewis",
-		"avatar": "/images/profile.jpg",
-		"email": "mia.lewis@dskbank.bg",
-		"address": "123 Redwood St, Anytown, USA",
-		"position": "Accountant",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1314"
-	},
-	{
-		"cif": 15161718,
-		"name": "Noah Walker",
-		"avatar": "/images/profile.jpg",
-		"email": "noah.walker@dskbank.bg",
-		"address": "456 Sequoia St, Anytown, USA",
-		"position": "Legal Advisor",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1415"
-	},
-	{
-		"cif": 16171819,
-		"name": "Olivia Hall",
-		"avatar": "/images/profile.jpg",
-		"email": "olivia.hall@dskbank.bg",
-		"address": "789 Cypress St, Anytown, USA",
-		"position": "Compliance Officer",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1516"
-	},
-	{
-		"cif": 17181920,
-		"name": "Paul Young",
-		"avatar": "/images/profile.jpg",
-		"email": "paul.young@dskbank.bg",
-		"address": "123 Dogwood St, Anytown, USA",
-		"position": "Risk Manager",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1617"
-	},
-	{
-		"cif": 18192021,
-		"name": "Quinn King",
-		"avatar": "/images/profile.jpg",
-		"email": "quinn.king@dskbank.bg",
-		"address": "456 Magnolia St, Anytown, USA",
-		"position": "Procurement Specialist",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1718"
-	},
-	{
-		"cif": 19202122,
-		"name": "Rachel Scott",
-		"avatar": "/images/profile.jpg",
-		"email": "rachel.scott@dskbank.bg",
-		"address": "789 Palm St, Anytown, USA",
-		"position": "Customer Service Manager",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1819"
-	},
-	{
-		"cif": 20212223,
-		"name": "Sam Green",
-		"avatar": "/images/profile.jpg",
-		"email": "sam.green@dskbank.bg",
-		"address": "123 Pine St, Anytown, USA",
-		"position": "Operations Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-1920"
-	},
-	{
-		"cif": 21222324,
-		"name": "Tina Adams",
-		"avatar": "/images/profile.jpg",
-		"email": "tina.adams@dskbank.bg",
-		"address": "456 Maple St, Anytown, USA",
-		"position": "Finance Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "corporate",
-		"phone": "+1 555-2021"
-	},
-	{
-		"cif": 22232425,
-		"name": "Uma Baker",
-		"avatar": "/images/profile.jpg",
-		"email": "uma.baker@dskbank.bg",
-		"address": "789 Oak St, Anytown, USA",
-		"position": "HR Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2122"
-	},
-	{
-		"cif": 23242526,
-		"name": "Victor Carter",
-		"avatar": "/images/profile.jpg",
-		"email": "victor.carter@dskbank.bg",
-		"address": "123 Birch St, Anytown, USA",
-		"position": "IT Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2223"
-	},
-	{
-		"cif": 24252627,
-		"name": "Wendy Evans",
-		"avatar": "/images/profile.jpg",
-		"email": "wendy.evans@dskbank.bg",
-		"address": "456 Cedar St, Anytown, USA",
-		"position": "Marketing Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2324"
-	},
-	{
-		"cif": 25262728,
-		"name": "Xander Foster",
-		"avatar": "/images/profile.jpg",
-		"email": "xander.foster@dskbank.bg",
-		"address": "789 Elm St, Anytown, USA",
-		"position": "Sales Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2425"
-	},
-	{
-		"cif": 26272829,
-		"name": "Yara Garcia",
-		"avatar": "/images/profile.jpg",
-		"email": "yara.garcia@dskbank.bg",
-		"address": "123 Spruce St, Anytown, USA",
-		"position": "Product Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2526"
-	},
-	{
-		"cif": 27282930,
-		"name": "Zane Harris",
-		"avatar": "/images/profile.jpg",
-		"email": "zane.harris@dskbank.bg",
-		"address": "456 Willow St, Anytown, USA",
-		"position": "Legal Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2627"
-	},
-	{
-		"cif": 28293031,
-		"name": "Amy Johnson",
-		"avatar": "/images/profile.jpg",
-		"email": "amy.johnson@dskbank.bg",
-		"address": "789 Redwood St, Anytown, USA",
-		"position": "Compliance Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2728"
-	},
-	{
-		"cif": 29303132,
-		"name": "Brian Lee",
-		"avatar": "/images/profile.jpg",
-		"email": "brian.lee@dskbank.bg",
-		"address": "123 Dogwood St, Anytown, USA",
-		"position": "Risk Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2829"
-	},
-	{
-		"cif": 30313233,
-		"name": "Cathy Miller",
-		"avatar": "/images/profile.jpg",
-		"email": "cathy.miller@dskbank.bg",
-		"address": "456 Magnolia St, Anytown, USA",
-		"position": "Procurement Director",
-		"country": "United States",
-		"status": "Active",
-		"type": "sme",
-		"phone": "+1 555-2930"
+		"phone": "+1 555-1010",
+		"egn": "0123456789"
 	},
 	{
 		"cif": 87654321,
@@ -357,7 +139,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-0000"
+		"phone": "+1 555-0000",
+		"egn": "1234509876"
 	},
 	{
 		"cif": 23456789,
@@ -369,7 +152,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-5678"
+		"phone": "+1 555-5678",
+		"egn": "2345610987"
 	},
 	{
 		"cif": 34567890,
@@ -381,7 +165,8 @@
 		"country": "Spain",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+34 555-1234"
+		"phone": "+34 555-1234",
+		"egn": "3456721098"
 	},
 	{
 		"cif": 45678901,
@@ -393,7 +178,8 @@
 		"country": "United Kingdom",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+44 555-1234"
+		"phone": "+44 555-1234",
+		"egn": "4567832109"
 	},
 	{
 		"cif": 56789012,
@@ -405,7 +191,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-8765"
+		"phone": "+1 555-8765",
+		"egn": "5678943210"
 	},
 	{
 		"cif": 67890123,
@@ -417,7 +204,8 @@
 		"country": "Australia",
 		"status": "Inactive",
 		"type": "retail",
-		"phone": "+61 555-1234"
+		"phone": "+61 555-1234",
+		"egn": "6789054321"
 	},
 	{
 		"cif": 78901234,
@@ -429,7 +217,8 @@
 		"country": "Germany",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+49 555-1234"
+		"phone": "+49 555-1234",
+		"egn": "7890165432"
 	},
 	{
 		"cif": 89012345,
@@ -441,7 +230,8 @@
 		"country": "Canada",
 		"status": "Active",
 		"type": "retail",
-		"phone": "+1 555-2345"
+		"phone": "+1 555-2345",
+		"egn": "8901276543"
 	},
 	{
 		"cif": 90123456,
@@ -453,7 +243,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "sme",
-		"phone": "+1 555-3456"
+		"phone": "+1 555-3456",
+		"egn": "1234567890"
 	},
 	{
 		"cif": 12345678,
@@ -465,7 +256,8 @@
 		"country": "France",
 		"status": "Inactive",
 		"type": "sme",
-		"phone": "+33 555-1234"
+		"phone": "+33 555-1234",
+		"egn": "2345678901"
 	},
 	{
 		"cif": 23456789,
@@ -477,7 +269,8 @@
 		"country": "Russia",
 		"status": "Active",
 		"type": "sme",
-		"phone": "+7 555-1234"
+		"phone": "+7 555-1234",
+		"egn": "3456789012"
 	},
 	{
 		"cif": 34567890,
@@ -489,7 +282,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "sme",
-		"phone": "+1 555-6789"
+		"phone": "+1 555-6789",
+		"egn": "4567890123"
 	},
 	{
 		"cif": 45678901,
@@ -501,7 +295,8 @@
 		"country": "Spain",
 		"status": "Active",
 		"type": "sme",
-		"phone": "+34 555-5678"
+		"phone": "+34 555-5678",
+		"egn": "5678901234"
 	},
 	{
 		"cif": 56789012,
@@ -513,7 +308,8 @@
 		"country": "United Kingdom",
 		"status": "Active",
 		"type": "sme",
-		"phone": "+44 555-5678"
+		"phone": "+44 555-5678",
+		"egn": "6789012345"
 	},
 	{
 		"cif": 67890123,
@@ -525,7 +321,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "sme",
-		"phone": "+1 555-7890"
+		"phone": "+1 555-7890",
+		"egn": "7890123456"
 	},
 	{
 		"cif": 78901234,
@@ -537,7 +334,8 @@
 		"country": "Australia",
 		"status": "Inactive",
 		"type": "corporate",
-		"phone": "+61 555-5678"
+		"phone": "+61 555-5678",
+		"egn": "1234567890"
 	},
 	{
 		"cif": 89012345,
@@ -549,7 +347,8 @@
 		"country": "Germany",
 		"status": "Active",
 		"type": "corporate",
-		"phone": "+49 555-5678"
+		"phone": "+49 555-5678",
+		"egn": "2345678901"
 	},
 	{
 		"cif": 90123456,
@@ -561,7 +360,8 @@
 		"country": "Canada",
 		"status": "Active",
 		"type": "corporate",
-		"phone": "+1 555-8901"
+		"phone": "+1 555-8901",
+		"egn": "3456789012"
 	},
 	{
 		"cif": 12345678,
@@ -573,7 +373,8 @@
 		"country": "United States",
 		"status": "Active",
 		"type": "corporate",
-		"phone": "+1 555-9012"
+		"phone": "+1 555-9012",
+		"egn": "4567890123"
 	},
 	{
 		"cif": 23456789,
@@ -585,7 +386,8 @@
 		"country": "France",
 		"status": "Inactive",
 		"type": "corporate",
-		"phone": "+33 555-5678"
+		"phone": "+33 555-5678",
+		"egn": "5678901234"
 	},
 	{
 		"cif": 34567890,
@@ -597,6 +399,7 @@
 		"country": "Russia",
 		"status": "Active",
 		"type": "corporate",
-		"phone": "+7 555-5678"
+		"phone": "+7 555-5678",
+		"egn": "6789012345"
 	}
 ]

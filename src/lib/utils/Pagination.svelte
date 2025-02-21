@@ -3,19 +3,34 @@
 		Button,
 		ButtonGroup,
 		Checkbox,
+		Dropdown,
+		DropdownDivider,
 		Input,
 		Table,
 		TableBody,
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
-	import { ChevronLeftOutline, ChevronRightOutline, SearchOutline } from 'flowbite-svelte-icons';
+	import {
+		ChevronLeftOutline,
+		ChevronRightOutline,
+		FilterSolid,
+		SearchOutline
+	} from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
 
-	let { items, searchPlaceholder, fieldsToSearch, tableHeaders, searchHeader, tableRow } = $props();
+	let {
+		items,
+		searchPlaceholder,
+		fieldsToSearch,
+		filtersToApply = [],
+		tableHeaders,
+		searchHeader = null,
+		tableRow
+	} = $props();
 
 	let searchTerm = $state('');
-	let filters = $state([]);
+	let appliedFilters: { [key: string]: string[] } = $state({});
 	let currentPosition = $state(0);
 	const itemsPerPage = 10;
 	const showPage = 5;
@@ -63,9 +78,21 @@
 
 	const currentPageItems = $derived(items.slice(currentPosition, currentPosition + itemsPerPage));
 	const filteredItems = $derived(
-		items.filter((item: any) =>
-			fieldsToSearch.some((field: string) => item[field].toLowerCase().includes(searchTerm.toLowerCase()))
-		));
+		items
+			.filter((item: any) =>
+				fieldsToSearch.some((field: string) =>
+					item[field].toString().toLowerCase().includes(searchTerm.toLowerCase())
+				)
+			)
+			.filter((item: any) => {
+				for (const [key, values] of Object.entries(appliedFilters)) {
+					if (!values.includes(item[key])) {
+						return false;
+					}
+				}
+				return true;
+			})
+	);
 
 	const toggleAll = (event: Event) => {
 		const isChecked = (event.target as HTMLInputElement).checked;
@@ -74,11 +101,51 @@
 		});
 	};
 
-	// function filterTransactions(type: string) {
-	// 	// Implement your filtering logic here
-	// 	console.log(`Filtering transactions by type: ${type}`);
-	// 	items.filter((t) => t.type === type);
-	// }
+	const toggleFilter = (event: Event) => {
+		let filter = event.target as HTMLInputElement;
+		if (filter.checked) {
+			if (appliedFilters[filter.id] != null) {
+				appliedFilters[filter.id].push(filter.value);
+			} else {
+				appliedFilters[filter.id] = [filter.value];
+			}
+		} else {
+			appliedFilters[filter.id] = appliedFilters[filter.id].filter(
+				(value) => value !== filter.value
+			);
+			if (appliedFilters[filter.id].length === 0) {
+				delete appliedFilters[filter.id];
+			}
+		}
+	};
+
+	const countsByFilters = $derived(
+		items.reduce(
+			(count: { [filter: string]: [{ [value: string]: number }] }, item: any) => {
+				filtersToApply.forEach((filter: string) => {
+					if (!count[filter]) {
+						// if no counter for filter type, initialize filter with first value and count as 1
+						count[filter] = [{ [item[filter]]: 1 }];
+						// {type: [{'Incoming': 1}]}
+					} else {
+						count[filter].forEach((filterValueItem) => {
+							if (filterValueItem[item[filter]]) {
+								// if found counter for one of the filter values, increment it
+								filterValueItem[item[filter]] += 1;
+							} else {
+								// if not found counter for one of the filter values, add it
+								console.log('not found', item[filter]);
+								filterValueItem[item[filter]] = 1;
+								console.log('added', filterValueItem[item[filter]]);
+							}
+						});
+					}
+				});
+				return count;
+			},
+			{}
+		)
+	);
 
 	onMount(() => {
 		renderPagination();
@@ -105,7 +172,39 @@
 		<div
 			class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
 		>
-			{@render searchHeader()}
+			{@render searchHeader?.()}
+			{#if filtersToApply.length > 0 && filtersToApply.length < 4}
+				{#each Object.keys(countsByFilters) as filter}
+					<Button color="alternative">
+						{filter.toLocaleUpperCase()}<FilterSolid class="w-3 h-3 ml-2 " />
+					</Button>
+					<Dropdown class="w-48 p-3 space-y-2 text-sm">
+						{#each Object.keys(countsByFilters[filter][0]) as filterValue}
+							<li>
+								<Checkbox
+									id={filter}
+									on:change={toggleFilter}
+									value={filterValue}
+									checked={appliedFilters[filter]?.includes(filterValue)}
+								>
+									{filterValue} ({countsByFilters[filter][0][filterValue]})
+								</Checkbox>
+							</li>
+						{/each}
+					</Dropdown>
+				{/each}
+			{:else}
+				{#each filtersToApply as filter}
+					<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+						{filter['name'].toLocaleUpperCase()}:
+					</h6>
+					{#each filter.values as value}
+						<Checkbox id={filter['name']} on:change={toggleFilter} {value}>
+							{value}
+						</Checkbox>
+					{/each}
+				{/each}
+			{/if}
 		</div>
 	</div>
 
@@ -117,7 +216,7 @@
 			{/each}
 		</TableHead>
 		<TableBody class="divide-y">
-			{#each searchTerm != '' ? filteredItems : currentPageItems as item}
+			{#each searchTerm != '' || appliedFilters != null ? filteredItems : currentPageItems as item}
 				{@render tableRow(item)}
 			{/each}
 		</TableBody>

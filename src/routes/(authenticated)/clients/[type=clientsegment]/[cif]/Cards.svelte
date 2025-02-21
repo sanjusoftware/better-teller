@@ -43,6 +43,7 @@
 	items={cards}
 	{searchPlaceholder}
 	fieldsToSearch={['accountNumber', 'cardNumber']}
+	filtersToApply={['cardType','status']}
 	tableHeaders={[
 		'Card Number',
 		'Cif',
@@ -65,15 +66,6 @@
 	>
 		<CreditCardPlusAltOutline size="sm" />Issue New Card
 	</Button>
-	<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
-	<Dropdown class="w-48 p-3 space-y-2 text-sm">
-		<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
-		{#each ['Active', 'Pending Activation', 'Expiered', 'Blocked'] as cardStatus}
-			<li>
-				<Checkbox>{cardStatus} (5)</Checkbox>
-			</li>
-		{/each}
-	</Dropdown>
 {/snippet}
 
 {#snippet tableRow(card: any)}

@@ -15,17 +15,14 @@
 	import {
 		Breadcrumb,
 		BreadcrumbItem,
-		Button,
 		Checkbox,
-		Dropdown,
 		TableBodyCell,
 		TableBodyRow,
 		Tooltip
 	} from 'flowbite-svelte';
 
-	import { FileCopyOutline, FilterSolid } from 'flowbite-svelte-icons';
+	import { FileCopyOutline } from 'flowbite-svelte-icons';
 
-	let searchPlaceholder = 'Search by Transaction Id, Account Number, Description, Details ...';
 </script>
 
 <Breadcrumb class="mb-5">
@@ -40,8 +37,9 @@
 
 <Pagination
 	items={transactions}
-	{searchPlaceholder}
-	fieldsToSearch={['description', 'from_account', 'to_account', 'detail', 'id']}
+	searchPlaceholder="Search by Transaction Id, Account Number, Description ..."
+	fieldsToSearch={['id','description', 'from_account', 'to_account']}
+	filtersToApply={['type', 'status']}
 	tableHeaders={[
 		'Transaction ID',
 		'From Account',
@@ -54,22 +52,8 @@
 		'Payment method',
 		'Status'
 	]}
-	{searchHeader}
 	{tableRow}
 />
-
-{#snippet searchHeader()}	
-	<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
-	<Dropdown class="w-48 p-3 space-y-2 text-sm">
-		<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
-		<li>
-			<Checkbox>Incoming (56)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>Outgoing (16)</Checkbox>
-		</li>
-	</Dropdown>
-{/snippet}
 
 {#snippet tableRow(transaction: any)}
 	<TableBodyRow>

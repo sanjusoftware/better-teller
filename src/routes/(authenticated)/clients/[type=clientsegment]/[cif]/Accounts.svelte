@@ -12,7 +12,6 @@
 		Button,
 		ButtonGroup,
 		Checkbox,
-		Dropdown,
 		TableBodyCell,
 		TableBodyRow,
 		Tooltip
@@ -24,7 +23,6 @@
 		DownloadOutline,
 		EyeSolid,
 		FileCopyOutline,
-		FilterSolid,
 		LockTimeOutline,
 		SalePercentOutline,
 		WalletOutline
@@ -40,6 +38,7 @@
 	items={accounts}
 	searchPlaceholder="Search by Account number or IBN ..."
 	fieldsToSearch={['accountNumber', 'iban']}
+	filtersToApply={['type','status']}
 	tableHeaders={[
 		'Account Number',
 		'CIF',
@@ -61,17 +60,7 @@
 		href={`/clients/${client.type}/${client.cif}/accounts/new`}
 	>
 		<WalletOutline size="sm" />Open New Account
-	</Button>
-	<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
-	<Dropdown class="w-48 p-3 space-y-2 text-sm">
-		<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
-		<li>
-			<Checkbox>Checking (5)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>Savings (16)</Checkbox>
-		</li>
-	</Dropdown>
+	</Button>	
 {/snippet}
 
 {#snippet tableRow(account: any)}

@@ -70,6 +70,7 @@
 	items={documents}
 	{searchPlaceholder}
 	fieldsToSearch={['documentId', 'documentName', 'documentType', 'issuedBy']}
+	filtersToApply={['documentSubType', 'issuedBy']}
 	tableHeaders={['Type', 'File Name', 'Issuer', 'Expiry', 'Status', 'Actions']}
 	{searchHeader}
 	{tableRow}
@@ -79,16 +80,6 @@
 	<Button size="sm" class="gap-2 whitespace-nowrap px-3" on:click={() => (newDocumentModal = true)}>
 		<UploadOutline size="sm" />Upload New Document
 	</Button>
-	<Button color="alternative">Filter<FilterSolid class="w-3 h-3 ml-2 " /></Button>
-	<Dropdown class="w-48 p-3 space-y-2 text-sm">
-		<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Show only:</h6>
-		<li>
-			<Checkbox>ID Document (2)</Checkbox>
-		</li>
-		<li>
-			<Checkbox>Collatral (1)</Checkbox>
-		</li>
-	</Dropdown>
 {/snippet}
 
 {#snippet tableRow(document: any)}
