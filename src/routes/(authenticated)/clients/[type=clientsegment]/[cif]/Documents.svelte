@@ -15,7 +15,6 @@
 		Button,
 		ButtonGroup,
 		Checkbox,
-		Dropdown,
 		Fileupload,
 		Helper,
 		Input,
@@ -32,12 +31,11 @@
 		CloseOutline,
 		DownloadOutline,
 		EyeSolid,
-		FilterSolid,
 		TrashBinOutline,
 		UploadOutline
 	} from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
-	import SuperDebug, { dateProxy, fileProxy, superForm } from 'sveltekit-superforms';
+	import { dateProxy, fileProxy, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import type { PageData } from './$types';
 

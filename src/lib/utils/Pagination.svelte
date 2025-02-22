@@ -4,7 +4,6 @@
 		ButtonGroup,
 		Checkbox,
 		Dropdown,
-		DropdownDivider,
 		Input,
 		Table,
 		TableBody,
@@ -18,6 +17,7 @@
 		SearchOutline
 	} from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
+	import { humanize } from '$lib/utils/strings';
 
 	let {
 		items,
@@ -167,7 +167,7 @@
 			{#if filtersToApply.length > 0 && filtersToApply.length < 4}
 				{#each Object.keys(countsByFilters) as filter}
 					<Button color="alternative">
-						{filter.toLocaleUpperCase()}<FilterSolid class="w-3 h-3 ml-2 " />
+						{humanize(filter)}<FilterSolid class="w-3 h-3 ml-2 " />
 					</Button>
 					<Dropdown class="w-48 p-3 space-y-2 text-sm">
 						{#each Object.keys(countsByFilters[filter]) as filterValue}
