@@ -126,7 +126,7 @@
 		</TableBodyCell>
 		<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
 			<MailBoxOutline size="md" class="text-gray-500 dark:text-gray-400" />
-			{client.address}
+			<span style="white-space: normal;">{client.address}</span>
 		</TableBodyCell>
 		<TableBodyCell class="p-4 font-normal">
 			<div class="flex items-center gap-2">

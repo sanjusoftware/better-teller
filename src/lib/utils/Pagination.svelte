@@ -120,31 +120,22 @@
 	};
 
 	const countsByFilters = $derived(
-		items.reduce(
-			(count: { [filter: string]: [{ [value: string]: number }] }, item: any) => {
-				filtersToApply.forEach((filter: string) => {
-					if (!count[filter]) {
-						// if no counter for filter type, initialize filter with first value and count as 1
-						count[filter] = [{ [item[filter]]: 1 }];
-						// {type: [{'Incoming': 1}]}
-					} else {
-						count[filter].forEach((filterValueItem) => {
-							if (filterValueItem[item[filter]]) {
-								// if found counter for one of the filter values, increment it
-								filterValueItem[item[filter]] += 1;
-							} else {
-								// if not found counter for one of the filter values, add it
-								console.log('not found', item[filter]);
-								filterValueItem[item[filter]] = 1;
-								console.log('added', filterValueItem[item[filter]]);
-							}
-						});
-					}
-				});
-				return count;
-			},
-			{}
-		)
+		items.reduce((count: { [filter: string]: { [value: string]: number } }, item: any) => {
+			filtersToApply.forEach((filter: string) => {
+				if (!count[filter]) {
+					// if no counter for filter type, initialize filter with first value and count as 1
+					count[filter] = { [item[filter]]: 1 };
+					// {type: [{'Incoming': 1}]}
+				} else {
+					// if counter for filter type already exists, 
+					// add the new value to the counter or increment its occurance
+					Object.keys(count[filter]).includes(item[filter])
+						? count[filter][item[filter]]++
+						: (count[filter][item[filter]] = 1);
+				}
+			});
+			return count;
+		}, {})
 	);
 
 	onMount(() => {
@@ -179,7 +170,7 @@
 						{filter.toLocaleUpperCase()}<FilterSolid class="w-3 h-3 ml-2 " />
 					</Button>
 					<Dropdown class="w-48 p-3 space-y-2 text-sm">
-						{#each Object.keys(countsByFilters[filter][0]) as filterValue}
+						{#each Object.keys(countsByFilters[filter]) as filterValue}
 							<li>
 								<Checkbox
 									id={filter}
@@ -187,7 +178,7 @@
 									value={filterValue}
 									checked={appliedFilters[filter]?.includes(filterValue)}
 								>
-									{filterValue} ({countsByFilters[filter][0][filterValue]})
+									{filterValue} ({countsByFilters[filter][filterValue]})
 								</Checkbox>
 							</li>
 						{/each}
