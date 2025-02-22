@@ -1,4 +1,4 @@
-<script lang="ts">	
+<script lang="ts">
 	import dayjs from 'dayjs';
 	import customParseFormat from 'dayjs/plugin/customParseFormat';
 	import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -44,16 +44,7 @@
 	{searchPlaceholder}
 	fieldsToSearch={['accountNumber', 'iban']}
 	filtersToApply={['type', 'status']}
-	tableHeaders={[
-		'Account Number',
-		'Cif',
-		'Type',
-		'Amount',
-		'Opened on',
-		'EMI',
-		'Status',
-		'Actions'
-	]}
+	tableHeaders={['Type', 'Account Number', 'Amount', 'Opened on', 'EMI', 'Status', 'Actions']}
 	{searchHeader}
 	{tableRow}
 />
@@ -71,15 +62,23 @@
 {#snippet tableRow(loan: any)}
 	<TableBodyRow class="text-base">
 		<TableBodyCell class="w-4 p-4"><Checkbox class="chk" /></TableBodyCell>
+		<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
+			{#if loan.type === 'Home'}
+				<HomeOutline size="sm" class="mr-1" />
+			{:else if loan.type === 'WCL'}
+				<CashOutline size="sm" class="mr-1" />
+			{:else if loan.type === 'Auto'}
+				<TruckClockOutline size="sm" class="mr-1" />
+			{/if}
+			{loan.type}
+		</TableBodyCell>
 		<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
 			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 				<div class="text-base font-semibold text-gray-900 dark:text-white">
 					<a href="/transactions?accountnumber={loan.accountNumber}" class="hover:underline">
 						{loan.accountNumber}
 					</a>
-					<Tooltip placement="top" class="text-sm font-light">
-						View Transactions
-					</Tooltip>
+					<Tooltip placement="top" class="text-sm font-light">View Transactions</Tooltip>
 					<button use:copy={loan.accountNumber}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
@@ -98,20 +97,6 @@
 				</div>
 			</div>
 		</TableBodyCell>
-		<TableBodyCell class="text-sm font-normal p-4">
-			{loan.customerId}
-		</TableBodyCell>
-		<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
-			{#if loan.type === 'Home'}
-				<HomeOutline size="sm" class="mr-1" />
-			{:else if loan.type === 'WCL'}
-				<CashOutline size="sm" class="mr-1" />
-			{:else if loan.type === 'Auto'}
-				<TruckClockOutline size="sm" class="mr-1" />
-			{/if}
-			{loan.type}
-		</TableBodyCell>
-
 		<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
 			<div class="text-base font-semibold text-gray-900 dark:text-white">
 				{loan.principle_amount.toLocaleString()}
@@ -135,10 +120,22 @@
 		</TableBodyCell>
 		<TableBodyCell class="space-x-2 p-4">
 			<ButtonGroup>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions?accountnumber={loan.accountNumber}">
+				<Button
+					outline
+					color="light"
+					size="xs"
+					class="gap-2 px-3"
+					href="/transactions?accountnumber={loan.accountNumber}"
+				>
 					<EyeSolid size="sm" /> Statement
 				</Button>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions?accountnumber={loan.accountNumber}">
+				<Button
+					outline
+					color="light"
+					size="xs"
+					class="gap-2 px-3"
+					href="/transactions?accountnumber={loan.accountNumber}"
+				>
 					<DownloadOutline size="sm" /> Download
 				</Button>
 			</ButtonGroup>

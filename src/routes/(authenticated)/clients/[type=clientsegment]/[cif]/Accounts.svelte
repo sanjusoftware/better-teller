@@ -41,7 +41,6 @@
 	filtersToApply={['type','status']}
 	tableHeaders={[
 		'Account Number',
-		'CIF',
 		'Type',
 		'Balance',
 		'Opened On',
@@ -93,9 +92,6 @@
 					</Tooltip>
 				</div>
 			</div>
-		</TableBodyCell>
-		<TableBodyCell class="text-sm font-normal p-4">
-			{account.customerId}
 		</TableBodyCell>
 		<TableBodyCell class="text-sm font-normal text-gray-500 dark:text-gray-400 p-4">
 			{#if account.type === 'Loan'}

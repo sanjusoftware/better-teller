@@ -46,7 +46,6 @@
 	filtersToApply={['cardType','status']}
 	tableHeaders={[
 		'Card Number',
-		'Cif',
 		'Type',
 		'Outdtanding Balance',
 		'Issued On',
@@ -89,9 +88,6 @@
 					</Tooltip>
 				</div>
 			</div>
-		</TableBodyCell>
-		<TableBodyCell class="text-sm font-normal p-4">
-			{card.customerId}
 		</TableBodyCell>
 		<TableBodyCell
 			class="max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 xl:max-w-xs dark:text-gray-400"

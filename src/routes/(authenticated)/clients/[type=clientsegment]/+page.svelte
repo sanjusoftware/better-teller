@@ -17,7 +17,6 @@
 	import {
 		CheckOutline,
 		CloseOutline,
-		DownloadOutline,
 		EnvelopeOutline,
 		EyeSolid,
 		FileCopyOutline,
@@ -28,12 +27,13 @@
 	} from 'flowbite-svelte-icons';
 
 	import MetaTag from '$lib/utils/MetaTag.svelte';
+	import { humanize } from '$lib/utils/strings';
 
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 	let clients = $derived(data.clients);
 
-	const clientsPath: string = `/clients/${data.clienttype}`;
+	const clientsPath: string = $derived(`/clients/${data.clienttype}`);
 	const description: string = 'Clients List';
 	const title: string = `Better Teller - Manage Clients`;
 	const subtitle: string = 'Manage Clients';
@@ -43,7 +43,7 @@
 
 <Breadcrumb class="mb-5">
 	<BreadcrumbItem home>Clients</BreadcrumbItem>
-	<BreadcrumbItem>{data.clienttype.toLocaleUpperCase()}</BreadcrumbItem>
+	<BreadcrumbItem>{humanize(data.clienttype)}</BreadcrumbItem>
 </Breadcrumb>
 
 <Pagination
@@ -103,8 +103,14 @@
 			</div>
 		</TableBodyCell>
 		<TableBodyCell class="p-4 font-normal">
-			<div class="flex items-center gap-2">
-				<StatusIndicator status={client.egn} />
+			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+				{client.egn}
+				<button use:copy={client.egn.toString()}>
+					<FileCopyOutline size="sm" class="mr-2" />
+				</button>
+				<Tooltip placement="right" trigger="click" class="text-sm font-light">
+					Copied EGN: {client.egn}
+				</Tooltip>
 			</div>
 		</TableBodyCell>
 		<TableBodyCell class="p-4">
@@ -150,13 +156,9 @@
 				<Button outline color="red" size="xs" class="gap-2 px-3">
 					<CloseOutline size="sm" /> Close
 				</Button>
-			{:else if client.status === 'Pending Activation' || client.status === 'Blocked'}
+			{:else if client.status === 'Pending Activation' || client.status === 'Blocked' || client.status === 'Inactive' || client.status === 'Closed' || client.status === 'Suspended'}
 				<Button outline color="green" size="xs" class="gap-2 px-3">
 					<CheckOutline size="sm" /> Activate
-				</Button>
-			{:else if client.status === 'Suspended'}
-				<Button outline color="green" size="xs" class="gap-2 px-3">
-					<LockTimeOutline size="sm" /> Unsuspend
 				</Button>
 			{/if}
 		</TableBodyCell>

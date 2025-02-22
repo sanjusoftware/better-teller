@@ -15,7 +15,7 @@ import type { Actions } from './$types';
 export const load: PageServerLoad = async ({ params }) => {
     const client = Clients.find((client) => client.cif === Number(params.cif) && client.type === params.type)
     if (!client) {
-        throw error(404, 'Client not found')
+        throw error(404, 'Client not found: CIF ' + params.cif);
     }
 
     const documentForm = await superValidate(zod(documentSchema));

@@ -32,7 +32,7 @@
 
 	import { countries } from '$lib/utils/constants';
 
-	const { form, errors, message, constraints, enhance, validateForm, options } = superForm(
+	const { form, errors, message, constraints, enhance, validateForm, options, capture, restore } = superForm(
 		data.newClientForm,
 		{
 			// No need for hidden fields with dataType: 'json'
@@ -76,6 +76,7 @@
 			}
 		}
 	);
+	export const snapshot = { capture, restore };
 </script>
 
 <Breadcrumb class="mb-5">
