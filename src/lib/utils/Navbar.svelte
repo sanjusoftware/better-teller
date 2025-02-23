@@ -13,7 +13,6 @@
 		NavUl
 	} from 'flowbite-svelte';
 	import {
-	ArrowRightAltOutline,
 	ArrowRightToBracketOutline,
 	ArrowsRepeatOutline,
 		BellRingSolid,
@@ -31,7 +30,6 @@
 		HomeOutline,
 		LandmarkOutline,
 		LayersOutline,
-		LifeSaverOutline,
 		LightbulbOutline,
 		MapPinOutline,
 		MobilePhoneOutline,
@@ -41,10 +39,11 @@
 		UserOutline,
 		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
-
+	import { SignOut } from '@auth/sveltekit/components';
 	import { page } from '$app/state';
+	import { humanize } from '$lib/utils/strings';
 	let activeUrl = $derived(page.url.pathname);
-	let loggedIn: boolean = page.data.loggedIn;
+	let user = page.data.session?.user;
 	let clientsOpen = $state(false);
 	let productsOpen = $state(false);
 	let paymentsOpen = $state(false);
@@ -60,7 +59,7 @@
 		</span>
 	</NavBrand>
 	<NavHamburger />
-	{#if loggedIn}
+	{#if user}
 		<NavUl {activeUrl}>
 			<NavLi href="/dashboard">
 				<div class="flex items-center gap-2">
@@ -231,20 +230,20 @@
 				<BellRingSolid class="w-6 h-6" />
 			</Button>
 			<div class="mx-2"></div>
-			<Avatar id="avatar-menu" src="/images/profile.jpg" href="#" class="w-8 h-8" />
+			<Avatar id="avatar-menu" src={user.image ?? undefined} href="#" class="w-8 h-8" />
 		</div>
 		<Dropdown placement="bottom" triggeredBy="#avatar-menu">
 			<DropdownHeader>
-				<span class="block text-sm">Sanjeev Mishra</span>
-				<span class="block truncate text-sm font-medium">sanjeev.mishra@dskbank.bg</span>
+				<span class="block text-sm">{humanize(user.name)}</span>
+				<span class="block truncate text-sm font-medium">{user.email}</span>
 			</DropdownHeader>
 			<DropdownItem href="/dashboard">Dashboard</DropdownItem>
 			<DropdownItem href="/settings">Settings</DropdownItem>
 			<DropdownDivider />
 			<DropdownItem>
-				<form method="POST" action="/logout">
-					<button>Sign out</button>
-				</form>
+				<SignOut>
+					<div slot="submitButton" class="buttonPrimary">Sign out</div>
+				</SignOut>
 			</DropdownItem>
 		</Dropdown>
 		<Dropdown placement="bottom" triggeredBy="#notifications-list">

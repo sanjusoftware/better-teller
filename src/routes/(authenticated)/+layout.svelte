@@ -1,8 +1,8 @@
 <script lang="ts">
   import "../../app.css";
-  import MetaTag from "../../lib/utils/MetaTag.svelte";
-  import Navbar from "../../lib/utils/Navbar.svelte";
-  import SpeedDial from "../../lib/utils/QuickActions.svelte";
+  import MetaTag from "$lib/utils/MetaTag.svelte";
+  import Navbar from "$lib/utils/Navbar.svelte";
+  import SpeedDial from "$lib/utils/QuickActions.svelte";
 
   const path: string = "/";
   const description: string = "DSK - Better Teller App";

@@ -7,7 +7,6 @@
 		FileCopyAltOutline,
 		FingerprintOutline,
 		ProfileCardOutline,
-		ShieldCheckOutline,
 		WalletOutline
 	} from 'flowbite-svelte-icons';
 
