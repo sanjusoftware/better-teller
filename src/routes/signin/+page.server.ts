@@ -9,7 +9,4 @@ export const load: PageServerLoad = async ({ locals}) => {
     if (session) {
         redirect(303, "/dashboard");
     }
-    // return {
-    //     session
-    // }
 }
