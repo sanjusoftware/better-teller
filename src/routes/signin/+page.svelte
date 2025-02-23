@@ -9,8 +9,6 @@
 	const description: string = 'DSK - Better Teller App';
 	const title: string = 'DSK - Better Teller App';
 	const subtitle: string = 'Home';
-
-	import { SignIn } from '@auth/sveltekit/components';
 </script>
 
 <div class="antialiased bg-gray-50 dark:bg-gray-900">
@@ -19,7 +17,7 @@
 
 	<!-- Main Content -->
 	<MetaTag {path} {description} {title} {subtitle} />
-	<main class="p-4 h-auto pt-20 pb-20">		
+	<main class="p-4 h-auto pt-20 pb-20">
 		<Section name="login" sectionClass="pt-20">
 			<Register
 				href="/"
@@ -29,11 +27,12 @@
 					<h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">
 						Login to access the portal
 					</h3>
-					<SignIn>
-						<Button slot="submitButton" class="w-full1 buttonPrimary">Login in with your DSK ID</Button>
-					</SignIn>
+					<form method="POST" action="/auth/signin/microsoft-entra-id">
+						<input type="hidden" name="csrfToken" >						
+						<Button type="submit" class="w-full buttonPrimary">Login in with your DSK ID</Button>	
+					</form>
 					<p class="text-sm font-light text-gray-500 dark:text-gray-400">
-						Trouble signingin? 
+						Trouble signingin?
 						<span class="font-medium text-primary-600 dark:text-primary-500">
 							Please contact the DSK bank for assistance.
 						</span>

@@ -52,7 +52,7 @@
 </script>
 
 <Navbar class="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 start-0 border-b">
-	<NavBrand href="/" class="flex items-center justify-between mr-4">
+	<NavBrand href="/dashboard" class="flex items-center justify-between mr-4">
 		<img src="/images/dsk.svg" class="me-3 h-6 sm:h-9" alt="DSK Logo" />
 		<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
 			Better Teller
@@ -234,7 +234,7 @@
 		</div>
 		<Dropdown placement="bottom" triggeredBy="#avatar-menu">
 			<DropdownHeader>
-				<span class="block text-sm">{humanize(user.name)}</span>
+				<span class="block text-sm">{humanize(user.name ?? 'Unknown')}</span>
 				<span class="block truncate text-sm font-medium">{user.email}</span>
 			</DropdownHeader>
 			<DropdownItem href="/dashboard">Dashboard</DropdownItem>
