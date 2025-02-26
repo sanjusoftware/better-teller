@@ -4,7 +4,8 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "cross-env NODE_ENV=local vite",
+		"dsk": "cross-env NODE_ENV=dsk vite",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -34,6 +35,8 @@
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
+		"@vitejs/plugin-basic-ssl": "^1.2.0",
+		"cross-env": "^7.0.3",
 		"dayjs": "^1.11.13",
 		"dotenv": "^16.4.7",
 		"flag-icons": "^7.2.3",

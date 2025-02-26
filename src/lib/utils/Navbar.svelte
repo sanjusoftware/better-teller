@@ -241,7 +241,7 @@
 			<DropdownItem href="/settings">Settings</DropdownItem>
 			<DropdownDivider />
 			<DropdownItem>
-				<SignOut>
+				<SignOut options={{ redirect: true, redirectTo: "/signin" }}>
 					<div slot="submitButton" class="buttonPrimary">Sign out</div>
 				</SignOut>
 			</DropdownItem>
