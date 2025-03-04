@@ -234,7 +234,7 @@
 		</div>
 		<Dropdown placement="bottom" triggeredBy="#avatar-menu">
 			<DropdownHeader>
-				<span class="block text-sm">{humanize(user.name ?? 'Unknown')}</span>
+				<span class="block text-sm">{humanize(user.name ?? 'Unknown')} - ({user.roles})</span>				
 				<span class="block truncate text-sm font-medium">{user.email}</span>
 			</DropdownHeader>
 			<DropdownItem href="/dashboard">Dashboard</DropdownItem>

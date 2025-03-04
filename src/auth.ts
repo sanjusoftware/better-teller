@@ -8,19 +8,23 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     clientId: env.AUTH_MICROSOFT_ENTRA_ID_ID,
     clientSecret: env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
     profile(profile) {
-      console.log('profile: ', profile, profile.roles)
-      return { roles: profile.roles ?? "unknown", ...profile }
+      return { ...profile, roles: profile.roles ?? "unknown", email: profile.email ?? profile.preferred_username, picture: profile.picture ?? "" }  
     }
   })],
   callbacks: {
+    jwt({ token, user }) {
+      // ignore the typescript error here 
+      // On sign-in, the role property is exposed from the profile callback on the user object
+      // https://authjs.dev/guides/role-based-access-control?framework=sveltekit
+      if (user) token.roles = user.roles
+      return token
+    },
     session({ session, token }) {
       if (token) {
-        console.log('token is: ', token)
-        console.log('roles are: ', token.roles)
-
         session.user.userId = token.sub as string
         session.user.roles = token.roles as string[]
       }
+      console.log('user is: ', session.user)
       return session
     }
   }
