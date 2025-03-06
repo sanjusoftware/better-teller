@@ -3,6 +3,7 @@
 	import ActivityList from './ActivityList.svelte';
 	import Insights from './Insights.svelte';
 
+	import Clock from '$lib/utils/Clock.svelte'
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 	let activities = data.Activities;
@@ -13,7 +14,11 @@
 	<BreadcrumbItem >My Dashboard</BreadcrumbItem>
 </Breadcrumb>
 
-<div class="grid grid-cols-1 gap-4 xl:grid-cols-2">	
+<div class="grid grid-cols-1 gap-4 xl:grid-cols-4">	
+	<Clock type="both" _24_hrs={true} />
+	<Clock type="digital" _24_hrs={false} />
+	<Clock type="analog" _24_hrs={true} />
+	<Insights />
 	<ActivityList {activities} />
 	<Insights />
 </div>
