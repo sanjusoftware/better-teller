@@ -14,11 +14,10 @@
 	<BreadcrumbItem >My Dashboard</BreadcrumbItem>
 </Breadcrumb>
 
-<div class="grid grid-cols-1 gap-4 xl:grid-cols-4">	
-	<Clock type="both" _24_hrs={true} />
-	<Clock type="digital" _24_hrs={false} />
-	<Clock type="analog" _24_hrs={true} />
+<Clock />
+<div class="grid grid-cols-1 gap-4 xl:grid-cols-3">	
+
+	<Insights />
 	<Insights />
 	<ActivityList {activities} />
-	<Insights />
 </div>
