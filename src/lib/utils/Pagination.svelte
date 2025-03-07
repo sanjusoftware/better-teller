@@ -39,6 +39,7 @@
 	let totalItems = $derived(items.length);
 	let startPage: number;
 	let endPage = $state(0);
+	let currentPage = $derived(Math.ceil((currentPosition + 1) / itemsPerPage));
 
 	const updateDataAndPagination = () => {
 		items.slice(currentPosition, currentPosition + itemsPerPage);
@@ -61,7 +62,6 @@
 
 	const renderPagination = () => {
 		totalPages = Math.ceil(totalItems / itemsPerPage);
-		const currentPage = Math.ceil((currentPosition + 1) / itemsPerPage);
 		startPage = currentPage - Math.floor(showPage / 2);
 		startPage = Math.max(1, startPage);
 		endPage = Math.min(startPage + showPage - 1, totalPages);
@@ -76,7 +76,7 @@
 	let startRange = $derived(currentPosition + 1);
 	let endRange = $derived(Math.min(currentPosition + itemsPerPage, totalItems));
 
-	const currentPageItems = $derived(items.slice(currentPosition, currentPosition + itemsPerPage));
+	const currentPageItems = $derived(items.slice(currentPosition, currentPosition + itemsPerPage));	
 	const filteredItems = $derived(
 		items
 			.filter((item: any) =>
@@ -207,7 +207,7 @@
 			{/each}
 		</TableHead>
 		<TableBody class="divide-y">
-			{#each searchTerm != '' || appliedFilters != null ? filteredItems : currentPageItems as item}
+			{#each searchTerm != '' || Object.keys(appliedFilters).length > 0 ? filteredItems : currentPageItems as item}
 				{@render tableRow(item)}
 			{/each}
 		</TableBody>
@@ -227,7 +227,7 @@
 				<ChevronLeftOutline size="xs" class="m-1.5" />
 			</Button>
 			{#each pagesToShow as pageNumber}
-				<Button on:click={() => goToPage(pageNumber)}>{pageNumber}</Button>
+				<Button color={pageNumber === currentPage ? 'primary' : 'alternative'} on:click={() => goToPage(pageNumber)}>{pageNumber}</Button>
 			{/each}
 			<Button on:click={loadNextPage} disabled={totalPages === endPage}>
 				<ChevronRightOutline size="xs" class="m-1.5" />
