@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { humanize } from '$lib/utils/strings';
 	import {
 		Button,
-		ButtonGroup,
 		Checkbox,
 		Dropdown,
 		Input,
+		Pagination,
 		Table,
 		TableBody,
 		TableHead,
@@ -16,8 +17,6 @@
 		FilterSolid,
 		SearchOutline
 	} from 'flowbite-svelte-icons';
-	import { onMount } from 'svelte';
-	import { humanize } from '$lib/utils/strings';
 
 	let {
 		items,
@@ -34,50 +33,7 @@
 	let currentPosition = $state(0);
 	const itemsPerPage = 10;
 	const showPage = 5;
-	let totalPages = $state(0);
-	let pagesToShow: number[] = $state([]);
-	let totalItems = $derived(items.length);
-	let startPage: number;
-	let endPage = $state(0);
-	let currentPage = $derived(Math.ceil((currentPosition + 1) / itemsPerPage));
-
-	const updateDataAndPagination = () => {
-		items.slice(currentPosition, currentPosition + itemsPerPage);
-		renderPagination();
-	};
-
-	const loadNextPage = () => {
-		if (currentPosition + itemsPerPage < items.length) {
-			currentPosition += itemsPerPage;
-			updateDataAndPagination();
-		}
-	};
-
-	const loadPreviousPage = () => {
-		if (currentPosition - itemsPerPage >= 0) {
-			currentPosition -= itemsPerPage;
-			updateDataAndPagination();
-		}
-	};
-
-	const renderPagination = () => {
-		totalPages = Math.ceil(totalItems / itemsPerPage);
-		startPage = currentPage - Math.floor(showPage / 2);
-		startPage = Math.max(1, startPage);
-		endPage = Math.min(startPage + showPage - 1, totalPages);
-		pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
-	};
-
-	const goToPage = (pageNumber: number) => {
-		currentPosition = (pageNumber - 1) * itemsPerPage;
-		updateDataAndPagination();
-	};
-
-	let startRange = $derived(currentPosition + 1);
-	let endRange = $derived(Math.min(currentPosition + itemsPerPage, totalItems));
-
-	const currentPageItems = $derived(items.slice(currentPosition, currentPosition + itemsPerPage));	
-	const filteredItems = $derived(
+	let filteredItems = $derived(
 		items
 			.filter((item: any) =>
 				fieldsToSearch.some((field: string) =>
@@ -93,12 +49,49 @@
 				return true;
 			})
 	);
+	let currentPageItems = $derived(
+		filteredItems.slice(currentPosition, currentPosition + itemsPerPage)
+	);
+	let totalItems = $derived(filteredItems.length);
+	let totalPages = $derived(Math.ceil(totalItems / itemsPerPage));
+	let currentPage = $derived(Math.ceil((currentPosition + 1) / itemsPerPage));
+	let startPage = $derived(Math.max(1, currentPage - Math.ceil(showPage / 2)));
+	let endPage = $derived(Math.min(startPage + showPage - 1, totalPages));
+	let startRange = $derived(currentPosition + 1);
+	let endRange = $derived(Math.min(currentPosition + itemsPerPage, totalItems));
+
+	const pages = $derived(
+		Array.from({ length: endPage - startPage + 1 }, (_, i) => ({
+			name: (startPage + i).toString(),
+			active: (startPage + i) === currentPage
+		}))
+	);
+
+	const nextPage = () => {
+		if (currentPosition + itemsPerPage < items.length) {
+			currentPosition += itemsPerPage;
+		}
+	};
+
+	const previousPage = () => {
+		if (currentPosition - itemsPerPage >= 0) {
+			currentPosition -= itemsPerPage;
+		}
+	};
+
+	const goToPage = (pageNumber: number) => {
+		currentPosition = (pageNumber - 1) * itemsPerPage;
+	};
 
 	const toggleAll = (event: Event) => {
 		const isChecked = (event.target as HTMLInputElement).checked;
 		document.querySelectorAll('.chk').forEach((checkbox) => {
 			(checkbox as HTMLInputElement).checked = isChecked;
 		});
+	};
+
+	const resetCurrentPosition = () => {
+		currentPosition = 0;
 	};
 
 	const toggleFilter = (event: Event) => {
@@ -117,6 +110,7 @@
 				delete appliedFilters[filter.id];
 			}
 		}
+		resetCurrentPosition();
 	};
 
 	const countsByFilters = $derived(
@@ -127,7 +121,7 @@
 					count[filter] = { [item[filter]]: 1 };
 					// {type: [{'Incoming': 1}]}
 				} else {
-					// if counter for filter type already exists, 
+					// if counter for filter type already exists,
 					// add the new value to the counter or increment its occurance
 					Object.keys(count[filter]).includes(item[filter])
 						? count[filter][item[filter]]++
@@ -137,10 +131,6 @@
 			return count;
 		}, {})
 	);
-
-	onMount(() => {
-		renderPagination();
-	});
 </script>
 
 <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
@@ -154,6 +144,7 @@
 			</div>
 			<Input
 				bind:value={searchTerm}
+				on:input={resetCurrentPosition}
 				type="search"
 				id="table-search"
 				class="text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 pl-10"
@@ -207,7 +198,7 @@
 			{/each}
 		</TableHead>
 		<TableBody class="divide-y">
-			{#each searchTerm != '' || Object.keys(appliedFilters).length > 0 ? filteredItems : currentPageItems as item}
+			{#each currentPageItems as item}
 				{@render tableRow(item)}
 			{/each}
 		</TableBody>
@@ -222,16 +213,24 @@
 			of
 			<span class="font-semibold text-gray-900 dark:text-white">{totalItems}</span>
 		</span>
-		<ButtonGroup>
-			<Button on:click={loadPreviousPage} disabled={currentPosition === 0}>
-				<ChevronLeftOutline size="xs" class="m-1.5" />
-			</Button>
-			{#each pagesToShow as pageNumber}
-				<Button color={pageNumber === currentPage ? 'primary' : 'alternative'} on:click={() => goToPage(pageNumber)}>{pageNumber}</Button>
-			{/each}
-			<Button on:click={loadNextPage} disabled={totalPages === endPage}>
-				<ChevronRightOutline size="xs" class="m-1.5" />
-			</Button>
-		</ButtonGroup>
+		{#if pages.length > 1}
+			<Pagination
+				{pages}
+				activeClass="text-white border border-gray-300 bg-green-600 hover:bg-green-100 hover:text-green-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+				on:previous={previousPage}
+				on:next={nextPage}
+				on:click={(e) =>
+					goToPage(parseInt((e.currentTarget as HTMLElement)?.textContent?.trim() ?? '1'))}
+			>
+				<svelte:fragment slot="prev">
+					<span class="sr-only">Previous</span>
+					<ChevronLeftOutline class="w-2.5 h-2.5" />
+				</svelte:fragment>
+				<svelte:fragment slot="next">
+					<span class="sr-only">Next</span>
+					<ChevronRightOutline class="w-2.5 h-2.5" />
+				</svelte:fragment>
+			</Pagination>
+		{/if}
 	</div>
 </div>
