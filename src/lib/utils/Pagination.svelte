@@ -190,7 +190,7 @@
 		</div>
 	</div>
 
-	<Table>
+	<Table items={items} hoverable={true}>
 		<TableHead>
 			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
 			{#each tableHeaders as header}
