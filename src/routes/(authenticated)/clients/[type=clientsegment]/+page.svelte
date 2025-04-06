@@ -8,7 +8,6 @@
 		Breadcrumb,
 		BreadcrumbItem,
 		Button,
-		ButtonGroup,
 		Checkbox,
 		TableBodyCell,
 		TableBodyRow,

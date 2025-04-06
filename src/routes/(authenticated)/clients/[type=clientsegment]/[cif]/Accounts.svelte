@@ -36,9 +36,9 @@
 
 <Pagination
 	items={accounts}
-	searchPlaceholder="Search by Account number or IBN ..."
+	searchPlaceholder="Search by Account number or IBAN ..."
 	fieldsToSearch={['accountNumber', 'iban']}
-	filtersToApply={['type','status']}
+	filtersToApply={['status']}
 	tableHeaders={[
 		'Account Number',
 		'Type',

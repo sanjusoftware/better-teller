@@ -14,9 +14,8 @@
 	<BreadcrumbItem >My Dashboard</BreadcrumbItem>
 </Breadcrumb>
 
-<Clock />
 <div class="grid grid-cols-1 gap-4 xl:grid-cols-3">	
-
+	<Clock type="both"/>
 	<Insights />
 	<Insights />
 	<ActivityList {activities} />
