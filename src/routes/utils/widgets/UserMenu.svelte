@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Avatar, Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from 'flowbite-svelte';
 	import { humanize } from '$lib/utils/strings';
+	import { SignOut } from '@auth/sveltekit/components';
 	
 	export let name: string = ''; 
 	export let avatar: string = ''; 
@@ -16,9 +17,11 @@
 		<span class="block text-sm">{humanize(name ?? 'Unknown')}</span>
 		<span class="block truncate text-sm font-medium">{email}</span>
 	</DropdownHeader>
-	<DropdownItem>Dashboard</DropdownItem>
-	<DropdownItem>Settings</DropdownItem>
-	<DropdownItem>Earnings</DropdownItem>
+	<DropdownItem href="/dashboard">Dashboard</DropdownItem>
+	<DropdownItem href="/settings">Settings</DropdownItem>
 	<DropdownDivider />
-	<DropdownItem>Sign out</DropdownItem>
+	<DropdownItem><SignOut options={{ redirect: true, redirectTo: "/signin" }}>
+		<div slot="submitButton" class="buttonPrimary">Sign out</div>
+	</SignOut>
+</DropdownItem>
 </Dropdown>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	import {
 		Sidebar,
@@ -12,17 +12,17 @@
 	import {
 		AngleDownOutline,
 		AngleUpOutline,
+		ChartPieOutline,
 		ClipboardListSolid,
 		CogOutline,
 		FileChartBarSolid,
 		GithubSolid,
+		GridOutline,
 		LayersSolid,
 		LifeSaverSolid,
 		LockSolid,
-		WandMagicSparklesOutline,
-		ChartPieOutline,
-		RectangleListSolid,
-		TableColumnSolid
+		UsersGroupOutline,
+		WandMagicSparklesOutline
 	} from 'flowbite-svelte-icons';
 
 	export let drawerHidden: boolean = false;
@@ -37,7 +37,7 @@
 		'flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700';
 	let groupClass = 'pt-2 space-y-2';
 
-	$: mainSidebarUrl = $page.url.pathname;
+	let mainSidebarUrl = page.url.pathname;
 	let activeMainSidebar: string;
 
 	afterNavigate((navigation) => {
@@ -51,19 +51,27 @@
 	let posts = [
 		{ name: 'Dashboard', icon: ChartPieOutline, href: '/dashboard' },
 		{
-			name: 'Layouts',
-			icon: TableColumnSolid,
+			name: 'Products',
+			icon: GridOutline,
 			children: {
-				Stacked: '/layouts/stacked',
-				Sidebar: '/layouts/sidebar'
+				'Smart Accounts': '/products/stacked',
+				Cards: '/products/card',
+				'Loan': '/products/loan',
+				'Term Deposits': '/products/deposits',
+				'Fixed Deposits': '/products/fixed-deposits',
+				'Recurring Deposits': '/products/recurring-deposits',
+				'Current Accounts': '/products/casa',
+				'Working Capital Loan': '/products/working-capital-loan',
+				'Overdraft Loan': '/products/overdraft-loan',
 			}
 		},
 		{
-			name: 'CRUD',
-			icon: RectangleListSolid,
+			name: 'Clients',
+			icon: UsersGroupOutline,
 			children: {
-				Products: '/crud/products',
-				Users: '/crud/users'
+				Individual: '/clients/retail',
+				Corporate: '/clients/corporate',
+				SME: '/clients/sme'
 			}
 		},
 		{ name: 'Settings', icon: CogOutline, href: '/settings' },
@@ -186,4 +194,4 @@
 	on:click={closeDrawer}
 	on:keydown={closeDrawer}
 	role="presentation"
-/>
+></div>

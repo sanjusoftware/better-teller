@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Notifications from '../utils/dashboard/NotificationList.svelte';
 	import AppsMenu from '../utils/widgets/AppsMenu.svelte';
 	import UserMenu from '../utils/widgets/UserMenu.svelte';
@@ -15,10 +15,7 @@
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 	import '../../app.css';
-	import { SignOut } from '@auth/sveltekit/components';
-	import { page } from '$app/state';
-	
-	let activeUrl = $derived(page.url.pathname);
+	import { page } from '$app/state';	
 	let user = page.data.session?.user;
 
 	let fluid = $state(true);
@@ -68,6 +65,6 @@
 			<AppsMenu />
 			<DarkMode />
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
-		</div>
+		</div>		
 	{/if}
 </Navbar>
