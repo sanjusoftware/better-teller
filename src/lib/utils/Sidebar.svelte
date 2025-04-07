@@ -14,10 +14,12 @@
 		AngleUpOutline,
 		ChartPieOutline,
 		CogOutline,
+		CreditCardOutline,
 		FileChartBarSolid,
 		GridOutline,
 		LifeSaverSolid,
 		LockSolid,
+		QrCodeOutline,
 		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
 
@@ -62,6 +64,22 @@
 			}
 		},
 		{
+			name: 'Accounts',
+			icon: QrCodeOutline,
+			children: {
+				'Current Account': '/products/casa',
+				'Savings Account': '/products/casa',
+				'Packages': '/products/casa',
+			}
+		},
+		{
+			name: 'Cards',
+			icon: CreditCardOutline,
+			children: {
+				Cards: '/products/card',
+			}
+		},
+		{
 			name: 'Clients',
 			icon: UsersGroupOutline,
 			children: {
@@ -79,17 +97,6 @@
 				'404 not found': '/errors/404',
 				'500 server error': '/errors/500'
 			}
-		},
-		{
-			name: 'Authenication',
-			icon: LockSolid,
-			children: {
-				'Sign in': '/authentication/sign-in',
-				'Sign up': '/authentication/sign-up',
-				'Forgot password': '/authentication/forgot-password',
-				'Reset password': '/authentication/reset-password',
-				'Profile lock': '/authentication/profile-lock'
-			}
 		}
 	];
 
@@ -97,7 +104,7 @@
 		{ label: 'Settings', icon: CogOutline, href: '/settings' },		
 		{
 			label: 'Support',
-			href: 'https://github.com/themesberg/flowbite-svelte-admin-dashboard/issues',
+			href: 'https://betterteller.dskbank.bg/help',
 			icon: LifeSaverSolid
 		}
 	];
@@ -108,7 +115,7 @@
 	class={drawerHidden ? 'hidden' : ''}
 	activeUrl={mainSidebarUrl}
 	activeClass="bg-green-100 dark:bg-green-700"
-	asideClass="fixed inset-0 z-30 flex-none h-full w-64 lg:h-auto border-e border-green-200 dark:border-green-600 lg:overflow-y-visible lg:pt-16 lg:block"
+	asideClass="fixed inset-0 z-30 flex-none h-full w-64 lg:h-auto border-e border-grey-200 dark:border-grey-600 lg:overflow-y-visible lg:pt-16 lg:block"
 >
 	<h4 class="sr-only">Main menu</h4>
 	<SidebarWrapper
