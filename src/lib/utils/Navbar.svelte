@@ -2,8 +2,8 @@
 	import '../../app.css';
 	import { page } from '$app/state';	
 	import Notifications from './NotificationList.svelte';
-	import AppsMenu from './widgets/AppsMenu.svelte';
-	import UserMenu from './widgets/UserMenu.svelte';
+	import AppsMenu from './AppsMenu.svelte';
+	import UserMenu from './UserMenu.svelte';
 	import {
 		DarkMode,
 		Dropdown,
