@@ -20,14 +20,14 @@
 	</BreadcrumbItem>
 </Breadcrumb>
 
-<Section name="pricing">
+<Section name="pricing" sectionClass='relative py-0 sm:py-0';>
 	<PricingHead>
 		<svelte:fragment slot="h2">{data.productCateory.toLocaleUpperCase()} Products</svelte:fragment>
 		<svelte:fragment slot="paragraph">
-			Top selling {data.productCateory.toLocaleUpperCase()} products for DSK customers .
+			Top selling {data.productCateory.toLocaleUpperCase()} products.
 		</svelte:fragment>
 	</PricingHead>
-	<div class="space-y-8 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0">
+	<div class="lg:grid lg:grid-cols-3 sm:gap-2 xl:gap-4 lg:space-y-0">
 		{#each data.products as product}
 			<PricingCard>
 				<PricingBodyHead>

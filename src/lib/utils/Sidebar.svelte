@@ -12,11 +12,15 @@
 	import {
 		AngleDownOutline,
 		AngleUpOutline,
+		ChartMixedDollarOutline,
 		ChartPieOutline,
 		CogOutline,
 		CreditCardOutline,
+		EuroOutline,
 		FileChartBarSolid,
 		GridOutline,
+		HomeOutline,
+		HourglassOutline,
 		LifeSaverSolid,
 		LockSolid,
 		QrCodeOutline,
@@ -50,19 +54,14 @@
 	let primary_actions = [
 		{ name: 'Dashboard', icon: ChartPieOutline, href: '/dashboard' },
 		{
-			name: 'Products',
-			icon: GridOutline,
+			name: 'Clients',
+			icon: UsersGroupOutline,
 			children: {
-				Accounts: '/products/casa',
-				Cards: '/products/card',
-				Loans: '/products/loan',
-				'Term Deposits': '/products/deposits',
-				'Fixed Deposits': '/products/fixed-deposits',
-				'Recurring Deposits': '/products/recurring-deposits',
-				'Working Capital Loan': '/products/working-capital-loan',
-				'Overdraft Loan': '/products/overdraft-loan',
+				Individual: '/clients/retail',
+				Corporate: '/clients/corporate',
+				SME: '/clients/sme'
 			}
-		},
+		},		
 		{
 			name: 'Accounts',
 			icon: QrCodeOutline,
@@ -73,29 +72,49 @@
 			}
 		},
 		{
+			name: 'Utility Payments',
+			icon: HomeOutline,
+			children: {
+				'Electricity': '/products/loan',
+				'Water': '/products/loan',
+				'Phone': '/products/loan'	
+			}
+		},
+		{ name: 'Money Transfers', icon: EuroOutline, href: '/dashboard' },
+		{
 			name: 'Cards',
 			icon: CreditCardOutline,
 			children: {
 				Cards: '/products/card',
 			}
+		},	
+		{
+			name: 'Loans',
+			icon: ChartMixedDollarOutline,
+			children: {
+				Mortgage: '/products/loan',
+				'Working Capital': '/products/loan',
+				Cash: '/products/loan'				
+			}
+		},	
+		{ name: 'Deposits', icon: HourglassOutline, href: '/products/loan' },
+		{
+			name: 'Investments',
+			icon: ChartMixedDollarOutline,
+			children: {
+				'Mutual Funds': '/products/loan',
+				'Gold Bonds': '/products/loan',
+				'Govt Bonds': '/products/loan',
+				'Shares': '/products/loan'				
+			}
 		},
 		{
-			name: 'Clients',
-			icon: UsersGroupOutline,
+			name: 'Insurance',
+			icon: ChartMixedDollarOutline,
 			children: {
-				Individual: '/clients/retail',
-				Corporate: '/clients/corporate',
-				SME: '/clients/sme'
-			}
-		},		
-		{
-			name: 'Pages',
-			icon: FileChartBarSolid,
-			children: {
-				Pricing: '/pages/pricing',
-				Maintenance: '/errors/400',
-				'404 not found': '/errors/404',
-				'500 server error': '/errors/500'
+				'Life Insurance': '/products/loan',
+				'Property Insurance': '/products/loan',
+				'Lending Insurance': '/products/loan'	
 			}
 		}
 	];

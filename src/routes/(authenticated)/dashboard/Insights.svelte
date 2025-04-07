@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Card, Carousel } from 'flowbite-svelte';
+	import { Card, Carousel } from 'flowbite-svelte';
 	import {
 		ArrowLeftOutline,
 		ArrowRightOutline,
