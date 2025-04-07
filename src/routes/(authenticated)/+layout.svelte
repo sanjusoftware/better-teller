@@ -13,13 +13,11 @@
 </header>
 <div class="overflow-hidden lg:flex">
 	<Sidebar {drawerHidden} />
-
-		<div class="relative h-full w-full overflow-y-auto lg:ml-64 pt-[70px]">
-			<div class="p-4">
+	<div class="relative h-full w-full overflow-y-auto lg:ml-64 pt-[70px]">
+		<div class="p-4">
 			<slot />
 		</div>
-		</div>
-		<!-- Quick Actions -->
-		<SpeedDial />
-	
+	</div>
+	<!-- Quick Actions -->
+	<SpeedDial />
 </div>
