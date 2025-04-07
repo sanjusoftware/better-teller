@@ -7,7 +7,6 @@ export const load: LayoutServerLoad = async ({locals, url}) => {
 	if (!session?.user) {
 		redirect(303, `/signin?redirectTo=${url.pathname}`);
 	}
-
 	return {
 		session,
 		Activities
