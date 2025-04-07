@@ -54,13 +54,12 @@
 			name: 'Products',
 			icon: GridOutline,
 			children: {
-				'Smart Accounts': '/products/stacked',
+				Accounts: '/products/casa',
 				Cards: '/products/card',
-				'Loan': '/products/loan',
+				Loans: '/products/loan',
 				'Term Deposits': '/products/deposits',
 				'Fixed Deposits': '/products/fixed-deposits',
 				'Recurring Deposits': '/products/recurring-deposits',
-				'Current Accounts': '/products/casa',
 				'Working Capital Loan': '/products/working-capital-loan',
 				'Overdraft Loan': '/products/overdraft-loan',
 			}
@@ -73,8 +72,7 @@
 				Corporate: '/clients/corporate',
 				SME: '/clients/sme'
 			}
-		},
-		{ name: 'Settings', icon: CogOutline, href: '/settings' },
+		},		
 		{
 			name: 'Pages',
 			icon: FileChartBarSolid,
@@ -95,33 +93,11 @@
 				'Reset password': '/authentication/reset-password',
 				'Profile lock': '/authentication/profile-lock'
 			}
-		},
-		{
-			name: 'Playground',
-			icon: WandMagicSparklesOutline,
-			children: {
-				Stacked: '/playground/stacked',
-				Sidebar: '/playground/sidebar'
-			}
 		}
 	];
 
 	let links = [
-		{
-			label: 'GitHub Repository',
-			href: 'https://github.com/themesberg/flowbite-svelte-admin-dashboard',
-			icon: GithubSolid
-		},
-		{
-			label: 'Flowbite Svelte',
-			href: 'https://flowbite-svelte.com/docs/pages/quickstart',
-			icon: ClipboardListSolid
-		},
-		{
-			label: 'Components',
-			href: 'https://flowbite-svelte.com/docs/components/accordion',
-			icon: LayersSolid
-		},
+		{ label: 'Settings', icon: CogOutline, href: '/settings' },		
 		{
 			label: 'Support',
 			href: 'https://github.com/themesberg/flowbite-svelte-admin-dashboard/issues',

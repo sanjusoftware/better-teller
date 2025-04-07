@@ -137,7 +137,6 @@
 	<div
 		class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4"
 	>
-		<label for="table-search" class="sr-only">Search</label>
 		<div class="w-full md:w-1/2 relative">
 			<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 				<SearchOutline size="md" class="text-gray-500 dark:text-gray-400" />
