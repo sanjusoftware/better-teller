@@ -27,7 +27,7 @@
 		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
 
-	export let drawerHidden: boolean = false;
+	let {drawerHidden = false} = $props();
 
 	const closeDrawer = () => {
 		console.log(drawerHidden);
@@ -40,15 +40,14 @@
 		'flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700';
 	let groupClass = 'pt-2 space-y-2';
 
-	let mainSidebarUrl = page.url.pathname;
-	let activeMainSidebar: string;
+	let mainSidebarUrl = $state(page.url.pathname);
 
 	afterNavigate((navigation) => {
 		// this fixes https://github.com/themesberg/flowbite-svelte/issues/364
 		document.getElementById('svelte')?.scrollTo({ top: 0 });
 		closeDrawer();
 
-		activeMainSidebar = navigation.to?.url.pathname ?? '';
+		mainSidebarUrl = navigation.to?.url.pathname ?? '';
 	});
 
 	let primary_actions = [
@@ -127,7 +126,8 @@
 			icon: LifeSaverSolid
 		}
 	];
-	let dropdowns = Object.fromEntries(Object.keys(primary_actions).map((x) => [x, false]));
+
+	let dropdowns = $state(Object.fromEntries(Object.keys(primary_actions).map((x) => [x, false])));
 </script>
 
 <Sidebar
@@ -147,7 +147,9 @@
 						<SidebarDropdownWrapper bind:isOpen={dropdowns[name]} label={name} class="pr-3">
 							<AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
 							<AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
-							<svelte:component this={icon} slot="icon" class={iconClass} />
+							{#key icon}
+								<icon class={iconClass} ></icon>
+							{/key}
 
 							{#each Object.entries(children) as [title, href]}
 								<SidebarItem
@@ -165,7 +167,10 @@
 							spanClass="ml-3"
 							class={itemClass}							
 						>
-							<svelte:component this={icon} slot="icon" class={iconClass} />
+						{#key icon}
+								<icon class={iconClass} ></icon>
+							{/key}
+							<!-- <svelte:component this={icon} slot="icon" class={iconClass} /> -->
 						</SidebarItem>
 					{/if}
 				{/each}
@@ -177,9 +182,11 @@
 						{href}
 						spanClass="ml-3"
 						class={itemClass}
-						target="_blank"
 					>
-						<svelte:component this={icon} slot="icon" class={iconClass} />
+					{#key icon}
+								<icon class={iconClass} ></icon>
+							{/key}
+						<!-- <svelte:component this={icon} slot="icon" class={iconClass} /> -->
 					</SidebarItem>
 				{/each}
 			</SidebarGroup>

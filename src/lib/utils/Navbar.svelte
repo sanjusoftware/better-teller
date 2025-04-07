@@ -1,12 +1,6 @@
 <script lang="ts">
-	import '../../app.css';
-	import { page } from '$app/state';	
-	import Languages from './LanguageList.svelte';
-	import Notifications from './NotificationList.svelte';
-	import AppsMenu from './AppsMenu.svelte';
-	import UserMenu from './UserMenu.svelte';
+	import { page } from '$app/state';
 	import {
-	Button,
 		DarkMode,
 		Dropdown,
 		DropdownItem,
@@ -18,6 +12,11 @@
 		Search
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
+	import '../../app.css';
+	import AppsMenu from './AppsMenu.svelte';
+	import Languages from './LanguageList.svelte';
+	import Notifications from './NotificationList.svelte';
+	import UserMenu from './UserMenu.svelte';
 
 	let user = page.data.session?.user;
 
