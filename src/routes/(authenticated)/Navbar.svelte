@@ -1,4 +1,6 @@
 <script lang="ts">
+	import '../../app.css';
+	import { page } from '$app/state';	
 	import Notifications from '../utils/dashboard/NotificationList.svelte';
 	import AppsMenu from '../utils/widgets/AppsMenu.svelte';
 	import UserMenu from '../utils/widgets/UserMenu.svelte';
@@ -14,12 +16,12 @@
 		Search
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
-	import '../../app.css';
-	import { page } from '$app/state';	
+
 	let user = page.data.session?.user;
 
 	let fluid = $state(true);
-	let drawerHidden = $state(false);
+	let {drawerHidden = false} = $props();
+	// export let drawerHidden: boolean = false;
 	let list = $state(false);
 </script>
 

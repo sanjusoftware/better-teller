@@ -13,21 +13,18 @@
 		AngleDownOutline,
 		AngleUpOutline,
 		ChartPieOutline,
-		ClipboardListSolid,
 		CogOutline,
 		FileChartBarSolid,
-		GithubSolid,
 		GridOutline,
-		LayersSolid,
 		LifeSaverSolid,
 		LockSolid,
-		UsersGroupOutline,
-		WandMagicSparklesOutline
+		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
 
 	export let drawerHidden: boolean = false;
 
 	const closeDrawer = () => {
+		console.log(drawerHidden);
 		drawerHidden = true;
 	};
 
@@ -48,7 +45,7 @@
 		activeMainSidebar = navigation.to?.url.pathname ?? '';
 	});
 
-	let posts = [
+	let primary_actions = [
 		{ name: 'Dashboard', icon: ChartPieOutline, href: '/dashboard' },
 		{
 			name: 'Products',
@@ -96,7 +93,7 @@
 		}
 	];
 
-	let links = [
+	let secondary_actions = [
 		{ label: 'Settings', icon: CogOutline, href: '/settings' },		
 		{
 			label: 'Support',
@@ -104,14 +101,14 @@
 			icon: LifeSaverSolid
 		}
 	];
-	let dropdowns = Object.fromEntries(Object.keys(posts).map((x) => [x, false]));
+	let dropdowns = Object.fromEntries(Object.keys(primary_actions).map((x) => [x, false]));
 </script>
 
 <Sidebar
 	class={drawerHidden ? 'hidden' : ''}
 	activeUrl={mainSidebarUrl}
-	activeClass="bg-gray-100 dark:bg-gray-700"
-	asideClass="fixed inset-0 z-30 flex-none h-full w-64 lg:h-auto border-e border-gray-200 dark:border-gray-600 lg:overflow-y-visible lg:pt-16 lg:block"
+	activeClass="bg-green-100 dark:bg-green-700"
+	asideClass="fixed inset-0 z-30 flex-none h-full w-64 lg:h-auto border-e border-green-200 dark:border-green-600 lg:overflow-y-visible lg:pt-16 lg:block"
 >
 	<h4 class="sr-only">Main menu</h4>
 	<SidebarWrapper
@@ -119,7 +116,7 @@
 	>
 		<nav class="divide-y divide-gray-200 dark:divide-gray-700">
 			<SidebarGroup ulClass={groupClass} class="mb-3">
-				{#each posts as { name, icon, children, href } (name)}
+				{#each primary_actions as { name, icon, children, href } (name)}
 					{#if children}
 						<SidebarDropdownWrapper bind:isOpen={dropdowns[name]} label={name} class="pr-3">
 							<AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
@@ -140,7 +137,7 @@
 							label={name}
 							{href}
 							spanClass="ml-3"
-							class={itemClass}
+							class={itemClass}							
 						>
 							<svelte:component this={icon} slot="icon" class={iconClass} />
 						</SidebarItem>
@@ -148,7 +145,7 @@
 				{/each}
 			</SidebarGroup>
 			<SidebarGroup ulClass={groupClass}>
-				{#each links as { label, href, icon } (label)}
+				{#each secondary_actions as { label, href, icon } (label)}
 					<SidebarItem
 						{label}
 						{href}
@@ -167,7 +164,7 @@
 <div
 	hidden={drawerHidden}
 	class="fixed inset-0 z-20 bg-gray-900/50 dark:bg-gray-900/60"
-	on:click={closeDrawer}
-	on:keydown={closeDrawer}
+	onclick={closeDrawer}
+	onkeydown={closeDrawer}
 	role="presentation"
 ></div>

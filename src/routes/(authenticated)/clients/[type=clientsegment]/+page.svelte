@@ -50,16 +50,7 @@
 	searchPlaceholder="Search by CIF, EGN, Name, Email, Phone ..."
 	fieldsToSearch={['cif', 'egn', 'name', 'email', 'phone']}
 	filtersToApply={['status']}
-	tableHeaders={[
-		'',
-		'Name',
-		'EGN',
-		'Primary Contact',
-		'Email',
-		'Mailing Address',
-		'Status',
-		'Actions'
-	]}
+	tableHeaders={['', 'Name', 'Contact', 'Mailing Address', 'Status', 'Actions']}
 	{tableRow}
 	{searchHeader}
 />
@@ -99,37 +90,34 @@
 						Copied CIF: {client.cif}
 					</Tooltip>
 				</div>
-			</div>
-		</TableBodyCell>
-		<TableBodyCell class="p-4 font-normal">
-			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-				{client.egn}
-				<button use:copy={client.egn.toString()}>
-					<FileCopyOutline size="sm" class="mr-2" />
-				</button>
-				<Tooltip placement="right" trigger="click" class="text-sm font-light">
-					Copied EGN: {client.egn}
-				</Tooltip>
+				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+					{client.egn}
+					<button use:copy={client.egn.toString()}>
+						<FileCopyOutline size="sm" class="mr-2" />
+					</button>
+					<Tooltip placement="right" trigger="click" class="text-sm font-light">
+						Copied EGN: {client.egn}
+					</Tooltip>
+				</div>
 			</div>
 		</TableBodyCell>
 		<TableBodyCell class="p-4">
-			<span class="flex items-center space-x-2">
+			<div class="flex items-center space-x-2 text-sm font-normal">
 				<PhoneOutline size="sm" class="text-gray-500 dark:text-gray-400" />
 				<a href={`tel:${client.phone}`} class="hover:underline" aria-label="Call client">
 					{client.phone}
 				</a>
-			</span>
-			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-				{client.country}
+			</div>
+			<div class="flex items-center space-x-2 text-sm font-normal">
+				<EnvelopeOutline size="sm" class="text-gray-500 dark:text-gray-400" />
+				<a href={`mailto:${client.email}`} class="hover:underline" aria-label="Email client">
+					{client.email}
+				</a>
 			</div>
 		</TableBodyCell>
-		<TableBodyCell class="px-4 font-normal">
-			<EnvelopeOutline size="sm" class="text-gray-500 dark:text-gray-400" />
-			<a href={`mailto:${client.email}`} class="hover:underline" aria-label="Email client">
-				{client.email}
-			</a>
-		</TableBodyCell>
-		<TableBodyCell class="px-4 font-normal text-gray-500 dark:text-gray-400">
+		<TableBodyCell
+			class="max-w-sm overflow-hidden truncate p-4 text-sm font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs"
+		>
 			<MailBoxOutline size="md" class="text-gray-500 dark:text-gray-400" />
 			<span style="white-space: normal;">{client.address}</span>
 		</TableBodyCell>
