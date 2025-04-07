@@ -1,22 +1,21 @@
-# sv
+# Better Teller
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Better Teller is an FO application made for bank braches.
 
-## Creating a project
+## Dependencies
+1. Auth.JS: to authenticate with Microsoft EntraID
+2. Superforms with Zod: for easy form creation and validation 
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Running the application
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. Clone the app
+2. Install dependencies with `npm install` (or `pnpm install` or `yarn`)
+3. Create .env file and add following (for Auth.js)
+AUTH_SECRET="RANDOM_STRING_FOR_ENCRYPTION_OF_AUTH_TOKENS"
+AUTH_MICROSOFT_ENTRA_ID_ID="YOUR_TENENT_ID"
+AUTH_MICROSOFT_ENTRA_ID_SECRET="YOUR_CLIENT_SECRET_OBTAINED_FROM_ENTRAID"
+AUTH_TRUST_HOST=true
+4. Start development server:
 
 ```bash
 npm run dev
@@ -25,7 +24,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+## Building for Production
 
 To create a production version of your app:
 
