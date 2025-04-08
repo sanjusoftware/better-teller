@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Chart, Card, A, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
-	import { UsersGroupOutline, ArrowUpOutline, ChevronDownOutline, ChevronRightOutline } from 'flowbite-svelte-icons';
+	import { Button, Card, Chart, Dropdown, DropdownItem } from 'flowbite-svelte';
+	import { ArrowUpOutline, ChevronDownOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
   
 	const options = {
 	  series: [
