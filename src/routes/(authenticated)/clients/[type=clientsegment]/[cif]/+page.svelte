@@ -40,7 +40,7 @@
 </script>
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home>Clients</BreadcrumbItem>
+	<BreadcrumbItem home href='/dashboard'>Home</BreadcrumbItem>
 	<BreadcrumbItem href={`/clients/${client.type}`}>
 		{client.type.toLocaleUpperCase()} Clients
 	</BreadcrumbItem>

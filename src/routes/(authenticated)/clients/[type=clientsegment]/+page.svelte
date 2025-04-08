@@ -41,8 +41,10 @@
 <MetaTag path={clientsPath} {description} {title} {subtitle} />
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home>Clients</BreadcrumbItem>
-	<BreadcrumbItem>{humanize(data.clienttype)}</BreadcrumbItem>
+	<BreadcrumbItem home href='/dashboard'>Home</BreadcrumbItem>
+	<BreadcrumbItem href={clientsPath}>
+		{data.clienttype.toLocaleUpperCase()} Clients
+	</BreadcrumbItem>
 </Breadcrumb>
 
 <Pagination
