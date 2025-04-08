@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import {
+		Button,
 		DarkMode,
 		Dropdown,
 		DropdownItem,
@@ -21,8 +22,23 @@
 	let user = page.data.session?.user;
 
 	let fluid = $state(true);
-	let {drawerHidden = false} = $props();
+	let { drawerHidden = false } = $props();
 	let list = $state(false);
+	let selectCategory = $state('Clients');
+	const searchableItems = [
+		{
+			label: 'Clients'
+		},
+		{
+			label: 'Transactions'
+		},
+		{
+			label: 'Accounts'
+		},
+		{
+			label: 'Products'
+		}
+	];
 </script>
 
 <Navbar {fluid} class="text-black" color="default" let:NavContainer>
@@ -57,17 +73,35 @@
 					</Dropdown>
 				</NavUl>
 			{:else}
-				<form>
-					<Search size="md" class="mt-1 w-96 border focus:outline-none" />
+				<form class="flex">
+					<div class="relative">
+						<Button class="rounded-e-none whitespace-nowrap border border-e-0 border-primary-700">
+							{selectCategory}
+							<ChevronDownOutline class="w-2.5 h-2.5 ms-2.5" />
+						</Button>
+						<Dropdown classContainer="w-40">
+							{#each searchableItems as { label }}
+								<DropdownItem
+									on:click={() => {
+										selectCategory = label;
+									}}
+									class={selectCategory === label ? 'underline' : ''}
+								>
+									{label}
+								</DropdownItem>
+							{/each}
+						</Dropdown>
+					</div>
+					<Search size="md" class="rounded-s-none w-96 border focus:outline-none" placeholder="Search Mockups, Logos, Design Templates..." />
 				</form>
 			{/if}
 		</div>
 		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
-			<Languages/>
+			<Languages />
 			<Notifications />
 			<AppsMenu />
 			<DarkMode />
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
-		</div>				
+		</div>
 	{/if}
 </Navbar>

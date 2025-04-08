@@ -12,11 +12,11 @@
 	import {
 		AngleDownOutline,
 		AngleUpOutline,
+		ArrowUpDownOutline,
 		ChartMixedDollarOutline,
 		ChartPieOutline,
 		CogOutline,
 		CreditCardOutline,
-		EuroOutline,
 		HomeOutline,
 		HourglassOutline,
 		LifeSaverSolid,
@@ -76,7 +76,7 @@
 				Phone: '/products/loan'
 			}
 		},
-		{ name: 'Money Transfers', icon: EuroOutline, href: '/dashboard' },
+		{ name: 'Transfers', icon: ArrowUpDownOutline, href: '/dashboard' },
 		{
 			name: 'Cards',
 			icon: CreditCardOutline,

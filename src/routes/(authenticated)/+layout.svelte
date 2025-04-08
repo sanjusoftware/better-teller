@@ -2,7 +2,7 @@
 	import '../../app.css';
 	import Navbar from '$lib/utils/Navbar.svelte';
 	import Sidebar from '$lib/utils/Sidebar.svelte';
-	import SpeedDial from '$lib/utils/QuickActions.svelte';
+	import SpeedDial from '$lib/utils/SpeedDialActions.svelte';
 	let drawerHidden = false;
 </script>
 
