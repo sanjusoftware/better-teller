@@ -1,8 +1,8 @@
 import type { PageLoad } from './$types';
-import Activities from "$lib/data/activities.json"
+import Clients from "$lib/data/clients.json";
 
 export const load: PageLoad = () => {
     return {
-        Activities: Activities
+        lastClient: Clients[0]
     }
 };

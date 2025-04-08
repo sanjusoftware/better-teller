@@ -24,21 +24,22 @@
 	let fluid = $state(true);
 	let { drawerHidden = false } = $props();
 	let list = $state(false);
-	let selectCategory = $state('Clients');
+	let selectedItem = $state('Clients');
 	const searchableItems = [
 		{
-			label: 'Clients'
+			label: 'Clients', placeholder: 'Search CIF, EGN, Mobile'
 		},
 		{
-			label: 'Transactions'
+			label: 'Transactions', placeholder: 'Search Transaction reference'
 		},
 		{
-			label: 'Accounts'
+			label: 'Accounts', placeholder: 'Search Account Number'
 		},
 		{
-			label: 'Products'
+			label: 'Products', placeholder: 'Search Product Name'
 		}
 	];
+	let searchPlaceholder = $derived(searchableItems.find((item) => item.label === selectedItem)?.placeholder)
 </script>
 
 <Navbar {fluid} class="text-black" color="default" let:NavContainer>
@@ -76,23 +77,23 @@
 				<form class="flex">
 					<div class="relative">
 						<Button class="rounded-e-none whitespace-nowrap border border-e-0 border-primary-700">
-							{selectCategory}
+							{selectedItem}
 							<ChevronDownOutline class="w-2.5 h-2.5 ms-2.5" />
 						</Button>
 						<Dropdown classContainer="w-40">
 							{#each searchableItems as { label }}
 								<DropdownItem
 									on:click={() => {
-										selectCategory = label;
+										selectedItem = label;
 									}}
-									class={selectCategory === label ? 'underline' : ''}
+									class={selectedItem === label ? 'underline' : ''}
 								>
 									{label}
 								</DropdownItem>
 							{/each}
 						</Dropdown>
 					</div>
-					<Search size="md" class="rounded-s-none w-96 border focus:outline-none" placeholder="Search Mockups, Logos, Design Templates..." />
+					<Search size="md" class="rounded-s-none w-96 border focus:outline-none" placeholder={searchPlaceholder} />
 				</form>
 			{/if}
 		</div>
