@@ -144,19 +144,14 @@
 						<SidebarDropdownWrapper bind:isOpen={dropdowns[name]} label={name} class="pr-3">
 							<AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
 							<AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
-							{#key icon}
-								<icon class={iconClass}></icon>
-							{/key}
-
+							<svelte:component this={icon} slot="icon" class={iconClass} />
 							{#each Object.entries(children) as [title, href]}
 								<SidebarItem label={title} {href} spanClass="ml-9" class={itemClass} />
 							{/each}
 						</SidebarDropdownWrapper>
 					{:else}
 						<SidebarItem label={name} {href} spanClass="ml-3" class={itemClass}>
-							{#key icon}
-								<icon class={iconClass}></icon>
-							{/key}
+							<svelte:component this={icon} slot="icon" class={iconClass} />
 						</SidebarItem>
 					{/if}
 				{/each}
@@ -164,9 +159,7 @@
 			<SidebarGroup ulClass={groupClass}>
 				{#each secondary_actions as { label, href, icon } (label)}
 					<SidebarItem {label} {href} spanClass="ml-3" class={itemClass}>
-						{#key icon}
-							<icon class={iconClass}></icon>
-						{/key}
+						<svelte:component this={icon} slot="icon" class={iconClass} />
 					</SidebarItem>
 				{/each}
 			</SidebarGroup>
