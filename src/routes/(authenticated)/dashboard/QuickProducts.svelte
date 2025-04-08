@@ -19,7 +19,7 @@
 			name: 'Cards',
 			icon: CreditCardOutline,
 			description: 'Traellers, Platinum, Student, Dinners',
-			href: '/products/cards'
+			href: '/products/card'
 		},
 		{
 			name: 'Loans',

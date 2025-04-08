@@ -3,7 +3,6 @@
 	import { UsersGroupOutline, ArrowUpOutline, ChevronDownOutline, ChevronRightOutline } from 'flowbite-svelte-icons';
   
 	const options = {
-	//   colors: ['#1A56DB', '#FDBA8C'],
 	  series: [
 		{
 		  name: 'In Person',

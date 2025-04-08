@@ -24,7 +24,7 @@
 		{
 			name: 'Transactions',
 			icon: ArrowsRepeatOutline,
-			description: 'Incoming, Outgoing',
+			description: 'Search Incoming and Outgoing Transactions',
 			href: '/transactions'
 		}
 	];
