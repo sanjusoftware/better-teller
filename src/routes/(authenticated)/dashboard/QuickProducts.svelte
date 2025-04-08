@@ -55,7 +55,7 @@
 			<span>Products</span>
 		</div>
 		<a
-			href="#top"
+			href="/products/all"
 			class="inline-flex items-center rounded-lg p-2 text-sm font-medium text-primary-700 dark:text-primary-500 hover:bg-gray-100 dark:hover:bg-gray-700"
 		>
 			<EyeOutline size='sm'/>

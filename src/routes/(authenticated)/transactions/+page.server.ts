@@ -20,7 +20,7 @@ export const load: PageServerLoad = ({ url }) => {
         filteredTransactions = filteredTransactions.filter((t) => accountNumbers.includes(t.from_account) || accountNumbers.includes(t.to_account));
     }
     else {
-        throw error(404, 'Please provide either Account or Cif to search transactions')
+        filteredTransactions = []
     }
 
     return {

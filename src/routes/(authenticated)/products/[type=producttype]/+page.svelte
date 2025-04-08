@@ -14,8 +14,8 @@
 
 <Breadcrumb>
 	<BreadcrumbItem href="/dashboard" home>Home</BreadcrumbItem>
-	<BreadcrumbItem>Products</BreadcrumbItem>
-	<BreadcrumbItem href={`/products/${data.productCateory}`}>
+	<BreadcrumbItem href="/products/all">Products</BreadcrumbItem>
+	<BreadcrumbItem>
 		{data.productCateory.toLocaleUpperCase()} Products
 	</BreadcrumbItem>
 </Breadcrumb>

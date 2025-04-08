@@ -22,12 +22,14 @@
 	} from 'flowbite-svelte';
 
 	import { FileCopyOutline } from 'flowbite-svelte-icons';
-
 </script>
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home>Transactions</BreadcrumbItem>
-	<BreadcrumbItem href="/transactions?cif={data.cif}">CIF: {data.cif}</BreadcrumbItem>
+	<BreadcrumbItem home href="/dashboard">Home</BreadcrumbItem>
+	<BreadcrumbItem>Transactions</BreadcrumbItem>
+	{#if data.cif}
+		<BreadcrumbItem href="/transactions?cif={data.cif}">CIF: {data.cif}</BreadcrumbItem>
+	{/if}
 	{#if data.acountNumber !== null}
 		<BreadcrumbItem href="/transactions?accountnumber={data.acountNumber}">
 			Account: {data.acountNumber}
@@ -38,7 +40,7 @@
 <Pagination
 	items={transactions}
 	searchPlaceholder="Search by Transaction Id, Account Number, Description ..."
-	fieldsToSearch={['id','description', 'from_account', 'to_account']}
+	fieldsToSearch={['id', 'description', 'from_account', 'to_account']}
 	filtersToApply={['type', 'status']}
 	tableHeaders={[
 		'Transaction ID',

@@ -1,5 +1,5 @@
 import type { ParamMatcher } from '@sveltejs/kit';
-
-export const match = ((param: string): param is ('casa' | 'card' | 'loan' ) => {
-	return param === 'casa' || param === 'card' || param === 'loan';
+let productTypes = ['casa', 'card', 'loan', 'deposit', 'insurance', 'investment', 'all']
+export const match = ((param: string): param is ('casa' | 'card' | 'loan' | 'deposit' | 'insurance' | 'investment') => {
+	return productTypes.includes(param)
 }) satisfies ParamMatcher;
