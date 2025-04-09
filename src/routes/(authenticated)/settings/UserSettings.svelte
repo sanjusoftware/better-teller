@@ -2,36 +2,18 @@
 	import { Toggle } from 'flowbite-svelte';
 	import Settings from '$lib/utils/SettingsCard.svelte';
 
-	const items = [
-		{
-			title: 'New Products and Offers',
-			subtitle: 'Get new product announcements, discounts and updates',
-			active: false
-		},
-		{
-			title: 'Account Activity',
-			subtitle: "Get important notifications about you or account activities",
-			active: true
-		},
-		{
-			title: 'Payment Reminders',
-			subtitle: 'Get reminders about utlity payments, credit card payments, and mortage payments',
-			active: false
-		},
-		{
-			title: 'Security Notifications',
-			subtitle: 'Get notified when you need to enter a one-time password',
-			active: true
-		}
-	];
+	let {
+		items = [
+			{
+				title: String,
+				subtitle: String,
+				active: Boolean
+			}
+		]
+	} = $props();
 </script>
 
-<Settings
-	title="Alerts & Notifications"
-	subtitle="Set up phone alerts and notifications"
-	{items}
-	let:item
->
+<Settings title="Personal Preferences" subtitle="Set your work preferences" {items} let:item>
 	<div class="flex items-center justify-between">
 		<div class="flex flex-grow flex-col">
 			<div class="text-lg font-semibold text-gray-900 dark:text-white">{item.title}</div>

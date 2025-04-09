@@ -1,20 +1,11 @@
 <script lang="ts">
 	import { Avatar, Button, Card, Heading, Tooltip } from 'flowbite-svelte';
 	import {
-		CheckCircleOutline,
-		UploadSolid,
-		FileCopyAltOutline,
+		ClockOutline,
 		EnvelopeOutline,
+		FileCopyAltOutline,
 		PhoneOutline,
-		EditOutline,
-		ExpandOutline,
-		UserCircleOutline,
-
-		ArrowUpOutline,
-
-		ClockOutline
-
-
+		UserCircleOutline
 	} from 'flowbite-svelte-icons';
 	import { copy } from 'svelte-copy';
 	export let client: {
