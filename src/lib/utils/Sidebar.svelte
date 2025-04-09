@@ -12,11 +12,15 @@
 	import {
 		AngleDownOutline,
 		AngleUpOutline,
+		ArrowsRepeatCountOutline,
+		ArrowsRepeatOutline,
 		ArrowUpDownOutline,
+		CashOutline,
 		ChartMixedDollarOutline,
 		ChartPieOutline,
 		CogOutline,
 		CreditCardOutline,
+		GridOutline,
 		HomeOutline,
 		HourglassOutline,
 		LifeSaverSolid,
@@ -59,60 +63,20 @@
 			}
 		},
 		{
-			name: 'Accounts',
-			icon: QrCodeOutline,
+			name: 'Products',
+			icon: GridOutline,
 			children: {
-				'Current Account': '/products/casa',
-				'Savings Account': '/products/casa',
-				Packages: '/products/casa'
+				'Accounts': '/products/casa',
+				'Loans': '/products/loan',
+				'Cards': '/products/card',
+				'Deposits': '/products/deposit',
+				'Insurances': '/products/insurance',
+				'Investments': '/products/investment',				
 			}
 		},
-		{
-			name: 'Utility Payments',
-			icon: HomeOutline,
-			children: {
-				Electricity: '/products/loan',
-				Water: '/products/loan',
-				Phone: '/products/loan'
-			}
-		},
-		{ name: 'Transfers', icon: ArrowUpDownOutline, href: '/dashboard' },
-		{
-			name: 'Cards',
-			icon: CreditCardOutline,
-			children: {
-				Cards: '/products/card'
-			}
-		},
-		{
-			name: 'Loans',
-			icon: ChartMixedDollarOutline,
-			children: {
-				Mortgage: '/products/loan',
-				'Working Capital': '/products/loan',
-				Cash: '/products/loan'
-			}
-		},
-		{ name: 'Deposits', icon: HourglassOutline, href: '/products/loan' },
-		{
-			name: 'Investments',
-			icon: ChartMixedDollarOutline,
-			children: {
-				'Mutual Funds': '/products/loan',
-				'Gold Bonds': '/products/loan',
-				'Govt Bonds': '/products/loan',
-				Shares: '/products/loan'
-			}
-		},
-		{
-			name: 'Insurance',
-			icon: ChartMixedDollarOutline,
-			children: {
-				'Life Insurance': '/products/loan',
-				'Property Insurance': '/products/loan',
-				'Lending Insurance': '/products/loan'
-			}
-		}
+		{ name: 'Payments', icon: CashOutline, href: '/payments' },
+		{ name: 'Transfers', icon: ArrowUpDownOutline, href: '/transfers' },
+		{ name: 'Transactions', icon: ArrowsRepeatOutline, href: '/transactions' }
 	];
 
 	let secondary_actions = [

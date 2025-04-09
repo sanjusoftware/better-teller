@@ -5,6 +5,7 @@
         "productCategory": "casa",
         "monthlyMaintenanceFee": 10.0,
         "interestRate": 0.5,
+        "productDescription": "A corporate account for daily transactions with minimal fees.",
         "productBenefits": [
             "10% discount on maintenance fee for the 1st year",
             "Free cheque book",
@@ -17,6 +18,7 @@
         "productCategory": "casa",
         "monthlyMaintenanceFee": 5.0,
         "interestRate": 1.5,
+        "productDescription": "A retail savings account with competitive interest rates.",
         "productBenefits": [
             "5% discount on transaction fee for 10 transactions",
             "Free online banking",
@@ -29,6 +31,7 @@
         "productCategory": "casa",
         "monthlyMaintenanceFee": 0.0,
         "interestRate": 2.0,
+        "productDescription": "A secure deposit option with guaranteed returns.",
         "productBenefits": [
             "Guaranteed returns",
             "Flexible tenure options",
@@ -41,6 +44,7 @@
         "productCategory": "loan",
         "monthlyMaintenanceFee": 15.0,
         "interestRate": 5.0,
+        "productDescription": "A loan for personal needs with flexible repayment options.",
         "productBenefits": [
             "Quick approval",
             "Flexible repayment options",
@@ -49,10 +53,11 @@
     },
     {
         "productName": "Home Loan",
-        "customerSegment": "corporate",
+        "customerSegment": "retail",
         "productCategory": "loan",
         "monthlyMaintenanceFee": 20.0,
         "interestRate": 3.5,
+        "productDescription": "A loan for purchasing or constructing private properties.",
         "productBenefits": [
             "Low interest rates",
             "Long tenure options",
@@ -65,6 +70,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 12.0,
         "interestRate": 2.5,
+        "productDescription": "A retail credit card with cashback and reward points.",
         "productBenefits": [
             "Cashback on purchases",
             "Reward points",
@@ -77,6 +83,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 7.0,
         "interestRate": 1.0,
+        "productDescription": "A corporate travel card with low foreign transaction fees.",
         "productBenefits": [
             "Low foreign transaction fees",
             "Free travel insurance",
@@ -89,6 +96,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 20.0,
         "interestRate": 3.0,
+        "productDescription": "An exclusive credit card with premium benefits.",
         "productBenefits": [
             "High credit limit",
             "Exclusive rewards program",
@@ -101,6 +109,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 5.0,
         "interestRate": 1.5,
+        "productDescription": "A credit card designed for students with low fees.",
         "productBenefits": [
             "Low interest rates",
             "Cashback on purchases",
@@ -113,6 +122,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 8.0,
         "interestRate": 1.0,
+        "productDescription": "A credit card tailored for senior citizens with special benefits.",
         "productBenefits": [
             "Low interest rates",
             "Discounts on medical expenses",
@@ -125,6 +135,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 10.0,
         "interestRate": 2.0,
+        "productDescription": "A credit card for SMEs with cashback on business expenses.",
         "productBenefits": [
             "High credit limit",
             "Cashback on business expenses",
@@ -137,6 +148,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 5.0,
         "interestRate": 1.5,
+        "productDescription": "A travel card for SMEs with free travel insurance.",
         "productBenefits": [
             "Low foreign transaction fees",
             "Free travel insurance",
@@ -149,6 +161,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 15.0,
         "interestRate": 2.5,
+        "productDescription": "A purchase card for SMEs with extended payment terms.",
         "productBenefits": [
             "Streamlined expense management",
             "Detailed transaction reports",
@@ -161,6 +174,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 15.0,
         "interestRate": 2.0,
+        "productDescription": "A corporate credit card with high credit limits.",
         "productBenefits": [
             "High credit limit",
             "Cashback on business expenses",
@@ -173,6 +187,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 10.0,
         "interestRate": 1.5,
+        "productDescription": "A travel card for corporate clients with airport lounge access.",
         "productBenefits": [
             "Low foreign transaction fees",
             "Free travel insurance",
@@ -185,6 +200,7 @@
         "productCategory": "card",
         "monthlyMaintenanceFee": 20.0,
         "interestRate": 2.5,
+        "productDescription": "A purchase card for corporates with detailed transaction reports.",
         "productBenefits": [
             "Streamlined expense management",
             "Detailed transaction reports",
@@ -197,6 +213,7 @@
         "productCategory": "loan",
         "monthlyMaintenanceFee": 25.0,
         "interestRate": 6.0,
+        "productDescription": "A loan for SMEs with high loan amounts and quick disbursal.",
         "productBenefits": [
             "High loan amount",
             "Flexible collateral options",
@@ -206,9 +223,10 @@
     {
         "productName": "Overdraft",
         "customerSegment": "corporate",
-        "productCategory": "casa",
+        "productCategory": "loan",
         "monthlyMaintenanceFee": 8.0,
         "interestRate": 4.0,
+        "productDescription": "An overdraft facility for corporates with flexible repayment.",
         "productBenefits": [
             "Easy access to funds",
             "Pay interest only on used amount",
@@ -221,6 +239,7 @@
         "productCategory": "loan",
         "monthlyMaintenanceFee": 18.0,
         "interestRate": 4.5,
+        "productDescription": "A loan for purchasing vehicles with quick processing.",
         "productBenefits": [
             "Low interest rates",
             "Quick processing",
@@ -233,6 +252,7 @@
         "productCategory": "loan",
         "monthlyMaintenanceFee": 10.0,
         "interestRate": 3.0,
+        "productDescription": "A loan against gold with high loan-to-value ratio.",
         "productBenefits": [
             "High loan-to-value ratio",
             "Quick disbursal",
@@ -245,6 +265,7 @@
         "productCategory": "loan",
         "monthlyMaintenanceFee": 5.0,
         "interestRate": 2.0,
+        "productDescription": "A loan for education with tax benefits and low interest rates.",
         "productBenefits": [
             "Low interest rates",
             "Flexible repayment options",
@@ -257,6 +278,7 @@
         "productCategory": "loan",
         "monthlyMaintenanceFee": 30.0,
         "interestRate": 5.5,
+        "productDescription": "A loan for SMEs to manage working capital needs.",
         "productBenefits": [
             "High loan amount",
             "Flexible repayment options",
@@ -266,9 +288,10 @@
     {
         "productName": "Fixed Deposit",
         "customerSegment": "corporate",
-        "productCategory": "casa",
+        "productCategory": "deposit",
         "monthlyMaintenanceFee": 0.0,
         "interestRate": 2.5,
+        "productDescription": "A fixed deposit for corporates with guaranteed returns.",
         "productBenefits": [
             "Guaranteed returns",
             "Flexible tenure options",
@@ -278,13 +301,105 @@
     {
         "productName": "Recurring Deposit",
         "customerSegment": "retail",
-        "productCategory": "casa",
+        "productCategory": "deposit",
         "monthlyMaintenanceFee": 0.0,
         "interestRate": 3.0,
+        "productDescription": "A recurring deposit for retail customers with flexible tenure.",
         "productBenefits": [
             "Guaranteed returns",
             "Flexible tenure options",
             "No monthly maintenance fee"
+        ]
+    },
+    {
+        "productName": "Junior Savings Account",
+        "customerSegment": "retail",
+        "productCategory": "deposit",
+        "monthlyMaintenanceFee": 0.0,
+        "interestRate": 2.0,
+        "productDescription": "A savings account for children to encourage saving habits.",
+        "productBenefits": [
+            "Encourages saving habits in children",
+            "No monthly maintenance fee",
+            "Higher interest rates for balances above $500"
+        ]
+    },
+    {
+        "productName": "Health Insurance",
+        "customerSegment": "retail",
+        "productCategory": "insurance",
+        "monthlyMaintenanceFee": 25.0,
+        "interestRate": 0.0,
+        "productDescription": "A health insurance plan with comprehensive coverage.",
+        "productBenefits": [
+            "Comprehensive health coverage",
+            "Cashless hospitalization",
+            "Tax benefits"
+        ]
+    },
+    {
+        "productName": "Life Insurance",
+        "customerSegment": "corporate",
+        "productCategory": "insurance",
+        "monthlyMaintenanceFee": 50.0,
+        "interestRate": 0.0,
+        "productDescription": "A life insurance plan with high coverage for corporates.",
+        "productBenefits": [
+            "High coverage amount",
+            "Flexible premium payment options",
+            "Tax benefits"
+        ]
+    },
+    {
+        "productName": "Travel Insurance",
+        "customerSegment": "sme",
+        "productCategory": "insurance",
+        "monthlyMaintenanceFee": 15.0,
+        "interestRate": 0.0,
+        "productDescription": "An insurance plan for travel-related risks and emergencies.",
+        "productBenefits": [
+            "Coverage for trip cancellations",
+            "Medical emergencies abroad",
+            "Lost baggage compensation"
+        ]
+    },
+    {
+        "productName": "Mutual Funds",
+        "customerSegment": "retail",
+        "productCategory": "investment",
+        "monthlyMaintenanceFee": 0.0,
+        "interestRate": 8.0,
+        "productDescription": "An investment option with diversified portfolio and high returns.",
+        "productBenefits": [
+            "Diversified portfolio",
+            "Professional fund management",
+            "High returns potential"
+        ]
+    },
+    {
+        "productName": "Stocks",
+        "customerSegment": "corporate",
+        "productCategory": "investment",
+        "monthlyMaintenanceFee": 0.0,
+        "interestRate": 10.0,
+        "productDescription": "An investment in stocks with high growth potential.",
+        "productBenefits": [
+            "High growth potential",
+            "Dividend income",
+            "Ownership in companies"
+        ]
+    },
+    {
+        "productName": "Bonds",
+        "customerSegment": "sme",
+        "productCategory": "investment",
+        "monthlyMaintenanceFee": 0.0,
+        "interestRate": 5.0,
+        "productDescription": "A low-risk investment option with stable returns.",
+        "productBenefits": [
+            "Stable returns",
+            "Low risk",
+            "Fixed income"
         ]
     }
 ]

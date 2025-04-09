@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Toggle } from 'flowbite-svelte';
-	import EmailPreferences from './NotificationPreferences.svelte';
+	import EmailPreferences from '$lib/utils/SettingsCard.svelte';
 
 	const items = [
 		{

@@ -26,7 +26,6 @@
 	} from 'flowbite-svelte-icons';
 
 	import MetaTag from '$lib/utils/MetaTag.svelte';
-	import { humanize } from '$lib/utils/strings';
 
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();

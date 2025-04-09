@@ -13,7 +13,6 @@
 	import {
 		Button,
 		Checkbox,
-		Dropdown,
 		TableBodyCell,
 		TableBodyRow,
 		Tooltip
@@ -24,7 +23,6 @@
 		CreditCardPlusAltOutline,
 		EyeSolid,
 		FileCopyOutline,
-		FilterSolid,
 		LockOpenOutline
 	} from 'flowbite-svelte-icons';
 

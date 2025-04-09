@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Toggle } from 'flowbite-svelte';
-	import PhonePreferences from '$lib/utils/SettingsCard.svelte';
+	import Settings from '$lib/utils/SettingsCard.svelte';
 
 	const items = [
 		{
@@ -26,7 +26,7 @@
 	];
 </script>
 
-<PhonePreferences
+<Settings
 	title="Alerts & Notifications"
 	subtitle="Set up phone alerts and notifications"
 	{items}
@@ -41,4 +41,4 @@
 		</div>
 		<Toggle checked={item.active} class="peer-focus:ring-0 me-0" />
 	</div>
-</PhonePreferences>
+</Settings>

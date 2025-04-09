@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button} from 'flowbite-svelte';
-	import Card from '../../../../../lib/utils/InfoCard.svelte';
+	import Card from '$lib/utils/InfoCard.svelte';
 
 	export let title: string;
 	export let subtitle: string = '';
@@ -23,13 +23,3 @@
 	</ul>
 	<Button class="mt-2 w-fit">{buttonLabel}</Button>
 </Card>
-
-<!--
-@component
-[Go to docs](https://flowbite-svelte-admin-dashboard.vercel.app/)
-## Props
-@prop export let title: string;
-@prop export let subtitle: string = '';
-@prop export let buttonLabel: string = 'Save all';
-@prop export let items: any[] = [];
--->
