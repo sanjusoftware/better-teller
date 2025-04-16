@@ -36,13 +36,13 @@
 <div class={divClass}>
 	<span class={color}>
 		{#if value > 0}
-			<span class="text-base leading-4">↑</span>{value}{unit}
+			<span class="text-base leading-4">↑</span>{value}{unit} better
 		{:else if value < 0}
-			<span class="text-base leading-4">↓</span>{Math.abs(value)}{unit}
+			<span class="text-base leading-4">↓</span>{Math.abs(value)}{unit} down
 		{:else}
 			--
 		{/if}
-	</span>&nbsp;
+	</span>
 	{#if equalHeight}
 		<span>{since}</span>
 	{:else}

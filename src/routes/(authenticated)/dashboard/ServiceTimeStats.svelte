@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { Button, Card, Chart, Dropdown, DropdownItem } from 'flowbite-svelte';
-	import { ArrowUpOutline, ChevronDownOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
+	import Change from '$lib/utils/Change.svelte';
+	import LastRange from '$lib/utils/LastRange.svelte';
+	import { Card, Chart } from 'flowbite-svelte';
+	import { ClockSolid } from 'flowbite-svelte-icons';
 
 	const options = {
 		series: [
 			{
-				name: 'In Person',
-				color: '#16a34a',
+				name: 'Avg. Time',
+				type: 'line',
 				data: [
 					{ x: 'Mon', y: 10 },
 					{ x: 'Tue', y: 15 },
@@ -17,52 +19,30 @@
 			}
 		],
 		chart: {
-			type: 'line',
-			fontFamily: 'Inter, sans-serif',
+			height: '140px',
 			toolbar: {
 				show: false
 			}
 		},
-		tooltip: {
-			shared: true,
-			intersect: false,
-			style: {
-				fontFamily: 'Inter, sans-serif'
-			}
-		},
-		states: {
-			hover: {
-				filter: {
-					type: 'darken',
-					value: 1
-				}
-			}
+		markers: {
+			size: 4
 		},
 		stroke: {
-			curve: 'smooth',
-			show: true,
-			colors: ['transparent']
+			curve: 'smooth'
 		},
 		grid: {
 			strokeDashArray: 4,
 			padding: {
-				left: 2,
-				right: 2,
-				top: -14
+				left: 10,
+				right: 10,
+				top: -10
 			}
-		},
-		dataLabels: {
-			enabled: false
-		},
-		legend: {
-			show: false
 		},
 		xaxis: {
 			type: 'category',
 			labels: {
 				show: true,
 				style: {
-					fontFamily: 'Inter, sans-serif',
 					cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
 				}
 			},
@@ -83,39 +63,20 @@
 			<div
 				class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center me-3"
 			>
-				<UsersGroupOutline class="w-6 h-6 text-gray-500 dark:text-gray-400" />
+				<ClockSolid class="w-6 h-6 text-gray-500 dark:text-gray-400" />
 			</div>
 			<div>
-				<h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">314</h5>
-				<p class="text-sm font-normal text-gray-500 dark:text-gray-400">Clients served</p>
+				<h5 class="leading-none text-2xl font-bold text-gray-500 dark:text-white pb-1">
+					Average Service Time
+				</h5>
+				<p class="text-sm font-normal text-gray-500 dark:text-gray-400">In Minutes</p>
 			</div>
 		</div>
 		<div>
-			<span
-				class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-green-900 dark:text-green-300"
-			>
-				<ArrowUpOutline class="w-2.5 h-2.5 me-1.5" />
-				42.5%
-			</span>
+			<h5 class="text-right text-2xl font-bold text-gray-900 dark:text-white pb-1">10</h5>
+			<Change size="sm" value={-18} since="since last month" />
 		</div>
 	</div>
-	<Chart {options} />
-	<div
-		class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
-	>
-		<div class="flex justify-between items-center pt-5">
-			<Button
-				class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent focus:ring-transparent dark:focus:ring-transparent py-0"
-			>
-				Last 7 days<ChevronDownOutline class="w-2.5 m-2.5 ms-1.5" />
-			</Button>
-			<Dropdown class="w-40" offset="-6">
-				<DropdownItem>Yesterday</DropdownItem>
-				<DropdownItem>Today</DropdownItem>
-				<DropdownItem>Last 7 days</DropdownItem>
-				<DropdownItem>Last 30 days</DropdownItem>
-				<DropdownItem>Last 90 days</DropdownItem>
-			</Dropdown>
-		</div>
-	</div>
+	<Chart {options} class="border-b border-gray-200 dark:border-gray-700" />
+	<LastRange />
 </Card>
