@@ -31,8 +31,8 @@
 				<button use:copy={client.cif.toString()}>
 					<FileCopyAltOutline size="sm" class="mr-2" />
 				</button>
-				<Tooltip placement="right" trigger="click" class="text-sm font-light">
-					Copied CIF: {client.cif}
+				<Tooltip placement="right"  class="text-sm font-light">
+					Copy CIF: {client.cif}
 				</Tooltip>
 			</div>
 			<span class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">

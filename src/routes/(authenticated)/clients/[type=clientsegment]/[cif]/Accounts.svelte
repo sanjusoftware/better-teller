@@ -87,8 +87,8 @@
 					<button use:copy={account.iban}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
-					<Tooltip placement="right" trigger="click" class="text-sm font-light">
-						Copied IBAN: {account.iban}
+					<Tooltip placement="right"  class="text-sm font-light">
+						Copy IBAN: {account.iban}
 					</Tooltip>
 				</div>
 			</div>

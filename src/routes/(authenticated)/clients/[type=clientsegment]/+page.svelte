@@ -87,17 +87,17 @@
 					<button use:copy={client.cif.toString()}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
-					<Tooltip placement="right" trigger="click" class="text-sm font-light">
-						Copied CIF: {client.cif}
+					<Tooltip placement="right"  class="text-sm font-light">
+						Copy CIF: {client.cif}
 					</Tooltip>
 				</div>
 				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-					{client.egn}
+					EGN: {client.egn}
 					<button use:copy={client.egn.toString()}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
-					<Tooltip placement="right" trigger="click" class="text-sm font-light">
-						Copied EGN: {client.egn}
+					<Tooltip placement="right" class="text-sm font-light">
+						Copy EGN: {client.egn}
 					</Tooltip>
 				</div>
 			</div>

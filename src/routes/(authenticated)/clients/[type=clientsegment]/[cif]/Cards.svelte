@@ -81,8 +81,8 @@
 					<button use:copy={card.accountNumber}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
-					<Tooltip placement="right" trigger="click" class="text-sm font-light">
-						Copied Account Number: {card.accountNumber}
+					<Tooltip placement="right"  class="text-sm font-light">
+						Copy Account Number: {card.accountNumber}
 					</Tooltip>
 				</div>
 			</div>
