@@ -28,7 +28,7 @@
 
 	let clientPath = client ? `/clients/${client.type}/${client.cif}` : '#';
 
-	let clientsListHidden = true;
+	let clientsListHidden = $state(true);
 	let transitionParamsRight = {
 		x: 320,
 		duration: 200,
@@ -136,7 +136,7 @@
 				<ClockOutline class="w-3 h-3 me-1.5" />
 				40 clients waiting
 			</span>
-			<form method="post" use:enhance action="?/getNextClient">
+			<form method="post" use:enhance action="?/getNextTicket">
 				<Button size="xs" class="px-3" type="submit">Get Next Client</Button>
 			</form>
 		</div>

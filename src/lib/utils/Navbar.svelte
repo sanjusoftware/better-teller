@@ -103,8 +103,6 @@
 		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
 			{#if currentClient}
 				<Button pill color="red" size="xs" class="px-3">Complete Service</Button>
-			{:else}
-				<Button pill color="green" size="xs" class="px-3">Get Next Client</Button>
 			{/if}
 			<Languages />
 			<Notifications />
