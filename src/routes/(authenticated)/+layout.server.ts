@@ -1,14 +1,16 @@
 import { redirect } from '@sveltejs/kit';
-import Activities from "$lib/data/activities.json"
-import type { LayoutServerLoad } from "./$types"
+import type { LayoutServerLoad } from "./$types";
 
-export const load: LayoutServerLoad = async ({locals, url}) => {
+export const load: LayoutServerLoad = async ({locals, url, cookies}) => {
 	const session = await locals.auth()
 	if (!session?.user) {
 		redirect(303, `/signin?redirectTo=${url.pathname}`);
 	}
-	return {
-		session,
-		Activities
+	let currentClient = cookies.get('currentClient');
+	console.log('currentClient', currentClient);
+
+	return {		
+		current_client: currentClient,
+		session
 	}
 }

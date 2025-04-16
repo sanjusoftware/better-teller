@@ -12,19 +12,13 @@
 	import {
 		AngleDownOutline,
 		AngleUpOutline,
-		ArrowsRepeatCountOutline,
 		ArrowsRepeatOutline,
 		ArrowUpDownOutline,
 		CashOutline,
-		ChartMixedDollarOutline,
 		ChartPieOutline,
 		CogOutline,
-		CreditCardOutline,
 		GridOutline,
-		HomeOutline,
-		HourglassOutline,
 		LifeSaverSolid,
-		QrCodeOutline,
 		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
 

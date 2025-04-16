@@ -20,6 +20,9 @@
 	import UserMenu from './UserMenu.svelte';
 
 	let user = page.data.session?.user;
+	let currentClient = page.data.current_client;
+	console.log('currentclient is:', currentClient);
+
 
 	let fluid = $state(true);
 	let { drawerHidden = false } = $props();
@@ -59,7 +62,7 @@
 		<div class="hidden lg:block lg:ps-3">
 			{#if list}
 				<NavUl class="ml-2" activeUrl="/" activeClass="text-primary-600 dark:text-primary-500">
-					<NavLi href="/">Home</NavLi>
+					<NavLi href="/dashboard">Home</NavLi>
 					<NavLi href="#top">Messages</NavLi>
 					<NavLi href="#top">Profile</NavLi>
 					<NavLi href="#top">Settings</NavLi>
@@ -98,6 +101,11 @@
 			{/if}
 		</div>
 		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
+			{#if currentClient}
+				<Button pill color="red" size="xs" class="px-3">Complete Service</Button>
+			{:else}
+				<Button pill color="green" size="xs" class="px-3">Get Next Client</Button>
+			{/if}
 			<Languages />
 			<Notifications />
 			<AppsMenu />

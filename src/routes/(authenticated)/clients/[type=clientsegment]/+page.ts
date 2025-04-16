@@ -6,4 +6,4 @@ export const load: PageLoad = ({ params }) => {
         clienttype: params.type, 
         clients: Clients.filter((client) => client.type === params.type)
     }
-};
+}
