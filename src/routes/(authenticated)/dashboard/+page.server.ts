@@ -18,7 +18,7 @@ export const load: PageServerLoad = ({ cookies }) => {
 
     return {
         currentClient: currentClient,
-        pastClients: Clients.filter((c) => pastClientIDs.includes(c.cif)),
+        pastClients: Clients,
         currentTicket: currentTicket
     }
 };

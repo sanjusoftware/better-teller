@@ -12,7 +12,7 @@
 
 <Card class="text-center flex items-center" size="xl">
 	<h5 class="mt-10 mb-3 text-3xl font-bold text-gray-800 dark:text-white">
-		Welcome {humanize(page.data.session?.user.name)}
+		Welcome {humanize(page.data.session?.user.name ?? 'Guest')}
 	</h5>
 	<h1 class="mb-8 font-bold text-2xl text-gray-500 dark:text-gray-200">Have a nice day!</h1>
 	<Button pill class="h-8 mb-10 p-8 text-2xl font-bold inline-flex items-center bg-gray-200 text-gray-600 dark:bg-green-900 dark:text-green-300 hover:bg-gray-300">

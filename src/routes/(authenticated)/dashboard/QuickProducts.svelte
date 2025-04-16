@@ -48,11 +48,11 @@
 	];
 </script>
 
-<Card size="none">
+<Card size="xl">
 	<div class="mb-4 flex items-center justify-between">
 		<div class="flex items-center gap-2 text-lg font-medium text-grey-600">
 			<GridOutline />
-			<span>Products</span>
+			<span>Browse Products</span>
 		</div>
 		<a
 			href="/products/all"
