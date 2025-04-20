@@ -21,8 +21,6 @@
 
 	let user = page.data.session?.user;
 	let currentClient = page.data.current_client;
-	console.log('currentclient is:', currentClient);
-
 
 	let fluid = $state(true);
 	let { drawerHidden = false } = $props();

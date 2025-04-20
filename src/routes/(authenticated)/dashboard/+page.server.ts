@@ -2,40 +2,22 @@ import type { Actions, PageServerLoad } from './$types';
 import Clients from "$lib/data/clients.json";
 import Tickets from "$lib/data/ticket_queue.json";
 
-export const load: PageServerLoad = ({ cookies }) => {
-    let pastClientIDs = JSON.parse(cookies.get('pastClientIDs') ?? '[]')
-    let currentClientID = cookies.get('currentClientID')
-    let currentTicket = cookies.get('currentTicket');
-    let currentClient = undefined;
+let ticket: string = ''; // Placeholder for the next ticket number
 
-    if(currentClientID){
-        currentClient = Clients.find((c) => c.cif === parseInt(currentClientID))
-    }
-
-    console.log('pastClientIDs:', pastClientIDs)
-    console.log('currentTicket:', currentTicket)
-    console.log('currentClient:', currentClient)    
+export const load: PageServerLoad = () => {
+    console.log('ticket from server load:', ticket);
+    let latestClients = Clients.slice(0, 5); // Get the first 5 clients from the list
 
     return {
-        currentClient: currentClient,
-        pastClients: Clients,
-        currentTicket: currentTicket
+        ticket: ticket,
+        latestClients: latestClients
     }
 };
 
-export const actions = {
-    getNextTicket: async ({ cookies }) => {
-        let pastClientIds = JSON.parse(cookies.get('pastClientIDs') ?? '[]') // The CIA is watching 
-        let currentClientID = cookies.get('currentClientID')
-
-        if (currentClientID) {
-            pastClientIds.push(currentClientID)
-            cookies.set('pastClientIDs', JSON.stringify(pastClientIds), { path: '/' })
-            cookies.delete('currentClientID', { path: '/' })
-        }
-
-        // get the next ticket from the queue
-        let nextTicket = Tickets.pop()
-        cookies.set('currentTicket', nextTicket?.ticket_number ?? '', { path: '/' })
+export const actions: Actions = {
+    getNextTicket: async () => {
+        console.log('getNextTicket called');
+        // Simulate an API call to fetch the next ticket        
+        ticket = Math.ceil(Math.random() * 10000).toString(); // Placeholder for the next ticket number
     }
-} satisfies Actions;
+};

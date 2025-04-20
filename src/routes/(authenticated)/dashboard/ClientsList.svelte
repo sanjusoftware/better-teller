@@ -6,7 +6,7 @@
 	let { clientsServed }: { clientsServed: { avatar: string; type: string; cif: string; name: string; status: string }[] } = $props();
 </script>
 
-<Listgroup items={clientsServed} let:item={client} class="border-0 dark:bg-transparent!">
+<Listgroup items={clientsServed} let:item={client} class="border-0 dark:bg-gray-800">
 	<div class="flex items-center space-x-4 rtl:space-x-reverse">
 		<Avatar
 			src={client.avatar}

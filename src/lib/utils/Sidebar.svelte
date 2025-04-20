@@ -25,7 +25,6 @@
 	let { drawerHidden = false } = $props();
 
 	const closeDrawer = () => {
-		console.log(drawerHidden);
 		drawerHidden = true;
 	};
 

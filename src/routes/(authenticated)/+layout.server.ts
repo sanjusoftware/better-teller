@@ -6,8 +6,7 @@ export const load: LayoutServerLoad = async ({locals, url, cookies}) => {
 	if (!session?.user) {
 		redirect(303, `/signin?redirectTo=${url.pathname}`);
 	}
-	let currentClient = cookies.get('currentClient');
-	console.log('currentClient', currentClient);
+	let currentClient = cookies.get('currentClient');	
 
 	return {		
 		current_client: currentClient,

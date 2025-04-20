@@ -24,7 +24,6 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
         session.user.userId = token.sub as string
         session.user.roles = token.roles as string[]
       }
-      console.log('user is: ', session.user)
       return session
     }
   }

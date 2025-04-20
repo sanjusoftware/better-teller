@@ -3,33 +3,36 @@
 	import QuickActions from './QuickActions.svelte';
 	import QuickProducts from './QuickProducts.svelte';
 	import LastestClients from './LatestClientsServed.svelte';
-	import ClientsServedStats from './ClientsServedStats.svelte';
 	import { page } from '$app/state';
 	import WelcomeCard from './WelcomeCard.svelte';
 	import ServiceTimeStats from './ServiceTimeStats.svelte';
-	let currentClient = page.data.currentClient;
+
+	let currentClient = $derived(page.data.currentClient);
+	let latestClients = $derived(page.data.latestClients);
+	let ticket: string = $derived(page.data.ticket);
 </script>
 
 <Breadcrumb class="mb-5">
 	<BreadcrumbItem home>Home</BreadcrumbItem>
 	<BreadcrumbItem>Dashboard</BreadcrumbItem>
 </Breadcrumb>
-<div class="grid auto-rows-fr grid-cols-2 gap-2 xl:grid-cols-2 dark:bg-gray-900 xl:gap-2 flex">
+<div class="grid grid-cols-2 gap-2 xl:grid-cols-2 dark:bg-gray-900 xl:gap-2 flex">
 	<div class="flex flex-col gap-2">
 		{#if currentClient}
 			<QuickActions />
 		{:else}
-			<WelcomeCard />
-			<QuickProducts />
+			<WelcomeCard {ticket} />
+			<!-- <QuickProducts /> -->
 		{/if}
 	</div>
-	<div class="grid grid-cols-1 gap-2 dark:bg-gray-900 xl:grid-cols-1 xl:gap-2">
+	<div class="grid gap-2 dark:bg-gray-900 xl:gap-2">
 		{#if currentClient}
 			<QuickActions />
 		{:else}
-			<LastestClients />
+			{#if latestClients}
+				<LastestClients {latestClients} />
+			{/if}
 			<ServiceTimeStats />
-			<ClientsServedStats />
 		{/if}
 	</div>
 </div>
