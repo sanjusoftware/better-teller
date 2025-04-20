@@ -47,11 +47,17 @@
 					<Button
 						pill
 						outline
-						class="mt-5 text-md inline-flex items-center dark:bg-green-900 dark:text-green-300"
+						color="light"
+						class="mt-5 text-md font-medium inline-flex items-center bg-gray-200 text-gray-800 dark:bg-green-900 dark:text-green-300"
 						type="submit"
 					>
-						Start Service - Ticket# {ticketValue}
-						<AngleRightOutline size="md" class="w-5 h-5 ms-2" />
+						Start Service 
+						<Badge
+							rounded
+							class="h-8 ms-2 p-2 text-md font-medium text-gray-800 bg-white dark:text-primary-800 dark:bg-white"
+						>
+						Ticket: {ticketValue}
+						</Badge>
 					</Button>
 				</form>
 			</div>
