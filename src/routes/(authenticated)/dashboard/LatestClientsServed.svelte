@@ -5,8 +5,9 @@
 	import { ClockOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
 	import { sineIn } from 'svelte/easing';
 	import ClientsList from './ClientsList.svelte';
+	import { page } from '$app/state';
 
-	let {latestClients} = $props();
+	let latestClients: any[] = $derived(page.data.latestClients);
 
 	let clientsListHidden = $state(true);
 	let transitionParamsRight = {

@@ -8,8 +8,7 @@
 	import ServiceTimeStats from './ServiceTimeStats.svelte';
 
 	let currentClient = $derived(page.data.currentClient);
-	let latestClients = $derived(page.data.latestClients);
-	let ticket: string = $derived(page.data.ticket);
+	
 </script>
 
 <Breadcrumb class="mb-5">
@@ -21,7 +20,7 @@
 		{#if currentClient}
 			<QuickActions />
 		{:else}
-			<WelcomeCard {ticket} />
+			<WelcomeCard />
 			<!-- <QuickProducts /> -->
 		{/if}
 	</div>
@@ -29,9 +28,7 @@
 		{#if currentClient}
 			<QuickActions />
 		{:else}
-			{#if latestClients}
-				<LastestClients {latestClients} />
-			{/if}
+		<LastestClients />
 			<ServiceTimeStats />
 		{/if}
 	</div>

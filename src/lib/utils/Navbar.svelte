@@ -18,10 +18,9 @@
 	import Languages from './LanguageList.svelte';
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
+	import { ticket } from '$lib/store';
 
 	let user = page.data.session?.user;
-	let currentClient = page.data.current_client;
-
 	let fluid = $state(true);
 	let { drawerHidden = false } = $props();
 	let list = $state(false);
@@ -99,8 +98,8 @@
 			{/if}
 		</div>
 		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
-			{#if currentClient}
-				<Button pill color="red" size="xs" class="px-3">Complete Service</Button>
+			{#if $ticket}
+				<Button pill color="red" size="xs" class="px-3">Complete Service - {$ticket}</Button>
 			{/if}
 			<Languages />
 			<Notifications />
