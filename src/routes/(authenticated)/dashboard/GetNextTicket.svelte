@@ -3,7 +3,6 @@
 	import { servingTicket, ticket } from '$lib/store';
 	import { Button } from 'flowbite-svelte';
 	import { AngleRightOutline } from 'flowbite-svelte-icons';
-	import '../../app.css';
 </script>
 
 {#if !$servingTicket}

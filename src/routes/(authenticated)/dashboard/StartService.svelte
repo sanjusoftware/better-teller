@@ -2,8 +2,8 @@
 	import { enhance } from '$app/forms';
 	import { servingTicket, ticket } from '$lib/store';
 	import { Badge, Button, Checkbox, Dropdown, DropdownItem, Modal, Search } from 'flowbite-svelte';
-	import '../../app.css';
 	import { ChevronDownOutline, CameraPhotoOutline, AngleRightOutline } from 'flowbite-svelte-icons';
+	import { Circle } from 'svelte-loading-spinners';
 
 	let clientVerficationModal = $state(false);
 	let OCRModal = $state(false);
@@ -12,7 +12,7 @@
 	let scanning = $state(false);
 	let scanModalTitle = $derived(
 		scanning ? 'Please wait!! Scanning in progress...' : 'Scan ID Document'
-	);		
+	);
 	const searchableItems = [
 		{
 			label: 'UCN',
@@ -85,7 +85,6 @@
 	</div>
 {/if}
 
-
 <!-- Modal for client verification -->
 <Modal
 	title="Client Identification - Ticket {$servingTicket}"
@@ -142,21 +141,9 @@
 	size="sm"
 	autoclose={false}
 >
-	{#if scanning}
+	{#if scanning}		
 		<div class="flex justify-center items-center h-32">
-			<svg
-				class="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-200"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-			>
-				<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
-				<path
-					class="opacity-75"
-					fill="currentColor"
-					d="M4 12a8 8 0 1 1 16 0A8 8 0 0 1 4 12Zm2.5 0a5.5 5.5 0 1 0 11 0A5.5 5.5 0 0 0 6.5 12Z"
-				/>
-			</svg>
+			<Circle size="120" color="#37c92c" unit="px" duration="1s" />	
 		</div>
 	{:else}
 		<p class="text-sm text-gray-800 dark:text-gray-400">

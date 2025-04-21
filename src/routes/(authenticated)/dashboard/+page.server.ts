@@ -65,7 +65,7 @@ export const actions = {
     startScan: async () => {
         console.log('Scanning ID document...');
         // Simulate a ID scan operation 
-        await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate a delay for the scan operation
+        await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay for the scan operation
         console.log('ID document scanned successfully!');
 
         // In a real-world scenario, you would perform an operation here, like calling an ID scanning API

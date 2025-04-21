@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { servingTicket } from '$lib/store';
 	import {
-		Button,
 		DarkMode,
 		Dropdown,
 		DropdownItem,
@@ -13,12 +11,11 @@
 		Navbar
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
-	import '../../app.css';
+	import CompleteService from '../../routes/(authenticated)/dashboard/CompleteService.svelte';
 	import AppsMenu from './AppsMenu.svelte';
 	import Languages from './LanguageList.svelte';
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
-	import CompleteService from '../../routes/(authenticated)/dashboard/CompleteService.svelte';
 
 	let user = page.data.session?.user;
 	let fluid = $state(true);

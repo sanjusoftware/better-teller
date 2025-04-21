@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { servingTicket, ticket } from '$lib/store';
 	import { Button } from 'flowbite-svelte';
-	import '../../app.css';
+	import '../../../app.css';
 	import { enhance } from '$app/forms';
 </script>
 
