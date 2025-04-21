@@ -1,5 +1,6 @@
 import type { PageServerLoad } from './$types';
 import Clients from "$lib/data/clients.json";
+import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = () => {
     let latestClients = Clients.slice(0, 5); // Get the first 5 clients from the list
@@ -10,25 +11,62 @@ export const load: PageServerLoad = () => {
 };
 
 export const actions = {
-	startService: async ({ request }) => {
-		const data = await request.formData();
-		const ticket = data.get('ticket');
+    getNextTicket: async () => {
+        // Call ticket aquiring api to get a new ticket number from the queue
+
+        const ticket = Math.ceil(Math.random() * 10000);
+
+        return {
+            success: true,
+            message: 'Ticket aquired successfully',
+            ticket: ticket
+        };
+    },
+
+    startService: async ({ request }) => {
+        const data = await request.formData();
+        const ticket = data.get('ticket');
 
         if (!ticket) {
             return {
-                success: false, 
+                success: false,
                 message: 'No ticket provided'
             };
         }
-        
+
         // Simulate a service start operation
         // In a real-world scenario, you would perform an operation here, like updating a database or calling ticketQueue API to lock the ticket
         console.log('Locked ticket for starting service', ticket);
 
         return {
-            success: true, 
+            success: true,
             message: 'Service started successfully',
-            ticket: ticket+'Locked' // Simulate a locked ticket
+            ticket: ticket // Simulate a locked ticket
         };
-	},
+    },
+
+    startScan: async ({ request }) => {               
+        console.log('Scanning ID document...');
+        // Simulate a ID scan operation 
+        await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate a delay for the scan operation
+        console.log('ID document scanned successfully!');
+
+        // In a real-world scenario, you would perform an operation here, like calling an ID scanning API
+        // or processing the ID document image.
+        // For this example, we'll just simulate a successful scan with a random client from the list
+        const scannedClient = Clients[Math.floor(Math.random() * Clients.length)];
+
+        if (!scannedClient) {
+            // If no client is found, return an error message
+            console.error('Scan failed. No client found.');
+            return {
+                success: false,
+                message: 'Scan failed. No client found.'
+            };
+        } else {
+            // If a client is found, return the scanned client ID
+            console.log('Scan successful. Client found:', scannedClient);
+            redirect(303, "/clients/"+scannedClient.type+"/"+scannedClient.cif);
+        }
+    }
 };
