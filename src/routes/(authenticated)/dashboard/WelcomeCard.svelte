@@ -2,6 +2,7 @@
 	import { deserialize, enhance } from '$app/forms';
 	import { page } from '$app/state';
 	import { servingTicket, ticket } from '$lib/store';
+	import CompleteService from '$lib/utils/CompleteService.svelte';
 	import { humanize } from '$lib/utils/strings';
 	import type { ActionResult } from '@sveltejs/kit';
 	import {
@@ -25,7 +26,9 @@
 	let selectedItem = $state('UCN');
 	let startScanConsent = $state(false);
 	let scanning = $state(false);
-	let scanModalTitle = $derived(scanning ? "Please wait!! Scanning in progress..." : "Scan ID Document");
+	let scanModalTitle = $derived(
+		scanning ? 'Please wait!! Scanning in progress...' : 'Scan ID Document'
+	);
 	const searchableItems = [
 		{
 			label: 'UCN',
@@ -89,7 +92,6 @@
 		clientVerficationModal = false;
 		OCRModal = true;
 	}
-
 </script>
 
 <Card class="text-center flex items-center" size="xl">
@@ -110,9 +112,8 @@
 			40
 		</Badge>
 	</Badge>
-	{#if $servingTicket}
-		<Button pill color="red" size="xs" class="px-3">Complete Service - {$servingTicket}</Button>
-	{:else}
+	<CompleteService />
+	{#if !$servingTicket}
 		<div class="mb-5 space-y-4 sm:space-y-0 sm:space-x-4">
 			<Button
 				pill
@@ -203,66 +204,68 @@
 	size="sm"
 	autoclose={false}
 >
-
-{#if scanning}
-	<div class="flex justify-center items-center h-32">
-		<svg
-			class="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-200"
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
+	{#if scanning}
+		<div class="flex justify-center items-center h-32">
+			<svg
+				class="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-200"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+				<path
+					class="opacity-75"
+					fill="currentColor"
+					d="M4 12a8 8 0 1 1 16 0A8 8 0 0 1 4 12Zm2.5 0a5.5 5.5 0 1 0 11 0A5.5 5.5 0 0 0 6.5 12Z"
+				/>
+			</svg>
+		</div>
+	{:else}
+		<p class="text-sm text-gray-800 dark:text-gray-400">
+			Please insert the ID document into the scanning device.
+			<br />
+			Ensure that the document is properly aligned and clear for accurate scanning.
+		</p>
+		<form
+			class="flex flex-col space-y-4"
+			method="POST"
+			action="?/startScan"
+			use:enhance={() => {
+				scanning = true;
+				return ({ update }) => {
+					// Set invalidateAll to false if you don't want to reload page data when submitting
+					update().finally(async () => {
+						scanning = false;
+					});
+				};
+			}}
 		>
-			<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
-			<path
-				class="opacity-75"
-				fill="currentColor"
-				d="M4 12a8 8 0 1 1 16 0A8 8 0 0 1 4 12Zm2.5 0a5.5 5.5 0 1 0 11 0A5.5 5.5 0 0 0 6.5 12Z"
-			/>
-		</svg>
-	</div>
-{:else}
-	<p class="text-sm text-gray-800 dark:text-gray-400">
-		Please insert the ID document into the scanning device.
-		<br />
-		Ensure that the document is properly aligned and clear for accurate scanning.
-	</p>
-	<form
-		class="flex flex-col space-y-4"
-		method="POST"
-		action="?/startScan"
-		use:enhance={() => {
-			scanning = true;
-			return ({ update }) => {
-				// Set invalidateAll to false if you don't want to reload page data when submitting
-				update({ invalidateAll: false }).finally(async () => {
-					scanning = false;
-				});
-			};
-		}}
-	>
-		<div class="flex items-center">
-			<Checkbox
-				id="ocr-concent"
-				checked={startScanConsent}
-				class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-				on:change={() => {
-					startScanConsent = !startScanConsent;
-				}}
-			/>
-			<label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-				Client Agreed to Scan ID Document
-			</label>
-		</div>
-		<div class="flex justify-center space-x-4">
-			<Button pill disabled={!startScanConsent || scanning} class="w-1/2" type="submit">
-				<CameraPhotoOutline class="w-4 h-4 me-2" />
-				Start Scan<AngleRightOutline class="w-4 h-4 me-2" />
-			</Button>
-			<Button pill outline color="light" disabled={scanning} class="w-1/2" on:click={cancelScan}>Back</Button>
-		</div>
-	</form>
-{/if}
+			<div class="flex items-center">
+				<Checkbox
+					id="ocr-concent"
+					checked={startScanConsent}
+					class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+					on:change={() => {
+						startScanConsent = !startScanConsent;
+					}}
+				/>
+				<label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+					Client Agreed to Scan ID Document
+				</label>
+			</div>
+			<div class="flex justify-center space-x-4">
+				<Button pill disabled={!startScanConsent || scanning} class="w-1/2" type="submit">
+					<CameraPhotoOutline class="w-4 h-4 me-2" />
+					Start Scan<AngleRightOutline class="w-4 h-4 me-2" />
+				</Button>
+				<Button pill outline color="light" disabled={scanning} class="w-1/2" on:click={cancelScan}>
+					Back
+				</Button>
+			</div>
+		</form>
+	{/if}
 	<p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
-		Note: The scanned ID document will be stored securely and will not be shared with any third party.
+		Note: The scanned ID document will be stored securely and will not be shared with any third
+		party.
 	</p>
 </Modal>

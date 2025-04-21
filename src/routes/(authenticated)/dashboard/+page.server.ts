@@ -45,7 +45,24 @@ export const actions = {
         };
     },
 
-    startScan: async ({ request }) => {
+    endService: async ({ request }) => {
+        const data = await request.formData();
+        const ticket = data.get('ticket');
+
+        if (!ticket) {
+            return {
+                success: false,
+                message: 'No ticket provided'
+            };
+        }
+
+        // Simulate a service end operation
+        // In a real-world scenario, you would perform an operation here, like updating a database or calling ticketQueue API to unlock the ticket
+        console.log('Unlocked ticket for ending service', ticket);
+        redirect(303, "/dashboard"); // Redirect to the dashboard after ending the service
+    },
+
+    startScan: async () => {
         console.log('Scanning ID document...');
         // Simulate a ID scan operation 
         await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate a delay for the scan operation
