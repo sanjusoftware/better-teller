@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { servingTicket, ticket } from '$lib/store';
+	import { currentClient, servingTicket, ticket } from '$lib/store';
+	import { goto } from '$app/navigation';
 	import { Badge, Button, Checkbox, Dropdown, DropdownItem, Modal, Search } from 'flowbite-svelte';
 	import { ChevronDownOutline, CameraPhotoOutline, AngleRightOutline } from 'flowbite-svelte-icons';
 	import { Circle } from 'svelte-loading-spinners';
@@ -157,9 +158,15 @@
 			action="?/startScan"
 			use:enhance={() => {
 				scanning = true;
-				return ({ update }) => {
+				return ({ result, update }) => {
 					update().finally(async () => {
-						scanning = false;
+						if (result.type === 'success') {
+							scanning = false;
+							$currentClient = result.data?.currentClient;
+							goto("/clients/" + $currentClient.type + "/" + $currentClient.cif);
+						} else {
+							new Error('Error scanning ID document: ' + result.status);
+						}
 					});
 				};
 			}}

@@ -20,7 +20,7 @@
 	let user = page.data.session?.user;
 	let fluid = $state(true);
 	let { drawerHidden = false } = $props();
-	let list = $state(false);	
+	let list = $state(false);
 </script>
 
 <Navbar {fluid} class="text-black" color="default" let:NavContainer>
@@ -53,16 +53,16 @@
 						<DropdownItem href="#top">Item 2</DropdownItem>
 						<DropdownItem href="#top">Item 3</DropdownItem>
 					</Dropdown>
-				</NavUl>			
+				</NavUl>
 			{/if}
 		</div>
-		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
-			<CompleteService />
+		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">			
 			<Languages />
 			<Notifications />
-			<AppsMenu />
+			<!-- <AppsMenu /> -->
 			<DarkMode />
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
+			<CompleteService />
 		</div>
 	{/if}
 </Navbar>

@@ -80,10 +80,12 @@ export const actions = {
                 success: false,
                 message: 'Scan failed. No client found.'
             };
-        } else {
-            // If a client is found, return the scanned client ID
-            console.log('Scan successful. Client found:', scannedClient);
-            redirect(303, "/clients/" + scannedClient.type + "/" + scannedClient.cif);
         }
+        
+        return {
+            success: true,
+            message: 'ID Document scanned successfully.',
+            currentClient: scannedClient
+        };
     }
 };

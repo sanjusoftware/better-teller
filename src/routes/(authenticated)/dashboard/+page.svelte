@@ -6,9 +6,7 @@
 	import { page } from '$app/state';
 	import WelcomeCard from './WelcomeCard.svelte';
 	import ServiceTimeStats from './ServiceTimeStats.svelte';
-
-	let currentClient = $derived(page.data.currentClient);
-	
+	import { currentClient } from '$lib/store';
 </script>
 
 <Breadcrumb class="mb-5">
@@ -17,19 +15,13 @@
 </Breadcrumb>
 <div class="grid grid-cols-2 gap-2 xl:grid-cols-2 dark:bg-gray-900 xl:gap-2 flex">
 	<div class="flex flex-col gap-2">
-		{#if currentClient}
+		<WelcomeCard />
+		{#if $currentClient}
 			<QuickActions />
-		{:else}
-			<WelcomeCard />
-			<!-- <QuickProducts /> -->
 		{/if}
 	</div>
 	<div class="grid gap-2 dark:bg-gray-900 xl:gap-2">
-		{#if currentClient}
-			<QuickActions />
-		{:else}
 		<LastestClients />
-			<ServiceTimeStats />
-		{/if}
+		<ServiceTimeStats />
 	</div>
 </div>
