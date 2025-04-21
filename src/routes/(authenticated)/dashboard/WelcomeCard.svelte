@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { deserialize, enhance } from '$app/forms';
 	import { page } from '$app/state';
-	import { currentClientID, servingTicket, ticket } from '$lib/store';
+	import { servingTicket, ticket } from '$lib/store';
 	import { humanize } from '$lib/utils/strings';
 	import type { ActionResult } from '@sveltejs/kit';
 	import {
@@ -21,7 +21,7 @@
 		ClockOutline
 	} from 'flowbite-svelte-icons';
 	let clientVerficationModal = $state(false);
-	let OCRModal = $state(true);
+	let OCRModal = $state(false);
 	let selectedItem = $state('UCN');
 	let startScanConsent = $state(false);
 	let scanning = $state(false);

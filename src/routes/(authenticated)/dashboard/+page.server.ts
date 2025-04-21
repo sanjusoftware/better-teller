@@ -45,7 +45,7 @@ export const actions = {
         };
     },
 
-    startScan: async ({ request }) => {               
+    startScan: async ({ request }) => {
         console.log('Scanning ID document...');
         // Simulate a ID scan operation 
         await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate a delay for the scan operation
@@ -66,7 +66,7 @@ export const actions = {
         } else {
             // If a client is found, return the scanned client ID
             console.log('Scan successful. Client found:', scannedClient);
-            redirect(303, "/clients/"+scannedClient.type+"/"+scannedClient.cif);
+            redirect(303, "/clients/" + scannedClient.type + "/" + scannedClient.cif);
         }
     }
 };
