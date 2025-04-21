@@ -18,7 +18,7 @@
 	import Languages from './LanguageList.svelte';
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
-	import CompleteService from './CompleteService.svelte';
+	import CompleteService from '../../routes/(authenticated)/dashboard/CompleteService.svelte';
 
 	let user = page.data.session?.user;
 	let fluid = $state(true);

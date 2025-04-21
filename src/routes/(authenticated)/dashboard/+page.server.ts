@@ -18,7 +18,7 @@ export const actions = {
 
         return {
             success: true,
-            message: 'Ticket aquired successfully',
+            message: "Ticket aquired successfully",
             ticket: ticket
         };
     },
@@ -54,12 +54,12 @@ export const actions = {
                 success: false,
                 message: 'No ticket provided'
             };
+        } else {
+            // Simulate a service end operation
+            // In a real-world scenario, you would perform an operation here, like updating a database or calling ticketQueue API to unlock the ticket
+            console.log('Unlocked ticket for ending service', ticket);
+            redirect(303, "/dashboard"); // Redirect to the dashboard after ending the service
         }
-
-        // Simulate a service end operation
-        // In a real-world scenario, you would perform an operation here, like updating a database or calling ticketQueue API to unlock the ticket
-        console.log('Unlocked ticket for ending service', ticket);
-        redirect(303, "/dashboard"); // Redirect to the dashboard after ending the service
     },
 
     startScan: async () => {

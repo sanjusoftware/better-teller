@@ -2,16 +2,10 @@
 	import { servingTicket, ticket } from '$lib/store';
 	import { Button } from 'flowbite-svelte';
 	import '../../app.css';
-	import { page } from '$app/state';
 	import { enhance } from '$app/forms';
 </script>
 
-{#if $servingTicket}
-	{#if page.form?.message}
-		<div class="text-center text-sm text-red-500">
-			{page.form?.message}
-		</div>
-	{/if}
+{#if $servingTicket}	
 	<form
 		action="/dashboard?/endService"
 		method="POST"
