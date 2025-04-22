@@ -4,7 +4,6 @@
 
 	export let client: {
 		address: string;
-		position: string;
 		type: string;
 		cif: number;
 		avatar: string;
@@ -22,8 +21,7 @@
 		{ label: 'Country', type: 'text', placeholder: 'USA', value: client.country, disabled: false },
 		{ label: 'Address', type: 'text', placeholder: 'e.g. Bulgaria', value: client.address, disabled: false },
 		{ label: 'Email', type: 'text', placeholder: 'email@dskbank.com', value: client.email, disabled: false },
-		{ label: 'Phone Number', type: 'text', placeholder: 'e.g. +(12)3456 789', value: client.phone, disabled: false },
-		{ label: 'Position', type: 'text', placeholder: 'e.g. CEO', value: client.position, disabled: false },
+		{ label: 'Phone Number', type: 'text', placeholder: 'e.g. +(12)3456 789', value: client.phone, disabled: false }
 
 	];
 </script>

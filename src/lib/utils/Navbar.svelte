@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/state';
+	import { page } from '$app/state';	
 	import {
+		Alert,
 		DarkMode,
 		Dropdown,
 		DropdownItem,
@@ -12,7 +13,6 @@
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 	import CompleteService from '../../routes/(authenticated)/dashboard/CompleteService.svelte';
-	import AppsMenu from './AppsMenu.svelte';
 	import Languages from './LanguageList.svelte';
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
@@ -36,6 +36,14 @@
 			BetterTeller
 		</span>
 	</NavBrand>
+	{#if page.form?.success && page.form.message}
+		<div class="absolute inset-x-0 mx-auto flex justify-center">
+			<Alert color="green" dismissable>
+				{page.form.message}
+			</Alert>
+		</div>
+	{/if}
+
 	{#if user}
 		<div class="hidden lg:block lg:ps-3">
 			{#if list}
@@ -56,13 +64,13 @@
 				</NavUl>
 			{/if}
 		</div>
-		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">			
+		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
 			<Languages />
 			<Notifications />
 			<!-- <AppsMenu /> -->
 			<DarkMode />
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
-			<CompleteService />
+				<CompleteService />
 		</div>
 	{/if}
 </Navbar>
