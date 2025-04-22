@@ -102,6 +102,9 @@ importers:
       svelte-loading-spinners:
         specifier: ^0.3.6
         version: 0.3.6
+      sveltekit-flash-message:
+        specifier: ^2.4.6
+        version: 2.4.6(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4)))(svelte@5.17.3)
       tailwindcss:
         specifier: ^3.4.9
         version: 3.4.17
@@ -1333,6 +1336,12 @@ packages:
   svelte@5.17.3:
     resolution: {integrity: sha512-eLgtpR2JiTgeuNQRCDcLx35Z7Lu9Qe09GPOz+gvtR9nmIZu5xgFd6oFiLGQlxLD0/u7xVyF5AUkjDVyFHe6Bvw==}
     engines: {node: '>=18'}
+
+  sveltekit-flash-message@2.4.6:
+    resolution: {integrity: sha512-++FGMWiKbQyJn133xwyTAKzoW7NPtsa3BrYq33IlR7Efh2J0XvLXg6rZkAROM8eKBG9s2MoxDANFfxa6pOxS6A==}
+    peerDependencies:
+      '@sveltejs/kit': 1.x || 2.x
+      svelte: 3.x || 4.x || >=5.0.0-next.51
 
   sveltekit-superforms@2.23.1:
     resolution: {integrity: sha512-SPj5ac4SMg8SPyP0Zi3ynwXJa7r9U1CTyn+YSyck67zLsjt367Sro4SZnl3yASrLd5kJ6Y57cgIdYJ2aWNArXw==}
@@ -2663,6 +2672,11 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.17
       zimmerframe: 1.1.2
+
+  sveltekit-flash-message@2.4.6(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4)))(svelte@5.17.3):
+    dependencies:
+      '@sveltejs/kit': 2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4))
+      svelte: 5.17.3
 
   sveltekit-superforms@2.23.1(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.13.4)))(@types/json-schema@7.0.15)(svelte@5.17.3)(typescript@5.7.3):
     dependencies:

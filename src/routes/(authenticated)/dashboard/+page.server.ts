@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import Clients from "$lib/data/clients.json";
-import { redirect } from '@sveltejs/kit';
+import { redirect } from 'sveltekit-flash-message/server';
 
 export const load: PageServerLoad = () => {
     let latestClients = Clients.slice(0, 5); // Get the first 5 clients from the list
@@ -45,7 +45,7 @@ export const actions = {
         };
     },
 
-    endService: async ({ request }) => {
+    endService: async ({ request, cookies }) => {
         const data = await request.formData();
         const ticket = data.get('ticket');
 
@@ -58,11 +58,11 @@ export const actions = {
             // Simulate a service end operation
             // In a real-world scenario, you would perform an operation here, like updating a database or calling ticketQueue API to unlock the ticket
             console.log('Unlocked ticket for ending service', ticket);
-            redirect(303, "/dashboard"); // Redirect to the dashboard after ending the service
+            redirect(303, '/dashboard', { type: 'success', message: "Congratulations! You completed service successfully!" }, cookies);
         }
     },
 
-    startScan: async () => {
+    startScan: async ({ cookies }) => {
         console.log('Scanning ID document...');
         // Simulate a ID scan operation 
         await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay for the scan operation
@@ -81,11 +81,10 @@ export const actions = {
                 message: 'Scan failed. No client found.'
             };
         }
-        
-        return {
-            success: true,
-            message: 'ID Document scanned successfully.',
-            currentClient: scannedClient
-        };
+
+        // If a client is found, redirect to the client profile page with a success message
+        console.log('Scanned client:', scannedClient);
+        let message = "ID Scanned successfully. You are serving " + scannedClient.name;
+        redirect(303, "/clients/" + scannedClient.type + "/" + scannedClient.cif, { type: 'success', message: message }, cookies);
     }
 };

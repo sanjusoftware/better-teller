@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/state';	
+	import { page } from '$app/state';
 	import {
 		Alert,
 		DarkMode,
@@ -16,11 +16,13 @@
 	import Languages from './LanguageList.svelte';
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
+	import { getFlash } from 'sveltekit-flash-message';
 
 	let user = page.data.session?.user;
 	let fluid = $state(true);
 	let { drawerHidden = false } = $props();
 	let list = $state(false);
+	const flash = getFlash(page);
 </script>
 
 <Navbar {fluid} class="text-black" color="default" let:NavContainer>
@@ -36,10 +38,18 @@
 			BetterTeller
 		</span>
 	</NavBrand>
-	{#if page.form?.success && page.form.message}
+	{#if (page.form?.success || page.form?.error) && page.form.message}
 		<div class="absolute inset-x-0 mx-auto flex justify-center">
-			<Alert color="green" dismissable>
+			<Alert color={page.form?.success ? 'green' : 'red'} dismissable>
 				{page.form.message}
+			</Alert>
+		</div>
+	{/if}
+	{#if $flash}
+		{@const bg = $flash.type == 'success' ? 'green' : 'red'}
+		<div class="absolute inset-x-0 mx-auto flex justify-center">
+			<Alert color={bg} dismissable>
+				{$flash.message}
 			</Alert>
 		</div>
 	{/if}
@@ -70,7 +80,7 @@
 			<!-- <AppsMenu /> -->
 			<DarkMode />
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
-				<CompleteService />
+			<CompleteService />
 		</div>
 	{/if}
 </Navbar>

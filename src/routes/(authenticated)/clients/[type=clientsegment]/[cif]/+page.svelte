@@ -36,11 +36,10 @@
 		type: '',
 		phone: ''
 	};
-
 </script>
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home href='/dashboard'>Home</BreadcrumbItem>
+	<BreadcrumbItem home href="/dashboard">Home</BreadcrumbItem>
 	<BreadcrumbItem href={`/clients/${client.type}`}>
 		{client.type.toLocaleUpperCase()} Clients
 	</BreadcrumbItem>
@@ -59,11 +58,11 @@
 				<LanguageTime />
 			</div>
 			<div class="col-span-2 space-y-4">
-				<PersonlaInfo {client}/>
+				<PersonlaInfo {client} />
 			</div>
 		</div>
 	</TabItem>
-	<TabItem >
+	<TabItem>
 		<div slot="title" class="flex items-center gap-2">
 			<WalletOutline size="md" />
 			Accounts

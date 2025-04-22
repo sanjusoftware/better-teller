@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { Breadcrumb, BreadcrumbItem } from 'flowbite-svelte';
 	import QuickActions from './QuickActions.svelte';
-	import QuickProducts from './QuickProducts.svelte';
 	import LastestClients from './LatestClientsServed.svelte';
-	import { page } from '$app/state';
 	import WelcomeCard from './WelcomeCard.svelte';
 	import ServiceTimeStats from './ServiceTimeStats.svelte';
 	import { currentClient } from '$lib/store';
