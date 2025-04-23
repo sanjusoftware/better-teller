@@ -1,8 +1,9 @@
 import type { PageServerLoad } from './$types';
 import Clients from "$lib/data/clients.json";
-import { redirect } from 'sveltekit-flash-message/server';
+import { redirect, setFlash } from 'sveltekit-flash-message/server';
 
 export const load: PageServerLoad = () => {
+    console.log('dashboard load called')
     let latestClients = Clients.slice(0, 5); // Get the first 5 clients from the list
 
     return {
@@ -62,7 +63,7 @@ export const actions = {
         }
     },
 
-    startScan: async ({ cookies }) => {
+    startScan: async ({cookies}) => {
         console.log('Scanning ID document...');
         // Simulate a ID scan operation 
         await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay for the scan operation
@@ -82,9 +83,10 @@ export const actions = {
             };
         }
 
-        // If a client is found, redirect to the client profile page with a success message
-        console.log('Scanned client:', scannedClient);
-        let message = "ID Scanned successfully. You are serving " + scannedClient.name;
-        redirect(303, "/clients/" + scannedClient.type + "/" + scannedClient.cif, { type: 'success', message: message }, cookies);
+        setFlash({ type: 'success', message: 'Scan Successful.' }, cookies);
+        return {
+            success: true,           
+            currentClient: scannedClient
+        };
     }
 };

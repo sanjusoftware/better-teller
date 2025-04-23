@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import {servingTicket, nextTicket, currentClient} from '$lib/servicecontext.svelte'
 	import { Badge, Button, Checkbox, Dropdown, DropdownItem, Modal, Search } from 'flowbite-svelte';
 	import { ChevronDownOutline, CameraPhotoOutline, AngleRightOutline } from 'flowbite-svelte-icons';
@@ -92,7 +93,7 @@
 	size="sm"
 	autoclose={false}
 >
-	<p class="text-sm text-gray-500 dark:text-gray-400">
+	<p class="text-sm text-gray-500 dark:text-gray-400 text-left">
 		Verify the client information before proceeding.
 	</p>
 	<form class="flex flex-col" action="#">
@@ -145,7 +146,7 @@
 			<Circle size="120" color="#37c92c" unit="px" duration="1s" />	
 		</div>
 	{:else}
-		<p class="text-sm text-gray-800 dark:text-gray-400">
+		<p class="text-sm text-gray-800 dark:text-gray-400 text-left">
 			Please insert the ID document into the scanning device.
 			<br />
 			Ensure that the document is properly aligned and clear for accurate scanning.
@@ -160,7 +161,9 @@
 					update().finally(async () => {
 						if (result.type === 'success') {
 							scanning = false;
+							console.log('currentClient', result.data?.currentClient)							
 							currentClient.current = result.data?.currentClient;
+							goto("/clients/" + currentClient.current.type + "/" + currentClient.current.cif);
 						} else {
 							new Error('Error scanning ID document: ' + result.status);
 						}
@@ -192,7 +195,7 @@
 			</div>
 		</form>
 	{/if}
-	<p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
+	<p class="text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
 		Note: The scanned ID document will be stored securely and will not be shared with any third
 		party.
 	</p>
