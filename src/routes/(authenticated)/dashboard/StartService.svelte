@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { currentClient, servingTicket, ticket } from '$lib/store';
+	import {servingTicket, nextTicket, currentClient} from '$lib/servicecontext.svelte'
 	import { Badge, Button, Checkbox, Dropdown, DropdownItem, Modal, Search } from 'flowbite-svelte';
 	import { ChevronDownOutline, CameraPhotoOutline, AngleRightOutline } from 'flowbite-svelte-icons';
 	import { Circle } from 'svelte-loading-spinners';
@@ -32,7 +32,7 @@
 	);
 	async function cancelVerification() {
 		clientVerficationModal = false;
-		$servingTicket = null;
+		servingTicket.current = '';
 	}
 
 	async function cancelScan() {
@@ -45,7 +45,7 @@
 	}
 </script>
 
-{#if !$servingTicket && $ticket}
+{#if servingTicket.current === '' && nextTicket.current != ''}
 	<div>
 		<form
 			action="?/startService"
@@ -55,8 +55,7 @@
 				return ({ result, update }) => {
 					update().finally(async () => {
 						if (result.type === 'success') {
-							console.log('Started serving ticket: ', result.data?.ticket);
-							$servingTicket = result.data?.ticket as string | null;
+							servingTicket.current = result.data?.ticket
 							clientVerficationModal = true;
 						} else {
 							new Error('Error starting service: ' + result.status);
@@ -72,12 +71,12 @@
 				class="mt-5 text-md font-medium inline-flex items-center bg-gray-200 text-gray-800 dark:bg-green-900 dark:text-green-300"
 				type="submit"
 			>
-				<input type="hidden" name="ticket" value={$ticket} />
+				<input type="hidden" name="ticket" value={nextTicket.current} />
 				<Badge
 					rounded
 					class="mr-5 h-8 p-2 text-sm font-medium text-gray-800 bg-white dark:text-primary-800 dark:bg-white"
 				>
-					Got Ticket: {$ticket}
+					Got Ticket: {nextTicket.current}
 				</Badge>
 				Start Service
 			</Button>
@@ -87,7 +86,7 @@
 
 <!-- Modal for client verification -->
 <Modal
-	title="Client Identification - Ticket {$servingTicket}"
+	title="Client Identification - Ticket {servingTicket.current}"
 	classHeader="text-gray-900"
 	bind:open={clientVerficationModal}
 	size="sm"
@@ -161,7 +160,7 @@
 					update().finally(async () => {
 						if (result.type === 'success') {
 							scanning = false;
-							$currentClient = result.data?.currentClient;
+							currentClient.current = result.data?.currentClient;
 						} else {
 							new Error('Error scanning ID document: ' + result.status);
 						}

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { servingTicket, ticket } from '$lib/store';
+	import {servingTicket, nextTicket} from '$lib/servicecontext.svelte'
 	import { Button } from 'flowbite-svelte';
 	import { AngleRightOutline } from 'flowbite-svelte-icons';
 </script>
 
-{#if !$servingTicket}
+{#if servingTicket.current === ''}
 	<form
 		action="?/getNextTicket"
 		method="POST"
@@ -15,7 +15,7 @@
 				update().finally(async () => {
 					if (result.type === 'success') {
 						console.log('Ticket acquired: ', result.data?.ticket);
-						$ticket = result.data?.ticket as string | null;
+						nextTicket.current = result.data?.ticket
 					} else {
 						new Error('Error aquiring ticket: ' + result.status);
 					}

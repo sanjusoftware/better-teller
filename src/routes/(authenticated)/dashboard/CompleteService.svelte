@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { servingTicket, ticket } from '$lib/store';
+	import {servingTicket, nextTicket, currentClient} from '$lib/servicecontext.svelte'
 	import { Button } from 'flowbite-svelte';
 	import { enhance } from '$app/forms';
 </script>
 
-{#if $servingTicket}
+{#if servingTicket.current != ''}
 	<div class="ml-2">
 		<form
 			action="/dashboard?/endService"
@@ -13,14 +13,15 @@
 			use:enhance={() => {
 				return ({ update }) => {
 					update().finally(async () => {
-						$servingTicket = null;
-						$ticket = null;
+						servingTicket.current = ''
+						nextTicket.current = ''
+						currentClient.current = JSON.stringify({})
 					});
 				};
 			}}
 		>
-			<input type="hidden" name="ticket" value={$servingTicket} />
-			<Button pill color="red" size="xs" class="px-3" type="submit">Complete Service</Button>
+			<input type="hidden" name="ticket" value={servingTicket.current} />
+			<Button pill color="red" size="xs" class="px-3" type="submit">Complete Service - {servingTicket.current}</Button>
 		</form>
 	</div>
 {/if}
