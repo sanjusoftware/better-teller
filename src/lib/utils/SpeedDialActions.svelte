@@ -12,7 +12,7 @@
 </script>
 
 <!-- Quick Actions -->
-  <SpeedDial defaultClass="fixed end-6 bottom-6" tooltip="none">
+  <SpeedDial tooltip="none">
     <SpeedDialButton name="Share">
       <ShareNodesSolid class="w-6 h-6" />
     </SpeedDialButton>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Button, Card } from 'flowbite-svelte';
 	import { RefreshOutline } from 'flowbite-svelte-icons';
-	import { flip } from 'svelte/animate';
-	let { client } = $props();
+	import SpeedDialActions from './SpeedDialActions.svelte';
+	let { IDForntImage, IDBackImage} = $props();
 
 	let showFront = $state(true);
 
@@ -17,11 +17,11 @@
 			<div class="card-inner" class:flipped={!showFront}>
 				{#if showFront}
 				<div class="card-front">
-					<img src="/images/idcards/idcard_front.png" alt="Front of ID card" />
+					<img  src={IDForntImage as string} alt="Front of ID card" />
 				</div>
 				{:else}
 				<div class="card-back">
-					<img src="/images/idcards/idcard_back.png" alt="Back of ID card" />
+					<img src={IDBackImage} alt="Back of ID card" />
 				</div>
 				{/if}
 			</div>

@@ -1,0 +1,42 @@
+{
+    "sweden": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Nya_svensk_ID.png",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Nya_svensk_ID_backsidan.png"
+    },
+    "bulgaria": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/a/ae/New_Bulgarian_ID_card_(front).png",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Bulgarian_Identity_card_-_back_(2024).png"
+    },
+    "swiss": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/NIDK-front.jpg/1259px-NIDK-front.jpg",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/NIDK-back.jpg/1256px-NIDK-back.jpg"
+    },
+    "norway": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/3/35/New_Norwegian_ID_Card_(2021)_(Front).png",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/0/0f/New_Norwegian_ID_(2021)_(Back).png"
+    },
+    "spain": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Spanish_ID_card_(front_side).webp/473px-Spanish_ID_card_(front_side).webp.png",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_(back_side).webp/473px-Spanish_ID_card_(back_side).webp.png"
+    },
+    "hungary": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/b/bf/The_renewed_hungarian_ID.jpg",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/3/3b/HunIDback.jpg"
+    },
+    "italy": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/a/af/CIE_(fronte).jpg",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/d/dc/CIE_(retro).jpg"
+    },
+    "netherland": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/8/89/Nederlandse_identiteitskaart_2021-II_(Voorkant).jpg",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Nederlandse_identiteitskaart_2021-II_(Rug).jpg"
+    },
+    "usa": {
+        "front": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Passport_card.jpg",
+        "back": "https://upload.wikimedia.org/wikipedia/commons/5/53/Ppt_card_back.jpg"
+    },
+    "india": {
+        "front": "https://miro.medium.com/v2/resize:fit:4000/1*Fr29c2pLjD1Z6mhzM3MAfg.png",
+        "back": "https://miro.medium.com/v2/resize:fit:4800/format:webp/1*hcnCzr1CrW9PvWc600TYOA.png"
+    }
+}

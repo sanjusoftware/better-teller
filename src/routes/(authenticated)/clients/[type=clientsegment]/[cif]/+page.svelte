@@ -15,7 +15,7 @@
 	import BankCards from './Cards.svelte';
 	import Documents from './Documents.svelte';
 	import Emails from './Emails.svelte';
-	import IDDcoument from './IDDocument.svelte';
+	import IDDcoument from '$lib/utils/IDDocument.svelte';
 	import Loans from './Loans.svelte';
 	import PasswordInfo from './PasswordInfo.svelte';
 	import PersonlaInfo from './PersonalInfo.svelte';
@@ -33,7 +33,9 @@
 		country: '',
 		status: '',
 		type: '',
-		phone: ''
+		phone: '',
+		id_card_back_image: '',
+		id_card_front_image:''
 	};
 </script>
 
@@ -53,7 +55,7 @@
 		</div>
 		<div class="grid grid-cols-2 dark:bg-gray-900 xl:grid-cols-2 xl:gap-3.5">
 			<div class="space-y-4">
-				<IDDcoument {client} />
+				<IDDcoument IDForntImage={client.id_card_front_image} IDBackImage={client.id_card_back_image} />
 			</div>
 			<div class="space-y-4">
 				<PersonlaInfo {client} />
