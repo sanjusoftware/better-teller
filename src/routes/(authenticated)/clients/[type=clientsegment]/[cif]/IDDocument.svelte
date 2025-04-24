@@ -1,0 +1,54 @@
+<script lang="ts">
+	import { Button, Card } from 'flowbite-svelte';
+	import { RefreshOutline } from 'flowbite-svelte-icons';
+	let { client } = $props();
+
+	let idCardFront = $state(true);
+	let showFront = $state(true);
+
+	function toggleCard() {
+		showFront = !showFront;
+	}
+</script>
+
+<Card class="p-5" size="xl">
+	<div class="flex items-center justify-center">
+		<button onclick={toggleCard} class="w-full text-white">
+			<div class="card-inner" class:flipped={showFront}>
+				{#if showFront}
+				<div class="card-front">
+					<img src="/images/idcards/idcard_front.png" alt="Front of ID card" />
+				</div>
+				{:else}
+				<div class="card-back">
+					<img src="/images/idcards/idcard_back.png" alt="Back of ID card" />
+				</div>
+				{/if}
+			</div>
+		</button>
+	</div>
+</Card>
+<div class="flex items-center justify-center">
+	<Button
+		pill
+		outline
+		onclick={toggleCard}
+	>
+		<RefreshOutline size="md" class="mr-2" />Flip card
+	</Button>
+</div>
+
+<style>
+	.card-inner {
+		transition: transform 0.6s;
+		transform-style: preserve-3d;
+	}
+
+	.card-back {
+		transform: rotateY(180deg);
+	}
+
+	.flipped {
+		transform: rotateY(180deg);
+	}
+</style>

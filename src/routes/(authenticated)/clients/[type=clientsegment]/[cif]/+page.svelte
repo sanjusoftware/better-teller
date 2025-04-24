@@ -15,11 +15,10 @@
 	import BankCards from './Cards.svelte';
 	import Documents from './Documents.svelte';
 	import Emails from './Emails.svelte';
-	import LanguageTime from './LanguageTime.svelte';
+	import IDDcoument from './IDDocument.svelte';
 	import Loans from './Loans.svelte';
 	import PasswordInfo from './PasswordInfo.svelte';
 	import PersonlaInfo from './PersonalInfo.svelte';
-	import ProfilePicture from './ProfilePicture.svelte';
 	import Sessions from './Sessions.svelte';
 
 	import type { PageData } from './$types';
@@ -46,18 +45,17 @@
 	<BreadcrumbItem>{client.name}</BreadcrumbItem>
 </Breadcrumb>
 
-<Tabs tabStyle="underline" contentClass="py-4 bg-gray-50 rounded-lg dark:bg-gray-800">
+<Tabs tabStyle="underline" contentClass="p-2 bg-white rounded-lg dark:bg-gray-800">
 	<TabItem open>
 		<div slot="title" class="flex items-center gap-2">
 			<ProfileCardOutline size="md" />
 			Profile
 		</div>
-		<div class="grid grid-cols-2 dark:bg-gray-900 xl:grid-cols-3 xl:gap-3.5">
-			<div class="col-span-full space-y-4 xl:col-auto">
-				<ProfilePicture {client} />
-				<LanguageTime />
+		<div class="grid grid-cols-2 dark:bg-gray-900 xl:grid-cols-2 xl:gap-3.5">
+			<div class="space-y-4">
+				<IDDcoument {client} />
 			</div>
-			<div class="col-span-2 space-y-4">
+			<div class="space-y-4">
 				<PersonlaInfo {client} />
 			</div>
 		</div>

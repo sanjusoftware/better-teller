@@ -8,7 +8,6 @@
 
 	let clientVerficationModal = $state(false);
 	let OCRModal = $state(false);
-	let selectedItem = $state('UCN');
 	let startScanConsent = $state(false);
 	let scanning = $state(false);
 	let scanModalTitle = $derived(
@@ -20,17 +19,27 @@
 			placeholder: 'Search UCN or EGN'
 		},
 		{
-			label: 'CIF',
+			label: 'Client Number',
 			placeholder: 'Search CIF'
 		},
 		{
-			label: 'Mobile No.',
-			placeholder: 'Search Mobile'
+			label: 'Account',
+			placeholder: 'Search account number'
+		},
+		{
+			label: 'Phone Number',
+			placeholder: 'Search Phone Number'
+		},
+		{
+			label: 'Email',
+			placeholder: 'Search Email'
 		}
 	];
+	let selectedItem = $state('UCN');
 	let searchPlaceholder = $derived(
 		searchableItems.find((item) => item.label === selectedItem)?.placeholder
 	);
+
 	async function cancelVerification() {
 		clientVerficationModal = false;
 		servingTicket.current = '';
@@ -92,12 +101,13 @@
 	bind:open={clientVerficationModal}
 	size="sm"
 	autoclose={false}
+	dismissable={false}
 >
 	<p class="text-sm text-gray-500 dark:text-gray-400 text-left">
 		Verify the client information before proceeding.
 	</p>
 	<form class="flex flex-col" action="#">
-		<div class="flex items-center">
+		<div class="flex items-center" style="height: auto;">
 			<div class="relative">
 				<Button class="rounded-e-none whitespace-nowrap border border-e-0 border-primary-700">
 					{selectedItem}
@@ -140,6 +150,7 @@
 	bind:open={OCRModal}
 	size="sm"
 	autoclose={false}
+	dismissable={false}
 >
 	{#if scanning}		
 		<div class="flex justify-center items-center h-32">
