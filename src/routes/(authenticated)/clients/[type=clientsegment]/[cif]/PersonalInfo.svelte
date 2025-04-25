@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Card from '$lib/utils/InfoCard.svelte';
-	import { A, Button, Checkbox, Datepicker, Input, Label, Select } from 'flowbite-svelte';
+	import { Button, Datepicker, Input, Label, Select } from 'flowbite-svelte';
 	import { EditOutline } from 'flowbite-svelte-icons';
-	let selected: string | undefined;
+	let selected = $state<string | undefined>(undefined);
 	let countries = [
 		{ value: 'idcard', name: 'ID Card' },
 		{ value: 'passport', name: 'Passport' },
