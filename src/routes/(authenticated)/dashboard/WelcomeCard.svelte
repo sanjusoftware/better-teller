@@ -6,6 +6,7 @@
 	import { humanize } from '$lib/utils/strings';
 	import { Badge, Button, Card } from 'flowbite-svelte';
 	import { ClockOutline } from 'flowbite-svelte-icons';	
+	import CurrentClient from './CurrentClient.svelte';
 </script>
 
 <Card class="text-center flex items-center" size="xl">
@@ -29,6 +30,9 @@
 	<div class="mb-5 space-y-4 sm:space-y-0 sm:space-x-4">
 		<GetNextTicket />
 		<StartService />
-		<CompleteService />		
+		<div class="flex items-center space-x-1 ml-2">
+			<CurrentClient/>
+			<CompleteService />	
+		</div>
 	</div>
 </Card>

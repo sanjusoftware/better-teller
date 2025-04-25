@@ -1,59 +1,48 @@
 <script>
-	import { Button, Popover, ToolbarButton } from 'flowbite-svelte';
-	import {
-		BellSolid,
-		EyeSolid
-	} from 'flowbite-svelte-icons';
+	import { Button, Popover } from 'flowbite-svelte';
+	import { BellSolid, EyeSolid } from 'flowbite-svelte-icons';
 	import Notification from './Notification.svelte';
+
+	let notifications = [
+		{
+			sender: 'Tamas Hak-Kovacs',
+			time: 'a few moments ago',
+			message: 'When can I get an update on the loan application # 12324342?'
+		},
+		{
+			sender: 'Petko Rangelov',
+			time: 'a few moments ago',
+			message: 'We need to keep cash ready for the Euro adaption day!!'
+		},
+		{
+			sender: 'Sanjeev Mishra',
+			time: 'a few moments ago',
+			message: 'Perhaps we can complete this project at the end :)'
+		}
+	];
 </script>
 
-<ToolbarButton size="lg" class="-mx-0.5 hover:text-gray-900 dark:hover:text-white">
-	<BellSolid size="lg" />
-</ToolbarButton>
+<div id="bell" class="inline-flex items-center text-sm focus:outline-hidden hover:cursor-pointer">
+	<BellSolid size="xl" color="green" />
+	<div class="flex relative">
+		<div
+			class="inline-flex relative -top-2 end-3 w-5 h-5 bg-red-500 rounded-full border-2 border-white dark:border-gray-900"
+		>
+			<span class="text-xs font-normal text-white m-auto">{notifications.length}</span>
+		</div>
+	</div>
+</div>
 <Popover class="max-w-sm border-0" trigger="click" defaultClass="p-0" arrow={false} offset={10}>
 	<div slot="title" class="rounded text-center">Notifications</div>
 	<div class="bg-50 dark:bg-gray-700">
-		<Notification
-			href="#"
-			when="a few moments ago"
-		>
-			New message from <span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span>
-			: "Hey, what's up? All set for the presentation?"
-		</Notification>
-		<Notification
-			href="#"
-			when="10 minutes ago"
-		>
-			<span class="font-semibold text-gray-900 dark:text-white">Jese leos</span> and
-			<span class="font-medium text-gray-900 dark:text-white">5 others</span> started following you.
-		</Notification>
-
-		<Notification
-			href="#"
-			when="44 minutes ago"
-		>
-			<span class="font-semibold text-gray-900 dark:text-white">Joseph Mcfall</span> and
-			<span class="font-medium text-gray-900 dark:text-white">141 others</span> love your story. See
-			it and view more stories.
-		</Notification>
-
-		<Notification
-			href="#"
-			when="1 hour ago"
-		>
-			<span class="font-semibold text-gray-900 dark:text-white">Leslie Livingston</span>
-			mentioned you in a comment:
-			<span class="font-medium text-primary-700 dark:text-primary-500">@bonnie.green</span> what do you
-			say?
-		</Notification>
-
-		<Notification
-			href="#"
-			when="3 hours ago"
-		>
-			<span class="font-semibold text-gray-900 dark:text-white">Robert Brown</span> posted a new video:
-			Glassmorphism - learn how to implement the new design trend.
-		</Notification>
+		{#each notifications as notification}
+			<Notification href="#" when={notification.time}>
+				New message from <span class="font-semibold text-gray-900 dark:text-white">
+					{notification.sender}
+				</span>
+				: "{notification.message}"
+			</Notification>
+		{/each}
 	</div>
 	<Button
 		href="/"

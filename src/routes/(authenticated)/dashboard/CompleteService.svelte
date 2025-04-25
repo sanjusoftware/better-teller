@@ -1,24 +1,15 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import {
-		servingTicket,
-		nextTicket,
 		currentClient,
-		currentClientPath,
-		isCurrentClient
+		nextTicket,
+		servingTicket
 	} from '$lib/servicecontext.svelte';
 	import { Button } from 'flowbite-svelte';
-	import { enhance } from '$app/forms';
 </script>
 
 {#if servingTicket.current != ''}
-	<div class="flex items-center space-x-1 ml-2">
-		{#if isCurrentClient()}
-			<div>
-				<Button outline pill size="xs" href={currentClientPath()} class="inline-flex items-center">
-					Serving: {currentClient.current.name}
-				</Button>
-			</div>
-		{/if}
+	<div class="flex items-center space-x-1 ml-2">		
 		<div>
 			<form
 				action="/dashboard?/endService"
@@ -35,7 +26,7 @@
 				}}
 			>
 				<input type="hidden" name="ticket" value={servingTicket.current} />
-				<Button pill color="red" size="xs" class="px-3" type="submit">Complete Service</Button>
+				<Button pill size="xs" class="px-3" type="submit">Complete Service</Button>
 			</form>
 		</div>
 	</div>

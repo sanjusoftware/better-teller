@@ -51,13 +51,13 @@
 	<TabItem open>
 		<div slot="title" class="flex items-center gap-2">
 			<ProfileCardOutline size="md" />
-			Profile
+			ID Document
 		</div>
-		<div class="grid grid-cols-2 dark:bg-gray-900 xl:grid-cols-2 xl:gap-3.5">
-			<div class="space-y-4">
+		<div class="grid grid-cols-7 dark:bg-gray-900 xl:grid-cols-7 xl:gap-3.5">
+			<div class="space-y-4 col-span-3">
 				<IDDcoument IDForntImage={client.id_card_front_image} IDBackImage={client.id_card_back_image} />
 			</div>
-			<div class="space-y-4">
+			<div class="space-y-4 col-span-4">
 				<PersonlaInfo {client} />
 			</div>
 		</div>

@@ -12,11 +12,12 @@
 		Navbar
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
+	import { getFlash } from 'sveltekit-flash-message';
 	import CompleteService from '../../routes/(authenticated)/dashboard/CompleteService.svelte';
-	import Languages from './LanguageList.svelte';
+	import CurrentClient from '../../routes/(authenticated)/dashboard/CurrentClient.svelte';
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
-	import { getFlash } from 'sveltekit-flash-message';
+	import UserSettings from './UserSettings.svelte';
 
 	let user = page.data.session?.user;
 	let fluid = $state(true);
@@ -75,12 +76,14 @@
 			{/if}
 		</div>
 		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
-			<Languages />
-			<Notifications />
-			<!-- <AppsMenu /> -->
-			<DarkMode />
+			<div class="absolute inset-x-0 flex justify-center">
+				<CurrentClient />
+			</div>
+			<!-- <Languages /> -->
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
-			<CompleteService />
+			<Notifications />
+			<UserSettings/>
+			<CompleteService />			
 		</div>
 	{/if}
 </Navbar>

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import '../../app.css';
 	import Navbar from '$lib/utils/Navbar.svelte';
 	import Sidebar from '$lib/utils/Sidebar.svelte';
-	import SpeedDial from '$lib/utils/SpeedDialActions.svelte';
+	import '../../app.css';
 	let drawerHidden = false;	
 </script>
 
@@ -19,5 +18,5 @@
 		</div>
 	</div>
 	<!-- Quick Actions -->
-	<SpeedDial />
+	<!-- <SpeedDial /> -->
 </div>
