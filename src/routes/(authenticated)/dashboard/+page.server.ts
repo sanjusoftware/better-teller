@@ -3,7 +3,6 @@ import Clients from "$lib/data/clients.json";
 import { redirect, setFlash } from 'sveltekit-flash-message/server';
 
 export const load: PageServerLoad = () => {
-    console.log('dashboard load called')
     let latestClients = Clients.slice(0, 5); // Get the first 5 clients from the list
 
     return {
@@ -83,7 +82,6 @@ export const actions = {
             };
         }
 
-        setFlash({ type: 'success', message: 'Scan Successful.' }, cookies);
         return {
             success: true,           
             currentClient: scannedClient

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { humanize } from '$lib/utils/strings';
+	import { SignOut } from '@auth/sveltekit/components';
 	import {
 		Avatar,
 		Button,
@@ -7,8 +9,6 @@
 		DropdownHeader,
 		DropdownItem
 	} from 'flowbite-svelte';
-	import { humanize } from '$lib/utils/strings';
-	import { SignOut } from '@auth/sveltekit/components';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 
 	export let name: string = '';
@@ -16,7 +16,7 @@
 	export let email: string = '';
 </script>
 
-<div class="flex items-center space-x-4 rtl:space-x-reverse">
+<div class="flex items-center space-x-4 rtl:space-x-reverse ml-4">
 	<Avatar src={avatar} size="sm" />
 	<div class="text-sm text-black font-bold dark:text-white">
 		<div>{humanize(name)}</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Dropdown, DropdownDivider, Toggle } from 'flowbite-svelte';
+	import { Button, Dropdown, DropdownDivider, Toggle } from 'flowbite-svelte';
 	import { CogOutline } from 'flowbite-svelte-icons';
 	let isDarkMode = false;
 </script>

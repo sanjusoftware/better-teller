@@ -10,7 +10,7 @@
 {#if isCurrentClient()}
 	<div>
 		<Button outline pill size="xs" href={currentClientPath()} class="inline-flex items-center">
-			Currently Serving: {currentClient.current.name}
+			Serving: {currentClient.current.name}
 		</Button>
 	</div>
 {/if}

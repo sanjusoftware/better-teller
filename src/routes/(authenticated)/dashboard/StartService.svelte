@@ -171,8 +171,7 @@
 				return ({ result, update }) => {
 					update().finally(async () => {
 						if (result.type === 'success') {
-							scanning = false;
-							console.log('currentClient', result.data?.currentClient)							
+							scanning = false;							
 							currentClient.current = result.data?.currentClient;
 							goto("/clients/" + currentClient.current.type + "/" + currentClient.current.cif);
 						} else {

@@ -14,7 +14,6 @@
 			return ({ result, update }) => {
 				update().finally(async () => {
 					if (result.type === 'success') {
-						console.log('Ticket acquired: ', result.data?.ticket);
 						nextTicket.current = result.data?.ticket
 					} else {
 						new Error('Error aquiring ticket: ' + result.status);
@@ -25,7 +24,7 @@
 	>
 		<Button
 			pill
-			class="mt-5 h-15 text-md inline-flex items-center dark:bg-green-900 dark:text-green-300"
+			class="mt-5 h-15 text-md inline-flex items-center dark:bg-primary-900 dark:text-primary-300"
 			type="submit"
 		>
 			Get Next Ticket
