@@ -33,8 +33,13 @@ const updatePastClients = () => {
         return;
     }
 
-    let pastclientsList = pastClients.current;   
-    pastclientsList.push(currentClient.current);
+    let pastclientsList = pastClients.current;
+    if (pastclientsList.length >= 20) {
+        // Remove the oldest client if we have more than 20 clients to not overload localstorage
+        // and to keep the list manageable
+        pastclientsList.shift();
+    }
+    pastclientsList.unshift(currentClient.current);
     pastClients.current = pastclientsList;
 }
 

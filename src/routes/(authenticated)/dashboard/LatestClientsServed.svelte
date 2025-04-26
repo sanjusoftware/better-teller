@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<div class="border-b border-gray-200 dark:border-gray-700">
-		<ClientsList clientsServed={latestClients.slice(0, 3)} />
+		<ClientsList clientsServed={latestClients.slice(0,3)} />
 	</div>
 	<div class="mt-4 flex items-center justify-between">
 		<LastRange timeslot="Today" />
