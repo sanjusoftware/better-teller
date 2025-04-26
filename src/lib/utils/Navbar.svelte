@@ -18,6 +18,7 @@
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
 	import UserSettings from './UserSettings.svelte';
+	import LanguageList from './LanguageList.svelte';
 
 	let user = page.data.session?.user;
 	let fluid = $state(true);
@@ -77,11 +78,9 @@
 		</div>
 		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
 			<CurrentClient />
-			<!-- <Languages /> -->
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
 			<Notifications />
 			<UserSettings/>
-			<CompleteService />			
 		</div>
 	{/if}
 </Navbar>

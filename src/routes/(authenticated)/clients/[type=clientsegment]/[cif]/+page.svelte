@@ -23,12 +23,10 @@
 	import { page } from '$app/state';
 
 	let { client, open } = $derived(page.data);
-	const tabs = ['identity', 'cards', 'accounts', 'loans', 'documents', 'security', 'alerts'];
-	
+	const tabs = ['identity', 'cards', 'accounts', 'loans', 'documents', 'security', 'alerts'];	
 	const openTab = $derived(open ? tabs.includes(open) ? open : 'identity' : 'identity');	
 
 	function isOpen(tabName: string): boolean {
-		console.log('tabName', tabName, 'open', openTab);
 		return tabName === openTab;
 	}
 
