@@ -22,7 +22,16 @@
 	import Sessions from './Sessions.svelte';
 	import { page } from '$app/state';
 
-	let { client } = $derived(page.data);
+	let { client, open } = $derived(page.data);
+	const tabs = ['identity', 'cards', 'accounts', 'loans', 'documents', 'security', 'alerts'];
+	
+	const openTab = $derived(open ? tabs.includes(open) ? open : 'identity' : 'identity');	
+
+	function isOpen(tabName: string): boolean {
+		console.log('tabName', tabName, 'open', openTab);
+		return tabName === openTab;
+	}
+
 </script>
 
 <Breadcrumb class="mb-5">
@@ -34,7 +43,7 @@
 </Breadcrumb>
 
 <Tabs tabStyle="underline" contentClass="p-2 bg-white rounded-lg dark:bg-gray-800">
-	<TabItem open>
+	<TabItem open={isOpen('identity')}>
 		<div slot="title" class="flex items-center gap-2">
 			<ProfileCardOutline size="md" />
 			ID Document
@@ -51,14 +60,14 @@
 			</div>
 		</div>
 	</TabItem>
-	<TabItem>
+	<TabItem open={isOpen('accounts')}>
 		<div slot="title" class="flex items-center gap-2">
 			<WalletOutline size="md" />
 			Accounts
 		</div>
 		<Accounts />
 	</TabItem>
-	<TabItem>
+	<TabItem open={isOpen('cards')}>
 		<div slot="title" class="flex items-center gap-2">
 			<CreditCardOutline size="md" />
 			Cards
@@ -67,7 +76,7 @@
 			<BankCards />
 		</div>
 	</TabItem>
-	<TabItem>
+	<TabItem open={isOpen('loans')}>
 		<div slot="title" class="flex items-center gap-2">
 			<ChartMixedDollarOutline size="md" />
 			Loans
@@ -76,7 +85,7 @@
 			<Loans />
 		</div>
 	</TabItem>
-	<TabItem>
+	<TabItem open={isOpen('documents')}>
 		<div slot="title" class="flex items-center gap-2">
 			<FileCopyAltOutline size="md" />
 			Documents
@@ -85,7 +94,7 @@
 			<Documents />
 		</div>
 	</TabItem>
-	<TabItem>
+	<TabItem open={isOpen('security')}>
 		<div slot="title" class="flex items-center gap-2">
 			<FingerprintOutline size="md" />
 			Security
@@ -95,7 +104,7 @@
 			<Sessions />
 		</div>
 	</TabItem>
-	<TabItem>
+	<TabItem open={isOpen('alerts')}>
 		<div slot="title" class="flex items-center gap-2">
 			<BellActiveAltOutline size="md" />
 			Notification Preferences

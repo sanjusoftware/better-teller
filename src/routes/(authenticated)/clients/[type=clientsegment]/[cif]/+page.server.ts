@@ -12,7 +12,7 @@ import { promises as fs } from 'node:fs';
 import path from 'path';
 import type { Actions } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, url }) => {
     const client = Clients.find((client) => client.cif === Number(params.cif) && client.type === params.type)
     if (!client) {
         throw error(404, 'Client not found: CIF ' + params.cif);
@@ -20,6 +20,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
     const documentForm = await superValidate(zod(documentSchema));
     return {
+        open: url.searchParams.get('open'),
         documentForm: documentForm,
         client: client,
         Accounts: Accounts.filter((account) => account.customerId === Number(params.cif)),

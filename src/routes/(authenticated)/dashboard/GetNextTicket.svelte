@@ -30,5 +30,5 @@
 			Get Next Ticket
 			<AngleRightOutline size="md" class="w-5 h-5 ms-2" />
 		</Button>
-	</form>
+	</form>	
 {/if}

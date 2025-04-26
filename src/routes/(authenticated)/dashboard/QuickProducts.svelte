@@ -10,8 +10,8 @@
 
 	let items = [
 		{
-			name: 'Accounts',
-			icon: QrCodeOutline,
+			name: 'Plans',
+			icon: GridOutline,
 			description: 'Current, Savings, Packages',
 			href: '/products/casa'
 		},
@@ -48,27 +48,27 @@
 	];
 </script>
 
-<Card size="xl">
+<Card size="none" class="mb-5">
 	<div class="mb-4 flex items-center justify-between">
-		<div class="flex items-center gap-2 text-lg font-medium text-grey-600">
+		<div class="flex items-center gap-2 text-lg font-medium text-gray-900 dark:text-white">
 			<GridOutline />
 			<span>Browse Products</span>
 		</div>
 		<a
 			href="/products/all"
-			class="inline-flex items-center rounded-lg p-2 text-sm font-medium text-primary-700 dark:text-primary-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+			class="inline-flex items-center rounded-lg p-2 text-sm font-normal text-primary-700 dark:text-primary-500"
 		>
-			<EyeOutline size='sm'/>
+			<EyeOutline size='sm'/> Show All
 		</a>
 	</div>
-	<div class="grid grid-cols-2 gap-3 xl:grid-cols-3">
+	<div class="grid grid-cols-6 gap-3 xl:grid-cols-6">
 		{#each items as action}
 			<a href={action.href}>
-				<Card class="h-full">
+				<Card class="h-full flex flex-col items-center text-center">
 					<span>
 						<svelte:component
 							this={action.icon}
-							class="w-8 h-8 mb-3 text-green-500 dark:text-gray-400"
+							class="w-8 h-8 mb-3 text-green-500 dark:text-gray-400 mx-auto"
 						/>
 						<div class="mb-2 text-xl font-semibold tracking-tight text-green-900 dark:text-white">
 							{action.name}

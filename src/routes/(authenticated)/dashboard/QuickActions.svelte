@@ -1,56 +1,70 @@
 <script lang="ts">
+	import { currentClientPath } from '$lib/servicecontext.svelte';
 	import { Card } from 'flowbite-svelte';
 	import {
 		ArrowsRepeatOutline,
 		ArrowUpDownOutline,
 		CashOutline,
+		CreditCardOutline,
 		EditOutline,
-		ExpandOutline
+		QrCodeOutline
 	} from 'flowbite-svelte-icons';
 
-	let quickactions = [
+	let quickLinks = [
+		
+		{
+			name: 'Cards',
+			icon: CreditCardOutline,
+			description: 'Debit, Credit, Prepaid',
+			href: currentClientPath('cards') 
+		},
+		{
+			name: 'Accounts',
+			icon: QrCodeOutline,
+			description: 'Savings, Current, Fixed',
+			href: currentClientPath('accounts')
+		},		
+		{
+			name: 'Transactions',
+			icon: ArrowsRepeatOutline,
+			description: 'Internal, External, International',
+			href: currentClientPath('transactions')
+		},
 		{
 			name: 'Transfers',
-			icon: ArrowUpDownOutline,
-			description: 'SEPA, BLINK, SWIFT, P2P',
-			href: '/transfers'
+			icon: ArrowUpDownOutline,	
+			description: 'Internal, External, International',
+			href: currentClientPath('transfers')
 		},
 		{
 			name: 'Payments',
 			icon: CashOutline,
 			description: 'Phone, Water, Electricity',
-			href: '/payments'
-		},
-		{
-			name: 'Transactions',
-			icon: ArrowsRepeatOutline,
-			description: 'Search Incoming and Outgoing Transactions',
-			href: '/transactions'
+			href: currentClientPath('payments')
 		}
 	];
 </script>
 
-<Card size="none">
+<Card size="none" class="mb-5">
 	<div class="mb-4 flex items-center justify-between">
-		<div class="flex items-center gap-2 font-medium text-grey-600">
-			<ExpandOutline />
-			<span>Quick Actions</span>
+		<div class="flex items-center gap-2 font-medium text-gray-900 dark:text-white">
+			Quick Links
 		</div>
 		<a
 			href="#top"
-			class="inline-flex items-center rounded-lg p-2 text-sm font-medium text-primary-700 hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700"
+			class="inline-flex items-center rounded-lg p-2 text-sm font-normal text-primary-700 dark:text-primary-500"
 		>
-			<EditOutline size="sm" />
+			<EditOutline size="sm" /> Edit Links
 		</a>
 	</div>
-	<div class="grid grid-cols-2 gap-3 xl:grid-cols-3">
-		{#each quickactions as action}
+	<div class="grid grid-cols-5 gap-3 xl:grid-cols-5">
+		{#each quickLinks as action}
 			<a href={action.href}>
-				<Card class="h-full">
+				<Card size="md" class="h-full flex flex-col items-center text-center">
 					<span>
 						<svelte:component
 							this={action.icon}
-							class="w-8 h-8 mb-3 text-green-500 dark:text-gray-400"
+							class="w-8 h-8 mb-3 text-green-500 dark:text-gray-400 mx-auto"
 						/>
 						<div class="mb-2 text-xl font-semibold tracking-tight text-green-900 dark:text-white">
 							{action.name}

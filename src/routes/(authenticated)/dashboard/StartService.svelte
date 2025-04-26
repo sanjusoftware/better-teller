@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import {servingTicket, nextTicket, currentClient} from '$lib/servicecontext.svelte'
+	import {
+		currentClient,
+		isCurrentClient,
+		nextTicket,
+		servingTicket
+	} from '$lib/servicecontext.svelte';
 	import { Badge, Button, Checkbox, Dropdown, DropdownItem, Modal, Search } from 'flowbite-svelte';
-	import { ChevronDownOutline, CameraPhotoOutline, AngleRightOutline } from 'flowbite-svelte-icons';
+	import { AngleRightOutline, CameraPhotoOutline, ChevronDownOutline } from 'flowbite-svelte-icons';
 	import { Circle } from 'svelte-loading-spinners';
 
-	let clientVerficationModal = $state(false);
+	let clientVerficationModal = $state(servingTicket.current !== '' && !isCurrentClient());
 	let OCRModal = $state(false);
 	let startScanConsent = $state(false);
 	let scanning = $state(false);
@@ -65,7 +70,7 @@
 				return ({ result, update }) => {
 					update().finally(async () => {
 						if (result.type === 'success') {
-							servingTicket.current = result.data?.ticket
+							servingTicket.current = result.data?.ticket;
 							clientVerficationModal = true;
 						} else {
 							new Error('Error starting service: ' + result.status);
@@ -106,41 +111,38 @@
 	<p class="text-sm text-gray-500 dark:text-gray-400 text-left">
 		Verify the client information before proceeding.
 	</p>
-	<form class="flex flex-col" action="#">
-		<div class="flex items-center" style="height: auto;">
-			<div class="relative">
-				<Button class="rounded-e-none whitespace-nowrap border border-e-0 border-primary-700">
-					{selectedItem}
-					<ChevronDownOutline class="w-2.5 h-2.5 ms-2.5" />
-				</Button>
-				<Dropdown classContainer="w-40">
-					{#each searchableItems as { label }}
-						<DropdownItem
-							on:click={() => {
-								selectedItem = label;
-							}}
-							class={selectedItem === label ? 'underline' : ''}
-						>
-							{label}
-						</DropdownItem>
-					{/each}
-				</Dropdown>
-			</div>
-			<Search
-				size="md"
-				class="rounded-s-none w-96 border focus:outline-none"
-				placeholder={searchPlaceholder}
-			/>
+	<div class="flex items-center justify-between" style="height: auto;">
+		<div class="relative flex-shrink-0">
+			<Button class="rounded-e-none whitespace-nowrap border border-e-0 border-primary-700">
+				{selectedItem}
+				<ChevronDownOutline class="w-2.5 h-2.5 ms-2.5" />
+			</Button>
+			<Dropdown classContainer="w-40">
+				{#each searchableItems as { label }}
+					<DropdownItem
+						on:click={() => {
+							selectedItem = label;
+						}}
+						class={selectedItem === label ? 'underline' : ''}
+					>
+						{label}
+					</DropdownItem>
+				{/each}
+			</Dropdown>
 		</div>
-	</form>
-
-	<div class="space-y-2 font-medium text-center text-gray-500 dark:text-gray-400">OR</div>
-	<div class="flex justify-center space-x-4">
-		<Button pill type="button" class="w-1/2" on:click={startOCR}>
+		<Search
+			size="md"
+			class="rounded-s-none border focus:outline-none flex-grow"
+			placeholder={searchPlaceholder}
+		/>
+		<span class="text-sm ml-2">OR</span>
+		<Button pill type="button" class="flex-shrink-0 ml-2" on:click={startOCR}>
 			<CameraPhotoOutline class="w-4 h-4 me-2" />OCR
 		</Button>
-		<Button pill outline color="red" class="w-1/2" on:click={cancelVerification}>Cancel</Button>
 	</div>
+	<Button pill outline color="red"  on:click={cancelVerification}>
+		Release Ticket
+	</Button>
 </Modal>
 
 <!-- Modal for OCR scanning -->
@@ -152,9 +154,9 @@
 	autoclose={false}
 	dismissable={false}
 >
-	{#if scanning}		
+	{#if scanning}
 		<div class="flex justify-center items-center h-32">
-			<Circle size="120" color="#37c92c" unit="px" duration="1s" />	
+			<Circle size="120" color="#37c92c" unit="px" duration="1s" />
 		</div>
 	{:else}
 		<p class="text-sm text-gray-800 dark:text-gray-400 text-left">
@@ -171,9 +173,9 @@
 				return ({ result, update }) => {
 					update().finally(async () => {
 						if (result.type === 'success') {
-							scanning = false;							
+							scanning = false;
 							currentClient.current = result.data?.currentClient;
-							goto("/clients/" + currentClient.current.type + "/" + currentClient.current.cif);
+							goto('/clients/' + currentClient.current.type + '/' + currentClient.current.cif);
 						} else {
 							new Error('Error scanning ID document: ' + result.status);
 						}
