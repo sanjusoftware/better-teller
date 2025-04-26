@@ -1,18 +1,16 @@
 <script lang="ts">
+	import Pagination from '$lib/utils/Pagination.svelte';
+	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
 	import dayjs from 'dayjs';
 	import customParseFormat from 'dayjs/plugin/customParseFormat';
 	import localizedFormat from 'dayjs/plugin/localizedFormat';
 	import { copy } from 'svelte-copy';
-	dayjs.extend(customParseFormat);
-	dayjs.extend(localizedFormat);
-	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
-	import Pagination from '$lib/utils/Pagination.svelte';
+	import { page } from '$app/state';
 
 	import {
 		Button,
 		ButtonGroup,
 		Checkbox,
-		Dropdown,
 		TableBodyCell,
 		TableBodyRow,
 		Tooltip
@@ -25,16 +23,13 @@
 		DownloadOutline,
 		EyeSolid,
 		FileCopyOutline,
-		FilterSolid,
 		HomeOutline,
 		LockOpenOutline,
 		TruckClockOutline
 	} from 'flowbite-svelte-icons';
 
-	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
-	let loans = data.Loans;
-	let client = data.client;
+	let loans = $derived(page.data.Loans);
+	let client = $derived(page.data.client);
 
 	let searchPlaceholder = 'Search by Account Number, IBAN ...';
 </script>

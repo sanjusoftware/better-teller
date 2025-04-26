@@ -27,11 +27,10 @@
 		SalePercentOutline,
 		WalletOutline
 	} from 'flowbite-svelte-icons';
+	import { page } from '$app/state';
 
-	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
-	let accounts = data.Accounts;
-	let client = data.client;
+	let accounts = $derived(page.data.Accounts);
+	let client = $derived(page.data.client);
 </script>
 
 <Pagination

@@ -3,7 +3,6 @@
 	import { SignOut } from '@auth/sveltekit/components';
 	import {
 		Avatar,
-		Button,
 		Dropdown,
 		DropdownDivider,
 		DropdownHeader,

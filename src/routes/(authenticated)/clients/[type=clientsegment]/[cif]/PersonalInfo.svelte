@@ -12,17 +12,7 @@
 	let selectedDate = $state(null);
 	let editing = $state(false);
 
-	let client: {
-		address: string;
-		type: string;
-		cif: number;
-		avatar: string;
-		name: string;
-		email: string;
-		phone: string;
-		country: string;
-		status: string;
-	} = $props();
+	let client = $props();
 </script>
 
 <Card>	

@@ -25,15 +25,14 @@
 		FileCopyOutline,
 		LockOpenOutline
 	} from 'flowbite-svelte-icons';
+	import { page } from '$app/state';
 
 	function maskCreditCard(cardNumber: string): string {
 		return `${cardNumber.slice(0, 4)} XXXX XXXX ${cardNumber.slice(cardNumber.length - 4, cardNumber.length)}`;
 	}
 
-	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
-	let cards = data.Cards;
-	let client = data.client;
+	let cards = $derived(page.data.Cards);
+	let client = $derived(page.data.client);
 	let searchPlaceholder = 'Search by Card Number, Account Number, IBAN ...';
 </script>
 

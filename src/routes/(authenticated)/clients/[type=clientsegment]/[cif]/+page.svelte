@@ -20,23 +20,9 @@
 	import PasswordInfo from './PasswordInfo.svelte';
 	import PersonlaInfo from './PersonalInfo.svelte';
 	import Sessions from './Sessions.svelte';
+	import { page } from '$app/state';
 
-	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
-	let client = data.client ?? {
-		cif: '',
-		name: '',
-		avatar: '',
-		email: '',
-		biography: '',
-		position: '',
-		country: '',
-		status: '',
-		type: '',
-		phone: '',
-		id_card_back_image: '',
-		id_card_front_image:''
-	};
+	let { client } = $derived(page.data);
 </script>
 
 <Breadcrumb class="mb-5">
@@ -55,7 +41,10 @@
 		</div>
 		<div class="grid grid-cols-7 dark:bg-gray-900 xl:grid-cols-7 xl:gap-3.5">
 			<div class="space-y-4 col-span-3">
-				<IDDcoument IDForntImage={client.id_card_front_image} IDBackImage={client.id_card_back_image} />
+				<IDDcoument
+					IDForntImage={client.id_card_front_image}
+					IDBackImage={client.id_card_back_image}
+				/>
 			</div>
 			<div class="space-y-4 col-span-4">
 				<PersonlaInfo {client} />
@@ -67,7 +56,7 @@
 			<WalletOutline size="md" />
 			Accounts
 		</div>
-		<Accounts {data} />
+		<Accounts />
 	</TabItem>
 	<TabItem>
 		<div slot="title" class="flex items-center gap-2">
@@ -75,7 +64,7 @@
 			Cards
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<BankCards {data} />
+			<BankCards />
 		</div>
 	</TabItem>
 	<TabItem>
@@ -84,7 +73,7 @@
 			Loans
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<Loans {data} />
+			<Loans />
 		</div>
 	</TabItem>
 	<TabItem>
@@ -93,7 +82,7 @@
 			Documents
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
-			<Documents {data} />
+			<Documents />
 		</div>
 	</TabItem>
 	<TabItem>

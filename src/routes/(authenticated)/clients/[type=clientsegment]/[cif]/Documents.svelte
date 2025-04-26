@@ -37,15 +37,13 @@
 	import { onMount } from 'svelte';
 	import { dateProxy, fileProxy, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import type { PageData } from './$types';
 
-	let { data }: { data: PageData } = $props();
-	let documents = data.Documents;
+	let documents = $derived(page.data.Documents);
 	let searchPlaceholder = 'Search by File Name, Document Type, Document Id ...';
 	let newDocumentModal = $state(false);
 	const modalStates: { [key: string]: boolean } = $state({});
 
-	const { form, errors, message, enhance, constraints, delayed } = superForm(data.documentForm, {
+	const { form, errors, message, enhance, constraints, delayed } = superForm(page.data.documentForm, {
 		validators: zodClient(documentSchema)
 	});
 
@@ -58,7 +56,7 @@
 	}
 
 	onMount(() => {
-		documents.forEach((doc) => {
+		documents.forEach((doc: any) => {
 			modalStates[doc.documentId] = false;
 		});
 	});
@@ -184,7 +182,7 @@
 	{/if}
 	<form method="POST" action="?/upload_document" use:enhance enctype="multipart/form-data" class="flex flex-col space-y-3">
 		<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-			New document for {data.client.name}
+			New document for {page.data.client.name}
 		</h3>
 		<div>
 			<Label for="document_file" class="mb-2">Choose Document</Label>
