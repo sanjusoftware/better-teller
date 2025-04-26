@@ -29,14 +29,12 @@ export const completeService = () => {
 
 const updatePastClients = () => {
     if (pastClients.current.length == 0) {
-        pastClients.current = JSON.stringify([currentClient.current.cif.toString()]);
+        pastClients.current = [currentClient.current];
         return;
     }
 
-    // the wiered logic below of first stringifying and then parsing is to avoid the error of 
-    // "Unexpected non-whitespace character after JSON at position 8 (line 1 column 9)"
-    let pastclientsList = JSON.parse(JSON.stringify(pastClients.current));    
-    pastclientsList.push(currentClient.current.cif.toString());
+    let pastclientsList = pastClients.current;   
+    pastclientsList.push(currentClient.current);
     pastClients.current = pastclientsList;
 }
 

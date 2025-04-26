@@ -5,11 +5,7 @@
 	import { ClockOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
 	import { sineIn } from 'svelte/easing';
 	import ClientsList from './ClientsList.svelte';
-	import { page } from '$app/state';
 	import { pastClients } from '$lib/servicecontext.svelte';
-
-	let latestClients: any[] = $derived(page.data.latestClients);
-	
 
 	let clientsListHidden = $state(true);
 	let transitionParamsRight = {
@@ -44,36 +40,38 @@
 		</div>
 	</div>
 	<div class="border-b border-gray-200 dark:border-gray-700">
-		<ClientsList clientsServed={latestClients.slice(0, 3)} />
+		<ClientsList clientsServed={pastClients.current.slice(0, 3)} />
 	</div>
 	<div class="mt-4 flex items-center justify-between">
 		<LastRange timeslot="Today" />
-		<button
-			type="button"
-			onclick={() => (clientsListHidden = false)}
-			class="inline-flex items-center rounded-lg p-2 text-xs font-medium text-primary-700 dark:text-primary-500 hover:bg-gray-100 dark:hover:bg-gray-700"
-			aria-label="View clients list"
-		>
-			View All
-		</button>
+		{#if pastClients.current.length > 3}
+			<button
+				type="button"
+				onclick={() => (clientsListHidden = false)}
+				class="inline-flex items-center rounded-lg p-2 text-xs font-medium text-primary-700 dark:text-primary-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+				aria-label="View clients list"
+			>
+				View All
+			</button>
+			<Drawer
+				placement="right"
+				transitionType="fly"
+				transitionParams={transitionParamsRight}
+				bind:hidden={clientsListHidden}
+				id="clientsListDrawerHidden"
+				width="w-180"
+			>
+				<div class="flex items-center border-b border-gray-200 dark:border-gray-700">
+					<h5
+						id="drawer-label"
+						class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
+					>
+						<UsersGroupOutline class="w-5 h-5 me-2.5" />All clients served today
+					</h5>
+					<CloseButton on:click={() => (clientsListHidden = true)} class="mb-4 dark:text-white" />
+				</div>
+				<ClientsList clientsServed={pastClients.current} />
+			</Drawer>
+		{/if}
 	</div>
 </Card>
-<Drawer
-	placement="right"
-	transitionType="fly"
-	transitionParams={transitionParamsRight}
-	bind:hidden={clientsListHidden}
-	id="clientsListDrawerHidden"
-	width="w-180"
->
-	<div class="flex items-center border-b border-gray-200 dark:border-gray-700">
-		<h5
-			id="drawer-label"
-			class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
-		>
-			<UsersGroupOutline class="w-5 h-5 me-2.5" />All clients served this month
-		</h5>
-		<CloseButton on:click={() => (clientsListHidden = true)} class="mb-4 dark:text-white" />
-	</div>
-	<ClientsList clientsServed={latestClients} />
-</Drawer>
