@@ -1,9 +1,9 @@
-import type { PageServerLoad } from './$types';
 import Clients from "$lib/data/clients.json";
-import { redirect, setFlash } from 'sveltekit-flash-message/server';
+import { redirect } from 'sveltekit-flash-message/server';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = () => {
-    let latestClients = Clients.slice(0, 5); // Get the first 5 clients from the list
+    let latestClients = Clients.slice(0, 5); // Get the first 5 clients from the list    
 
     return {
         latestClients: latestClients
@@ -21,7 +21,7 @@ export const actions = {
             message: "Ticket aquired successfully",
             ticket: ticket
         };
-    },
+    },    
 
     startService: async ({ request }) => {
         const data = await request.formData();
@@ -62,7 +62,7 @@ export const actions = {
         }
     },
 
-    startScan: async ({cookies}) => {
+    startScan: async ({ cookies }) => {
         console.log('Scanning ID document...');
         // Simulate a ID scan operation 
         await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay for the scan operation
@@ -83,7 +83,7 @@ export const actions = {
         }
 
         return {
-            success: true,           
+            success: true,
             currentClient: scannedClient
         };
     }
