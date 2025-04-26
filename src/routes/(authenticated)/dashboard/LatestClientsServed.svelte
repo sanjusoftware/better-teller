@@ -6,6 +6,9 @@
 	import { sineIn } from 'svelte/easing';
 	import ClientsList from './ClientsList.svelte';
 	import { pastClients } from '$lib/servicecontext.svelte';
+	import { page } from '$app/state';
+
+	let latestClients = $derived(pastClients.current.length > 0 ? pastClients.current : page.data.latestClients);
 
 	let clientsListHidden = $state(true);
 	let transitionParamsRight = {
@@ -40,11 +43,11 @@
 		</div>
 	</div>
 	<div class="border-b border-gray-200 dark:border-gray-700">
-		<ClientsList clientsServed={pastClients.current.slice(0, 3)} />
+		<ClientsList clientsServed={latestClients.slice(0, 3)} />
 	</div>
 	<div class="mt-4 flex items-center justify-between">
 		<LastRange timeslot="Today" />
-		{#if pastClients.current.length > 3}
+		{#if latestClients.length > 3}
 			<button
 				type="button"
 				onclick={() => (clientsListHidden = false)}
@@ -70,7 +73,7 @@
 					</h5>
 					<CloseButton on:click={() => (clientsListHidden = true)} class="mb-4 dark:text-white" />
 				</div>
-				<ClientsList clientsServed={pastClients.current} />
+				<ClientsList clientsServed={latestClients} />
 			</Drawer>
 		{/if}
 	</div>
