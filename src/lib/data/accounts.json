@@ -120,7 +120,7 @@
         "ownership": "primary"
     },
     {
-        "customerId": 22334455,
+        "customerId": 11223344,
         "accountNumber": "556677002",
         "iban": "BGSOF0009556677002",
         "balance": 95000,
@@ -129,10 +129,11 @@
         "card_issued": false,
         "currency": "USD",
         "status": "In Active",
-        "ownership": "poa"
+        "ownership": "poa",
+        "primaryOwnerId": 22334455
     },
     {
-        "customerId": 22334455,
+        "customerId": 11223344,
         "accountNumber": "556677003",
         "iban": "BGSOF0009556677003",
         "balance": 100000,
@@ -141,7 +142,8 @@
         "card_issued": true,
         "currency": "BGN",
         "status": "Active",
-        "ownership": "secondary"
+        "ownership": "secondary",
+        "primaryOwnerId": 22334455
     },
     {
         "customerId": 11223344,
@@ -165,7 +167,8 @@
         "card_issued": true,
         "currency": "BGN",
         "status": "Closed",
-        "ownership": "poa"
+        "ownership": "poa",
+        "primaryOwnerId": 22334455
     },
     {
         "customerId": 11223344,
@@ -177,7 +180,8 @@
         "card_issued": true,
         "currency": "EUR",
         "status": "Blocked",
-        "ownership": "secondary"
+        "ownership": "secondary",
+        "primaryOwnerId": 22334455
     },
     {
         "customerId": 22232425,

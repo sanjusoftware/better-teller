@@ -6,13 +6,14 @@
 	dayjs.extend(localizedFormat);
 
 	import { page } from '$app/state';
-	import { Badge, Card, Tooltip } from 'flowbite-svelte';
-	import { ChevronDownOutline } from 'flowbite-svelte-icons';
-	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
-	import { statusBorderColor, formatBalance } from '$lib/utils/accountHelper';
+	import { formatBalance, statusBorderColor } from '$lib/utils/accountHelper';
 	import OwnershipIndicator from '$lib/utils/OwnershipIndicator.svelte';
+	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
+	import { Card, Tooltip } from 'flowbite-svelte';
+	import { ChevronDownOutline } from 'flowbite-svelte-icons';
+	import { clientPath } from '$lib/utils/pathHelper';
 
-	let accounts = $derived(page.data.Accounts);	
+	let accounts = $derived(page.data.Accounts);
 </script>
 
 <div class="grid gap-4 xl:grid-cols-1 xl:gap-4 p-2">
@@ -25,7 +26,9 @@
 			<div class="flex justify-between w-full">
 				<div>
 					<div class="flex items-center space-x-2">
-						<p class="font-bold text-gray-900 dark:text-gray-400">{account.type} account - ({account.currency})</p>						
+						<p class="font-bold text-gray-900 dark:text-gray-400">
+							{account.type} account - ({account.currency})
+						</p>
 						<OwnershipIndicator {account} />
 					</div>
 					<p class="text-sm text-gray-600 dark:text-gray-400">{account.iban}</p>
@@ -60,6 +63,18 @@
 					</button>
 				</div>
 			</div>
+			{#if account.ownership !== 'primary'}
+				<div class="border-t border-gray-200 dark:border-gray-700 mt-4 pt-2">
+					<p class="text-sm text-gray-600 dark:text-gray-400">
+						Primary owner: <a
+							href="/clients/retail/{account.primaryOwnerId}/products"
+							class="font-medium text-gray-900 dark:text-gray-100"
+						>
+							{account.primaryOwnerId}
+						</a>
+					</p>
+				</div>
+			{/if}
 		</Card>
 	{/each}
 	<div class="p-4 rounded shadow-sm">
