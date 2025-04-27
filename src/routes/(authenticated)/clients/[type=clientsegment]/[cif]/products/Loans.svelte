@@ -28,7 +28,7 @@
 		TruckClockOutline
 	} from 'flowbite-svelte-icons';
 
-	let loans = $derived(page.data.Loans);
+	let loans = $derived(page.data);
 	let client = $derived(page.data.client);
 
 	let searchPlaceholder = 'Search by Account Number, IBAN ...';

@@ -11,8 +11,9 @@
 	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
 	import { Button, Card, Tooltip } from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
+	import Transactions from '../../../../transactions/Transactions.svelte';
 
-	let accounts = $derived(page.data.Accounts);
+	let {accounts, transactions} = $derived(page.data);
 </script>
 
 <div class="grid gap-4 xl:grid-cols-1 xl:gap-4 p-2">
@@ -75,6 +76,9 @@
 						</p>
 					</div>
 				{/if}
+				<div class="mt-4">					
+					<Transactions {transactions}/>
+				</div>
 			</Card>
 		{/each}
 		<div class="p-4 rounded shadow-sm">
@@ -94,9 +98,7 @@
 	{:else}
 		<div class="p-4 text-center text-gray-500 dark:text-gray-400 space-y-2">
 			<p class="text-sm">Customer has no accounts opened with us.</p>
-			<Button href="/products/casa">
-				Open new CASA account
-			</Button>
+			<Button href="/products/casa">Open new CASA account</Button>
 		</div>
 	{/if}
 </div>

@@ -31,7 +31,7 @@
 		return `${cardNumber.slice(0, 4)} XXXX XXXX ${cardNumber.slice(cardNumber.length - 4, cardNumber.length)}`;
 	}
 
-	let cards = $derived(page.data.Cards);
+	let cards = $derived(page.data);
 	let client = $derived(page.data.client);
 	let searchPlaceholder = 'Search by Card Number, Account Number, IBAN ...';
 </script>

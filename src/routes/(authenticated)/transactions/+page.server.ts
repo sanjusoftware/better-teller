@@ -16,7 +16,7 @@ export const load: PageServerLoad = ({ url }) => {
         cif = account.customerId.toString();
         filteredTransactions = filteredTransactions.filter((t) => t.from_account === accountNumber || t.to_account === accountNumber);
     } else if (cif) {
-        let accountNumbers = Accounts.filter((acc) => acc.customerId.toString() === cif).map(acc => acc.accountNumber)
+        let accountNumbers = Accounts.filter((acc) => acc.customerId.toString() === cif).map(acc => acc.iban)
         filteredTransactions = filteredTransactions.filter((t) => accountNumbers.includes(t.from_account) || accountNumbers.includes(t.to_account));
     }
     else {
