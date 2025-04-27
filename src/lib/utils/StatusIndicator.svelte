@@ -9,9 +9,9 @@
 		<Indicator color="green" />
 	{:else if status === 'Defaulted' || status === 'Pending Activation' || status === 'Pending Verification'}
 		<Indicator color="yellow" />
-	{:else if status === 'NPA' || status === 'Blocked' || status === 'Rejected' || status === 'Inactive'}
+	{:else if status === 'NPA' || status === 'Blocked' || status === 'Rejected' }
 		<Indicator color="red" />
-	{:else if status === 'Closed' || status === 'Expired'}
+	{:else if status === 'Closed' || status === 'Expired' || status === 'In Active'}
 		<Indicator color="gray" />
 	{/if}
 	<span class="text-sm">{status}</span>

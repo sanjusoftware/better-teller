@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { clientPath } from '$lib/utils/pathHelper';
 	import { Button, Modal } from 'flowbite-svelte';
 	import { ExpandOutline, RefreshOutline } from 'flowbite-svelte-icons';
 	let { IDForntImage, IDBackImage } = $props();
 
 	let showFront = $state(true);
-	let enlarge = $state(true);
+	let enlarge = $state(false);
 
 	function toggleCard() {
 		showFront = !showFront;
