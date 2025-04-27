@@ -10,7 +10,6 @@
 
 <Breadcrumb class="mb-5">
 	<BreadcrumbItem home>Home</BreadcrumbItem>
-	<BreadcrumbItem>Dashboard</BreadcrumbItem>
 </Breadcrumb>
 
 {#if isCurrentClient()}
