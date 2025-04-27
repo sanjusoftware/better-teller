@@ -6,10 +6,11 @@
 	dayjs.extend(localizedFormat);
 
 	import { page } from '$app/state';
-	import { Card, Tooltip } from 'flowbite-svelte';
+	import { Badge, Card, Tooltip } from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
 	import { statusBorderColor, formatBalance } from '$lib/utils/accountHelper';
+	import OwnershipIndicator from '$lib/utils/OwnershipIndicator.svelte';
 
 	let accounts = $derived(page.data.Accounts);	
 </script>
@@ -23,7 +24,10 @@
 		>
 			<div class="flex justify-between w-full">
 				<div>
-					<p class="font-bold text-gray-900 dark:text-gray-400">{account.type} account - ({account.currency})</p>
+					<div class="flex items-center space-x-2">
+						<p class="font-bold text-gray-900 dark:text-gray-400">{account.type} account - ({account.currency})</p>						
+						<OwnershipIndicator {account} />
+					</div>
 					<p class="text-sm text-gray-600 dark:text-gray-400">{account.iban}</p>
 					<div class="flex items-center space-x-2">
 						<p class="text-sm text-gray-600 dark:text-gray-400">Status:</p>
