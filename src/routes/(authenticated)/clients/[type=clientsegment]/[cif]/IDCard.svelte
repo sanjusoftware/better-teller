@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Modal } from 'flowbite-svelte';
+	import { clientPath } from '$lib/utils/pathHelper';
+	import { Button, Modal } from 'flowbite-svelte';
 	import { ExpandOutline, RefreshOutline } from 'flowbite-svelte-icons';
 	let { IDForntImage, IDBackImage } = $props();
 
@@ -43,29 +44,25 @@
 	</button>
 
 	<!-- Modal for enlarged image -->
-	<Modal bind:open={enlarge} size="lg">
-		<div class="p-2 flex items-center justify-center">
-			<div class="relative rounded-lg shadow-lg w-full">
-				<div class="card-inner" class:flipped={!showFront}>					
-					{#if showFront}
-						<div class="card-front">
-							<img src={IDForntImage as string} alt="Front of ID card" class="rounded-lg" />
-						</div>
-					{:else}
-						<div class="card-back">
-							<img src={IDBackImage as string} alt="Back of ID card" class="rounded-lg" />
-						</div>
-					{/if}
-				</div>
-				<button
-					type="button"
-					class="absolute top-4 right-4 p-1 bg-gray-500 bg-opacity-30 hover:bg-opacity-80 rounded-full cursor-pointer"
-					onclick={toggleCard}
-					aria-label="Flip card"
-				>
-					<RefreshOutline class="text-white w-10 h-10" />
-				</button>
+	<Modal title="ID Card Image" bind:open={enlarge} aria-label="Enlarge ID card" class="overflow-hidden">
+		<div class="p-2 flex items-center justify-center relative rounded-lg w-full">
+			<div class="card-inner" class:flipped={!showFront}>
+				{#if showFront}
+					<div class="card-front">
+						<img src={IDForntImage as string} alt="Front of ID card" class="rounded-lg" />
+					</div>
+				{:else}
+					<div class="card-back">
+						<img src={IDBackImage as string} alt="Back of ID card" class="rounded-lg" />
+					</div>
+				{/if}
 			</div>
+		</div>
+		<div class="flex justify-center mt-2">
+			<Button outline on:click={toggleCard} aria-label="Close modal">
+				<RefreshOutline class="mr-2 w-4 h-4" />
+				Flip
+			</Button>
 		</div>
 	</Modal>
 </div>
