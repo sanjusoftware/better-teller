@@ -1,16 +1,17 @@
 <script lang="ts">
-	import { Button } from 'flowbite-svelte';
-	import { CheckCircleOutline, CloseCircleOutline, RefreshOutline } from 'flowbite-svelte-icons';
+	import { Modal } from 'flowbite-svelte';
+	import { ExpandOutline, RefreshOutline } from 'flowbite-svelte-icons';
 	let { IDForntImage, IDBackImage } = $props();
 
 	let showFront = $state(true);
+	let enlarge = $state(true);
 
 	function toggleCard() {
 		showFront = !showFront;
 	}
 </script>
 
-<div class="flex items-center justify-center">
+<div class="relative w-full mb-2">
 	<button onclick={toggleCard} class="w-full text-white">
 		<div class="card-inner" class:flipped={!showFront}>
 			{#if showFront}
@@ -24,11 +25,49 @@
 			{/if}
 		</div>
 	</button>
-</div>
-<div class="flex items-center justify-center mt-4 space-x-2">
-	<Button size="xs" pill outline onclick={toggleCard}>
-		<RefreshOutline class="mr-2" />Flip card
-	</Button>
+	<button
+		type="button"
+		class="absolute top-2 right-2 p-1 bg-gray-500 bg-opacity-30 hover:bg-opacity-80 rounded-full cursor-pointer"
+		onclick={toggleCard}
+		aria-label="Flip card"
+	>
+		<RefreshOutline class="text-white w-4 h-4" />
+	</button>
+	<button
+		type="button"
+		class="absolute top-2 right-10 p-1 bg-gray-500 bg-opacity-30 hover:bg-opacity-80 rounded-full cursor-pointer"
+		onclick={() => (enlarge = true)}
+		aria-label="Enlarge image"
+	>
+		<ExpandOutline class="text-white w-4 h-4" />
+	</button>
+
+	<!-- Modal for enlarged image -->
+	<Modal bind:open={enlarge} size="lg">
+		<div class="p-2 flex items-center justify-center">
+			<div class="relative rounded-lg shadow-lg w-full">
+				<div class="card-inner" class:flipped={!showFront}>					
+					{#if showFront}
+						<div class="card-front">
+							<img src={IDForntImage as string} alt="Front of ID card" class="rounded-lg" />
+						</div>
+					{:else}
+						<div class="card-back">
+							<img src={IDBackImage as string} alt="Back of ID card" class="rounded-lg" />
+						</div>
+					{/if}
+				</div>
+				<button
+					type="button"
+					class="absolute top-4 right-4 p-1 bg-gray-500 bg-opacity-30 hover:bg-opacity-80 rounded-full cursor-pointer"
+					onclick={toggleCard}
+					aria-label="Flip card"
+				>
+					<RefreshOutline class="text-white w-10 h-10" />
+				</button>
+			</div>
+		</div>
+	</Modal>
 </div>
 
 <style>
