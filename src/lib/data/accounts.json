@@ -7,7 +7,7 @@
         "type": "Loan",
         "opened_on": "01/01/2021",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Active"
     },
     {
@@ -40,7 +40,7 @@
         "type": "Loan",
         "opened_on": "01/04/2021",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Active"
     },
     {
@@ -51,7 +51,7 @@
         "type": "Loan",
         "opened_on": "01/04/2021",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Closed"
     },
     {
@@ -73,7 +73,7 @@
         "type": "Savings",
         "opened_on": "21/03/2021",
         "card_issued": false,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "In Active"
     },
     {
@@ -106,7 +106,7 @@
         "type": "Checking",
         "opened_on": "09/05/2018",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Blocked"
     },
     {
@@ -161,7 +161,7 @@
         "type": "Loan",
         "opened_on": "01/07/2021",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Blocked"
     },
     {
@@ -194,7 +194,7 @@
         "type": "Loan",
         "opened_on": "11/02/2020",
         "card_issued": false,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Closed"
     },
     {
@@ -227,7 +227,7 @@
         "type": "Loan",
         "opened_on": "06/08/2017",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Active"
     },
     {
@@ -260,7 +260,7 @@
         "type": "Savings",
         "opened_on": "19/04/2019",
         "card_issued": false,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "In Active"
     },
     {
@@ -293,7 +293,7 @@
         "type": "Checking",
         "opened_on": "26/01/2017",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Blocked"
     },
     {
@@ -326,7 +326,7 @@
         "type": "Savings",
         "opened_on": "01/10/2014",
         "card_issued": false,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Closed"
     },
     {
@@ -359,7 +359,7 @@
         "type": "Checking",
         "opened_on": "13/07/2013",
         "card_issued": true,
-        "currency": "Euro",
+        "currency": "EUR",
         "status": "Active"
     },
     {

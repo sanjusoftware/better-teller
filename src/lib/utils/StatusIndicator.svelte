@@ -14,5 +14,5 @@
 	{:else if status === 'Closed' || status === 'Expired'}
 		<Indicator color="gray" />
 	{/if}
-	<span>{status}</span>
+	<span class="text-sm">{status}</span>
 </div>
