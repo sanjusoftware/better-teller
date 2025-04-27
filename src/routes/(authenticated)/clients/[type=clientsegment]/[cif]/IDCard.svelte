@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Button, Card } from 'flowbite-svelte';
+	import { Button } from 'flowbite-svelte';
 	import {
-		CameraPhotoOutline,
 		CheckCircleOutline,
 		CloseCircleOutline,
 		RefreshOutline
@@ -15,9 +14,9 @@
 	}
 </script>
 
-<Card class="p-5" size="xl">
-	<div class="w-full mb-4 border-b">
-		<div class="flex justify-between mb-2 text-sm">
+<div>
+	<div class="w-full mb-2 border-b">
+		<div class="flex justify-between mb-2 text-xs">
 			<div class="flex items-center">
 				<CheckCircleOutline class="mr-1" size="lg" color="green" />
 				MRZ-OCR
@@ -28,7 +27,7 @@
 			</div>
 			<div class="flex items-center">
 				<CloseCircleOutline class="mr-1" size="lg" color="red" />
-				Validated at Ministry of Interior
+				Validated at MoI
 			</div>
 		</div>
 	</div>
@@ -48,14 +47,11 @@
 		</button>
 	</div>
 	<div class="flex items-center justify-center mt-4 space-x-2">
-		<Button pill outline onclick={toggleCard}>
-			<RefreshOutline size="md" class="mr-2" />Flip card
-		</Button>
-		<Button pill outline onclick={()=> {alert("To implement")}}>
-			<CameraPhotoOutline size="md" class="mr-2" />Scan Again
+		<Button size="xs" pill outline onclick={toggleCard}>
+			<RefreshOutline  class="mr-2" />Flip card
 		</Button>
 	</div>
-</Card>
+</div>
 
 <style>
 	.card-inner {

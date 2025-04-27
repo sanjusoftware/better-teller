@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Card from '$lib/utils/InfoCard.svelte';
 	import { Button, Datepicker, Input, Label, Select } from 'flowbite-svelte';
-	import { EditOutline } from 'flowbite-svelte-icons';
+	import { CameraPhotoOutline, EditOutline } from 'flowbite-svelte-icons';
 	let selected = $state<string | undefined>(undefined);
 	let countries = [
 		{ value: 'idcard', name: 'ID Card' },
@@ -17,7 +17,10 @@
 
 <Card>	
 	<form>
-		<div class="flex justify-end">
+		<div class="flex justify-between items-center mb-4">
+			<Button pill outline onclick={() => { alert("To implement") }}>
+				<CameraPhotoOutline size="md" class="mr-2" />Scan Again
+			</Button>
 			{#if !editing}
 				<button
 					type="button"
