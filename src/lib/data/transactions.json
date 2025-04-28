@@ -133,8 +133,8 @@
     },
     {
         "id": "BT2234567890",
-        "from_account": "123456782",
-        "to_account": "112233446",
+        "from_account": "BGSOF0009556677003",
+        "to_account": "BGSOF0009987654323",
         "type": "debit",
         "detail": "Domestic Transfer",
         "description": "Payment to Jane Smith",
@@ -145,8 +145,8 @@
     },
     {
         "id": "DR3345678901",
-        "from_account": "987654322",
-        "to_account": "112233446",
+        "from_account": "BGSOF0009987654323",
+        "to_account": "BGSOF0009556677003",
         "type": "credit",
         "detail": "Intrabank Transfer",
         "description": "Payment from Alice Johnson",
@@ -157,8 +157,8 @@
     },
     {
         "id": "CR4456789012",
-        "from_account": "987654322",
-        "to_account": "112233446",
+        "from_account": "BGSOF0009556677003",
+        "to_account": "BGSOF0009987654323",
         "type": "debit",
         "detail": "International Transfer",
         "description": "Payment to Bob Brown",
@@ -169,8 +169,8 @@
     },
     {
         "id": "PY5567890123",
-        "from_account": "987654322",
-        "to_account": "112233446",
+        "from_account": "BGSOF0009987654323",
+        "to_account": "BGSOF0009556677003",
         "type": "credit",
         "detail": "Reversal",
         "description": "Payment from Charlie Davis",
@@ -181,7 +181,7 @@
     },
     {
         "id": "IT6678901234",
-        "from_account": "987654322",
+        "from_account": "BGSOF0009987654324",
         "to_account": "112233446",
         "type": "debit",
         "detail": "Utility Payment",
@@ -194,7 +194,7 @@
     {
         "id": "LT7789012345",
         "from_account": "987654322",
-        "to_account": "112233446",
+        "to_account": "BGSOF0009987654324",
         "type": "credit",
         "detail": "Domestic Transfer",
         "description": "Payment from Echo Inc",
@@ -205,7 +205,7 @@
     },
     {
         "id": "BT8890123456",
-        "from_account": "987654322",
+        "from_account": "BGSOF0009987654324",
         "to_account": "112233446",
         "type": "debit",
         "detail": "Intrabank Transfer",
@@ -218,7 +218,7 @@
     {
         "id": "DR9901234567",
         "from_account": "987654322",
-        "to_account": "112233446",
+        "to_account": "BGSOF0009987654324",
         "type": "credit",
         "detail": "International Transfer",
         "description": "Payment from Golf Ltd",
@@ -229,7 +229,7 @@
     },
     {
         "id": "CR1012345678",
-        "from_account": "987654322",
+        "from_account": "BGSOF0009112233446",
         "to_account": "112233446",
         "type": "debit",
         "detail": "Reversal",
@@ -242,7 +242,7 @@
     {
         "id": "PY2123456789",
         "from_account": "987654322",
-        "to_account": "112233446",
+        "to_account": "BGSOF0009112233446",
         "type": "credit",
         "detail": "Utility Payment",
         "description": "Payment from India Ltd",
@@ -253,7 +253,7 @@
     },
     {
         "id": "IT3234567890",
-        "from_account": "987654322",
+        "from_account": "BGSOF0009112233446",
         "to_account": "112233446",
         "type": "debit",
         "detail": "Domestic Transfer",
@@ -266,7 +266,7 @@
     {
         "id": "LT4345678901",
         "from_account": "987654322",
-        "to_account": "112233446",
+        "to_account": "BGSOF0009112233446",
         "type": "credit",
         "detail": "Intrabank Transfer",
         "description": "Payment from Kilo Inc",

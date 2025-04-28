@@ -150,46 +150,46 @@
 				placeholder={searchPlaceholder}
 			/>
 		</div>
-		<div
-			class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
-		>
-			{@render searchHeader?.()}
-			{#if filtersToApply.length > 0 && filtersToApply.length < 4}
-				{#each Object.keys(countsByFilters) as filter}
-					<Button color="alternative">
-						{humanize(filter)}<FilterSolid class="w-3 h-3 ml-2 " />
-					</Button>
-					<Dropdown class="w-48 p-3 space-y-2 text-sm">
-						{#each Object.keys(countsByFilters[filter]) as filterValue}
-							<li>
-								<Checkbox
-									id={filter}
-									on:change={toggleFilter}
-									value={filterValue}
-									checked={appliedFilters[filter]?.includes(filterValue)}
-								>
-									{filterValue} ({countsByFilters[filter][filterValue]})
-								</Checkbox>
-							</li>
-						{/each}
-					</Dropdown>
-				{/each}
-			{:else}
-				{#each filtersToApply as filter}
-					<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-						{filter['name'].toLocaleUpperCase()}:
-					</h6>
-					{#each filter.values as value}
-						<Checkbox id={filter['name']} on:change={toggleFilter} {value}>
-							{value}
-						</Checkbox>
+			<div
+				class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
+			>
+				{@render searchHeader?.()}
+				{#if filtersToApply.length > 0 && filtersToApply.length < 4}
+					{#each Object.keys(countsByFilters) as filter}
+						<Button color="alternative">
+							{humanize(filter)}<FilterSolid class="w-3 h-3 ml-2 " />
+						</Button>
+						<Dropdown class="w-48 p-3 space-y-2 text-sm">
+							{#each Object.keys(countsByFilters[filter]) as filterValue}
+								<li>
+									<Checkbox
+										id={filter}
+										on:change={toggleFilter}
+										value={filterValue}
+										checked={appliedFilters[filter]?.includes(filterValue)}
+									>
+										{filterValue} ({countsByFilters[filter][filterValue]})
+									</Checkbox>
+								</li>
+							{/each}
+						</Dropdown>
 					{/each}
-				{/each}
-			{/if}
-		</div>
+				{:else}
+					{#each filtersToApply as filter}
+						<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+							{filter['name'].toLocaleUpperCase()}:
+						</h6>
+						{#each filter.values as value}
+							<Checkbox id={filter['name']} on:change={toggleFilter} {value}>
+								{value}
+							</Checkbox>
+						{/each}
+					{/each}
+				{/if}
+			</div>
 	</div>
 
-	<Table items={items} hoverable={true}>
+	<Table {items} hoverable={true}>
 		<TableHead>
 			<TableHeadCell class="!p-4"><Checkbox id="checkAll" on:change={toggleAll} /></TableHeadCell>
 			{#each tableHeaders as header}

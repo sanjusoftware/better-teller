@@ -6,7 +6,7 @@
 	dayjs.extend(localizedFormat);
 
 	import { page } from '$app/state';
-	import { formatBalance, statusBorderColor } from '$lib/utils/accountHelper';
+	import { formatAccountsBalance, statusBorderColor } from '$lib/utils/accountHelper';
 	import OwnershipIndicator from '$lib/utils/OwnershipIndicator.svelte';
 	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
 	import { Button, Card, Tooltip } from 'flowbite-svelte';
@@ -43,13 +43,13 @@
 							<div class="flex items-center space-x-2 justify-end">
 								<p class="text-sm text-gray-400 dark:text-gray-600">current balance:</p>
 								<p class="text-lg font-bold text-gray-900 dark:text-gray-100">
-									{formatBalance('en-US', [account])}
+									{formatAccountsBalance('en-US', [account])}
 								</p>
 							</div>
 							<div class="flex items-center space-x-2 justify-end">
 								<p class="text-sm text-gray-400 dark:text-gray-600">available balance:</p>
 								<p class="text-sm font-medium text-gray-900 dark:text-gray-100">
-									{formatBalance('en-US', [account])}
+									{formatAccountsBalance('en-US', [account])}
 								</p>
 							</div>
 						</div>
@@ -77,7 +77,7 @@
 					</div>
 				{/if}
 				<div class="mt-4">					
-					<Transactions {transactions}/>
+					<Transactions transactions={transactions.get(account.iban)} currency={account.currency}/>
 				</div>
 			</Card>
 		{/each}
@@ -85,13 +85,13 @@
 			<div class="flex justify-end space-x-2">
 				<p class="text-md font-bold text-gray-400 dark:text-gray-300">Total balance:</p>
 				<p class="text-lg font-bold text-gray-900 dark:text-gray-100">
-					{formatBalance('en-US', accounts)}
+					{formatAccountsBalance('en-US', accounts)}
 				</p>
 			</div>
 			<div class="flex justify-end space-x-2">
 				<p class="text-md text-gray-400 dark:text-gray-300">Total available balance:</p>
 				<p class="text-lg font-bold text-gray-900 dark:text-gray-100">
-					{formatBalance('en-US', accounts)}
+					{formatAccountsBalance('en-US', accounts)}
 				</p>
 			</div>
 		</div>

@@ -1,9 +1,13 @@
-export const formatBalance = (locale: string, accounts: any[]) => {
+export const formatAccountsBalance = (locale: string, accounts: any[]) => {
     const totalBalance = accounts.reduce((total: number, account: any) => total + account.balance, 0);
+    return formatBalance(locale, totalBalance, accounts[0]?.currency)
+};
+
+export const formatBalance = (locale: string, balance: number, currency: string) => {    
     return new Intl.NumberFormat(locale, {
         style: 'currency',
-        currency: accounts[0]?.currency || ''
-    }).format(totalBalance);
+        currency: currency || ''
+    }).format(balance);
 };
 
 export const statusBorderColor = (status: string) => {
