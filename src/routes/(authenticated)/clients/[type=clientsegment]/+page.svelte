@@ -28,7 +28,7 @@
 	import MetaTag from '$lib/utils/MetaTag.svelte';
 
 	import type { PageData } from './$types';
-	import { clientProductsPath } from '$lib/utils/pathHelper';
+	import { clientProductSummaryPath } from '$lib/utils/pathHelper';
 	let { data }: { data: PageData } = $props();
 	let clients = $derived(data.clients);
 
@@ -69,7 +69,7 @@
 		<TableBodyCell class="p-4">
 			<Avatar
 				src={client.avatar}
-				href={clientProductsPath(client)}
+				href={clientProductSummaryPath(client)}
 				border
 				class={client.status === 'Active'
 					? 'ring-green-400 dark:ring-green-300'
@@ -79,7 +79,7 @@
 		<TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
 			<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 				<div class="text-base font-semibold text-gray-900 dark:text-white">
-					<a href={clientProductsPath(client)}>
+					<a href={clientProductSummaryPath(client)}>
 						{client.name}
 					</a>
 				</div>

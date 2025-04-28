@@ -10,7 +10,7 @@
 	import { FileCopyOutline } from 'flowbite-svelte-icons';
 	import { formatBalance } from '$lib/utils/accountHelper';
 
-	let { transactions, currency } = $props();
+	let { transactions, currency = 'BGN' } = $props();
 </script>
 
 {#if transactions.length > 0}

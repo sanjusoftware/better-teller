@@ -2,7 +2,7 @@
 	import { Avatar, Badge, Listgroup, Tooltip } from 'flowbite-svelte';
 	import { ClockOutline, FileCopyOutline } from 'flowbite-svelte-icons';
 	import { copy } from 'svelte-copy';
-	import { clientProductsPath } from '$lib/utils/pathHelper';
+	import { clientProductSummaryPath } from '$lib/utils/pathHelper';
 
 	let { clientsServed }: { clientsServed: { avatar: string; type: string; cif: string; name: string; status: string }[] } = $props();
 </script>
@@ -11,7 +11,7 @@
 	<div class="flex items-center space-x-4 rtl:space-x-reverse">
 		<Avatar
 			src={client.avatar}
-			href={clientProductsPath(client)}
+			href={clientProductSummaryPath(client)}
 			border
 			class={client.status === 'Active'
 				? 'ring-green-400 dark:ring-green-300'
@@ -19,7 +19,7 @@
 		/>
 		<div class="flex-1 min-w-0">
 			<p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-				<a href={clientProductsPath(client)}>
+				<a href={clientProductSummaryPath(client)}>
 					{client.name}
 				</a>
 			</p>

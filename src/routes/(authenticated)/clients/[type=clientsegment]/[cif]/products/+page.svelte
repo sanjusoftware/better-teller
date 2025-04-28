@@ -1,10 +1,6 @@
 <script lang="ts">
 	import { Breadcrumb, BreadcrumbItem, TabItem, Tabs } from 'flowbite-svelte';
-	import {
-		ChartMixedDollarOutline,
-		CreditCardOutline,
-		WalletOutline
-	} from 'flowbite-svelte-icons';
+	import { ChartMixedDollarOutline, CreditCardOutline, WalletOutline } from 'flowbite-svelte-icons';
 
 	import { page } from '$app/state';
 	import Accounts from './Accounts.svelte';
@@ -26,7 +22,11 @@
 	<BreadcrumbItem>Products Summary</BreadcrumbItem>
 </Breadcrumb>
 
-<Tabs tabStyle="full" contentClass="p-2 bg-white dark:bg-gray-800" defaultClass="flex rounded-lg divide-x rtl:divide-x-reverse divide-gray-200 shadow-sm dark:divide-gray-700">
+<Tabs
+	tabStyle="full"
+	contentClass="p-2 bg-white dark:bg-gray-800"
+	defaultClass="flex rounded-lg divide-x rtl:divide-x-reverse divide-gray-200 shadow-sm dark:divide-gray-700"
+>
 	<TabItem open={isOpen('accounts')}>
 		<div slot="title" class="flex items-center gap-2">
 			<WalletOutline size="md" />

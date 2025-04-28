@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { currentClient } from '$lib/servicecontext.svelte';
-	import { clientProductsPath } from '$lib/utils/pathHelper';
+	import { clientProductSummaryPath } from '$lib/utils/pathHelper';
 	import { Card } from 'flowbite-svelte';
 	import {
 		ArrowsRepeatOutline,
@@ -17,31 +17,31 @@
 			name: 'Cards',
 			icon: CreditCardOutline,
 			description: 'Debit, Credit, Prepaid',
-			href: clientProductsPath(currentClient.current, 'cards') 
+			href: clientProductSummaryPath(currentClient.current, 'cards') 
 		},
 		{
 			name: 'Accounts',
 			icon: QrCodeOutline,
 			description: 'Savings, Current, Fixed',
-			href: clientProductsPath(currentClient.current, 'accounts')
+			href: clientProductSummaryPath(currentClient.current, 'accounts')
 		},		
 		{
 			name: 'Transactions',
 			icon: ArrowsRepeatOutline,
 			description: 'Internal, External, International',
-			href: clientProductsPath(currentClient.current, 'transactions')
+			href: clientProductSummaryPath(currentClient.current, 'transactions')
 		},
 		{
 			name: 'Transfers',
 			icon: ArrowUpDownOutline,	
 			description: 'Internal, External, International',
-			href: clientProductsPath(currentClient.current, 'transfers')
+			href: clientProductSummaryPath(currentClient.current, 'transfers')
 		},
 		{
 			name: 'Payments',
 			icon: CashOutline,
 			description: 'Phone, Water, Electricity',
-			href: clientProductsPath(currentClient.current, 'payments')
+			href: clientProductSummaryPath(currentClient.current, 'payments')
 		}
 	];
 </script>

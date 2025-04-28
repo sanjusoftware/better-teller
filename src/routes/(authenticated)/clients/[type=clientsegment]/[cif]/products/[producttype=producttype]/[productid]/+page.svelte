@@ -1,24 +1,39 @@
 <script lang="ts">
-	import dayjs from 'dayjs';
-	import customParseFormat from 'dayjs/plugin/customParseFormat';
-	import localizedFormat from 'dayjs/plugin/localizedFormat';
-	dayjs.extend(customParseFormat);
-	dayjs.extend(localizedFormat);
-
 	import { page } from '$app/state';
-	import { formatAccountsBalance, statusBorderColor } from '$lib/utils/accountHelper';
 	import OwnershipIndicator from '$lib/utils/OwnershipIndicator.svelte';
 	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
-	import { Button, Card, Tooltip } from 'flowbite-svelte';
-	import { ChevronDownOutline } from 'flowbite-svelte-icons';
-	import {accountTransactionsPath} from '$lib/utils/pathHelper'
+	import { formatAccountsBalance, statusBorderColor } from '$lib/utils/accountHelper';
+	import { clientProductSummaryPath } from '$lib/utils/pathHelper';
+	import { Breadcrumb, BreadcrumbItem, Card, TabItem, Tabs, Tooltip } from 'flowbite-svelte';
+	import {
+		ChartMixedDollarOutline,
+		ChevronUpOutline,
+		CreditCardOutline,
+		WalletOutline
+	} from 'flowbite-svelte-icons';
+	import Transactions from '../../../../../../transactions/Transactions.svelte';
 
-	let {client, accounts} = $derived(page.data);
+	let { client, account, transactions } = $derived(page.data);
 </script>
 
-<div class="grid gap-4 xl:grid-cols-1 xl:gap-4 p-2">
-	{#if accounts.length > 0}
-		{#each accounts as account}
+<Breadcrumb class="mb-5">
+	<BreadcrumbItem home href="/dashboard">Home</BreadcrumbItem>
+	<BreadcrumbItem>{client.name}</BreadcrumbItem>
+	<BreadcrumbItem href={clientProductSummaryPath(client)}>Product Summary</BreadcrumbItem>
+	<BreadcrumbItem>{account.iban}</BreadcrumbItem>
+</Breadcrumb>
+
+<Tabs
+	tabStyle="full"
+	contentClass="p-2 bg-white dark:bg-gray-800"
+	defaultClass="flex rounded-lg divide-x rtl:divide-x-reverse divide-gray-200 shadow-sm dark:divide-gray-700"
+>
+	<TabItem open>
+		<div slot="title" class="flex items-center gap-2">
+			<WalletOutline size="md" />
+			<a href={clientProductSummaryPath(client, 'casa')}>Accounts</a>
+		</div>
+		<div class="p-2">
 			<Card
 				size="none"
 				class="bg-gray-50 dark:bg-gray-800 shadow-sm"
@@ -53,8 +68,8 @@
 								</p>
 							</div>
 						</div>
-						<a href={accountTransactionsPath(client, account)}>
-							<ChevronDownOutline size="xl" class="text-green-600 dark:text-gray-400" />
+						<a href={clientProductSummaryPath(client, 'casa')}>
+							<ChevronUpOutline size="xl" class="text-green-600 dark:text-gray-400" />
 						</a>
 					</div>
 				</div>
@@ -69,27 +84,23 @@
 							</a>
 						</p>
 					</div>
-				{/if}				
+				{/if}
+				<div class="mt-4">
+					<Transactions {transactions} currency={account.currency} />
+				</div>
 			</Card>
-		{/each}
-		<div class="p-4 rounded shadow-sm">
-			<div class="flex justify-end space-x-2">
-				<p class="text-md font-bold text-gray-400 dark:text-gray-300">Total balance:</p>
-				<p class="text-lg font-bold text-gray-900 dark:text-gray-100">
-					{formatAccountsBalance('en-US', accounts)}
-				</p>
-			</div>
-			<div class="flex justify-end space-x-2">
-				<p class="text-md text-gray-400 dark:text-gray-300">Total available balance:</p>
-				<p class="text-lg font-bold text-gray-900 dark:text-gray-100">
-					{formatAccountsBalance('en-US', accounts)}
-				</p>
-			</div>
 		</div>
-	{:else}
-		<div class="p-4 text-center text-gray-500 dark:text-gray-400 space-y-2">
-			<p class="text-sm">Customer has no accounts opened with us.</p>
-			<Button href="/products/casa">Open new CASA account</Button>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<CreditCardOutline size="md" />
+			<a href={clientProductSummaryPath(client, 'cards')}>Cards</a>
 		</div>
-	{/if}
-</div>
+	</TabItem>
+	<TabItem>
+		<div slot="title" class="flex items-center gap-2">
+			<ChartMixedDollarOutline size="md" />
+			<a href={clientProductSummaryPath(client, 'loans')}>Loans</a>
+		</div>
+	</TabItem>
+</Tabs>
