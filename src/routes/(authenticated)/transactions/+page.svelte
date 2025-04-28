@@ -8,7 +8,7 @@
 		BreadcrumbItem
 	} from 'flowbite-svelte';
 
-	import Transactions from './Transactions.svelte';
+	import Transactions from '$lib/utils/Transactions.svelte';
 </script>
 
 <Breadcrumb class="mb-5">

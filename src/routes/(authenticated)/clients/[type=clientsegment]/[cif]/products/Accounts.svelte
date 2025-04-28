@@ -1,76 +1,23 @@
-<script lang="ts">
-	import dayjs from 'dayjs';
-	import customParseFormat from 'dayjs/plugin/customParseFormat';
-	import localizedFormat from 'dayjs/plugin/localizedFormat';
-	dayjs.extend(customParseFormat);
-	dayjs.extend(localizedFormat);
-
+<script lang="ts">	
 	import { page } from '$app/state';
-	import { formatAccountsBalance, statusBorderColor } from '$lib/utils/accountHelper';
-	import OwnershipIndicator from '$lib/utils/OwnershipIndicator.svelte';
-	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
-	import { Button, Card, Tooltip } from 'flowbite-svelte';
+	import { formatAccountsBalance } from '$lib/utils/accountHelper';
+	import { Button } from 'flowbite-svelte';
+	import AccountCard from '$lib/utils/AccountCard.svelte';
+	import { accountTransactionsPath } from '$lib/utils/pathHelper';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
-	import {accountTransactionsPath} from '$lib/utils/pathHelper'
 
-	let {client, accounts} = $derived(page.data);
+	let { client, accounts } = $derived(page.data);
 </script>
 
 <div class="grid gap-4 xl:grid-cols-1 xl:gap-4 p-2">
 	{#if accounts.length > 0}
 		{#each accounts as account}
-			<Card
-				size="none"
-				class="bg-gray-50 dark:bg-gray-800 shadow-sm"
-				style="border-left: 4px solid {statusBorderColor(account.status)}"
-			>
-				<div class="flex justify-between w-full">
-					<div>
-						<div class="flex items-center space-x-2">
-							<p class="font-bold text-gray-900 dark:text-gray-400">
-								{account.type} account - ({account.currency})
-							</p>
-							<OwnershipIndicator {account} />
-						</div>
-						<p class="text-sm text-gray-600 dark:text-gray-400">{account.iban}</p>
-						<div class="flex items-center space-x-2">
-							<p class="text-sm text-gray-600 dark:text-gray-400">Status:</p>
-							<StatusIndicator status={account.status} />
-						</div>
-					</div>
-					<div class="text-right flex items-center justify-end space-x-2">
-						<div>
-							<div class="flex items-center space-x-2 justify-end">
-								<p class="text-sm text-gray-400 dark:text-gray-600">current balance:</p>
-								<p class="text-lg font-bold text-gray-900 dark:text-gray-100">
-									{formatAccountsBalance('en-US', [account])}
-								</p>
-							</div>
-							<div class="flex items-center space-x-2 justify-end">
-								<p class="text-sm text-gray-400 dark:text-gray-600">available balance:</p>
-								<p class="text-sm font-medium text-gray-900 dark:text-gray-100">
-									{formatAccountsBalance('en-US', [account])}
-								</p>
-							</div>
-						</div>
-						<a href={accountTransactionsPath(client, account)}>
-							<ChevronDownOutline size="xl" class="text-green-600 dark:text-gray-400" />
-						</a>
-					</div>
-				</div>
-				{#if account.ownership !== 'primary'}
-					<div class="border-t border-gray-200 dark:border-gray-700 mt-4 pt-2">
-						<p class="text-sm text-gray-600 dark:text-gray-400">
-							Primary owner: <a
-								href="/clients/retail/{account.primaryOwnerId}/products"
-								class="font-medium text-gray-900 dark:text-gray-100"
-							>
-								{account.primaryOwnerId}
-							</a>
-						</p>
-					</div>
-				{/if}				
-			</Card>
+			<AccountCard {account} {openclosebutton} />
+			{#snippet openclosebutton()}
+				<a href={accountTransactionsPath(client, account)}>
+					<ChevronDownOutline size="xl" class="text-green-600 dark:text-gray-400" />
+				</a>
+			{/snippet}
 		{/each}
 		<div class="p-4 rounded shadow-sm">
 			<div class="flex justify-end space-x-2">
