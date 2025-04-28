@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Breadcrumb, BreadcrumbItem, TabItem, Tabs } from 'flowbite-svelte';
+	import { Badge, Breadcrumb, BreadcrumbItem, TabItem, Tabs } from 'flowbite-svelte';
 	import { ChartMixedDollarOutline, CreditCardOutline, WalletOutline } from 'flowbite-svelte-icons';
 
 	import { page } from '$app/state';
@@ -14,6 +14,7 @@
 	function isOpen(tabName: string): boolean {
 		return tabName === openTab;
 	}
+
 </script>
 
 <Breadcrumb class="mb-5">
@@ -25,17 +26,25 @@
 <Tabs
 	tabStyle="full"
 	contentClass="p-2 bg-white dark:bg-gray-800"
-	defaultClass="flex rounded-lg divide-x rtl:divide-x-reverse divide-gray-200 shadow-sm dark:divide-gray-700"
+	defaultClass="flex dark:divide-gray-700"	
 >
-	<TabItem open={isOpen('accounts')}>
-		<div slot="title" class="flex items-center gap-2">
+	<TabItem
+		open={isOpen('accounts')}
+		inactiveClasses="p-4 text-gray-500 bg-white rounded-tl-lg"
+		activeClasses="p-4 text-green-500 underline underline-offset-4 decoration-2 bg-white rounded-tl-lg dark:bg-gray-800 dark:text-primary-500"
+	>
+		<div slot="title" class="flex items-center gap-1">
 			<WalletOutline size="md" />
 			Accounts
 		</div>
 		<Accounts />
 	</TabItem>
-	<TabItem open={isOpen('cards')}>
-		<div slot="title" class="flex items-center gap-2">
+	<TabItem
+		open={isOpen('cards')}
+		inactiveClasses="p-4 text-gray-500 bg-white"
+		activeClasses="p-4 text-green-500 underline underline-offset-4 decoration-2 bg-white dark:bg-gray-800 dark:text-primary-500"
+	>
+		<div slot="title" class="flex items-center gap-1" >
 			<CreditCardOutline size="md" />
 			Cards
 		</div>
@@ -43,8 +52,12 @@
 			<BankCards />
 		</div>
 	</TabItem>
-	<TabItem open={isOpen('loans')}>
-		<div slot="title" class="flex items-center gap-2">
+	<TabItem
+		open={isOpen('loans')}
+		inactiveClasses="p-4 text-gray-500 bg-white rounded-tr-lg"
+		activeClasses="p-4 text-green-500 underline underline-offset-4 decoration-2 bg-white rounded-tr-lg dark:bg-gray-800 dark:text-primary-500"
+	>
+		<div slot="title" class="flex items-center gap-1">
 			<ChartMixedDollarOutline size="md" />
 			Loans
 		</div>

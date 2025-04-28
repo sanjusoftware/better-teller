@@ -24,14 +24,18 @@
 <Tabs
 	tabStyle="full"
 	contentClass="p-2 bg-white dark:bg-gray-800"
-	defaultClass="flex rounded-lg divide-x rtl:divide-x-reverse divide-gray-200 shadow-sm dark:divide-gray-700"
+	defaultClass="flex dark:divide-gray-700"
 >
-	<TabItem open>
-		<div slot="title" class="flex items-center gap-2">
+	<TabItem
+		open
+		inactiveClasses="p-4 text-gray-500 bg-white rounded-tl-lg"
+		activeClasses="p-4 text-green-500 underline underline-offset-4 decoration-2 bg-white rounded-tl-lg dark:bg-gray-800 dark:text-primary-500"
+	>
+		<div slot="title" class="flex items-center gap-1">
 			<WalletOutline size="md" />
 			<a href={clientProductSummaryPath(client, 'casa')}>Accounts</a>
 		</div>
-		<div class="p-2">			
+		<div class="p-2">
 			<AccountCard {account} {openclosebutton} />
 			{#snippet openclosebutton()}
 				<a href={clientProductSummaryPath(client, 'casa')}>
@@ -41,14 +45,20 @@
 			<Transactions {transactions} currency={account.currency} />
 		</div>
 	</TabItem>
-	<TabItem>
-		<div slot="title" class="flex items-center gap-2">
+	<TabItem
+		inactiveClasses="p-4 text-gray-500 bg-white"
+		activeClasses="p-4 text-green-500 underline underline-offset-4 decoration-2 bg-white dark:bg-gray-800 dark:text-primary-500"
+	>
+		<div slot="title" class="flex items-center gap-1">
 			<CreditCardOutline size="md" />
 			<a href={clientProductSummaryPath(client, 'cards')}>Cards</a>
 		</div>
 	</TabItem>
-	<TabItem>
-		<div slot="title" class="flex items-center gap-2">
+	<TabItem
+		inactiveClasses="p-4 text-gray-500 bg-white rounded-tr-lg"
+		activeClasses="p-4 text-green-500 underline underline-offset-4 decoration-2 bg-white rounded-tr-lg dark:bg-gray-800 dark:text-primary-500"
+	>
+		<div slot="title" class="flex items-center gap-1">
 			<ChartMixedDollarOutline size="md" />
 			<a href={clientProductSummaryPath(client, 'loans')}>Loans</a>
 		</div>

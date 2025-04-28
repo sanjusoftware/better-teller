@@ -35,7 +35,7 @@
 				<div class="text-gray-900 dark:text-white">
 					{transaction.id}
 					<button use:copy={transaction.id}>
-						<FileCopyOutline size="sm" class="mr-2" />
+						<FileCopyOutline size="sm" class="mr-2 text-gray-400" />
 					</button>
 					<Tooltip placement="right" class="text-sm font-light">Copy</Tooltip>
 				</div>
@@ -46,14 +46,14 @@
 						{transaction.from_account}
 					</span>
 					<button use:copy={transaction.from_account}>
-						<FileCopyOutline size="sm" class="mr-2" />
+						<FileCopyOutline size="sm" class="mr-2 text-gray-400" />
 					</button>
 				{:else}
 					<span>
-						{transaction.from_account}
+						{transaction.to_account}
 					</span>
 					<button use:copy={transaction.to_account}>
-						<FileCopyOutline size="sm" class="mr-2" />
+						<FileCopyOutline size="sm" class="mr-2 text-gray-400" />
 					</button>
 				{/if}
 				<Tooltip placement="right" class="text-sm font-light">Copy</Tooltip>
