@@ -7,7 +7,7 @@
 </script>
 
 <h2 class="text-md font-semibold text-gray-500 mb-2">Client's Information</h2>
-<Card class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-1">
+<Card class="bg-white dark:bg-gray-800 shadow-md rounded-lg">
 	<Alert dismissable color="blue" class="mb-2 p-2">
 		<div class="flex items-center gap-3">
 		  <InfoCircleSolid class="w-5 h-5" />

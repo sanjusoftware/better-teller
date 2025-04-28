@@ -11,7 +11,7 @@
 	<div class="col-span-5">
         {@render children()}
 	</div>
-	<div class="col-span-2">
+	<div class="col-span-2 mt-10">
 		<ClientInfoCard {client} />
 	</div>
 </div>
