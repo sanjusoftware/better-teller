@@ -23,7 +23,7 @@
 
 <Tabs
 	tabStyle="full"
-	contentClass="p-2 bg-white dark:bg-gray-800"
+	contentClass="p-2 bg-white dark:bg-gray-800  rounded-lg"
 	defaultClass="flex dark:divide-gray-700"
 >
 	<TabItem
@@ -36,7 +36,7 @@
 			<a href={clientProductSummaryPath(client, 'casa')}>Accounts</a>
 		</div>
 		<div class="p-2">
-			<AccountCard {account} {openclosebutton} />
+			<AccountCard {account} {openclosebutton} open={true} />
 			{#snippet openclosebutton()}
 				<a href={clientProductSummaryPath(client, 'casa')}>
 					<ChevronUpOutline size="xl" class="text-green-600 dark:text-gray-400" />

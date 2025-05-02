@@ -12,14 +12,14 @@
 <div class="grid gap-4 xl:grid-cols-1 xl:gap-4 p-2">
 	{#if accounts.length > 0}
 		{#each accounts as account}
-			<AccountCard {account} {openclosebutton} />
+			<AccountCard {account} {openclosebutton} open={false} />
 			{#snippet openclosebutton()}
 				<a href={accountTransactionsPath(client, account)}>
 					<ChevronDownOutline size="xl" class="text-green-600 dark:text-gray-400" />
 				</a>
 			{/snippet}
 		{/each}
-		<div class="p-4 rounded shadow-sm">
+		<div class="p-4">
 			<div class="flex justify-end space-x-2">
 				<p class="text-md font-bold text-gray-400 dark:text-gray-300">Total balance:</p>
 				<p class="text-lg font-bold text-gray-900 dark:text-gray-100">

@@ -2,16 +2,16 @@
 	import { formatAccountsBalance, statusBorderColor } from '$lib/utils/accountHelper';
 	import OwnershipIndicator from '$lib/utils/OwnershipIndicator.svelte';
 	import StatusIndicator from '$lib/utils/StatusIndicator.svelte';
-	import { Card } from 'flowbite-svelte';
 
-	let { account, openclosebutton } = $props();
+	let { account, openclosebutton, open } = $props();
+	let divClass = $derived(
+		open
+			? 'p-4 bg-gray-50 dark:bg-gray-800 shadow-md rounded-tl-lg rounded-tr-lg'
+			: 'p-4 bg-gray-50 dark:bg-gray-800 shadow-md rounded-lg'
+	);
 </script>
 
-<Card
-	size="none"
-	class="bg-gray-50 dark:bg-gray-800 shadow-sm"
-	style="border-left: 4px solid {statusBorderColor(account.status)}"
->
+<div class={divClass} style="border-left: 4px solid {statusBorderColor(account.status)}">
 	<div class="flex justify-between w-full">
 		<div>
 			<div class="flex items-center space-x-2">
@@ -41,7 +41,7 @@
 					</p>
 				</div>
 			</div>
-			{@render openclosebutton()}			
+			{@render openclosebutton()}
 		</div>
 	</div>
 	{#if account.ownership !== 'primary'}
@@ -56,4 +56,4 @@
 			</p>
 		</div>
 	{/if}
-</Card>
+</div>

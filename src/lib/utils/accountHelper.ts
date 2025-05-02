@@ -3,7 +3,7 @@ export const formatAccountsBalance = (locale: string, accounts: any[]) => {
     return formatBalance(locale, totalBalance, accounts[0]?.currency)
 };
 
-export const formatBalance = (locale: string, balance: number, currency: string) => {    
+export const formatBalance = (locale: string, balance: number, currency: string) => {
     return new Intl.NumberFormat(locale, {
         style: 'currency',
         currency: currency || ''
@@ -22,12 +22,12 @@ export const statusBorderColor = (status: string) => {
         case 'NPA':
         case 'Blocked':
         case 'Rejected':
-        case 'Inactive':
             return 'red';
         case 'Closed':
         case 'Expired':
+        case 'In Active':
             return 'gray';
         default:
-            return 'gray';
+            return '#b7b9c3';
     }
 };

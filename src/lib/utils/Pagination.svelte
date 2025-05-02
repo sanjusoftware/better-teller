@@ -25,7 +25,8 @@
 		filtersToApply = [],
 		tableHeaders,
 		searchHeader = null,
-		tableRow
+		tableRow,
+		connectedToParent = false
 	} = $props();
 
 	let searchTerm = $state('');
@@ -63,7 +64,7 @@
 	const pages = $derived(
 		Array.from({ length: endPage - startPage + 1 }, (_, i) => ({
 			name: (startPage + i).toString(),
-			active: (startPage + i) === currentPage
+			active: startPage + i === currentPage
 		}))
 	);
 
@@ -131,9 +132,15 @@
 			return count;
 		}, {})
 	);
+
+	let parentClass = connectedToParent
+		? 'bg-white dark:bg-gray-800 relative shadow-md sm:rounded-bl-lg sm:rounded-br-lg overflow-hidden'
+		: 'bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden';
 </script>
 
-<div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+<div
+	class={parentClass}
+>
 	<div
 		class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4"
 	>
@@ -150,43 +157,43 @@
 				placeholder={searchPlaceholder}
 			/>
 		</div>
-			<div
-				class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
-			>
-				{@render searchHeader?.()}
-				{#if filtersToApply.length > 0 && filtersToApply.length < 4}
-					{#each Object.keys(countsByFilters) as filter}
-						<Button color="alternative">
-							{humanize(filter)}<FilterSolid class="w-3 h-3 ml-2 " />
-						</Button>
-						<Dropdown class="w-48 p-3 space-y-2 text-sm">
-							{#each Object.keys(countsByFilters[filter]) as filterValue}
-								<li>
-									<Checkbox
-										id={filter}
-										on:change={toggleFilter}
-										value={filterValue}
-										checked={appliedFilters[filter]?.includes(filterValue)}
-									>
-										{filterValue} ({countsByFilters[filter][filterValue]})
-									</Checkbox>
-								</li>
-							{/each}
-						</Dropdown>
-					{/each}
-				{:else}
-					{#each filtersToApply as filter}
-						<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-							{filter['name'].toLocaleUpperCase()}:
-						</h6>
-						{#each filter.values as value}
-							<Checkbox id={filter['name']} on:change={toggleFilter} {value}>
-								{value}
-							</Checkbox>
+		<div
+			class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
+		>
+			{@render searchHeader?.()}
+			{#if filtersToApply.length > 0 && filtersToApply.length < 4}
+				{#each Object.keys(countsByFilters) as filter}
+					<Button color="alternative">
+						{humanize(filter)}<FilterSolid class="w-3 h-3 ml-2 " />
+					</Button>
+					<Dropdown class="w-48 p-3 space-y-2 text-sm">
+						{#each Object.keys(countsByFilters[filter]) as filterValue}
+							<li>
+								<Checkbox
+									id={filter}
+									on:change={toggleFilter}
+									value={filterValue}
+									checked={appliedFilters[filter]?.includes(filterValue)}
+								>
+									{filterValue} ({countsByFilters[filter][filterValue]})
+								</Checkbox>
+							</li>
 						{/each}
+					</Dropdown>
+				{/each}
+			{:else}
+				{#each filtersToApply as filter}
+					<h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+						{filter['name'].toLocaleUpperCase()}:
+					</h6>
+					{#each filter.values as value}
+						<Checkbox id={filter['name']} on:change={toggleFilter} {value}>
+							{value}
+						</Checkbox>
 					{/each}
-				{/if}
-			</div>
+				{/each}
+			{/if}
+		</div>
 	</div>
 
 	<Table {items} hoverable={true}>

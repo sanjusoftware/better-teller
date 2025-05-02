@@ -29,6 +29,6 @@
 	};
 </script>
 
-<Badge rounded color={color()} class="text-sm font-medium">
+<Badge rounded color={color()} class="text-xs">
 	{accountOwnership(account.ownership)}
 </Badge>

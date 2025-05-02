@@ -21,6 +21,7 @@
 		filtersToApply={['status']}
 		tableHeaders={['Date', 'Reference', 'Account', 'Amount']}
 		{tableRow}
+		connectedToParent={true}
 	/>
 
 	{#snippet tableRow(transaction: any)}
