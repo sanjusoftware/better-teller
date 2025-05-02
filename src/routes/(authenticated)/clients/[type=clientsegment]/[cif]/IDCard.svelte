@@ -43,7 +43,7 @@
 	</button>
 
 	<!-- Modal for enlarged image -->
-	<Modal title="ID Card Image" bind:open={enlarge} aria-label="Enlarge ID card" class="overflow-hidden">
+	<Modal bind:open={enlarge} aria-label="Enlarge ID card" class="overflow-hidden">
 		<div class="p-2 flex items-center justify-center relative rounded-lg w-full">
 			<div class="card-inner" class:flipped={!showFront}>
 				{#if showFront}

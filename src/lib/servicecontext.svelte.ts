@@ -13,6 +13,10 @@ export const getCurrentClient = () => {
     return currentClient.current
 }
 
+export const setCurrentClient = (client: any) => {
+    currentClient.current = client;
+}
+
 export const isServingClient = () => {
     return servingTicket.current != ''
 }

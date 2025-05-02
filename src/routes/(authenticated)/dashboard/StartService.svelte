@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
 	import {
-		currentClient,
 		isCurrentClient,
 		nextTicket,
-		servingTicket
+		servingTicket,
+		setCurrentClient
 	} from '$lib/servicecontext.svelte';
 	import { Badge, Button, Checkbox, Dropdown, DropdownItem, Modal, Search } from 'flowbite-svelte';
 	import { AngleRightOutline, CameraPhotoOutline, ChevronDownOutline } from 'flowbite-svelte-icons';
@@ -140,9 +139,7 @@
 			<CameraPhotoOutline class="w-4 h-4 me-2" />OCR
 		</Button>
 	</div>
-	<Button pill outline color="red"  on:click={cancelVerification}>
-		Release Ticket
-	</Button>
+	<Button pill outline color="red" on:click={cancelVerification}>Release Ticket</Button>
 </Modal>
 
 <!-- Modal for OCR scanning -->
@@ -174,8 +171,7 @@
 					update().finally(async () => {
 						if (result.type === 'success') {
 							scanning = false;
-							currentClient.current = result.data?.currentClient;
-							// goto('/clients/' + currentClient.current.type + '/' + currentClient.current.cif);
+							setCurrentClient(result.data?.currentClient);
 						} else {
 							new Error('Error scanning ID document: ' + result.status);
 						}
