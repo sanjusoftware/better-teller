@@ -2,6 +2,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 
+	import { getCurrentClient, isCurrentClient } from '$lib/servicecontext.svelte';
 	import {
 		Sidebar,
 		SidebarDropdownWrapper,
@@ -14,13 +15,16 @@
 		AngleUpOutline,
 		ArrowsRepeatOutline,
 		ArrowUpDownOutline,
+		BuildingOutline,
 		CashOutline,
-		ChartPieOutline,
+		ChartMixedOutline,
 		CogOutline,
 		GridOutline,
+		HomeOutline,
 		LifeSaverSolid,
-		UsersGroupOutline
+		UserOutline
 	} from 'flowbite-svelte-icons';
+	import { clientProductSummaryPath } from './pathHelper';
 
 	let { drawerHidden = false } = $props();
 
@@ -29,10 +33,10 @@
 	};
 
 	let iconClass =
-		'flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white';
+		'flex-shrink-0 w-6 h-6 text-green-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white';
 	let itemClass =
-		'flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700';
-	let groupClass = 'pt-2 space-y-2';
+		'flex items-center p-2 text-gray-700 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700';
+	let groupClass = 'space-y-2';
 
 	let mainSidebarUrl = $state(page.url.pathname);
 
@@ -42,17 +46,26 @@
 		closeDrawer();
 
 		mainSidebarUrl = navigation.to?.url.pathname ?? '';
-	});
+	});	
 
-	let primary_actions = [
-		{ name: 'Dashboard', icon: ChartPieOutline, href: '/dashboard' },
+	let non_client_actions = [
+		{ name: 'Home', icon: HomeOutline, href: '/dashboard' },		
+		{ name: 'Reports', icon: ChartMixedOutline, href: '/reports' },
+		{ name: 'Admin', icon: BuildingOutline, href: '/admin' }
+	];
+
+	let client_actions = [
+		{ name: 'Home', icon: HomeOutline, href: '/dashboard' },
 		{
-			name: 'Clients',
-			icon: UsersGroupOutline,
+			name: "Client's Info",
+			icon: UserOutline,
 			children: {
-				Individual: '/clients/retail',
-				Corporate: '/clients/corporate',
-				SME: '/clients/sme'
+				'Products Summary': clientProductSummaryPath(getCurrentClient()),
+				'ID Dcouments': '/clients/corporate',
+				'Contacts': '/clients/sme',
+				'GDPR & KYC Documents': '/clients/sme',
+				'Employer & Revenues': '/clients/sme',
+				
 			}
 		},
 		{
@@ -67,21 +80,23 @@
 				'Investments': '/products/investment',				
 			}
 		},
-		{ name: 'Payments', icon: CashOutline, href: '/payments' },
-		{ name: 'Transfers', icon: ArrowUpDownOutline, href: '/transfers' },
-		{ name: 'Transactions', icon: ArrowsRepeatOutline, href: '/transactions' }
-	];
-
-	let secondary_actions = [
-		{ label: 'Settings', icon: CogOutline, href: '/settings' },
 		{
-			label: 'Support',
-			href: 'https://betterteller.dskbank.bg/help',
-			icon: LifeSaverSolid
-		}
+			name: "Transactions",
+			icon: ArrowsRepeatOutline,
+			children: {
+				'Deposit': clientProductSummaryPath(getCurrentClient()),
+				'Withdrawal': '/clients/corporate',
+				'Transfers': '/clients/sme'
+			}
+		},
+		{ name: 'Reports', icon: ChartMixedOutline, href: '/reports' },
+		{ name: 'Admin', icon: BuildingOutline, href: '/admin' }
 	];
 
-	let dropdowns = $state(Object.fromEntries(Object.keys(primary_actions).map((x) => [x, false])));
+	let primary_actions = $derived(isCurrentClient() ? client_actions : non_client_actions)
+	
+
+	let dropdowns = $state(Object.fromEntries(Object.keys(() => primary_actions).map((x) => [x, false])));
 </script>
 
 <Sidebar
@@ -103,7 +118,7 @@
 							<AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
 							<svelte:component this={icon} slot="icon" class={iconClass} />
 							{#each Object.entries(children) as [title, href]}
-								<SidebarItem label={title} {href} spanClass="ml-9" class={itemClass} />
+								<SidebarItem label={title} href={href as string} spanClass="ml-9" class={itemClass} />
 							{/each}
 						</SidebarDropdownWrapper>
 					{:else}
@@ -111,13 +126,6 @@
 							<svelte:component this={icon} slot="icon" class={iconClass} />
 						</SidebarItem>
 					{/if}
-				{/each}
-			</SidebarGroup>
-			<SidebarGroup ulClass={groupClass}>
-				{#each secondary_actions as { label, href, icon } (label)}
-					<SidebarItem {label} {href} spanClass="ml-3" class={itemClass}>
-						<svelte:component this={icon} slot="icon" class={iconClass} />
-					</SidebarItem>
 				{/each}
 			</SidebarGroup>
 		</nav>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Badge, Breadcrumb, BreadcrumbItem, TabItem, Tabs } from 'flowbite-svelte';
+	import { Breadcrumb, BreadcrumbItem, TabItem, Tabs } from 'flowbite-svelte';
 	import { ChartMixedDollarOutline, CreditCardOutline, WalletOutline } from 'flowbite-svelte-icons';
 
 	import { page } from '$app/state';

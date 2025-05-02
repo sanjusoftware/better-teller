@@ -9,6 +9,10 @@ export const isCurrentClient = () => {
     return Object.keys(currentClient.current).length > 2;
 }
 
+export const getCurrentClient = () => {
+    return currentClient.current
+}
+
 export const isServingClient = () => {
     return servingTicket.current != ''
 }
