@@ -1,82 +1,14 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { humanize } from '$lib/utils/strings';
-	import { Button, Card, Modal, Tooltip } from 'flowbite-svelte';
-	import {
-		CheckCircleOutline,
-		CloseCircleOutline
-	} from 'flowbite-svelte-icons';
+	import { Button, Card, Tooltip } from 'flowbite-svelte';
+	import { CheckCircleOutline, CloseCircleOutline } from 'flowbite-svelte-icons';
 	import IDCard from './IDCard.svelte';
-	import { LocalStorage } from '$lib/localstorage.svelte';
-	let phoneVerficationModal = $state(true);
+	import PhoneVerification from './PhoneVerification.svelte';
+	let phoneVerficationModal = $state(false);
 	let emailVerficationModal = $state(false);
 
 	let { client } = $props();
 
-	async function cancelPhoneVerification() {
-		phoneVerficationModal = false;
-	}
-	async function openVerifyPhoneModal() {
-		phoneVerficationModal = true;
-	}
-
-	// let otp = $state('');
-	let isSending = $state(false);
-	let canResend = $state(false);
-
-	let otp = $state(Array(6).fill(''));
-
-	function handleInput(event, index) {
-		const value = event.target.value;
-
-		// If a 6-digit OTP is pasted, split and fill the inputs
-		if (value.length === 6) {
-			otp = value.split('');
-			return;
-		}
-
-		// Allow only numeric input
-		if (!/^\d$/.test(value)) {
-			event.target.value = '';
-			return;
-		}
-
-		otp[index] = value;
-
-		// Move to the next input if available
-		const nextInput = document.getElementById(`otp-${index + 1}`);
-		if (nextInput) {
-			nextInput.focus();
-		}
-	}
-
-	async function verifyPhone() {
-		isSending = true;
-		// Simulate sending OTP
-		await new Promise((resolve) => setTimeout(resolve, 2000));
-		isSending = false;
-		canResend = false;
-
-		// Enable resend button after 30 seconds
-		setTimeout(() => {
-			canResend = true;
-		}, 30000);
-	}
-
-	async function resendSMS() {
-		canResend = false;
-		isSending = true;
-		// Simulate resending OTP
-		await new Promise((resolve) => setTimeout(resolve, 2000));
-		isSending = false;
-
-		// Enable resend button after 30 seconds
-		setTimeout(() => {
-			canResend = true;
-		}, 30000);
-	}
-
-	let otpSent = new LocalStorage("otp", '');
 </script>
 
 <h2 class="text-md font-semibold text-gray-500 mb-2">Client's Information</h2>
@@ -134,9 +66,16 @@
 							<Tooltip>
 								<span class="text-xs">Phone Unverified</span>
 							</Tooltip>
-							<Button size="xs" outline class="p-1 text-xs" on:click={openVerifyPhoneModal}>
+							<Button
+								size="xs"
+								outline
+								class="p-1 text-xs"
+								on:click={() => (phoneVerficationModal = true)}
+							>
 								Verify
 							</Button>
+							<!-- Modal for sending OTP for phone verification -->
+							<PhoneVerification phone={client.phone} bind:open={phoneVerficationModal} />
 						{/if}
 					</div>
 				</div>
@@ -179,66 +118,3 @@
 		</div>
 	</div>
 </Card>
-
-<!-- Modal for sending OTP for phone verification -->
-<Modal
-	title="Phone Verification"
-	classHeader="text-gray-900"
-	bind:open={phoneVerficationModal}
-	size="sm"
-	autoclose={false}
->
-	<p class="text-sm text-gray-500 dark:text-gray-400 text-left">
-		Send OTP to the client't registered phone number:
-		<span class="font-semibold text-gray-900">{client.phone}</span>
-	</p>
-	<form
-		method="POST"
-		action="?/sendOTP"
-		use:enhance={() => {
-			isSending = true;
-			return ({ result, update }) => {
-				update().finally(async () => {
-					if (result.type === 'success') {
-						isSending = false;
-						otpSent.current = result.data?.otp;
-
-					} else {
-						new Error('Error sending OTP : ' + result.status);
-					}
-				});
-			};
-		}}
-	>
-		<input name ="phonenumber" type="hidden" value={client.phone} />
-		<!-- <div class="mb-4">
-			<label for="otp" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-				Enter OTP
-			</label>
-			<div class="flex space-x-2">
-				{#each Array(6) as _, index}
-					<input
-						id="otp-{index}"
-						type="text"
-						maxlength="1"
-						class="w-10 h-10 text-center rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-						bind:value={otp[index]}
-						on:input={(e) => handleInput(e, index)}
-						required
-					/>
-				{/each}
-			</div>
-		</div> -->
-		<div class="flex items-center justify-between">
-			<Button pill type="submit" class="flex-shrink-0 ml-2" disabled={isSending}>
-				{isSending ? 'Sending...' : 'Send OTP'}
-			</Button>
-			<Button pill outline color="light" on:click={resendSMS} disabled={!canResend}>
-				Resend OTP
-			</Button>
-			<Button pill outline color="red" on:click={cancelPhoneVerification}>
-				Cancel
-			</Button>
-		</div>
-	</form>
-</Modal>
