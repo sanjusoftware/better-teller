@@ -2,7 +2,6 @@
 	import { page } from '$app/state';
 	import {
 		Alert,
-		DarkMode,
 		Dropdown,
 		DropdownItem,
 		NavBrand,
@@ -13,12 +12,10 @@
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 	import { getFlash } from 'sveltekit-flash-message';
-	import CompleteService from '../../routes/(authenticated)/dashboard/CompleteService.svelte';
 	import CurrentClient from '../../routes/(authenticated)/dashboard/CurrentClient.svelte';
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
 	import UserSettings from './UserSettings.svelte';
-	import LanguageList from './LanguageList.svelte';
 
 	let user = page.data.session?.user;
 	let fluid = $state(true);
