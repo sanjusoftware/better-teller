@@ -5,12 +5,14 @@ import path from 'path';
 import { fail, message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { Actions, PageServerLoad } from './$types';
+import Clients from '$lib/data/clients.json'
+import { error } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ params, url }) => {
-    // const client = Clients.find((client) => client.cif === Number(params.cif) && client.type === params.type)
-    // if (!client) {
-    //     throw error(404, 'Client not found: CIF ' + params.cif);
-    // }
+    const client = Clients.find((client) => client.cif === Number(params.cif) && client.type === params.type)
+    if (!client) {
+        throw error(404, 'Client not found: CIF ' + params.cif);
+    }
 
     const documentForm = await superValidate(zod(documentSchema));
     return {
