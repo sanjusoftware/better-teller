@@ -77,6 +77,7 @@
 						isSending = false;
 						otpSent.current = result.data?.otp;
 						validateOTPOpen = true;
+						open = false;
 					} else {
 						new Error('Error sending OTP : ' + result.status);
 					}
@@ -106,7 +107,8 @@
 	autoclose={false}
 >	
 	<p class="text-sm text-gray-500 dark:text-gray-400 text-left">
-		Enter the OTP recieved by the customer on their registered phone number:
+		<span class="font-semibold text-gray-900">Enter 6 digit OTP</span>
+		recieved by the customer on their registered phone number:
 		<span class="font-semibold text-gray-900">{phone}</span>
 	</p>
 	{#if validationError}
@@ -137,10 +139,7 @@
 		}}
 	>
 		<div class="mb-4">
-			<label for="otp" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-				Enter OTP
-			</label>
-			<div class="flex space-x-2">
+			<div class="flex justify-center space-x-2">
 				{#each Array(6) as _, index}
 					<input
 						id="otp-{index}"
@@ -158,10 +157,10 @@
 			</div>
 		</div>
 		<div class="flex items-center justify-between">
+			<Button pill outline color="light" on:click={() => (validateOTPOpen = false, open=true)}>Back</Button>
 			<Button pill type="submit" class="flex-shrink-0 ml-2" disabled={isValidating}>
 				{isSending ? 'Validating...' : 'Validate'}
 			</Button>
-			<Button pill outline color="red" on:click={() => (validateOTPOpen = false)}>Cancel</Button>
 		</div>
 	</form>
 </Modal>
