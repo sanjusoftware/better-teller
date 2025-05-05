@@ -24,12 +24,13 @@ export const actions = {
         // Simulate sending OTP
         // In a real-world scenario, you would perform sendOTP operation here, like calling an OTP API
         await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay for the scan operation
-        console.log('OTP sent successfully!');
+        let otp = Math.floor(100000 + Math.random() * 900000); // Generate a random 6-digit number
+        console.log('OTP sent successfully!', otp);
         setFlash({ type: 'success', message: 'OTP sent successfully!' }, cookies);
 
         return {
             success: true,
-            otp: Math.floor(100000 + Math.random() * 900000) // Generate a random 6-digit number
+            otp: otp 
         };
     },
     validateOTP: async ({ request, cookies }) => {
@@ -48,6 +49,7 @@ export const actions = {
         // Simulate validating OTP
         // In a real-world scenario, you would perform verifyOTP operation here, like calling an validate OTP API
         await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay for the scan operation
+        
         setFlash({ type: 'success', message: 'Phone verification completed successfully!' }, cookies);
         return {
             success: true

@@ -75,7 +75,7 @@
 								Verify
 							</Button>
 							<!-- Modal for sending OTP for phone verification -->
-							<PhoneVerification phone={client.phone} bind:open={phoneVerficationModal} />
+							<PhoneVerification phone={client.phone} bind:sendOTPOpen={phoneVerficationModal} />
 						{/if}
 					</div>
 				</div>
