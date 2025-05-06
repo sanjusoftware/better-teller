@@ -4,6 +4,7 @@
 	import { CheckCircleOutline, CloseCircleOutline } from 'flowbite-svelte-icons';
 	import IDCard from './IDCard.svelte';
 	import PhoneVerification from './PhoneVerification.svelte';
+	import EmailVerification from './EmailVerification.svelte';
 	let phoneVerficationModal = $state(false);
 	let emailVerficationModal = $state(false);
 
@@ -74,7 +75,6 @@
 							>
 								Verify
 							</Button>
-							<!-- Modal for sending OTP for phone verification -->
 							<PhoneVerification phone={client.phone} bind:sendOTPOpen={phoneVerficationModal} />
 						{/if}
 					</div>
@@ -105,6 +105,7 @@
 							>
 								Verify
 							</Button>
+							<EmailVerification email={client.email} bind:sendOTPOpen={emailVerficationModal} />
 						</div>
 					{/if}
 				</div>
