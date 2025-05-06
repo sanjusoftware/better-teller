@@ -75,7 +75,7 @@
 	</p>
 	<form
 		method="POST"
-		action="?/sendOTP"
+		action="/otp?/sendOTP"
 		use:enhance={() => {
 			isSending = true;
 			return ({ result, update }) => {
@@ -122,7 +122,7 @@
 	{/if}
 	<form
 		method="POST"
-		action="?/validateOTP"
+		action="/otp?/validateOTP"
 		use:enhance={() => {
 			isValidating = true;
 			return ({ result, update }) => {
