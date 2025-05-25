@@ -1,0 +1,23 @@
+[
+    {
+        "names_cyrilic": "Санджив Мишра",
+        "names_latin": "sanjeev mishra",
+        "document_type": "National ID",
+        "document_number": "121234342",
+        "issuing_authority": "Mol BGR",
+        "egn": "9378429282",
+        "id_issue_date": "2020-09-09",
+        "id_expiry_date": "2024-09-09",
+        "issuing_country": "bg",
+        "date_of_birth": "1982-09-30",
+        "place_of_birth": "Sofia",
+        "citizenship": "bg",
+        "gender": "M",
+        "permanent_address": "Sofia, 63 Krichim St., Lozenets",
+        "post_code": "1000",
+        "residence": "Bulgaria",
+        "locality": "Lozenets",
+        "neighbourhood": "",
+        "street": "Krichim"
+    }
+]

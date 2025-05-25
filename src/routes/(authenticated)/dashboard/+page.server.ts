@@ -1,4 +1,5 @@
 import Clients from "$lib/data/clients.json";
+import ScannedData from "$lib/data/scanned_data.json"
 import { redirect } from 'sveltekit-flash-message/server';
 import type { PageServerLoad } from './$types';
 
@@ -21,7 +22,7 @@ export const actions = {
             message: "Ticket aquired successfully",
             ticket: ticket
         };
-    },    
+    },
 
     startService: async ({ request }) => {
         const data = await request.formData();
@@ -67,24 +68,21 @@ export const actions = {
         // Simulate a ID scan operation 
         await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay for the scan operation
         console.log('ID document scanned successfully!');
+        let scannedData = ScannedData[Math.floor(Math.random() * ScannedData.length)]
+        console.log('scannedData', scannedData)
 
-        // In a real-world scenario, you would perform an operation here, like calling an ID scanning API
-        // or processing the ID document image.
-        // For this example, we'll just simulate a successful scan with a random client from the list
-        const scannedClient = Clients[Math.floor(Math.random() * Clients.length)];
+        const existingClient = Clients.find((c) => c.egn === scannedData.document_number);
 
-        if (!scannedClient) {
-            // If no client is found, return an error message
-            console.error('Scan failed. No client found.');
-            return {
-                success: false,
-                message: 'Scan failed. No client found.'
-            };
+        if (!existingClient) {
+            console.log("Client not found, going to create new one")
+            cookies.set('scanned-data', JSON.stringify(scannedData), { path: '/' })
+            // If no client is found, redirect to opening new client form
+            redirect(303, '/clients/new', { type: 'success', message: "No existing client found with the ID card." }, cookies);
         }
 
         return {
             success: true,
-            currentClient: scannedClient
+            currentClient: existingClient
         };
     }
 };

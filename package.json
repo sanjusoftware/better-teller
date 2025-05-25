@@ -9,15 +9,20 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"generate-migrations:db": "drizzle-kit generate --config=src/lib/server/db/drizzle.config.ts",
+		"push:db": "drizzle-kit push --config=src/lib/server/db/drizzle.config.ts",
+		"migrate:db": "tsx src/lib/server/db/migrate.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "^5.2.9",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@tailwindcss/typography": "^0.5.14",
+		"@types/better-sqlite3": "^7.6.13",
 		"@types/node": "^22.13.4",
 		"autoprefixer": "^10.4.20",
+		"drizzle-kit": "^0.31.1",
 		"flowbite": "^2.5.2",
 		"flowbite-svelte": "^0.47.4",
 		"flowbite-svelte-icons": "^2.0.2",
@@ -35,13 +40,16 @@
 		"@auth/sveltekit": "^1.7.4",
 		"@azure/communication-email": "^1.0.0",
 		"@floating-ui/dom": "^1.6.13",
+		"@oslojs/crypto": "^1.0.1",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
 		"@vitejs/plugin-basic-ssl": "^1.2.0",
+		"better-sqlite3": "^11.10.0",
 		"cross-env": "^7.0.3",
 		"dayjs": "^1.11.13",
 		"dotenv": "^16.4.7",
+		"drizzle-orm": "^0.43.1",
 		"flag-icons": "^7.2.3",
 		"flowbite-svelte-blocks": "^1.1.4",
 		"formsnap": "^2.0.0",
@@ -50,6 +58,7 @@
 		"svelte-select": "^5.8.3",
 		"sveltekit-superforms": "^2.23.1",
 		"tailwind-merge": "^3.2.0",
-		"zod": "^3.24.1"
+		"tsx": "^4.19.4",
+		"zod": "^3.25.28"
 	}
 }

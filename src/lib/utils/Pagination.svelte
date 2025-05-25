@@ -222,7 +222,7 @@
 		{#if pages.length > 1}
 			<Pagination
 				{pages}
-				activeClass="text-white border border-gray-300 bg-green-600 hover:bg-green-100 hover:text-green-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+				activeClass="text-gray-500 border border-gray-300 bg-green-200 hover:bg-green-100 hover:text-green-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
 				on:previous={previousPage}
 				on:next={nextPage}
 				on:click={(e) =>

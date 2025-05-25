@@ -26,7 +26,7 @@
 <Tabs
 	tabStyle="full"
 	contentClass="p-2 bg-white dark:bg-gray-800 rounded-lg"
-	defaultClass="flex dark:divide-gray-700"	
+	defaultClass="flex dark:divide-gray-700"
 >
 	<TabItem
 		open={isOpen('accounts')}

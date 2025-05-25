@@ -2,7 +2,7 @@
 	import { humanize } from '$lib/utils/strings';
 	import { Button, Card, Tooltip } from 'flowbite-svelte';
 	import { CheckCircleOutline, CloseCircleOutline } from 'flowbite-svelte-icons';
-	import IDCard from './IDCard.svelte';
+	import IDCard from '$lib/utils/IDCard.svelte';
 	import PhoneVerification from './PhoneVerification.svelte';
 	import EmailVerification from './EmailVerification.svelte';
 	let phoneVerficationModal = $state(false);

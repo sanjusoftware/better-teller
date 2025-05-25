@@ -4,5 +4,20 @@ export const countries = [
     { label: 'India', value: 'in' }
 ];
 
-export const IDTypes = [{ value: 'passport', name: 'Passport' }, { value: 'dl', name: 'Driving Licence' }, { value: 'national_id', name: 'National ID' }, { value: 'egn', name: 'EGN' }];
-export const documentTypes = [...IDTypes, { value: 'other', name: 'Other...' }];
+export const genders = [
+    {label: 'Male', value: 'M'},
+    {label: "Female", value: "F"}
+]
+
+export const locations = [
+    {label: 'Sofia', value: 'Sofia'},
+    {label: "Plovdiv", value: "Plovdiv"},
+    {label: "Varna", value: "Varna"}
+]
+
+export const quaters = [
+    {label: 'Lozenets', value: 'Lozenets'},
+    {label: "Sofia Center", value: "Sofia Center"}
+]
+
+export const documentTypes = ["Passport", "Driving Licence", "National ID"];
