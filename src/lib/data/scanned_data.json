@@ -6,9 +6,9 @@
         "document_number": "121234342",
         "issuing_authority": "Mol BGR",
         "egn": "9378429282",
-        "id_issue_date": "2020-09-09",
-        "id_expiry_date": "2024-09-09",
-        "issuing_country": "bg",
+        "id_issue_date": "2020-09-29",
+        "id_expiry_date": "2024-08-30",
+        "issuing_country": "in",
         "date_of_birth": "1982-09-30",
         "place_of_birth": "Sofia",
         "citizenship": "bg",
@@ -18,6 +18,8 @@
         "residence": "Bulgaria",
         "locality": "Lozenets",
         "neighbourhood": "",
-        "street": "Krichim"
+        "street": "Krichim",
+        "id_front_image": "https://upload.wikimedia.org/wikipedia/commons/a/ae/New_Bulgarian_ID_card_(front).png",
+        "id_back_image": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Bulgarian_Identity_card_-_back_(2024).png"
     }
 ]

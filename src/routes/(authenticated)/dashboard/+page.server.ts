@@ -66,7 +66,7 @@ export const actions = {
     startScan: async ({ cookies }) => {
         console.log('Scanning ID document...');
         // Simulate a ID scan operation 
-        await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay for the scan operation
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a delay for the scan operation
         console.log('ID document scanned successfully!');
         let scannedData = ScannedData[Math.floor(Math.random() * ScannedData.length)]
         console.log('scannedData', scannedData)

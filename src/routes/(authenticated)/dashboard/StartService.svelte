@@ -6,6 +6,7 @@
 		servingTicket,
 		setCurrentClient
 	} from '$lib/servicecontext.svelte';
+	import DskSpinner from '$lib/utils/DSKSpinner.svelte';
 	import { Badge, Button, Checkbox, Dropdown, DropdownItem, Modal, Search } from 'flowbite-svelte';
 	import { AngleRightOutline, CameraPhotoOutline, ChevronDownOutline } from 'flowbite-svelte-icons';
 	import { Circle } from 'svelte-loading-spinners';
@@ -152,9 +153,7 @@
 	dismissable={false}
 >
 	{#if scanning}
-		<div class="flex justify-center items-center h-32">
-			<Circle size="120" color="#37c92c" unit="px" duration="1s" />
-		</div>
+		<DskSpinner />
 	{:else}
 		<p class="text-sm text-gray-800 dark:text-gray-400 text-left">
 			Please insert the ID document into the scanning device.

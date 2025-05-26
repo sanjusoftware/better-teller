@@ -1,8 +1,9 @@
-import { superValidate, message } from 'sveltekit-superforms';
+import { superValidate } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
-import { gdprSchema as lastStep } from '$lib/schemas/clientSchema';
+import { IDSchema } from '$lib/schemas/clientSchema';
 import type { PageServerLoad } from "./$types";
+import { generateCustomerId } from '$lib/utils/strings';
 
 export const load: PageServerLoad = async ({ cookies }) => {
   let scannedData = cookies.get('scanned-data')
@@ -10,9 +11,9 @@ export const load: PageServerLoad = async ({ cookies }) => {
   let newClientForm = null;
   if (scannedData) {
     let data = JSON.parse(scannedData)
-    newClientForm = await superValidate(data, zod(lastStep));
+    newClientForm = await superValidate(data, zod(IDSchema));
   } else {
-    newClientForm = await superValidate(zod(lastStep));
+    newClientForm = await superValidate(zod(IDSchema));
   }
 
   return {
@@ -22,14 +23,20 @@ export const load: PageServerLoad = async ({ cookies }) => {
 };
 
 export const actions = {
-  default: async ({ request }) => {
-    const form = await superValidate(request, zod(lastStep));
-    console.log(form);
+  createNewClient: async ({ request }) => {
+    const form = await superValidate(request, zod(IDSchema));
     if (!form.valid) return fail(400, { form });
 
-    // TODO: Do something with the validated form.data
-
-    // Display a success status message
-    return message(form, 'Client created successfully!');
+    // Simulate a successful client creation operation
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a delay for the scan operation
+    const clientNumber = generateCustomerId(10); // Generate a random client number
+    console.log('Client created with number:', clientNumber);
+    
+    return {
+      form,
+      success: true,
+      message: 'Client created successfully with number: ' + clientNumber,
+      clientNumber: clientNumber
+    };
   }
-};
+}

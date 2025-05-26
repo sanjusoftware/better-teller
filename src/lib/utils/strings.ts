@@ -12,6 +12,11 @@ export const generateId = (length: number) => {
   return generateRandomString(random, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", length);
 }
 
+export const generateCustomerId = (length: number) => {
+  // 10-characters long integer
+  return generateRandomString(random, "123456789", length);
+}
+
 export const humanize = (text: string) => {
   // Insert a space before each capital letter
   const spacedName = text.replace(/([A-Z])/g, ' $1').trim();

@@ -1,105 +1,68 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Card from '$lib/utils/InfoCard.svelte';
 	import {
-		Alert,
-		ArrowKeyLeft,
-		ArrowKeyRight,
 		Badge,
 		Breadcrumb,
 		BreadcrumbItem,
 		Button,
-		Datepicker,
 		Heading,
 		Helper,
 		Input,
 		Label,
+		Modal,
 		Select,
 		StepIndicator,
 		Toggle
 	} from 'flowbite-svelte';
-	import SearchableSelect from 'svelte-select';
-	import { superForm } from 'sveltekit-superforms';
-	import { zod } from 'sveltekit-superforms/adapters';
-	import SuperDebug from 'sveltekit-superforms';
-	import Card from '$lib/utils/InfoCard.svelte';
-	import { gdprSchema, IDSchema, contactSchema } from '$lib/schemas/clientSchema';
+	import SuperDebug, { dateProxy, superForm } from 'sveltekit-superforms';
 
-	let { data } = $props();
+	let clientNumber = $state(null);
+	let newClientForm = page.data.newClientForm;
 	let stepNames = ['ID Information', 'Contact Data', 'GDPR, KYC Documents'];
 	let currentStep = $state(1);
-	function previousStep() {
-		currentStep = currentStep - 1;
-	}
 
 	import { countries, genders, locations, quaters } from '$lib/utils/constants';
 	import IDCard from '$lib/utils/IDCard.svelte';
+	import DskSpinner from '$lib/utils/DSKSpinner.svelte';
 
-	const { form, errors, message, constraints, enhance, validateForm, options, capture, restore } =
-		superForm(data.newClientForm, {
-			// No need for hidden fields with dataType: 'json'
+	const { form, errors, constraints, enhance, capture, restore, delayed } = superForm(
+		newClientForm,
+		{
 			dataType: 'json',
-			async onSubmit({ cancel }) {
-				// set validator to current steps schema, steps has index 0, so it must be (currentStep - 1)
-				options.validators = [zod(IDSchema), zod(contactSchema), zod(gdprSchema)][currentStep - 1];
-				console.log('Total steps: ' + stepNames.length + ' Current step: ' + currentStep);
-				// console.log('Validators: ' + options.validators.shape);
-
-				console.log('validting form');
-				// Make a manual client-side validation, since we have cancelled
-				const result = await validateForm({ update: true });
-
-				console.log(result.errors);
-				if (!result.valid) {
-					cancel();
-					return;
-				}
-
-				// If it's valid, go to next step
-				if (currentStep < stepNames.length) {
-					cancel();
-					currentStep = currentStep + 1;
-				}
-				console.log('Step after validation: ' + currentStep);
-
-				// If on last step, submit the form
-				return;
-			},
-
+			delayMs: 100,
 			async onResult({ result }) {
 				if (result.type === 'success') {
-					document.scrollingElement?.scrollTo({
-						top: 0,
-						behavior: 'smooth'
-					});
+					clientNumber = result.data?.clientNumber;
+					currentStep = 2;
 				}
 			}
-		});
+		}
+	);
+	const issueDateProxy = dateProxy(form, 'id_issue_date', { format: 'date' });
+	const expiryDateProxy = dateProxy(form, 'id_expiry_date', { format: 'date' });
+	const dobProxy = dateProxy(form, 'date_of_birth', { format: 'date' });
 	export const snapshot = { capture, restore };
 </script>
 
 <Breadcrumb class="mb-5">
 	<BreadcrumbItem home>Clients</BreadcrumbItem>
 	<BreadcrumbItem>New Client</BreadcrumbItem>
+	{#if clientNumber}
+		<BreadcrumbItem>
+			<a href="?/viewClient?clientNumber={clientNumber}">{clientNumber}</a>
+		</BreadcrumbItem>
+	{/if}
 </Breadcrumb>
 
 <StepIndicator {currentStep} steps={stepNames} />
 
-<form method="POST" use:enhance>
-	<Card class="-mt-px max-w-none mt-5">
-		{#if $message}
-			<Alert color={page.status == 200 ? 'green' : 'red'}>
-				{page.status == 200 ? 'Success!' : 'Error!'}
-				{$message}
-			</Alert>
-		{/if}
-
-		{#if stepNames[currentStep - 1] === 'ID Information'}
+<Card class="-mt-px max-w-none mt-5">
+	{#if stepNames[currentStep - 1] === 'ID Information'}
+		<form action="?/createNewClient" method="POST" use:enhance>
 			<div class="grid grid-cols-2 gap-4 mb-6">
 				<Card>
-					<IDCard
-						IDForntImage={'https://upload.wikimedia.org/wikipedia/commons/a/ae/New_Bulgarian_ID_card_(front).png'}
-						IDBackImage={'https://upload.wikimedia.org/wikipedia/commons/2/2b/Bulgarian_Identity_card_-_back_(2024).png'}
-					/>
+					<IDCard IDForntImage={$form.id_front_image} IDBackImage={$form.id_back_image} />
 				</Card>
 				<Card class="flex flex-col items-center justify-center h-full py-8">
 					<Badge rounded border color="red" class="p-5 text-lg font-medium mb-5">
@@ -108,7 +71,7 @@
 					<h1 class="font-bold text-2xl mb-5 text-gray-900">Do you want to create new client?</h1>
 					<div class="flex gap-4">
 						<Button pill outline color="red" class="px-10">No</Button>
-						<Button pill color="green" class="px-10">Yes</Button>
+						<Button pill color="green" class="px-10" type="submit">Yes</Button>
 					</div>
 				</Card>
 			</div>
@@ -209,8 +172,17 @@
 					{/if}
 				</div>
 				<div>
-					<Label for="id_issue_date" class="mb-2">ID issue date - {$form.id_issue_date}</Label>
-					<Datepicker bind:value={$form.id_issue_date} {...$constraints.id_issue_date}></Datepicker>
+					<Label for="id_issue_date" class="mb-2">ID issue date</Label>
+					<input
+						name="id_issue_date"
+						type="date"
+						bind:value={$issueDateProxy}
+						class="w-full border-gray-300 rounded-lg focus:ring-green-500 focus:border-primary-500"
+						aria-invalid={$errors.id_issue_date ? 'true' : undefined}
+						{...$constraints.id_issue_date}
+						min={$constraints.id_issue_date?.min?.toString().slice(0, 10)}
+						max={$constraints.id_issue_date?.max?.toString().slice(0, 10)}
+					/>
 					{#if $errors.id_issue_date}
 						<Helper class="mt-2" color="red">
 							{$errors.id_issue_date}
@@ -218,9 +190,17 @@
 					{/if}
 				</div>
 				<div>
-					<Label for="id_expiry_date" class="mb-2">ID expiry date - {$form.id_expiry_date}</Label>
-					<Datepicker bind:value={$form.id_expiry_date} {...$constraints.id_expiry_date}
-					></Datepicker>
+					<Label for="id_expiry_date" class="mb-2">ID expiry date</Label>
+					<input
+						name="id_expiry_date"
+						type="date"
+						bind:value={$expiryDateProxy}
+						class="w-full border-gray-300 rounded-lg focus:ring-green-500 focus:border-primary-500"
+						aria-invalid={$errors.id_expiry_date ? 'true' : undefined}
+						{...$constraints.id_expiry_date}
+						min={$constraints.id_expiry_date?.min?.toString().slice(0, 10)}
+						max={$constraints.id_expiry_date?.max?.toString().slice(0, 10)}
+					/>
 					{#if $errors.id_expiry_date}
 						<Helper class="mt-2" color="red">
 							{$errors.id_expiry_date}
@@ -248,17 +228,16 @@
 				</div>
 				<div>
 					<Label class="mb-2">Country of issuance</Label>
-					<SearchableSelect
-						showChevron={true}
+					<Select
 						id="issuing_country"
-						name="issuing_country"
-						class="py-2"
-						bind:justValue={$form.issuing_country}
-						items={countries}
-						placeholder="Select or search country..."
-						--font-size="1"
-						clearable={false}
-					/>
+						class="mt-2"
+						bind:value={$form.issuing_country}
+						placeholder=""
+					>
+						{#each countries as { value, label }}
+							<option {value}>{label}</option>
+						{/each}
+					</Select>
 					{#if $errors.issuing_country}
 						<Helper class="mt-2" color="red">
 							{$errors.issuing_country}
@@ -266,8 +245,17 @@
 					{/if}
 				</div>
 				<div>
-					<Label for="date_of_birth" class="mb-2">Date of birth - {$form.date_of_birth}</Label>
-					<Datepicker bind:value={$form.date_of_birth} {...$constraints.date_of_birth}></Datepicker>
+					<Label for="date_of_birth" class="mb-2">Date of birth</Label>
+					<input
+						name="date_of_birth"
+						type="date"
+						bind:value={$dobProxy}
+						class="w-full border-gray-300 rounded-lg focus:ring-green-500 focus:border-primary-500"
+						aria-invalid={$errors.date_of_birth ? 'true' : undefined}
+						{...$constraints.date_of_birth}
+						min={$constraints.date_of_birth?.min?.toString().slice(0, 10)}
+						max={$constraints.date_of_birth?.max?.toString().slice(0, 10)}
+					/>
 					{#if $errors.date_of_birth}
 						<Helper class="mt-2" color="red">
 							{$errors.date_of_birth}
@@ -283,7 +271,6 @@
 						type="text"
 						id="place_of_birth"
 						placeholder="Place of birth"
-						required
 						color={$errors.place_of_birth ? 'red' : undefined}
 					/>
 					{#if $errors.place_of_birth}
@@ -294,17 +281,11 @@
 				</div>
 				<div>
 					<Label class="mb-2">Citizenship</Label>
-					<SearchableSelect
-						showChevron={true}
-						id="citizenship"
-						name="citizenship"
-						class="py-2"
-						bind:justValue={$form.citizenship}
-						items={countries}
-						placeholder="Select or search country..."
-						--font-size="1"
-						clearable={false}
-					/>
+					<Select id="citizenship" class="mt-2" bind:value={$form.citizenship} placeholder="">
+						{#each countries as { value, label }}
+							<option {value}>{label}</option>
+						{/each}
+					</Select>
 					{#if $errors.citizenship}
 						<Helper class="mt-2" color="red">
 							{$errors.citizenship}
@@ -313,7 +294,7 @@
 				</div>
 				<div>
 					<Label class="mb-2">Gender</Label>
-					<Select id="countries" class="mt-2" bind:value={$form.gender} placeholder="">
+					<Select id="gender" class="mt-2" bind:value={$form.gender} placeholder="">
 						{#each genders as { value, label }}
 							<option {value}>{label}</option>
 						{/each}
@@ -381,12 +362,12 @@
 				</div>
 				<div class="col-span-4">
 					<Label class="mb-2 flex items-center gap-2">
-						Matches Correspondence Address?
+						Correspondence Address is samke as permanent address?
 						<Toggle size="small" bind:checked={$form.matches_mailing_address as boolean}>
 							{#snippet offLabel()}
 								No
 							{/snippet}
-								Yes
+							Yes
 						</Toggle>
 					</Label>
 				</div>
@@ -407,11 +388,6 @@
 							<option {value}>{label}</option>
 						{/each}
 					</Select>
-					{#if $errors.mailing_address?.location}
-						<Helper class="mt-2" color="red">
-							{$errors.mailing_address?.location}
-						</Helper>
-					{/if}
 				</div>
 				<div>
 					<Label for="mailing_quater" class="mb-2">Quarter</Label>
@@ -425,228 +401,71 @@
 							<option {value}>{label}</option>
 						{/each}
 					</Select>
-					{#if $errors.mailing_address?.quarter}
-						<Helper class="mt-2" color="red">
-							{$errors.mailing_address?.quarter}
-						</Helper>
-					{/if}
 				</div>
 				<div>
 					<Label for="maling_street_name" class="mb-2">Boulevad / Street</Label>
 					<Input
 						bind:value={$form.mailing_address.street_name}
-						aria-invalid={$errors.mailing_address?.street_name ? 'true' : undefined}
-						{...$constraints.mailing_address?.street_name}
 						type="text"
 						id="maling_street_name"
 						placeholder="Enter name of the street"
-						required
-						color={$errors.mailing_address?.street_name ? 'red' : undefined}
 					/>
-					{#if $errors.mailing_address?.street_name}
-						<Helper class="mt-2" color="red">
-							{$errors.mailing_address?.street_name}
-						</Helper>
-					{/if}
 				</div>
 				<div>
 					<Label for="mailing_street_no" class="mb-2">Boulevad / Street No.</Label>
 					<Input
 						bind:value={$form.mailing_address.street_no}
-						aria-invalid={$errors.mailing_address?.street_no ? 'true' : undefined}
-						{...$constraints.mailing_address?.street_no}
 						type="text"
 						id="mailing_street_no"
+						name="mailing_street_no"
 						placeholder="Enter street no."
-						required
-						color={$errors.mailing_address?.street_no ? 'red' : undefined}
 					/>
-					{#if $errors.mailing_address?.street_no}
-						<Helper class="mt-2" color="red">
-							{$errors.mailing_address?.street_no}
-						</Helper>
-					{/if}
 				</div>
 				<div>
 					<Label for="mailing_floor_no" class="mb-2">Floor No.</Label>
 					<Input
 						bind:value={$form.mailing_address.floor_no}
-						aria-invalid={$errors.mailing_address?.floor_no ? 'true' : undefined}
-						{...$constraints.mailing_address?.floor_no}
 						type="text"
 						id="mailing_floor_no"
+						name="mailing_floor_no"
 						placeholder="Enter floor no."
-						required
-						color={$errors.mailing_address?.floor_no ? 'red' : undefined}
 					/>
-					{#if $errors.mailing_address?.floor_no}
-						<Helper class="mt-2" color="red">
-							{$errors.mailing_address?.floor_no}
-						</Helper>
-					{/if}
 				</div>
 				<div>
 					<Label for="mailing_apt_no" class="mb-2">Apt. No.</Label>
 					<Input
 						bind:value={$form.mailing_address.apt_no}
-						aria-invalid={$errors.mailing_address?.apt_no ? 'true' : undefined}
-						{...$constraints.mailing_address?.apt_no}
 						type="text"
 						id="mailing_apt_no"
 						placeholder="Enter apt. no."
-						required
-						color={$errors.mailing_address?.apt_no ? 'red' : undefined}
+						name="mailing_apt_no"
 					/>
-					{#if $errors.mailing_address?.apt_no}
-						<Helper class="mt-2" color="red">
-							{$errors.mailing_address?.apt_no}
-						</Helper>
-					{/if}
 				</div>
 				<div>
 					<Label for="mailing_post_code" class="mb-2">Postal Code</Label>
 					<Input
 						bind:value={$form.mailing_address.post_code}
-						aria-invalid={$errors.mailing_address?.post_code ? 'true' : undefined}
-						{...$constraints.mailing_address?.post_code}
 						type="text"
 						id="mailing_post_code"
 						placeholder="Enter postal code"
-						required
-						color={$errors.mailing_address?.post_code ? 'red' : undefined}
 					/>
-					{#if $errors.mailing_address?.post_code}
-						<Helper class="mt-2" color="red">
-							{$errors.mailing_address?.post_code}
-						</Helper>
-					{/if}
 				</div>
 			</div>
-		{/if}
-		<div class="grid gap-6 mb-6 md:grid-cols-3">
-			{#if stepNames[currentStep - 1] === 'Contact Data'}
-				<div>
-					<Label for="email" class="mb-2">Email Address</Label>
-					<Input
-						bind:value={$form.email}
-						aria-invalid={$errors.email ? 'true' : undefined}
-						{...$constraints.email}
-						type="text"
-						id="email"
-						placeholder="E.g., email@company.bg"
-						required
-						color={$errors.email ? 'red' : undefined}
-					/>
-					{#if $errors.email}
-						<Helper color="red">
-							{$errors.email}. Enter correct email format: email@email.email
-						</Helper>
-					{/if}
-				</div>
-				<div>
-					<Label for="phone_number" class="mb-2">Phone Number</Label>
-					<Input
-						bind:value={$form.phone_number}
-						aria-invalid={$errors.phone_number ? 'true' : undefined}
-						{...$constraints.phone_number}
-						type="text"
-						id="phone_number"
-						placeholder="+359 88 123 4567"
-						required
-						color={$errors.phone_number ? 'red' : undefined}
-					/>
-					{#if $errors.phone_number}
-						<Helper color="red">
-							{$errors.phone_number}
-						</Helper>
-					{/if}
-				</div>
-			{:else if stepNames[currentStep - 1] === 'GDPR, KYC Documents'}
-				<div>
-					<Label for="employer_name" class="mb-2">Employer Name</Label>
-					<Input
-						bind:value={$form.employer_name}
-						aria-invalid={$errors.employer_name ? 'true' : undefined}
-						{...$constraints.employer_name}
-						type="text"
-						id="employer_name"
-						placeholder="E.g., DSK Bank"
-						required
-						color={$errors.employer_name ? 'red' : undefined}
-					/>
-					{#if $errors.employer_name}
-						<Helper class="mt-2" color="red">
-							{$errors.employer_name}
-						</Helper>
-					{/if}
-				</div>
-				<div>
-					<Label for="designation" class="mb-2">Designation</Label>
-					<Input
-						bind:value={$form.designation}
-						aria-invalid={$errors.designation ? 'true' : undefined}
-						{...$constraints.designation}
-						type="text"
-						id="designation"
-						placeholder="E.g., Software Engineer"
-						required
-						color={$errors.designation ? 'red' : undefined}
-					/>
-					{#if $errors.designation}
-						<Helper class="mt-2" color="red">
-							{$errors.designation}
-						</Helper>
-					{/if}
-				</div>
-				<div>
-					<Label for="salary" class="mb-2">Salary</Label>
-					<Input
-						bind:value={$form.salary}
-						aria-invalid={$errors.salary ? 'true' : undefined}
-						{...$constraints.salary}
-						type="number"
-						id="salary"
-						placeholder="E.g., 50000"
-						required
-						color={$errors.salary ? 'red' : undefined}
-					/>
-					{#if $errors.salary}
-						<Helper class="mt-2" color="red">
-							{$errors.salary}
-						</Helper>
-					{/if}
-				</div>
-			{/if}
-		</div>
-		<div class="grid gap-6 md:grid-cols-4">
-			<div>
-				{#if currentStep > 1}
-					<Button
-						color="green"
-						class="w-fit whitespace-nowrap"
-						type="submit"
-						onclick={previousStep}
-					>
-						<ArrowKeyLeft class="w-4 h-4 me-2" />
-						{stepNames[currentStep - 2]}
-					</Button>
-				{/if}
-			</div>
-			<div></div>
-			<div></div>
-			<div style="text-align: right;">
-				<Button color="green" class="w-fit whitespace-nowrap" type="submit">
-					<span class="me-2">
-						{#if currentStep == stepNames.length}
-							Submit {stepNames[currentStep]}
-						{:else}
-							{stepNames[currentStep]}
-						{/if}
-					</span>
-					<ArrowKeyRight class="w-4 h-4" />
-				</Button>
-			</div>
-		</div>
-	</Card>
-</form>
+		</form>
+	{:else if stepNames[currentStep - 1] === 'Contact Data'}
+		<Heading tag="h5" class="mb-4">Contact Data</Heading>
+	{/if}
+</Card>
+
+<Modal
+	title="Creating new client. Please wait!"
+	classHeader="text-gray-900"
+	bind:open={$delayed}
+	size="sm"
+	autoclose={false}
+	dismissable={false}
+>
+	<DskSpinner />
+</Modal>
+
 <SuperDebug data={$form} />
