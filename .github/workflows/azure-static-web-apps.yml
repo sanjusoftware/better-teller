@@ -1,0 +1,69 @@
+name: Deploy to Azure Static Web Apps
+
+on:
+  push:
+    branches:
+      - main # Trigger the workflow on pushes to the main branch
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' # Only run on push events (not scheduled, etc.)
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true # Checkout submodules if any
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Specify a Node.js version compatible with your project
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps # Using --legacy-peer-deps as per previous manual steps
+
+      - name: Build application
+        run: npm run build
+
+      - name: Deploy to Azure Static Web Apps
+        id: builddeploy # id for the step
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          # IMPORTANT: Create a secret in your GitHub repository settings named AZURE_STATIC_WEB_APPS_API_TOKEN
+          # Go to Settings > Secrets and variables > Actions > New repository secret
+          # The value for this secret is the "Deployment token" from your Azure Static Web App resource in the Azure portal
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for GitHub Actions integration, automatically available
+          action: "upload" # Specifies the action to take, "upload" will build and deploy
+
+          ###### Repository/Build Configurations ######
+          app_location: "/" # Location of your application code in the repository
+          api_location: "" # Location of your Azure Functions code, if any. Leave blank if not deploying an API.
+          output_location: "build" # The folder produced by the SvelteKit build (npm run build)
+
+          ###### Skip Build Flags (Optional) ######
+          # skip_app_build: false # Set to true if you build the app in a previous step and only want to deploy
+          # skip_api_build: true # Set to true if you don't have an API or build it separately
+
+        # Environment variables for the build process (if your build needs them)
+        # These are NOT the runtime app settings for Azure SWA, those are set in Azure portal or with Azure CLI
+        # env:
+          # VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }} # Example if build needs env vars
+          # Add other build-time environment variables here if needed
+          # For this application, AUTH_SECRET etc. are runtime variables and should be set in Azure Portal,
+          # not necessarily needed during a static build unless your build process specifically uses them.
+          # If they are needed for `npm run build` (e.g. for prerendering pages that use them),
+          # then they would need to be passed here. However, adapter-static typically builds a client-side app.
+          # For a truly static build, these might not be used during `npm run build`.
+          # If your app is a SPA that calls APIs, those APIs (if separate) or the SvelteKit app itself (if SSR/functions) would use runtime env vars.
+          # The current setup with adapter-static implies a SPA.
+          # The `AUTH_SECRET` and other `AUTH_` variables are typically used by SvelteKit Auth.js for server-side operations (which adapter-static doesn't have)
+          # or potentially during prerendering if pages using auth are prerendered.
+          # For a client-side SPA, these secrets are usually not exposed to the client and not needed for the static build itself.
+          # However, if your `npm run build` *does* depend on them (e.g., for prerendering specific pages that require auth),
+          # you would need to provide them here as secrets.
+          # For now, assuming a standard static build where these are not strictly required for `npm run build`.
+          # The Azure SWA service itself will use the runtime environment variables configured in Azure.
