@@ -154,3 +154,46 @@ This SvelteKit application is configured to be deployed as a Static Web App on A
     *   Once configured, Azure Static Web Apps will build and deploy your application. You can monitor the deployment process through GitHub Actions (if using GitHub for source control) or directly in the Azure portal.
 
 For more detailed and up-to-date instructions, please refer to the [official Azure Static Web Apps documentation](https://docs.microsoft.com/azure/static-web-apps/).
+
+## End-to-End (E2E) Testing
+
+This project uses [Playwright](https://playwright.dev/) for End-to-End (E2E) testing.
+
+### Running E2E Tests
+
+1.  **Prerequisite:** Ensure the SvelteKit development server is running. You can start it with:
+    ```bash
+    npm run dev
+    ```
+    *(Note: The Playwright configuration (`playwright.config.ts`) has a `webServer` option that can be enabled to let Playwright start the dev server automatically, but it's currently commented out.)*
+
+2.  **Install Browsers (One-time setup):** If you haven't done so, or to ensure browsers are up to date, install the necessary browser binaries and dependencies:
+    ```bash
+    npx playwright install --with-deps
+    ```
+
+3.  **Run All Tests:** To execute all E2E tests located in the `tests/e2e/` directory:
+    ```bash
+    npx playwright test
+    ```
+
+4.  **Run Tests in a Specific Browser:**
+    ```bash
+    npx playwright test --project=chromium
+    # or --project=firefox, --project=webkit (if configured in playwright.config.ts)
+    ```
+
+5.  **Run Tests in Headed Mode:** To watch the tests execute in a browser window:
+    ```bash
+    npx playwright test --headed
+    ```
+
+6.  **View HTML Report:** After tests have run, an HTML report is generated. You can view it using:
+    ```bash
+    npx playwright show-report
+    ```
+    This will open the report in your default web browser, typically found in the `playwright-report` directory.
+
+### Test Location
+
+-   E2E test files (specs) are located in the `tests/e2e/` directory.
