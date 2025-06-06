@@ -18,16 +18,16 @@
 	import SuperDebug, { dateProxy, superForm } from 'sveltekit-superforms';
 
 	let clientNumber = $state(null);
-	let newClientForm = page.data.newClientForm;
 	let stepNames = ['ID Information', 'Contact Data', 'GDPR, KYC Documents'];
 	let currentStep = $state(1);
 
 	import { countries, genders, locations, quaters } from '$lib/utils/constants';
 	import IDCard from '$lib/utils/IDCard.svelte';
 	import DskSpinner from '$lib/utils/DSKSpinner.svelte';
+	import PhoneVerification from '../[type=clientsegment]/[cif]/PhoneVerification.svelte';
 
 	const { form, errors, constraints, enhance, capture, restore, delayed } = superForm(
-		newClientForm,
+		page.data.newClientForm,
 		{
 			dataType: 'json',
 			delayMs: 100,
@@ -39,6 +39,25 @@
 			}
 		}
 	);
+
+	const {
+		form: contactForm,
+		errors: contactErrors,
+		constraints: contactConstraints,
+		enhance: contactEnhance
+	} = superForm(page.data.contactForm, {
+		dataType: 'json',
+		delayMs: 100,
+		async onResult({ result }) {
+			if (result.type === 'success') {
+				clientNumber = result.data?.clientNumber;
+				currentStep = 3;
+			}
+		}
+	});
+
+	let phoneVerficationModal = $state(false);
+
 	const issueDateProxy = dateProxy(form, 'id_issue_date', { format: 'date' });
 	const expiryDateProxy = dateProxy(form, 'id_expiry_date', { format: 'date' });
 	const dobProxy = dateProxy(form, 'date_of_birth', { format: 'date' });
@@ -180,8 +199,6 @@
 						class="w-full border-gray-300 rounded-lg focus:ring-green-500 focus:border-primary-500"
 						aria-invalid={$errors.id_issue_date ? 'true' : undefined}
 						{...$constraints.id_issue_date}
-						min={$constraints.id_issue_date?.min?.toString().slice(0, 10)}
-						max={$constraints.id_issue_date?.max?.toString().slice(0, 10)}
 					/>
 					{#if $errors.id_issue_date}
 						<Helper class="mt-2" color="red">
@@ -198,8 +215,6 @@
 						class="w-full border-gray-300 rounded-lg focus:ring-green-500 focus:border-primary-500"
 						aria-invalid={$errors.id_expiry_date ? 'true' : undefined}
 						{...$constraints.id_expiry_date}
-						min={$constraints.id_expiry_date?.min?.toString().slice(0, 10)}
-						max={$constraints.id_expiry_date?.max?.toString().slice(0, 10)}
 					/>
 					{#if $errors.id_expiry_date}
 						<Helper class="mt-2" color="red">
@@ -253,8 +268,6 @@
 						class="w-full border-gray-300 rounded-lg focus:ring-green-500 focus:border-primary-500"
 						aria-invalid={$errors.date_of_birth ? 'true' : undefined}
 						{...$constraints.date_of_birth}
-						min={$constraints.date_of_birth?.min?.toString().slice(0, 10)}
-						max={$constraints.date_of_birth?.max?.toString().slice(0, 10)}
 					/>
 					{#if $errors.date_of_birth}
 						<Helper class="mt-2" color="red">
@@ -453,19 +466,72 @@
 			</div>
 		</form>
 	{:else if stepNames[currentStep - 1] === 'Contact Data'}
-		<Heading tag="h5" class="mb-4">Contact Data</Heading>
+		<div class="grid grid-cols-3 gap-4 mb-2">
+			<div></div>
+			<div>
+				<div class="flex flex-col">
+					<Label for="phone_number" class="">Mobile Number</Label>
+					<div class="flex items-end gap-2">
+						<Input
+							bind:value={$contactForm.phone_number}
+							aria-invalid={$contactErrors.phone_number ? 'true' : undefined}
+							{...$contactConstraints.phone_number}
+							type="text"
+							id="phone_number"
+							placeholder="+359 88 123 4567"
+							required
+							color={$contactErrors.phone_number ? 'red' : undefined}
+							class="flex-1"
+						/>
+						<Button
+							pill
+							class="mb-1"
+							disabled={$contactForm.phone_number === ''}
+							on:click={() => (phoneVerficationModal = true)}
+						>
+							Vaidate Mobile
+						</Button>
+					</div>
+					{#if $contactErrors.phone_number}
+						<Helper color="red">
+							{$contactErrors.phone_number}
+						</Helper>
+					{/if}
+				</div>
+				<PhoneVerification
+					phone={$contactForm.phone_number}
+					bind:sendOTPOpen={phoneVerficationModal}
+				/>
+				<div>
+					<Label for="email" class="mb-2">Email Address</Label>
+					<div class="flex items-end gap-2">
+						<Input
+							bind:value={$contactForm.email}
+							aria-invalid={$contactErrors.email ? 'true' : undefined}
+							{...$contactConstraints.email}
+							type="text"
+							id="email"
+							placeholder="E.g., email@company.bg"
+							required
+							color={$contactErrors.email ? 'red' : undefined}
+						/>
+						{#if $contactErrors.email}
+							<Helper color="red">
+								{$contactErrors.email}. Enter correct email format: email@email.email
+							</Helper>
+						{/if}
+						<Button pill class="mt-4" type="submit" disabled={$contactForm.email === ''}>
+							Send verification Email
+						</Button>
+					</div>
+				</div>
+			</div>
+			<div></div>
+		</div>
 	{/if}
 </Card>
 
-<Modal
-	title="Creating new client. Please wait!"
-	classHeader="text-gray-900"
-	bind:open={$delayed}
-	size="sm"
-	autoclose={false}
-	dismissable={false}
->
-	<DskSpinner />
-</Modal>
+<DskSpinner title="Creating new client. Please wait!" bind:open={$delayed} />
 
-<SuperDebug data={$form} />
+<!-- <SuperDebug data={$contactForm} />
+<SuperDebug data={$form} /> -->

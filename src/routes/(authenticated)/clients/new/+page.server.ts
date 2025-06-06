@@ -1,23 +1,26 @@
 import { superValidate } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
-import { IDSchema } from '$lib/schemas/clientSchema';
+import { IDSchema, contactSchema } from '$lib/schemas/clientSchema';
 import type { PageServerLoad } from "./$types";
 import { generateCustomerId } from '$lib/utils/strings';
 
 export const load: PageServerLoad = async ({ cookies }) => {
-  let scannedData = cookies.get('scanned-data')
-  console.log('scannedData', scannedData)
+  let scannedData = cookies.get('scanned-data');
   let newClientForm = null;
+  let contactForm = null;
+
   if (scannedData) {
     let data = JSON.parse(scannedData)
     newClientForm = await superValidate(data, zod(IDSchema));
+    contactForm = await superValidate(zod(contactSchema));
   } else {
     newClientForm = await superValidate(zod(IDSchema));
   }
 
   return {
     newClientForm: newClientForm,
+    contactForm: contactForm,
     clientType: 'retail'
   };
 };

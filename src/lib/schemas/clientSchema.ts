@@ -35,7 +35,7 @@ export const IDSchema = z.object({
   })
 });
 
-export const contactSchema = IDSchema.extend({
+export const contactSchema = z.object({
   email: z.string().email(),
   phone_number: phoneNumberSchema,
 });
