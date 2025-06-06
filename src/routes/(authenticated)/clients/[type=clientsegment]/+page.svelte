@@ -26,6 +26,7 @@
 	} from 'flowbite-svelte-icons';
 
 	import MetaTag from '$lib/utils/MetaTag.svelte';
+	import { _ } from 'svelte-i18n';
 
 	import type { PageData } from './$types';
 	import { clientProductSummaryPath } from '$lib/utils/pathHelper';
@@ -33,33 +34,47 @@
 	let clients = $derived(data.clients);
 
 	const clientsPath: string = $derived(`/clients/${data.clienttype}`);
-	const description: string = 'Clients List';
-	const title: string = `Better Teller - Manage Clients`;
-	const subtitle: string = 'Manage Clients';
+	// MetaTag props could also be localized
+	const description: string = 'Clients List'; // $_('clients.metaDescription')
+	const title: string = `Better Teller - Manage Clients`; // $_('clients.metaTitle')
+	const subtitle: string = 'Manage Clients'; // $_('clients.metaSubtitle')
+
+	// For dynamic breadcrumb, consider passing data.clienttype to translation if needed
+	// For now, using the generic 'clients.title'
+	$: breadcrumbClientTitle = `${data.clienttype.toLocaleUpperCase()} ${$_('clients.title')}`;
+
+	$: tableHeadersLocalized = [
+		'', // Checkbox
+		$_('clients.table.name'),
+		$_('clients.table.contact'),
+		$_('clients.table.mailingAddress'),
+		$_('clients.table.status'),
+		$_('common.actions')
+	];
 </script>
 
 <MetaTag path={clientsPath} {description} {title} {subtitle} />
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home href='/dashboard'>Home</BreadcrumbItem>
+	<BreadcrumbItem home href='/dashboard'>{$_('navbar.dashboard')}</BreadcrumbItem>
 	<BreadcrumbItem href={clientsPath}>
-		{data.clienttype.toLocaleUpperCase()} Clients
+		{breadcrumbClientTitle}
 	</BreadcrumbItem>
 </Breadcrumb>
 
 <Pagination
 	items={clients}
-	searchPlaceholder="Search by CIF, EGN, Name, Email, Phone ..."
+	searchPlaceholder={$_('clients.searchPlaceholder')}
 	fieldsToSearch={['cif', 'egn', 'name', 'email', 'phone']}
 	filtersToApply={['status']}
-	tableHeaders={['', 'Name', 'Contact', 'Mailing Address', 'Status', 'Actions']}
+	tableHeaders={tableHeadersLocalized}
 	{tableRow}
 	{searchHeader}
 />
 
 {#snippet searchHeader()}
 	<Button size="sm" class="gap-2 whitespace-nowrap px-3" href="{clientsPath}/new">
-		<UserAddOutline size="sm" />Add New Client
+		<UserAddOutline size="sm" />{$_('clients.newClientButton')}
 	</Button>
 {/snippet}
 
@@ -84,21 +99,21 @@
 					</a>
 				</div>
 				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-					CIF: {client.cif}
+					{$_('clients.cifLabel')} {client.cif}
 					<button use:copy={client.cif.toString()}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
 					<Tooltip placement="right"  class="text-sm font-light">
-						Copy CIF: {client.cif}
+						{$_('clients.copyCifTooltip')} {client.cif}
 					</Tooltip>
 				</div>
 				<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-					EGN: {client.egn}
+					{$_('clients.egnLabel')} {client.egn}
 					<button use:copy={client.egn.toString()}>
 						<FileCopyOutline size="sm" class="mr-2" />
 					</button>
 					<Tooltip placement="right" class="text-sm font-light">
-						Copy EGN: {client.egn}
+						{$_('clients.copyEgnTooltip')} {client.egn}
 					</Tooltip>
 				</div>
 			</div>
@@ -136,18 +151,18 @@
 				class="gap-2 px-3"
 				href={`/clients/${client.type}/${client.cif}`}
 			>
-				<EyeSolid size="sm" /> View
+				<EyeSolid size="sm" /> {$_('common.view')}
 			</Button>
 			{#if client.status === 'Active'}
 				<Button outline color="yellow" size="xs" class="gap-2 px-3">
-					<LockTimeOutline size="sm" /> Suspend
+					<LockTimeOutline size="sm" /> {$_('clients.suspendButton')}
 				</Button>
 				<Button outline color="red" size="xs" class="gap-2 px-3">
-					<CloseOutline size="sm" /> Close
+					<CloseOutline size="sm" /> {$_('common.close')} {/* Or a more specific key */}
 				</Button>
 			{:else if client.status === 'Pending Activation' || client.status === 'Blocked' || client.status === 'Inactive' || client.status === 'Closed' || client.status === 'Suspended'}
 				<Button outline color="green" size="xs" class="gap-2 px-3">
-					<CheckOutline size="sm" /> Activate
+					<CheckOutline size="sm" /> {$_('clients.activateButton')}
 				</Button>
 			{/if}
 		</TableBodyCell>

@@ -16,6 +16,8 @@
 	import Notifications from './NotificationList.svelte';
 	import UserMenu from './UserMenu.svelte';
 	import UserSettings from './UserSettings.svelte';
+	import LanguageSwitcher from './LanguageSwitcher.svelte'; // Import the new component
+	import { _ } from 'svelte-i18n';
 
 	let user = page.data.session?.user;
 	let fluid = $state(true);
@@ -57,12 +59,12 @@
 		<div class="hidden lg:block lg:ps-3">
 			{#if list}
 				<NavUl class="ml-2" activeUrl="/" activeClass="text-primary-600 dark:text-primary-500">
-					<NavLi href="/dashboard">Home</NavLi>
-					<NavLi href="#top">Messages</NavLi>
-					<NavLi href="#top">Profile</NavLi>
-					<NavLi href="#top">Settings</NavLi>
+					<NavLi href="/dashboard">{$_('navbar.dashboard')}</NavLi> {/* Assuming Home maps to Dashboard */}
+					<NavLi href="#top">Messages</NavLi> {/* No key yet */}
+					<NavLi href="#top">Profile</NavLi> {/* No key yet */}
+					<NavLi href="#top">{$_('navbar.settings')}</NavLi>
 					<NavLi class="cursor-pointer">
-						Dropdown
+						Dropdown {/* Consider if "Dropdown" needs translation */}
 						<ChevronDownOutline class="ms-0 inline" />
 					</NavLi>
 					<Dropdown class="z-20 w-44">
@@ -73,7 +75,8 @@
 				</NavUl>
 			{/if}
 		</div>
-		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
+		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2 space-x-3"> {/* Added space-x-3 for spacing */}
+			<LanguageSwitcher />
 			<CurrentClient />
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />
 			<Notifications />

@@ -6,6 +6,82 @@ Better Teller is an FO application made for bank braches.
 1. Auth.JS: to authenticate with Microsoft EntraID
 2. Superforms with Zod: for easy form creation and validation 
 
+## Internationalization (i18n)
+
+This project uses `svelte-i18n` for internationalization.
+
+### Managing Translations
+
+-   **Location:** Translation files are JSON files located in the `src/lib/locales/` directory.
+-   **Supported Languages:**
+    -   English (default): `en.json`
+    -   Bulgarian: `bg.json`
+    -   Hungarian: `hu.json`
+-   **Structure:** Translations are organized as key-value pairs. Nested JSON objects can be used to group related translations (e.g., `navbar.dashboard`, `login.title`).
+
+    ```json
+    // Example from en.json
+    {
+      "greeting": "Hello",
+      "navbar": {
+        "dashboard": "Dashboard",
+        "clients": "Clients"
+      }
+    }
+    ```
+
+### Adding a New Language
+
+To add support for a new language (e.g., German with code `de`):
+
+1.  **Create JSON File:**
+    *   Add a new file `de.json` in the `src/lib/locales/` directory.
+2.  **Populate Translations:**
+    *   Copy the content of an existing translation file (e.g., `en.json`) into `de.json`.
+    *   Translate all the string values into German.
+3.  **Register the Language:**
+    *   Open `src/lib/i18n.ts`.
+    *   Add the new language code to the `supportedLocales` array:
+        ```typescript
+        export const supportedLocales = ['en', 'bg', 'hu', 'de'];
+        ```
+    *   Register the new locale file with a dynamic import:
+        ```typescript
+        register('de', () => import('./locales/de.json'));
+        ```
+4.  **Add Language Name for Switcher:**
+    *   For the language to appear correctly in the language switcher, add its translated name to the `languages` object in each existing locale file:
+        *   In `en.json`: `"languages": { ..., "de": "German" }`
+        *   In `bg.json`: `"languages": { ..., "de": "Немски" }`
+        *   In `hu.json`: `"languages": { ..., "de": "Német" }`
+        *   In the new `de.json`: `"languages": { "en": "Englisch", "bg": "Bulgarisch", "hu": "Ungarisch", "de": "Deutsch" }`
+
+### Using Translations in Components
+
+To use translations in your Svelte components:
+
+1.  **Import the `_` store/function:**
+    ```html
+    <script lang="ts">
+        import { _ } from 'svelte-i18n';
+    </script>
+    ```
+2.  **Access translations:**
+    *   Use the `$_` syntax (auto-subscription) to get the translated string for a key:
+        ```html
+        <h1>{$_('greeting')}</h1>
+        <p>{$_('navbar.dashboard')}</p>
+        ```
+    *   For translations with dynamic values (interpolation):
+        ```html
+        <p>{$_('dashboard.welcomeMessage', { values: { name: userName } })}</p>
+        ```
+        (Assuming `dashboard.welcomeMessage` in your JSON is like: `"Welcome, {name}!"`)
+
+### Language Switcher
+
+A `LanguageSwitcher.svelte` component is available in `src/lib/utils/`. It allows users to change the selected language. This component has been integrated into the main navigation bar (`Navbar.svelte`).
+
 ## Running the application
 
 1. Clone the app

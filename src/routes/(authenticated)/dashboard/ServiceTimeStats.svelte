@@ -3,6 +3,7 @@
 	import LastRange from '$lib/utils/LastRange.svelte';
 	import { Card, Chart } from 'flowbite-svelte';
 	import { ClockSolid } from 'flowbite-svelte-icons';
+	import { _ } from 'svelte-i18n';
 
 	const options = {
 		series: [
@@ -67,9 +68,9 @@
 			</div>
 			<div>
 				<h5 class="leading-none text-2xl font-bold text-gray-500 dark:text-white pb-1">
-					Average Service Time
+					{$_('dashboard.averageServiceTime')}
 				</h5>
-				<p class="text-sm font-normal text-gray-500 dark:text-gray-400">In Minutes</p>
+				<p class="text-sm font-normal text-gray-500 dark:text-gray-400">{$_('dashboard.inMinutes')}</p>
 			</div>
 		</div>
 		<div>

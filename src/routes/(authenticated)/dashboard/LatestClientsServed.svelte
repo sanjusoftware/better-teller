@@ -7,6 +7,7 @@
 	import ClientsList from './ClientsList.svelte';
 	import { pastClients } from '$lib/servicecontext.svelte';
 	import { page } from '$app/state';
+	import { _ } from 'svelte-i18n';
 
 	let latestClients = $derived(pastClients.current.length > 0 ? pastClients.current : page.data.latestClients);
 
@@ -28,10 +29,10 @@
 			</div>
 			<div>
 				<h5 class="leading-none text-2xl font-bold text-gray-500 dark:text-white pb-1">
-					Clients Served
+					{$_('dashboard.recentActivity')} {/* Changed from "Clients Served" */}
 				</h5>
 				<p class="text-sm font-normal text-gray-500 dark:text-gray-400">
-					Avg Serving Time: <Badge rounded><ClockOutline class="w-2.5 h-2.5 me-1.5" />5 mins</Badge>
+					{$_('dashboard.avgServingTime')} <Badge rounded><ClockOutline class="w-2.5 h-2.5 me-1.5" />5 mins</Badge> {/* Value "5 mins" is not localized yet */}
 				</p>
 			</div>
 		</div>
@@ -46,15 +47,15 @@
 		<ClientsList clientsServed={latestClients.slice(0,3)} />
 	</div>
 	<div class="mt-4 flex items-center justify-between">
-		<LastRange timeslot="Today" />
+		<LastRange timeslot="Today" /> {/* "Today" is not localized yet */}
 		{#if latestClients.length > 3}
 			<button
 				type="button"
 				onclick={() => (clientsListHidden = false)}
 				class="inline-flex items-center rounded-lg p-2 text-xs font-medium text-primary-700 dark:text-primary-500 hover:bg-gray-100 dark:hover:bg-gray-700"
-				aria-label="View clients list"
+				aria-label={$_('dashboard.viewAll')} {/* Using for aria-label too */}
 			>
-				View All
+				{$_('dashboard.viewAll')}
 			</button>
 			<Drawer
 				placement="right"
@@ -69,7 +70,7 @@
 						id="drawer-label"
 						class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
 					>
-						<UsersGroupOutline class="w-5 h-5 me-2.5" />All clients served today
+						<UsersGroupOutline class="w-5 h-5 me-2.5" />{$_('dashboard.allClientsServedToday')}
 					</h5>
 					<CloseButton on:click={() => (clientsListHidden = true)} class="mb-4 dark:text-white" />
 				</div>
