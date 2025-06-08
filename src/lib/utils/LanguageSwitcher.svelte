@@ -3,7 +3,7 @@
     import { locale as currentLocaleStore } from 'svelte-i18n';
     import { supportedLocales, setLocale } from '$lib/i18n';
     import { Button, Dropdown, DropdownItem } from 'flowbite-svelte';
-    import { ChevronDownOutline, GlobeAltOutline } from 'flowbite-svelte-icons'; // Using GlobeAltOutline as a more generic icon
+    import { ChevronDownOutline, GlobeOutline } from 'flowbite-svelte-icons'; // Corrected icon name
 
     // Map language codes to emoji flags (can be kept for display within DropdownItem)
     const flags: Record<string, string> = {
@@ -33,7 +33,7 @@
     aria-label={$_('languages.' + $currentLocaleStore)}
 >
     <span class="relative px-3 py-1.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-        <GlobeAltOutline class="w-5 h-5 inline-block mr-1 align-middle" />
+        <GlobeOutline class="w-5 h-5 inline-block mr-1 align-middle" /> {/* Corrected icon usage */}
         <span class="align-middle">{$_(getLanguageTranslationKey($currentLocaleStore))}</span>
         <ChevronDownOutline class="w-4 h-4 ml-1 inline-block align-middle" />
     </span>
