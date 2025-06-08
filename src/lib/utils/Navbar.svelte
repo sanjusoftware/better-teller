@@ -67,11 +67,6 @@
 						Dropdown
 						<ChevronDownOutline class="ms-0 inline" />
 					</NavLi>
-					<Dropdown class="z-20 w-44">
-						<DropdownItem href="#top">Item 1</DropdownItem>
-						<DropdownItem href="#top">Item 2</DropdownItem>
-						<DropdownItem href="#top">Item 3</DropdownItem>
-					</Dropdown>
 				</NavUl>
 			{/if}
 		</div>

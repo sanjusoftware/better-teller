@@ -105,7 +105,7 @@
 
 	// This part for dropdowns needs careful handling if `name` becomes a function returning translated string
 	// A quick fix might be to use the index or a static key part of the object for dropdowns state
-	let dropdowns = $state(Object.fromEntries(primary_actions.map((action, index) => [action.name, false])));
+	let dropdowns = $derived(Object.fromEntries(primary_actions.map((action, index) => [action.name, false])));
 
 </script>
 

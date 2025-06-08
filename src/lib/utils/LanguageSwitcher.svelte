@@ -33,7 +33,7 @@
     aria-label={$_('languages.' + $currentLocaleStore)}
 >
     <span class="relative px-3 py-1.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-        <GlobeOutline class="w-5 h-5 inline-block mr-1 align-middle" /> {/* Corrected icon usage */}
+        <GlobeOutline class="w-5 h-5 inline-block mr-1 align-middle" />
         <span class="align-middle">{$_(getLanguageTranslationKey($currentLocaleStore))}</span>
         <ChevronDownOutline class="w-4 h-4 ml-1 inline-block align-middle" />
     </span>
