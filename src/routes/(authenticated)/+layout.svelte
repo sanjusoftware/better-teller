@@ -12,7 +12,7 @@
 </header>
 <div class="overflow-hidden lg:flex">
 	<Sidebar {drawerHidden} />
-	<div class="relative h-full w-full overflow-y-auto lg:ml-64 pt-[70px]">
+	<div class="relative h-full w-full overflow-y-auto lg:ml-64">
 		<div class="p-2">
 			<slot />
 		</div>

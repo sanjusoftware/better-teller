@@ -10,7 +10,7 @@
 </script>
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home>{$_('navbar.dashboard')}</BreadcrumbItem> {/* Assuming "Home" maps to "Dashboard" */}
+	<BreadcrumbItem home>{$_('navbar.dashboard')}</BreadcrumbItem>
 </Breadcrumb>
 
 {#if isCurrentClient()}

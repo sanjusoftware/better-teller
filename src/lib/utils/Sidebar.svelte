@@ -50,13 +50,13 @@
 	});	
 
 	// Defer translation to render time by using functions
-	$: non_client_actions = [
+	let non_client_actions = $state([
 		{ name: () => $_('navbar.dashboard'), icon: HomeOutline, href: '/dashboard' },
 		{ name: () => 'Reports', icon: ChartMixedOutline, href: '/reports' }, // No key for Reports yet
 		{ name: () => 'Admin', icon: BuildingOutline, href: '/admin' } // No key for Admin yet
-	];
+	]);
 
-	$: client_actions = [
+	let client_actions = $state([
 		{ name: () => $_('navbar.dashboard'), icon: HomeOutline, href: '/dashboard' },
 		{
 			name: () => $_('navbar.clients'), // Mapping "Client's Info" to "Clients"
@@ -93,7 +93,7 @@
 		},
 		{ name: () => 'Reports', icon: ChartMixedOutline, href: '/reports' }, // No key for Reports yet
 		{ name: () => 'Admin', icon: BuildingOutline, href: '/admin' } // No key for Admin yet
-	];
+	]);
 	
 	// Need to ensure dropdown keys are stable if names are functions now
 	// Using a unique ID or the original English name for the key might be better for $state(Object.fromEntries(...))
@@ -121,18 +121,18 @@
 	>
 		<nav class="divide-y divide-gray-200 dark:divide-gray-700">
 			<SidebarGroup ulClass={groupClass} class="mb-3">
-				{#each primary_actions as action (action.name)} {/* Using action.name (which is a function) as key is problematic */}
+				{#each primary_actions as action (action.name)} 
 					{#if action.children}
-						<SidebarDropdownWrapper bind:isOpen={dropdowns[action.name]} label={action.name()} class="pr-3"> {/* Call name() here */}
+						<SidebarDropdownWrapper bind:isOpen={dropdowns[action.name]} label={action.name()} class="pr-3">
 							<AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
 							<AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
 							<svelte:component this={action.icon} slot="icon" class={iconClass} />
 							{#each Object.entries(action.children) as [title, href]}
-								<SidebarItem label={title} href={href as string} spanClass="ml-9" class={itemClass} /> {/* TODO: Translate title */}
+								<SidebarItem label={title} href={href as string} spanClass="ml-9" class={itemClass} /> 
 							{/each}
 						</SidebarDropdownWrapper>
 					{:else}
-						<SidebarItem label={action.name()} href={action.href as string} spanClass="ml-3" class={itemClass}> {/* Call name() here */}
+						<SidebarItem label={action.name()} href={action.href as string} spanClass="ml-3" class={itemClass}>
 							<svelte:component this={action.icon} slot="icon" class={iconClass} />
 						</SidebarItem>
 					{/if}
