@@ -47,7 +47,7 @@ const createIconStub = (name: string) => ({
 
 vi.mock('flowbite-svelte-icons', () => ({
     ChevronDownOutline: createIconStub('ChevronDownOutline'),
-    GlobeAltOutline: createIconStub('GlobeAltOutline'),
+    GlobeOutline: createIconStub('GlobeOutline'), // Corrected icon mock
 }));
 
 
