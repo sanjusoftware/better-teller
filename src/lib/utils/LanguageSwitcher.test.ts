@@ -1,24 +1,27 @@
-import { render, fireEvent, screen } from '@testing-library/svelte';
+import { render, fireEvent, screen, waitFor } from '@testing-library/svelte';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { writable, get } from 'svelte/store'; // Import get to read store value
+import { writable, get } from 'svelte/store';
 
 import LanguageSwitcher from './LanguageSwitcher.svelte';
 
+// --- Mocks ---
+
 // Mock svelte-i18n
-const mockSvelteI18nLocale = writable('en'); // Writable store for currentLocale
+const mockSvelteI18nLocale = writable('en');
 const mockTranslate = (key: string, options?: any) => {
     if (key === 'languages.en') return 'English';
     if (key === 'languages.bg') return 'Bulgarian';
     if (key === 'languages.hu') return 'Hungarian';
-    return key; // Fallback
+    // For aria-label on the main button
+    if (key === 'languages.en' && options?.values === undefined) return 'English'; // Simulating direct key usage for label
+    return key;
 };
-const readableMockTranslate = writable(mockTranslate); // Using writable to allow $ syntax
+const readableMockTranslate = writable(mockTranslate);
 
 vi.mock('svelte-i18n', () => ({
     _: readableMockTranslate,
-    locale: mockSvelteI18nLocale, // This is the store components subscribe to for current language
-    // Mock other exports if needed by any component, though LanguageSwitcher mostly uses _ and locale
-    t: readableMockTranslate,
+    locale: mockSvelteI18nLocale,
+    t: readableMockTranslate, // Assuming t is used similarly if at all
     init: vi.fn(),
     register: vi.fn(),
     waitLocale: vi.fn().mockResolvedValue(undefined),
@@ -26,85 +29,99 @@ vi.mock('svelte-i18n', () => ({
 }));
 
 // Mock $lib/i18n.ts
-const mockSetLocale = vi.fn();
+const mockSetLocale = vi.fn((lang: string) => {
+    // Simulate the actual setLocale behavior of updating the store
+    mockSvelteI18nLocale.set(lang);
+});
 vi.mock('$lib/i18n', () => ({
     supportedLocales: ['en', 'bg', 'hu'],
     setLocale: mockSetLocale,
 }));
 
-describe('LanguageSwitcher.svelte', () => {
+// Mock Flowbite Svelte Icons (simple stubs that render nothing or a placeholder)
+// This prevents errors if the icons have complex internal logic not relevant to the test.
+const createIconStub = (name: string) => ({
+    render: () => ({ Component: class { static $is_flanker = true; /* Minimal Svelte component structure */ } }),
+    name, // For debugging if needed
+});
+
+vi.mock('flowbite-svelte-icons', () => ({
+    ChevronDownOutline: createIconStub('ChevronDownOutline'),
+    GlobeAltOutline: createIconStub('GlobeAltOutline'),
+}));
+
+
+// --- Tests ---
+
+describe('LanguageSwitcher.svelte (Dropdown with Flowbite)', () => {
     beforeEach(() => {
-        vi.resetAllMocks(); // Reset mocks before each test
+        vi.resetAllMocks();
         mockSvelteI18nLocale.set('en'); // Reset locale to 'en' before each test
     });
 
-    it('renders buttons for all supported locales', () => {
+    it('displays the current language on the main button', () => {
         render(LanguageSwitcher);
-        const { supportedLocales } = await import('$lib/i18n');
+        // The button text includes the icon text and the language name.
+        // We check for the language name part.
+        // Flowbite Button renders a <button type="button">.
+        // The text is within a span inside the button.
+        const mainButton = screen.getByRole('button'); // Gets the Flowbite Button
+        expect(mainButton).toBeInTheDocument();
+        expect(mainButton.textContent).toContain('English'); // Based on mockTranslate for 'languages.en'
+    });
 
-        supportedLocales.forEach(langCode => {
-            // Check if button exists by its translated aria-label (or text)
-            // The aria-label is set using $_('languages.' + langCode)
-            const expectedLabel = mockTranslate('languages.' + langCode);
-            expect(screen.getByRole('button', { name: expectedLabel })).toBeInTheDocument();
+    it('calls setLocale with "bg" when Bulgarian DropdownItem is clicked', async () => {
+        render(LanguageSwitcher);
+        const mainButton = screen.getByRole('button'); // Main dropdown trigger
+
+        // Click to open the dropdown.
+        // Flowbite's Dropdown might render items elsewhere or manage visibility dynamically.
+        // We assume clicking the main button makes DropdownItems available.
+        await fireEvent.click(mainButton);
+
+        // Find the DropdownItem for Bulgarian. Flowbite DropdownItems might not be direct 'button' roles
+        // but could be 'menuitem' or other interactive elements.
+        // We'll look for the text content.
+        const bulgarianOption = await screen.findByText(/Bulgarian/); // Find by text, more robust to exact role
+        expect(bulgarianOption).toBeInTheDocument();
+
+        await fireEvent.click(bulgarianOption);
+
+        expect(mockSetLocale).toHaveBeenCalledWith('bg');
+    });
+
+    it('main button text updates when locale changes via setLocale mock', async () => {
+        render(LanguageSwitcher);
+
+        // Initial state
+        const mainButton = screen.getByRole('button');
+        expect(mainButton.textContent).toContain('English');
+
+        // Simulate locale change by calling our mocked setLocale, which updates mockSvelteI18nLocale
+        mockSetLocale('hu');
+        // mockSvelteI18nLocale.set('hu'); // This is done by mockSetLocale now
+
+        // Wait for Svelte's reactivity and DOM update
+        await waitFor(() => {
+            expect(mainButton.textContent).toContain('Hungarian');
         });
     });
 
-    it('displays translated language names on buttons', () => {
+    it('dropdown items display correct language names and flags', async () => {
         render(LanguageSwitcher);
-        expect(screen.getByText('English')).toBeInTheDocument();
-        expect(screen.getByText('Bulgarian')).toBeInTheDocument();
-        expect(screen.getByText('Hungarian')).toBeInTheDocument();
-    });
+        const mainButton = screen.getByRole('button');
+        await fireEvent.click(mainButton); // Open dropdown
 
-    it('calls setLocale with the correct language code when a button is clicked', async () => {
-        render(LanguageSwitcher);
+        const englishOption = await screen.findByText(/English/);
+        expect(englishOption.textContent).toContain('🇬🇧'); // Check for flag
+        expect(englishOption.textContent).toContain('English');
 
-        const bulgarianButton = screen.getByText('Bulgarian');
-        await fireEvent.click(bulgarianButton);
-        expect(mockSetLocale).toHaveBeenCalledWith('bg');
+        const bulgarianOption = await screen.findByText(/Bulgarian/);
+        expect(bulgarianOption.textContent).toContain('🇧🇬');
+        expect(bulgarianOption.textContent).toContain('Bulgarian');
 
-        const hungarianButton = screen.getByText('Hungarian');
-        await fireEvent.click(hungarianButton);
-        expect(mockSetLocale).toHaveBeenCalledWith('hu');
-    });
-
-    it('applies active class based on current locale', async () => {
-        // Set current locale to 'bg' for this test
-        mockSvelteI18nLocale.set('bg');
-
-        render(LanguageSwitcher);
-
-        const englishButton = screen.getByText('English');
-        const bulgarianButton = screen.getByText('Bulgarian');
-        const hungarianButton = screen.getByText('Hungarian');
-
-        // Check classes based on the mocked Tailwind-like classes in the component
-        expect(bulgarianButton.classList.contains('active')).toBe(true);
-        expect(bulgarianButton.classList.contains('bg-primary-600')).toBe(true); // Example active class
-
-        expect(englishButton.classList.contains('active')).toBe(false);
-        expect(englishButton.classList.contains('bg-gray-200')).toBe(true); // Example inactive class
-
-        expect(hungarianButton.classList.contains('active')).toBe(false);
-        expect(hungarianButton.classList.contains('bg-gray-200')).toBe(true);
-    });
-
-     it('updates active class when locale changes', async () => {
-        render(LanguageSwitcher);
-
-        const englishButton = screen.getByText('English');
-        const bulgarianButton = screen.getByText('Bulgarian');
-
-        // Initially 'en' is active
-        expect(englishButton.classList.contains('active')).toBe(true);
-        expect(bulgarianButton.classList.contains('active')).toBe(false);
-
-        // Change locale to 'bg'
-        mockSvelteI18nLocale.set('bg');
-        await Promise.resolve(); // Wait for Svelte to react to store change
-
-        expect(englishButton.classList.contains('active')).toBe(false);
-        expect(bulgarianButton.classList.contains('active')).toBe(true);
+        const hungarianOption = await screen.findByText(/Hungarian/);
+        expect(hungarianOption.textContent).toContain('🇭🇺');
+        expect(hungarianOption.textContent).toContain('Hungarian');
     });
 });
