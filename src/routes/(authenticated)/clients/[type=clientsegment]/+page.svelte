@@ -158,7 +158,7 @@
 					<LockTimeOutline size="sm" /> {$_('clients.suspendButton')}
 				</Button>
 				<Button outline color="red" size="xs" class="gap-2 px-3">
-					<CloseOutline size="sm" /> {$_('common.close')} {/* Or a more specific key */}
+					<CloseOutline size="sm" /> {$_('common.close')}
 				</Button>
 			{:else if client.status === 'Pending Activation' || client.status === 'Blocked' || client.status === 'Inactive' || client.status === 'Closed' || client.status === 'Suspended'}
 				<Button outline color="green" size="xs" class="gap-2 px-3">

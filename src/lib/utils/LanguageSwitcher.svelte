@@ -31,7 +31,7 @@
     <span class="relative flex items-center px-3 py-1.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
         <svelte:component this={flagComponents[$currentLocaleStore]} className="w-5 h-auto mr-2" />
         <span class="align-middle">{$_(getLanguageTranslationKey($currentLocaleStore))}</span>
-        <ChevronDownOutline class="w-4 h-4 ml-auto pl-1" /> {/* ml-auto to push chevron to the right, pl-1 for some space */}
+        <ChevronDownOutline class="w-4 h-4 ml-auto pl-1" />
     </span>
 </Button>
 <Dropdown class="w-auto z-50" placement="bottom-end">

@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { locale, _ } from 'svelte-i18n';
+	import '../app.css';
 	import type { LayoutData } from './$types';
-	import '../app.pcss'; // Global styles
-	import { Toaster } from 'flowbite-svelte'; // Assuming Toaster is a global component
+ // Global styles
 
 	export let data: LayoutData;
 
@@ -39,5 +37,4 @@
 <!-- Basic test of translation -->
 <!-- <h1>{$_('greeting')}</h1> -->
 
-<Toaster /> <!-- Global Toaster component -->
 <slot />

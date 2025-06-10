@@ -18,6 +18,6 @@
 			<span>{$_('clients.details.confirmPasswordLabel')}</span>
 			<Input placeholder="••••••••" class="border font-normal outline-none"></Input>
 		</Label>
-		<Button class="sm:col-full col-span-6 w-fit">{$_('common.save')}</Button> {/* Assuming "Save all" maps to common.save */}
+		<Button class="sm:col-full col-span-6 w-fit">{$_('common.save')}</Button>
 	</div>
 </Card>

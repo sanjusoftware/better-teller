@@ -148,7 +148,7 @@
 				>
 					<EyeSolid size="sm" /> {$_('common.view')}
 				</Button>
-				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions"> {/* Assuming generic download, not transaction related */}
+				<Button outline color="light" size="xs" class="gap-2 px-3" href="/transactions">
 					<DownloadOutline size="sm" /> {$_('common.download')}
 				</Button>
 			</ButtonGroup>
@@ -172,11 +172,11 @@
 		</TableBodyCell>
 		<Modal
 			bind:open={modalStates[document.documentId]}
-			title="{document.documentSubType} - {document.documentName}" {/* Title is dynamic, consider if parts need translation if they are not variable names */}
+			title="{document.documentSubType} - {document.documentName}"
 			classBackdrop="bg-opacity-20 dark:bg-opacity-20"
 			size="xl"
 		>
-			<iframe src="/images/sample.pdf?url" width="100%" height="1000px" title="PDF"></iframe> {/* title="PDF" could be localized */}
+			<iframe src="/images/sample.pdf?url" width="100%" height="1000px" title="PDF"></iframe>
 			<svelte:fragment slot="footer">
 				<Button on:click={() => alert('E-Signature Initiated"')}>{$_('documents.initiateESignature')}</Button>
 			</svelte:fragment>
@@ -187,7 +187,7 @@
 <Modal bind:open={newDocumentModal} size="md" autoclose={false} class="w-full">
 	{#if $message}
 	<Alert dismissable color={page.status == 200 ? 'green' : 'red'}>
-		{page.status == 200 ? $_('common.success') : $_('common.error')} {/* Added common.success/error keys */}
+		{page.status == 200 ? $_('common.success') : $_('common.error')}
 		{$message}
 	</Alert>
 	{/if}
@@ -269,7 +269,7 @@
 				{/if}
 			</div>
 			<div>
-				<Label for="document_expiry_date" class="mb-2">{$_('documents.expiryDateLabel')}</Label> {/* Corrected to use specific expiry label */}
+				<Label for="document_expiry_date" class="mb-2">{$_('documents.expiryDateLabel')}</Label>
 				<input
 					name="document_expiry_date"
 					type="date"
@@ -286,7 +286,7 @@
 				{/if}
 			</div>
 			<Button type="submit" class="w-fit">{$_('common.submit')}</Button>
-			{#if $delayed}<Spinner />{/if} {/* Spinner text might need localization if it has any */}
+			{#if $delayed}<Spinner />{/if}
 		</div>
 	</form>
 </Modal>

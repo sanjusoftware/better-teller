@@ -46,7 +46,7 @@
 				placeholder={$_('clients.details.personalInfo.documentTypePlaceholder')}
 			>
 				{#each countries as { value, name }}
-					<option {value}>{name}</option> {/* Name here would need localization if it's not just for value mapping */}
+					<option {value}>{name}</option>
 				{/each}
 			</Select>
 		</div>
@@ -70,7 +70,7 @@
 				<Datepicker bind:value={selectedDate} color="primary" required />
 			</div>
 			<div>
-				<Label for="expiry_date" class="mb-2">{$_('clients.details.personalInfo.dateOfExpiryLabel')}</Label> {/* Corrected key */}
+				<Label for="expiry_date" class="mb-2">{$_('clients.details.personalInfo.dateOfExpiryLabel')}</Label>
 				<Datepicker bind:value={selectedDate} color="primary" required />
 			</div>
 			<div>
@@ -82,7 +82,7 @@
 				<Input type="text" id="birth_place" placeholder="Sofia" />
 			</div>
 		</div>
-		<div class="mb-6"> {/* This email field seems redundant if there's one below, or it's for a different purpose */}
+		<div class="mb-6"> 
 			<Label for="email_main" class="mb-2">{$_('clients.details.personalInfo.emailAddressLabel')}</Label>
 			<Input type="email" id="email_main" placeholder="john.doe@company.com" required />
 		</div>
@@ -98,7 +98,7 @@
 				/>
 			</div>
 			<div>
-				<Label for="email_contact" class="mb-2">{$_('clients.details.personalInfo.emailAddressLabel')}</Label> {/* Ensure unique ID if this is a different email field */}
+				<Label for="email_contact" class="mb-2">{$_('clients.details.personalInfo.emailAddressLabel')}</Label>
 				<Input type="email" id="email_contact" placeholder="john.doe@company.com" required />
 			</div>
 		</div>
