@@ -32,7 +32,7 @@
 		class="m-0 me-3 md:block lg:hidden"
 	/>
 	<NavBrand href="/" class={list ? 'w-40' : 'lg:w-60'}>
-		<img src="/images/dsk.svg" class="me-2.5 h-6 sm:h-8" alt="DSK Logo" />
+		<img src="/images/dskLogo.svg" class="me-2.5 h-6 sm:h-8" alt="DSK Logo" />
 		<span
 			class="ml-px self-center whitespace-nowrap text-l font-semibold dark:text-white sm:text-xl"
 		>
