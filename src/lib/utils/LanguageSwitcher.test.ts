@@ -1,6 +1,6 @@
 import { render, fireEvent, screen, waitFor } from '@testing-library/svelte';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { writable, get } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 import LanguageSwitcher from './LanguageSwitcher.svelte';
 
@@ -12,16 +12,18 @@ const mockTranslate = (key: string, options?: any) => {
     if (key === 'languages.en') return 'English';
     if (key === 'languages.bg') return 'Bulgarian';
     if (key === 'languages.hu') return 'Hungarian';
-    // For aria-label on the main button
-    if (key === 'languages.en' && options?.values === undefined) return 'English'; // Simulating direct key usage for label
+    // For aria-label on the main button, which uses the same key
+    if (key === ('languages.' + get(mockSvelteI18nLocale)) && options?.values === undefined) {
+        return mockTranslate('languages.' + get(mockSvelteI18nLocale));
+    }
     return key;
 };
-const readableMockTranslate = writable(mockTranslate);
+const readableMockTranslate = writable(mockTranslate); // svelte-i18n's _ is a store
 
 vi.mock('svelte-i18n', () => ({
     _: readableMockTranslate,
     locale: mockSvelteI18nLocale,
-    t: readableMockTranslate, // Assuming t is used similarly if at all
+    t: readableMockTranslate,
     init: vi.fn(),
     register: vi.fn(),
     waitLocale: vi.fn().mockResolvedValue(undefined),
@@ -30,7 +32,6 @@ vi.mock('svelte-i18n', () => ({
 
 // Mock $lib/i18n.ts
 const mockSetLocale = vi.fn((lang: string) => {
-    // Simulate the actual setLocale behavior of updating the store
     mockSvelteI18nLocale.set(lang);
 });
 vi.mock('$lib/i18n', () => ({
@@ -38,90 +39,105 @@ vi.mock('$lib/i18n', () => ({
     setLocale: mockSetLocale,
 }));
 
-// Mock Flowbite Svelte Icons (simple stubs that render nothing or a placeholder)
-// This prevents errors if the icons have complex internal logic not relevant to the test.
+// Mock Flowbite Svelte Icons (only ChevronDownOutline is now directly in LanguageSwitcher)
 const createIconStub = (name: string) => ({
-    render: () => ({ Component: class { static $is_flanker = true; /* Minimal Svelte component structure */ } }),
-    name, // For debugging if needed
+    render: () => ({ Component: class { static $is_flanker = true; } }),
+    name,
 });
 
 vi.mock('flowbite-svelte-icons', () => ({
     ChevronDownOutline: createIconStub('ChevronDownOutline'),
-    GlobeOutline: createIconStub('GlobeOutline'), // Corrected icon mock
+    // GlobeOutline is no longer used, so no need to mock it here.
 }));
 
+// SVG Flag components from $lib/icons/flags are NOT mocked.
+// We will test for their output (e.g., the title attribute of their span).
 
 // --- Tests ---
 
-describe('LanguageSwitcher.svelte (Dropdown with Flowbite)', () => {
+describe('LanguageSwitcher.svelte (with SVG Flags)', () => {
     beforeEach(() => {
         vi.resetAllMocks();
-        mockSvelteI18nLocale.set('en'); // Reset locale to 'en' before each test
+        mockSvelteI18nLocale.set('en');
     });
 
-    it('displays the current language on the main button', () => {
+    it('displays the current language name and its flag title on the main button', () => {
         render(LanguageSwitcher);
-        // The button text includes the icon text and the language name.
-        // We check for the language name part.
-        // Flowbite Button renders a <button type="button">.
-        // The text is within a span inside the button.
-        const mainButton = screen.getByRole('button'); // Gets the Flowbite Button
+        const mainButton = screen.getByRole('button'); // The Flowbite Button
         expect(mainButton).toBeInTheDocument();
-        expect(mainButton.textContent).toContain('English'); // Based on mockTranslate for 'languages.en'
-    });
-
-    it('calls setLocale with "bg" when Bulgarian DropdownItem is clicked', async () => {
-        render(LanguageSwitcher);
-        const mainButton = screen.getByRole('button'); // Main dropdown trigger
-
-        // Click to open the dropdown.
-        // Flowbite's Dropdown might render items elsewhere or manage visibility dynamically.
-        // We assume clicking the main button makes DropdownItems available.
-        await fireEvent.click(mainButton);
-
-        // Find the DropdownItem for Bulgarian. Flowbite DropdownItems might not be direct 'button' roles
-        // but could be 'menuitem' or other interactive elements.
-        // We'll look for the text content.
-        const bulgarianOption = await screen.findByText(/Bulgarian/); // Find by text, more robust to exact role
-        expect(bulgarianOption).toBeInTheDocument();
-
-        await fireEvent.click(bulgarianOption);
-
-        expect(mockSetLocale).toHaveBeenCalledWith('bg');
-    });
-
-    it('main button text updates when locale changes via setLocale mock', async () => {
-        render(LanguageSwitcher);
-
-        // Initial state
-        const mainButton = screen.getByRole('button');
         expect(mainButton.textContent).toContain('English');
-
-        // Simulate locale change by calling our mocked setLocale, which updates mockSvelteI18nLocale
-        mockSetLocale('hu');
-        // mockSvelteI18nLocale.set('hu'); // This is done by mockSetLocale now
-
-        // Wait for Svelte's reactivity and DOM update
-        await waitFor(() => {
-            expect(mainButton.textContent).toContain('Hungarian');
-        });
+        // Check for the title attribute of the span rendered by GbFlag.svelte
+        expect(screen.getByTitle('UK Flag')).toBeInTheDocument();
     });
 
-    it('dropdown items display correct language names and flags', async () => {
+    it('calls setLocale with "bg" and updates main button when Bulgarian DropdownItem is clicked', async () => {
         render(LanguageSwitcher);
         const mainButton = screen.getByRole('button');
         await fireEvent.click(mainButton); // Open dropdown
 
-        const englishOption = await screen.findByText(/English/);
-        expect(englishOption.textContent).toContain('🇬🇧'); // Check for flag
-        expect(englishOption.textContent).toContain('English');
+        // Find the DropdownItem for Bulgarian by its text content
+        const bulgarianOptionText = await screen.findByText('Bulgarian');
+        // DropdownItem in Flowbite Svelte typically renders as a button or a link-like element if href is provided.
+        // Assuming it's a button or can be found by role 'menuitem' or similar.
+        // Clicking the text element itself if it's distinct enough, or its closest interactive parent.
+        let bulgarianOptionButton = bulgarianOptionText.closest('button') || bulgarianOptionText.closest('[role="menuitem"]') || bulgarianOptionText;
+        if (!bulgarianOptionButton) {
+            // Fallback if closest doesn't work, try to find by role if text is inside a specific role
+            bulgarianOptionButton = screen.getByRole('menuitem', { name: /Bulgarian/i });
+        }
+        await fireEvent.click(bulgarianOptionButton);
 
-        const bulgarianOption = await screen.findByText(/Bulgarian/);
-        expect(bulgarianOption.textContent).toContain('🇧🇬');
-        expect(bulgarianOption.textContent).toContain('Bulgarian');
+        expect(mockSetLocale).toHaveBeenCalledWith('bg');
 
-        const hungarianOption = await screen.findByText(/Hungarian/);
-        expect(hungarianOption.textContent).toContain('🇭🇺');
-        expect(hungarianOption.textContent).toContain('Hungarian');
+        // mockSetLocale already updates mockSvelteI18nLocale in our mock setup
+        // Check if main button updates
+        await waitFor(() => {
+            expect(mainButton.textContent).toContain('Bulgarian');
+            expect(screen.getByTitle('Bulgarian Flag')).toBeInTheDocument();
+        });
+    });
+
+    it('main button text and flag update correctly when locale changes multiple times', async () => {
+        render(LanguageSwitcher);
+        const mainButton = screen.getByRole('button');
+
+        // Initial: English
+        expect(mainButton.textContent).toContain('English');
+        expect(screen.getByTitle('UK Flag')).toBeInTheDocument();
+
+        // Change to Hungarian
+        mockSetLocale('hu'); // This updates mockSvelteI18nLocale
+        await waitFor(() => {
+            expect(mainButton.textContent).toContain('Hungarian');
+            expect(screen.getByTitle('Hungarian Flag')).toBeInTheDocument();
+        });
+
+        // Change back to Bulgarian
+        mockSetLocale('bg');
+        await waitFor(() => {
+            expect(mainButton.textContent).toContain('Bulgarian');
+            expect(screen.getByTitle('Bulgarian Flag')).toBeInTheDocument();
+        });
+    });
+
+    it('dropdown items display correct flags (by title) and names', async () => {
+        render(LanguageSwitcher);
+        const mainButton = screen.getByRole('button');
+        await fireEvent.click(mainButton); // Open dropdown
+
+        // Check English option
+        const englishOptionText = await screen.findByText('English');
+        expect(englishOptionText).toBeInTheDocument();
+        expect(screen.getByTitle('UK Flag')).toBeInTheDocument(); // Assuming title is unique enough for this check
+
+        // Check Bulgarian option
+        const bulgarianOptionText = await screen.findByText('Bulgarian');
+        expect(bulgarianOptionText).toBeInTheDocument();
+        expect(screen.getByTitle('Bulgarian Flag')).toBeInTheDocument();
+
+        // Check Hungarian option
+        const hungarianOptionText = await screen.findByText('Hungarian');
+        expect(hungarianOptionText).toBeInTheDocument();
+        expect(screen.getByTitle('Hungarian Flag')).toBeInTheDocument();
     });
 });

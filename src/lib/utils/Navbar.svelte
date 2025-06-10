@@ -59,18 +59,23 @@
 		<div class="hidden lg:block lg:ps-3">
 			{#if list}
 				<NavUl class="ml-2" activeUrl="/" activeClass="text-primary-600 dark:text-primary-500">
-					<NavLi href="/dashboard">{$_('navbar.dashboard')}</NavLi>
-					<NavLi href="#top">Messages</NavLi> 
-					<NavLi href="#top">Profile</NavLi>
+					<NavLi href="/dashboard">{$_('navbar.dashboard')}</NavLi> {/* Assuming Home maps to Dashboard */}
+					<NavLi href="#top">Messages</NavLi> {/* No key yet */}
+					<NavLi href="#top">Profile</NavLi> {/* No key yet */}
 					<NavLi href="#top">{$_('navbar.settings')}</NavLi>
 					<NavLi class="cursor-pointer">
-						Dropdown
+						Dropdown {/* Consider if "Dropdown" needs translation */}
 						<ChevronDownOutline class="ms-0 inline" />
 					</NavLi>
+					<Dropdown class="z-20 w-44">
+						<DropdownItem href="#top">Item 1</DropdownItem>
+						<DropdownItem href="#top">Item 2</DropdownItem>
+						<DropdownItem href="#top">Item 3</DropdownItem>
+					</Dropdown>
 				</NavUl>
 			{/if}
 		</div>
-		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2 space-x-3">
+		<div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2 space-x-3"> {/* Added space-x-3 for spacing */}
 			<LanguageSwitcher />
 			<CurrentClient />
 			<UserMenu name={user?.name ?? ''} avatar={user?.image ?? ''} email={user?.email ?? ''} />

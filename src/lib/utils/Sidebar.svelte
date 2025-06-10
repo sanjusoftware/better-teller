@@ -50,13 +50,13 @@
 	});	
 
 	// Defer translation to render time by using functions
-	let non_client_actions = $state([
+	$: non_client_actions = [
 		{ name: () => $_('navbar.dashboard'), icon: HomeOutline, href: '/dashboard' },
 		{ name: () => 'Reports', icon: ChartMixedOutline, href: '/reports' }, // No key for Reports yet
 		{ name: () => 'Admin', icon: BuildingOutline, href: '/admin' } // No key for Admin yet
-	]);
+	];
 
-	let client_actions = $state([
+	$: client_actions = [
 		{ name: () => $_('navbar.dashboard'), icon: HomeOutline, href: '/dashboard' },
 		{
 			name: () => $_('navbar.clients'), // Mapping "Client's Info" to "Clients"
@@ -93,7 +93,7 @@
 		},
 		{ name: () => 'Reports', icon: ChartMixedOutline, href: '/reports' }, // No key for Reports yet
 		{ name: () => 'Admin', icon: BuildingOutline, href: '/admin' } // No key for Admin yet
-	]);
+	];
 	
 	// Need to ensure dropdown keys are stable if names are functions now
 	// Using a unique ID or the original English name for the key might be better for $state(Object.fromEntries(...))
@@ -105,7 +105,7 @@
 
 	// This part for dropdowns needs careful handling if `name` becomes a function returning translated string
 	// A quick fix might be to use the index or a static key part of the object for dropdowns state
-	let dropdowns = $derived(Object.fromEntries(primary_actions.map((action, index) => [action.name, false])));
+	let dropdowns = $state(Object.fromEntries(primary_actions.map((action, index) => [action.name, false])));
 
 </script>
 
@@ -121,18 +121,18 @@
 	>
 		<nav class="divide-y divide-gray-200 dark:divide-gray-700">
 			<SidebarGroup ulClass={groupClass} class="mb-3">
-				{#each primary_actions as action (action.name)} 
+				{#each primary_actions as action (action.name)} {/* Using action.name (which is a function) as key is problematic */}
 					{#if action.children}
-						<SidebarDropdownWrapper bind:isOpen={dropdowns[action.name]} label={action.name()} class="pr-3">
+						<SidebarDropdownWrapper bind:isOpen={dropdowns[action.name]} label={action.name()} class="pr-3"> {/* Call name() here */}
 							<AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
 							<AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
 							<svelte:component this={action.icon} slot="icon" class={iconClass} />
 							{#each Object.entries(action.children) as [title, href]}
-								<SidebarItem label={title} href={href as string} spanClass="ml-9" class={itemClass} /> 
+								<SidebarItem label={title} href={href as string} spanClass="ml-9" class={itemClass} /> {/* TODO: Translate title */}
 							{/each}
 						</SidebarDropdownWrapper>
 					{:else}
-						<SidebarItem label={action.name()} href={action.href as string} spanClass="ml-3" class={itemClass}>
+						<SidebarItem label={action.name()} href={action.href as string} spanClass="ml-3" class={itemClass}> {/* Call name() here */}
 							<svelte:component this={action.icon} slot="icon" class={iconClass} />
 						</SidebarItem>
 					{/if}
