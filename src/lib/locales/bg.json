@@ -1,0 +1,146 @@
+{
+  "greeting": "Здравейте",
+  "navbar": {
+    "dashboard": "Табло",
+    "clients": "Клиенти",
+    "transactions": "Транзакции",
+    "products": "Продукти",
+    "settings": "Настройки"
+  },
+  "login": {
+    "title": "Вход",
+    "usernameLabel": "Потребителско име",
+    "passwordLabel": "Парола",
+    "button": "Вход",
+    "errorMessage": "Невалидни данни. Моля, опитайте отново.",
+    "cardTitle": "Влезте за достъп до портала",
+    "dskIdButton": "Вход с вашето ДСК ID",
+    "troubleSigningIn": "Проблем с влизането?",
+    "contactSupport": "Свържете се с банка ДСК за съдействие."
+  },
+  "dashboard": {
+    "welcomeMessage": "Добре дошли, {name}!",
+    "totalClients": "Общо клиенти",
+    "totalAccounts": "Общо сметки",
+    "recentActivity": "Последна активност",
+    "haveANiceDay": "Приятен ден!",
+    "waitingTickets": "Чакащи билети",
+    "avgServingTime": "Средно време за обслужване:",
+    "viewAll": "Преглед на всички",
+    "allClientsServedToday": "Всички обслужени клиенти днес",
+    "averageServiceTime": "Средно време за обслужване",
+    "inMinutes": "В минути"
+  },
+  "clients": {
+    "title": "Клиенти",
+    "newClientButton": "Нов клиент",
+    "searchPlaceholder": "Търсене на клиенти...",
+    "cifLabel": "ЕИК/БУЛСТАТ:",
+    "egnLabel": "ЕГН:",
+    "copyCifTooltip": "Копирай ЕИК/БУЛСТАТ:",
+    "copyEgnTooltip": "Копирай ЕГН:",
+    "suspendButton": "Спиране",
+    "activateButton": "Активиране",
+    "table": {
+      "name": "Име",
+      "email": "Имейл",
+      "phone": "Телефон",
+      "status": "Статус",
+      "contact": "Контакт",
+      "mailingAddress": "Адрес за кореспонденция"
+    },
+    "details": {
+      "title": "Детайли за клиента",
+      "editButton": "Редактиране на клиент",
+      "tabs": {
+        "idDocument": "Документ за самоличност",
+        "documents": "Документи",
+        "security": "Сигурност",
+        "notificationPreferences": "Предпочитания за известия"
+      },
+      "clientInformationTitle": "Информация за клиента",
+      "nameLabel": "Име",
+      "idNumberLabel": "Идентификационен номер",
+      "nationalityLabel": "Националност",
+      "typeLabel": "Тип",
+      "phoneLabel": "Телефонен номер",
+      "emailLabel": "Имейл",
+      "addressLabel": "Адрес на клиента",
+      "phoneVerified": "Телефонът е потвърден",
+      "phoneUnverified": "Телефонът не е потвърден",
+      "emailVerified": "Имейлът е потвърден",
+      "emailUnverified": "Имейлът не е потвърден",
+      "verifyButton": "Потвърди",
+      "passwordInfoTitle": "Информация за паролата",
+      "currentPasswordLabel": "Текуща парола",
+      "newPasswordLabel": "Нова парола",
+    "confirmPasswordLabel": "Потвърди паролата",
+    "personalInfo": {
+      "scanAgainButton": "Сканирай отново",
+      "documentTypeLabel": "Тип на документа",
+      "documentTypePlaceholder": "Моля, изберете тип на документа за самоличност",
+      "documentNumberLabel": "Номер на документа",
+      "issuingAuthorityLabel": "Издаващ орган",
+      "dateOfIssueLabel": "Дата на издаване",
+      "dateOfExpiryLabel": "Дата на валидност",
+      "dateOfBirthLabel": "Дата на раждане",
+      "placeOfBirthLabel": "Място на раждане",
+      "emailAddressLabel": "Имейл адрес",
+      "phoneNumberLabel": "Телефонен номер",
+      "nextButton": "Напред"
+    }
+    }
+  },
+  "common": {
+    "save": "Запази",
+    "cancel": "Отказ",
+    "download": "Изтегли",
+    "reject": "Отхвърли",
+    "submit": "Изпрати",
+    "success": "Успех!",
+    "error": "Грешка!",
+    "edit": "Редактирай",
+    "delete": "Изтрий",
+    "new": "Нов",
+    "view": "Преглед",
+    "close": "Затвори",
+    "actions": "Действия",
+    "loading": "Зареждане...",
+    "noData": "Няма налични данни.",
+    "next": "Напред"
+  },
+  "forms": {
+    "requiredField": "Това поле е задължително.",
+    "invalidEmail": "Невалиден имейл адрес."
+  },
+  "documents": {
+    "searchPlaceholder": "Търсене по име на файл, тип документ, ID на документ...",
+    "table": {
+      "type": "Тип",
+      "fileName": "Име на файл",
+      "issuer": "Издател",
+      "expiry": "Валидност до"
+    },
+    "uploadNewButton": "Качи нов документ",
+    "sizeLabel": "Размер:",
+    "issueDateLabel": "Дата на издаване:",
+    "expiryDateLabel": "Дата на валидност:",
+    "renewalReminder": "Напомняне за подновяване",
+    "initiateESignature": "Инициирай електронен подпис",
+    "modalTitleNew": "Нов документ за {clientName}",
+    "chooseDocumentLabel": "Избери документ",
+    "allowedFileTypes": "Позволени типове файлове: .PDF, .DOC, .DOCX, .JPG, .JPEG, или .PNG",
+    "maxFileSize": "(Макс. размер 100 kB).",
+    "documentIssuerLabel": "Издател на документа",
+    "documentIssuerPlaceholder": "Въведете издател на документа",
+    "documentTypeLabel": "Тип на документа",
+    "documentTypePlaceholder": "Изберете тип на документа...",
+    "documentIssueDateLabel": "Дата на издаване на документа",
+    "noDocumentsFound": "Няма намерени документи."
+  },
+  "languages": {
+    "en": "Английски",
+    "bg": "Български",
+    "hu": "Унгарски"
+  }
+}

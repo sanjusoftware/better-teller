@@ -1,31 +1,51 @@
 import type { PageServerLoad } from './$types';
-import Transactions from '$lib/data/transactions.json';
-import Accounts from '$lib/data/accounts.json';
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = ({ url }) => {
-    let accountNumber = url.searchParams.get('accountnumber')
-    let cif = url.searchParams.get('cif')
-    let filteredTransactions = Transactions;
+export const load: PageServerLoad = async ({ url, fetch }) => {
+    let accountNumber = url.searchParams.get('accountnumber');
+    let cif = url.searchParams.get('cif');
+    let transactionsToDisplay = [];
+
+    // Fetch all accounts
+    const accountsResponse = await fetch('/api/accounts');
+    if (!accountsResponse.ok) {
+        throw error(accountsResponse.status, `Failed to fetch accounts: ${accountsResponse.statusText}`);
+    }
+    const allAccounts = await accountsResponse.json();
+
+    // Fetch all transactions
+    const transactionsResponse = await fetch('/api/transactions');
+    if (!transactionsResponse.ok) {
+        throw error(transactionsResponse.status, `Failed to fetch transactions: ${transactionsResponse.statusText}`);
+    }
+    const allTransactions = await transactionsResponse.json();
 
     if (accountNumber) {
-        let account = Accounts.find((acc) => acc.accountNumber === accountNumber);
+        const account = allAccounts.find((acc) => acc.accountNumber === accountNumber);
         if (!account) {
-            throw error(404, 'Account not found')
+            // If account number is given but not found, perhaps return empty or specific error
+            // For now, it will fall through to returning empty transactionsToDisplay, which is acceptable.
+            // Alternatively, throw error(404, 'Account not found');
+        } else {
+            cif = account.clientId; // Update cif based on the found account
+            transactionsToDisplay = allTransactions.filter(
+                (t) => t.sourceAccountId === account.id || t.destinationAccountId === account.id
+            );
         }
-        cif = account.customerId.toString();
-        filteredTransactions = filteredTransactions.filter((t) => t.from_account === accountNumber || t.to_account === accountNumber);
     } else if (cif) {
-        let accountNumbers = Accounts.filter((acc) => acc.customerId.toString() === cif).map(acc => acc.iban)
-        filteredTransactions = filteredTransactions.filter((t) => accountNumbers.includes(t.from_account) || accountNumbers.includes(t.to_account));
+        const clientAccounts = allAccounts.filter((acc) => acc.clientId === cif);
+        const clientAccountIds = clientAccounts.map(acc => acc.id);
+        if (clientAccountIds.length > 0) {
+            transactionsToDisplay = allTransactions.filter(
+                (t) => clientAccountIds.includes(t.sourceAccountId) || clientAccountIds.includes(t.destinationAccountId)
+            );
+        }
     }
-    else {
-        filteredTransactions = []
-    }
+    // If neither accountNumber nor cif is provided, transactionsToDisplay remains empty as initialized.
 
     return {
-        acountNumber: accountNumber,
-        cif: cif,
-        transactions: filteredTransactions
+        accountNumber: accountNumber,
+        cif: cif, // This will be the original cif or the one derived from accountNumber
+        transactions: transactionsToDisplay
     }
 };

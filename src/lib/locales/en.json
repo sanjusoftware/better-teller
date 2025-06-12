@@ -1,0 +1,146 @@
+{
+  "greeting": "Hello",
+  "navbar": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "transactions": "Transactions",
+    "products": "Products",
+    "settings": "Settings"
+  },
+  "login": {
+    "title": "Sign In",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "button": "Login",
+    "errorMessage": "Invalid credentials. Please try again.",
+    "cardTitle": "Login to access the portal",
+    "dskIdButton": "Login in with your DSK ID",
+    "troubleSigningIn": "Trouble signing in?",
+    "contactSupport": "Contact the DSK bank for assistance."
+  },
+  "dashboard": {
+    "welcomeMessage": "Welcome, {name}!",
+    "totalClients": "Total Clients",
+    "totalAccounts": "Total Accounts",
+    "recentActivity": "Recent Activity",
+    "haveANiceDay": "Have a nice day!",
+    "waitingTickets": "Waiting Tickets",
+    "avgServingTime": "Avg Serving Time:",
+    "viewAll": "View All",
+    "allClientsServedToday": "All clients served today",
+    "averageServiceTime": "Average Service Time",
+    "inMinutes": "In Minutes"
+  },
+  "clients": {
+    "title": "Clients",
+    "newClientButton": "New Client",
+    "searchPlaceholder": "Search clients...",
+    "cifLabel": "CIF:",
+    "egnLabel": "EGN:",
+    "copyCifTooltip": "Copy CIF:",
+    "copyEgnTooltip": "Copy EGN:",
+    "suspendButton": "Suspend",
+    "activateButton": "Activate",
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "status": "Status",
+      "contact": "Contact",
+      "mailingAddress": "Mailing Address"
+    },
+    "details": {
+      "title": "Client Details",
+      "editButton": "Edit Client",
+      "tabs": {
+        "idDocument": "ID Document",
+        "documents": "Documents",
+        "security": "Security",
+        "notificationPreferences": "Notification Preferences"
+      },
+      "clientInformationTitle": "Client's Information",
+      "nameLabel": "Name",
+      "idNumberLabel": "ID number",
+      "nationalityLabel": "Nationality",
+      "typeLabel": "Type",
+      "phoneLabel": "Phone number",
+      "emailLabel": "Email",
+      "addressLabel": "Client's address",
+      "phoneVerified": "Phone Verified",
+      "phoneUnverified": "Phone Unverified",
+      "emailVerified": "Email Verified",
+      "emailUnverified": "Email Unverified",
+      "verifyButton": "Verify",
+      "passwordInfoTitle": "Password Information",
+      "currentPasswordLabel": "Current password",
+      "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm password",
+    "personalInfo": {
+      "scanAgainButton": "Scan Again",
+      "documentTypeLabel": "Document Type",
+      "documentTypePlaceholder": "Please select type of ID document",
+      "documentNumberLabel": "Document Number",
+      "issuingAuthorityLabel": "Issuing Authority",
+      "dateOfIssueLabel": "Date of issue",
+      "dateOfExpiryLabel": "Date of expiry",
+      "dateOfBirthLabel": "Date of birth",
+      "placeOfBirthLabel": "Place of birth",
+      "emailAddressLabel": "Email address",
+      "phoneNumberLabel": "Phone number",
+      "nextButton": "Next"
+    }
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "download": "Download",
+    "reject": "Reject",
+    "submit": "Submit",
+    "success": "Success!",
+    "error": "Error!",
+    "edit": "Edit",
+    "delete": "Delete",
+    "new": "New",
+    "view": "View",
+    "close": "Close",
+    "actions": "Actions",
+    "loading": "Loading...",
+    "noData": "No data available.",
+    "next": "Next"
+  },
+  "forms": {
+    "requiredField": "This field is required.",
+    "invalidEmail": "Invalid email address."
+  },
+  "documents": {
+    "searchPlaceholder": "Search by File Name, Document Type, Document Id ...",
+    "table": {
+      "type": "Type",
+      "fileName": "File Name",
+      "issuer": "Issuer",
+      "expiry": "Expiry"
+    },
+    "uploadNewButton": "Upload New Document",
+    "sizeLabel": "Size:",
+    "issueDateLabel": "Issue Date:",
+    "expiryDateLabel": "Expiry Date:",
+    "renewalReminder": "Renewal Reminder",
+    "initiateESignature": "Initiate E-Signature",
+    "modalTitleNew": "New document for {clientName}",
+    "chooseDocumentLabel": "Choose Document",
+    "allowedFileTypes": "Allowed file types: .PDF, .DOC, .DOCX, .JPG, .JPEG, or .PNG",
+    "maxFileSize": "(Max 100 kB upload size).",
+    "documentIssuerLabel": "Document Issuer",
+    "documentIssuerPlaceholder": "Enter Document Issuer",
+    "documentTypeLabel": "Document Type",
+    "documentTypePlaceholder": "Choose Document type...",
+    "documentIssueDateLabel": "Document Issue Date",
+    "noDocumentsFound": "No documents found."
+  },
+  "languages": {
+    "en": "English",
+    "bg": "Bulgarian",
+    "hu": "Hungarian"
+  }
+}

@@ -12,6 +12,8 @@
 	import Emails from './Emails.svelte';
 	import PasswordInfo from './PasswordInfo.svelte';
 	import Sessions from './Sessions.svelte';
+	import { _ } from 'svelte-i18n';
+
 	let {client, open} = $derived(page.data);
 	const tabs = ['identity', 'cards', 'accounts', 'loans', 'documents', 'security', 'alerts'];
 	const openTab = $derived(open ? (tabs.includes(open) ? open : 'identity') : 'identity');
@@ -42,7 +44,7 @@
 	<TabItem open={isOpen('documents')}>
 		<div slot="title" class="flex items-center gap-2">
 			<FileCopyAltOutline size="md" />
-			Documents
+			{$_('clients.details.tabs.documents')}
 		</div>
 		<div class="grid gap-4 xl:grid-cols-1 xl:gap-4">
 			<Documents />
@@ -51,7 +53,7 @@
 	<TabItem open={isOpen('security')}>
 		<div slot="title" class="flex items-center gap-2">
 			<FingerprintOutline size="md" />
-			Security
+			{$_('clients.details.tabs.security')}
 		</div>
 		<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
 			<PasswordInfo />
@@ -61,7 +63,7 @@
 	<TabItem open={isOpen('alerts')}>
 		<div slot="title" class="flex items-center gap-2">
 			<BellActiveAltOutline size="md" />
-			Notification Preferences
+			{$_('clients.details.tabs.notificationPreferences')}
 		</div>
 		<div class="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-4">
 			<Alerts />

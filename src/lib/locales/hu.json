@@ -1,0 +1,146 @@
+{
+  "greeting": "Helló",
+  "navbar": {
+    "dashboard": "Irányítópult",
+    "clients": "Ügyfelek",
+    "transactions": "Tranzakciók",
+    "products": "Termékek",
+    "settings": "Beállítások"
+  },
+  "login": {
+    "title": "Bejelentkezés",
+    "usernameLabel": "Felhasználónév",
+    "passwordLabel": "Jelszó",
+    "button": "Bejelentkezés",
+    "errorMessage": "Érvénytelen adatok. Kérjük, próbálja újra.",
+    "cardTitle": "Jelentkezzen be a portál eléréséhez",
+    "dskIdButton": "Bejelentkezés DSK azonosítóval",
+    "troubleSigningIn": "Probléma a bejelentkezéssel?",
+    "contactSupport": "Segítségért forduljon a DSK bankhoz."
+  },
+  "dashboard": {
+    "welcomeMessage": "Üdvözöljük, {name}!",
+    "totalClients": "Összes ügyfél",
+    "totalAccounts": "Összes számla",
+    "recentActivity": "Legutóbbi tevékenység",
+    "haveANiceDay": "Legyen szép napod!",
+    "waitingTickets": "Várakozó jegyek",
+    "avgServingTime": "Átlagos kiszolgálási idő:",
+    "viewAll": "Összes megtekintése",
+    "allClientsServedToday": "Ma kiszolgált összes ügyfél",
+    "averageServiceTime": "Átlagos szolgáltatási idő",
+    "inMinutes": "Percben"
+  },
+  "clients": {
+    "title": "Ügyfelek",
+    "newClientButton": "Új ügyfél",
+    "searchPlaceholder": "Ügyfelek keresése...",
+    "cifLabel": "CIF:",
+    "egnLabel": "EGN:",
+    "copyCifTooltip": "CIF másolása:",
+    "copyEgnTooltip": "EGN másolása:",
+    "suspendButton": "Felfüggesztés",
+    "activateButton": "Aktiválás",
+    "table": {
+      "name": "Név",
+      "email": "E-mail",
+      "phone": "Telefonszám",
+      "status": "Állapot",
+      "contact": "Kapcsolat",
+      "mailingAddress": "Levelezési cím"
+    },
+    "details": {
+      "title": "Ügyfél adatai",
+      "editButton": "Ügyfél szerkesztése",
+      "tabs": {
+        "idDocument": "Személyazonosító okmány",
+        "documents": "Dokumentumok",
+        "security": "Biztonság",
+        "notificationPreferences": "Értesítési beállítások"
+      },
+      "clientInformationTitle": "Ügyfél információ",
+      "nameLabel": "Név",
+      "idNumberLabel": "Azonosítószám",
+      "nationalityLabel": "Nemzetiség",
+      "typeLabel": "Típus",
+      "phoneLabel": "Telefonszám",
+      "emailLabel": "E-mail",
+      "addressLabel": "Ügyfél címe",
+      "phoneVerified": "Telefonszám megerősítve",
+      "phoneUnverified": "Telefonszám nincs megerősítve",
+      "emailVerified": "E-mail megerősítve",
+      "emailUnverified": "E-mail nincs megerősítve",
+      "verifyButton": "Megerősítés",
+      "passwordInfoTitle": "Jelszó információ",
+      "currentPasswordLabel": "Jelenlegi jelszó",
+      "newPasswordLabel": "Új jelszó",
+    "confirmPasswordLabel": "Jelszó megerősítése",
+    "personalInfo": {
+      "scanAgainButton": "Újraolvasás",
+      "documentTypeLabel": "Dokumentum típusa",
+      "documentTypePlaceholder": "Kérjük, válassza ki a személyazonosító okmány típusát",
+      "documentNumberLabel": "Okmányszám",
+      "issuingAuthorityLabel": "Kibocsátó hatóság",
+      "dateOfIssueLabel": "Kiadás dátuma",
+      "dateOfExpiryLabel": "Lejárat dátuma",
+      "dateOfBirthLabel": "Születési dátum",
+      "placeOfBirthLabel": "Születési hely",
+      "emailAddressLabel": "E-mail cím",
+      "phoneNumberLabel": "Telefonszám",
+      "nextButton": "Tovább"
+    }
+    }
+  },
+  "common": {
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "download": "Letöltés",
+    "reject": "Elutasítás",
+    "submit": "Küldés",
+    "success": "Siker!",
+    "error": "Hiba!",
+    "edit": "Szerkesztés",
+    "delete": "Törlés",
+    "new": "Új",
+    "view": "Megtekintés",
+    "close": "Bezárás",
+    "actions": "Műveletek",
+    "loading": "Betöltés...",
+    "noData": "Nincs elérhető adat.",
+    "next": "Tovább"
+  },
+  "forms": {
+    "requiredField": "Ez a mező kötelező.",
+    "invalidEmail": "Érvénytelen e-mail cím."
+  },
+  "documents": {
+    "searchPlaceholder": "Keresés fájlnév, dokumentumtípus, dokumentumazonosító alapján...",
+    "table": {
+      "type": "Típus",
+      "fileName": "Fájlnév",
+      "issuer": "Kibocsátó",
+      "expiry": "Lejárat"
+    },
+    "uploadNewButton": "Új dokumentum feltöltése",
+    "sizeLabel": "Méret:",
+    "issueDateLabel": "Kibocsátás dátuma:",
+    "expiryDateLabel": "Lejárat dátuma:",
+    "renewalReminder": "Megújítási emlékeztető",
+    "initiateESignature": "E-aláírás kezdeményezése",
+    "modalTitleNew": "Új dokumentum {clientName} részére",
+    "chooseDocumentLabel": "Dokumentum kiválasztása",
+    "allowedFileTypes": "Engedélyezett fájltípusok: .PDF, .DOC, .DOCX, .JPG, .JPEG, vagy .PNG",
+    "maxFileSize": "(Max. 100 kB feltöltési méret).",
+    "documentIssuerLabel": "Dokumentum kibocsátója",
+    "documentIssuerPlaceholder": "Adja meg a dokumentum kibocsátóját",
+    "documentTypeLabel": "Dokumentum típusa",
+    "documentTypePlaceholder": "Válassza ki a dokumentum típusát...",
+    "documentIssueDateLabel": "Dokumentum kibocsátási dátuma",
+    "noDocumentsFound": "Nem található dokumentum."
+  },
+  "languages": {
+    "en": "Angol",
+    "bg": "Bolgár",
+    "hu": "Magyar"
+  }
+}

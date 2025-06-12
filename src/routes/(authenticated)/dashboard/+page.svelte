@@ -6,10 +6,11 @@
 	import QuickProducts from './QuickProducts.svelte';
 	import ServiceTimeStats from './ServiceTimeStats.svelte';
 	import WelcomeCard from './WelcomeCard.svelte';
+	import { _ } from 'svelte-i18n';
 </script>
 
 <Breadcrumb class="mb-5">
-	<BreadcrumbItem home>Home</BreadcrumbItem>
+	<BreadcrumbItem home>{$_('navbar.dashboard')}</BreadcrumbItem>
 </Breadcrumb>
 
 {#if isCurrentClient()}

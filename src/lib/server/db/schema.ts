@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text, real } from "drizzle-orm/sqlite-core";
 import { generateId } from "../../utils/strings";
 
 
@@ -29,4 +29,35 @@ const clients = sqliteTable("clients", {
   ...timestamp,
 });
 
-export { clients };
+const accounts = sqliteTable("accounts", {
+  id: text("id")
+    .primaryKey()
+    .notNull()
+    .$defaultFn(() => generateId(10)),
+  accountNumber: text("account_number").notNull().unique(),
+  type: text("type").notNull(),
+  balance: real("balance").notNull(),
+  currency: text("currency").notNull(),
+  clientId: text("client_id").notNull().references(() => clients.cif),
+  ...timestamp,
+});
+
+const transactions = sqliteTable("transactions", {
+  id: text("id")
+    .primaryKey()
+    .notNull()
+    .$defaultFn(() => generateId(10)),
+  type: text("type").notNull(),
+  amount: real("amount").notNull(),
+  currency: text("currency").notNull(),
+  timestamp: integer("timestamp", { mode: "timestamp" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+  sourceAccountId: text("source_account_id").references(() => accounts.id),
+  destinationAccountId: text("destination_account_id").references(() => accounts.id),
+  description: text("description"),
+  status: text("status").notNull(),
+  ...timestamp,
+});
+
+export { clients, accounts, transactions };

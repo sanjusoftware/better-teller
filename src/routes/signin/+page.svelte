@@ -2,11 +2,13 @@
 	import MetaTag from '$lib/utils/MetaTag.svelte';
 	import { Button, Card } from 'flowbite-svelte';
 	import '../../app.css';
+	import { _ } from 'svelte-i18n';
 
 	const path: string = '/signin';
-	const description: string = 'DSK - Better Teller Sign in';
-	const title: string = 'Signin to the platform';
-	const subtitle: string = 'Home';
+	// MetaTag props could also be localized if needed, but focusing on visible text first.
+	const description: string = 'DSK - Better Teller Sign in'; // $_('login.metaDescription')
+	const title: string = 'Signin to the platform'; // $_('login.metaTitle')
+	const subtitle: string = 'Home'; // $_('login.metaSubtitle')
 </script>
 
 <!-- Main Content -->
@@ -18,18 +20,18 @@
 		<Card class="w-full" size="md" border={false}>
 			<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 				<h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">
-					Login to access the portal
+					{$_('login.cardTitle')}
 				</h3>
 				<form method="POST" action="/auth/signin/microsoft-entra-id">
 					<input type="hidden" name="csrfToken" />
 					<Button type="submit" size="xl" class="w-full buttonPrimary">
-						Login in with your DSK ID
+						{$_('login.dskIdButton')}
 					</Button>
 				</form>
 				<p class="text-sm font-light text-gray-500 dark:text-gray-400">
-					Trouble signingin?
+					{$_('login.troubleSigningIn')}
 					<span class="font-medium text-primary-600 dark:text-primary-500">
-						Contact the DSK bank for assistance.
+						{$_('login.contactSupport')}
 					</span>
 				</p>
 			</div>

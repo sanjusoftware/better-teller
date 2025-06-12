@@ -5,6 +5,8 @@
 	import IDCard from '$lib/utils/IDCard.svelte';
 	import PhoneVerification from './PhoneVerification.svelte';
 	import EmailVerification from './EmailVerification.svelte';
+	import { _ } from 'svelte-i18n';
+
 	let phoneVerficationModal = $state(false);
 	let emailVerficationModal = $state(false);
 
@@ -12,7 +14,7 @@
 
 </script>
 
-<h2 class="text-md font-semibold text-gray-500 mb-2">Client's Information</h2>
+<h2 class="text-md font-semibold text-gray-500 mb-2">{$_('clients.details.clientInformationTitle')}</h2>
 <Card class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 sm:p-4">
 	<!-- <Alert dismissable color="blue" class="mb-2 p-2">
 		<div class="flex items-center gap-3">
@@ -27,31 +29,31 @@
 	<div class="grid grid-cols-1 gap-2 xl:grid-cols-1 xl:gap-4">
 		<div class="flex flex-col space-y-2">
 			<div>
-				<div class="text-sm text-gray-500 dark:text-gray-400">Name</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{$_('clients.details.nameLabel')}</div>
 				<div class="text-gray-900 dark:text-gray-200 font-semibold">
 					{client.name}
 				</div>
 			</div>
 			<div>
-				<div class="text-sm text-gray-500 dark:text-gray-400">ID number</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{$_('clients.details.idNumberLabel')}</div>
 				<div class="text-gray-900 dark:text-gray-200 font-semibold">
 					#{client.cif}
 				</div>
 			</div>
 			<div>
-				<div class="text-sm text-gray-500 dark:text-gray-400">Nationality</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{$_('clients.details.nationalityLabel')}</div>
 				<div class="text-gray-900 dark:text-gray-200 font-semibold">
 					{client.country}
 				</div>
 			</div>
 			<div>
-				<div class="text-sm text-gray-500 dark:text-gray-400">Type</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{$_('clients.details.typeLabel')}</div>
 				<div class="text-gray-900 dark:text-gray-200 font-semibold">
 					{humanize(client.type)}
 				</div>
 			</div>
 			<div>
-				<div class="text-sm text-gray-500 dark:text-gray-400">Phone number</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{$_('clients.details.phoneLabel')}</div>
 				<div class="flex items-center justify-between w-full">
 					<span class="text-gray-900 dark:text-gray-200 font-semibold">
 						{client.phone}
@@ -60,12 +62,12 @@
 						{#if client.phone_verified}
 							<CheckCircleOutline class="mr-1" size="sm" color="green" />
 							<Tooltip>
-								<span class="text-xs">Phone Verified</span>
+								<span class="text-xs">{$_('clients.details.phoneVerified')}</span>
 							</Tooltip>
 						{:else}
 							<CloseCircleOutline class="mr-1" size="sm" color="red" />
 							<Tooltip>
-								<span class="text-xs">Phone Unverified</span>
+								<span class="text-xs">{$_('clients.details.phoneUnverified')}</span>
 							</Tooltip>
 							<Button
 								size="xs"
@@ -73,7 +75,7 @@
 								class="p-1 text-xs"
 								on:click={() => (phoneVerficationModal = true)}
 							>
-								Verify
+								{$_('clients.details.verifyButton')}
 							</Button>
 							<PhoneVerification phone={client.phone} bind:sendOTPOpen={phoneVerficationModal} />
 						{/if}
@@ -81,7 +83,7 @@
 				</div>
 			</div>
 			<div>
-				<div class="text-sm text-gray-500 dark:text-gray-400">Phone number</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{$_('clients.details.emailLabel')}</div>
 				<div class="flex items-center justify-between w-full">
 					<span class="text-gray-900 dark:text-gray-200 font-semibold">
 						{client.email}
@@ -89,13 +91,13 @@
 					{#if client.email_verified}
 						<CheckCircleOutline class="mr-1" size="sm" color="green" />
 						<Tooltip>
-							<span class="text-xs">Verified</span>
+							<span class="text-xs">{$_('clients.details.emailVerified')}</span>
 						</Tooltip>
 					{:else}
 						<div class="flex items-center space-x-1">
 							<CloseCircleOutline class="mr-1" size="sm" color="red" />
 							<Tooltip>
-								<span class="text-xs">Not verified</span>
+								<span class="text-xs">{$_('clients.details.emailUnverified')}</span>
 							</Tooltip>
 							<Button
 								size="xs"
@@ -103,7 +105,7 @@
 								class="p-1 text-xs"
 								onclick={() => (emailVerficationModal = true)}
 							>
-								Verify
+								{$_('clients.details.verifyButton')}
 							</Button>
 							<EmailVerification email={client.email} bind:sendOTPOpen={emailVerficationModal} />
 						</div>
@@ -111,7 +113,7 @@
 				</div>
 			</div>
 			<div>
-				<div class="text-sm text-gray-500 dark:text-gray-400">Client's address</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{$_('clients.details.addressLabel')}</div>
 				<div class="text-gray-900 dark:text-gray-200 font-semibold">
 					{client.address}
 				</div>

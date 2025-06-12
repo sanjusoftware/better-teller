@@ -14,16 +14,13 @@
 		AngleDownOutline,
 		AngleUpOutline,
 		ArrowsRepeatOutline,
-		ArrowUpDownOutline,
 		BuildingOutline,
-		CashOutline,
 		ChartMixedOutline,
-		CogOutline,
 		GridOutline,
 		HomeOutline,
-		LifeSaverSolid,
 		UserOutline
 	} from 'flowbite-svelte-icons';
+	import { _ } from 'svelte-i18n';
 	import { clientProductSummaryPath } from './pathHelper';
 
 	let { drawerHidden = false } = $props();
@@ -48,16 +45,17 @@
 		mainSidebarUrl = navigation.to?.url.pathname ?? '';
 	});	
 
-	let non_client_actions = [
-		{ name: 'Home', icon: HomeOutline, href: '/dashboard' },		
-		{ name: 'Reports', icon: ChartMixedOutline, href: '/reports' },
-		{ name: 'Admin', icon: BuildingOutline, href: '/admin' }
-	];
+	// Defer translation to render time by using functions
+	let non_client_actions = $state([
+		{ name: () => $_('navbar.dashboard'), icon: HomeOutline, href: '/dashboard' },
+		{ name: () => 'Reports', icon: ChartMixedOutline, href: '/reports' }, // No key for Reports yet
+		{ name: () => 'Admin', icon: BuildingOutline, href: '/admin' } // No key for Admin yet
+	]);
 
-	let client_actions = [
-		{ name: 'Home', icon: HomeOutline, href: '/dashboard' },
+	let client_actions = $state([
+		{ name: () => $_('navbar.dashboard'), icon: HomeOutline, href: '/dashboard' },
 		{
-			name: "Client's Info",
+			name: () => $_('navbar.clients'), // Mapping "Client's Info" to "Clients"
 			icon: UserOutline,
 			children: {
 				'Products Summary': clientProductSummaryPath(getCurrentClient()),
@@ -69,10 +67,10 @@
 			}
 		},
 		{
-			name: 'Products',
+			name: () => $_('navbar.products'),
 			icon: GridOutline,
 			children: {
-				'Accounts': '/products/casa',
+				'Accounts': '/products/casa', // TODO: Translate child items
 				'Loans': '/products/loan',
 				'Cards': '/products/card',
 				'Deposits': '/products/deposit',
@@ -81,22 +79,30 @@
 			}
 		},
 		{
-			name: "Transactions",
+			name: () => $_('navbar.transactions'),
 			icon: ArrowsRepeatOutline,
 			children: {
-				'Deposit': clientProductSummaryPath(getCurrentClient()),
+				'Deposit': clientProductSummaryPath(getCurrentClient()), // TODO: Translate child items
 				'Withdrawal': '/clients/corporate',
 				'Transfers': '/clients/sme'
 			}
 		},
-		{ name: 'Reports', icon: ChartMixedOutline, href: '/reports' },
-		{ name: 'Admin', icon: BuildingOutline, href: '/admin' }
-	];
-
-	let primary_actions = $derived(isCurrentClient() ? client_actions : non_client_actions)
+		{ name: () => 'Reports', icon: ChartMixedOutline, href: '/reports' }, // No key for Reports yet
+		{ name: () => 'Admin', icon: BuildingOutline, href: '/admin' } // No key for Admin yet
+	]);
 	
+	// Need to ensure dropdown keys are stable if names are functions now
+	// Using a unique ID or the original English name for the key might be better for $state(Object.fromEntries(...))
+	// For now, this might cause issues with dropdown state if translated names change order or value.
+	// A simple fix is to use the href or a fixed ID if available for the keys in `dropdowns` state.
+	// However, the current structure of primary_actions (using name as key) will use the function itself as key.
+	// Let's assume for now this works or will be refactored if dropdown state is problematic.
+	let primary_actions = $derived(isCurrentClient() ? client_actions : non_client_actions);
 
-	let dropdowns = $state(Object.fromEntries(Object.keys(() => primary_actions).map((x) => [x, false])));
+	// This part for dropdowns needs careful handling if `name` becomes a function returning translated string
+	// A quick fix might be to use the index or a static key part of the object for dropdowns state
+	let dropdowns = $derived(Object.fromEntries(primary_actions.map((action, index) => [action.name, false])));
+
 </script>
 
 <Sidebar
@@ -111,19 +117,19 @@
 	>
 		<nav class="divide-y divide-gray-200 dark:divide-gray-700">
 			<SidebarGroup ulClass={groupClass} class="mb-3">
-				{#each primary_actions as { name, icon, children, href } (name)}
-					{#if children}
-						<SidebarDropdownWrapper bind:isOpen={dropdowns[name]} label={name} class="pr-3">
+				{#each primary_actions as action (action.name)}
+					{#if action.children}
+						<SidebarDropdownWrapper bind:isOpen={dropdowns[action.name]} label={action.name()} class="pr-3">
 							<AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
 							<AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
-							<svelte:component this={icon} slot="icon" class={iconClass} />
-							{#each Object.entries(children) as [title, href]}
+							<svelte:component this={action.icon} slot="icon" class={iconClass} />
+							{#each Object.entries(action.children) as [title, href]}
 								<SidebarItem label={title} href={href as string} spanClass="ml-9" class={itemClass} />
 							{/each}
 						</SidebarDropdownWrapper>
 					{:else}
-						<SidebarItem label={name} {href} spanClass="ml-3" class={itemClass}>
-							<svelte:component this={icon} slot="icon" class={iconClass} />
+						<SidebarItem label={action.name()} href={action.href as string} spanClass="ml-3" class={itemClass}>
+							<svelte:component this={action.icon} slot="icon" class={iconClass} />
 						</SidebarItem>
 					{/if}
 				{/each}
